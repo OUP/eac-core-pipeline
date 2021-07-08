@@ -5,7 +5,7 @@ phases:
     commands:
        - echo "setting up global environment variables"
        - export BUILDDIR="./build"
-       - export APPDIR="./eac-core/eac/eacBuild"
+       - export APPDIR="./eac-core/eac"
        - echo "updating container packages"
        - apt-get update -y
        - echo "installing container dependencies"
@@ -16,7 +16,7 @@ phases:
       - echo "setting java home to ${JAVA_HOME}"
       - mkdir $BUILDDIR
       - mkdir $BUILDDIR/target
-      - rsync -avz "${APPDIR}/" $BUILDDIR/target/eacBuild
+      - rsync -avz "${APPDIR}/" $BUILDDIR/target/
       - cd $BUILDDIR/target/eacBuild
       - mvn --batch-mode clean install
       - ls -lh
