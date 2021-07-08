@@ -15,7 +15,6 @@
 		<module>../eacData</module>
 		<module>../eacIntegration</module>
 		<module>../eacService</module>
-		<module>../eacAssetTotalDeletionTool</module>
 		<module>../eacWebCommon</module>
 		<module>../eacWebApp</module>
 		<module>../eacWeb</module>
@@ -26,7 +25,6 @@
 		<module>../eacAdminWeb</module>
 		<module>../eacSampleSite</module>
         <module>../eacTools</module>
-        <module>../eacMigrationTool</module>
         <module>../eacAccountsWebApp</module>
         <module>../eacLog4j</module>
         <module>../eacBatchJob</module>
@@ -608,17 +606,6 @@
 				<artifactId>eacWebServiceClient</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<dependency>
-                <groupId>com.oup.eac</groupId>
-                <artifactId>eacMigrationTool</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oup.eac</groupId>
-                <artifactId>eacMigrationTool</artifactId>
-                <type>test-jar</type>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
 				<groupId>com.oup.eac</groupId>
 				<artifactId>eacAccountsWebApp</artifactId>
