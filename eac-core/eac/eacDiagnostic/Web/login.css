@@ -1,0 +1,206 @@
+@CHARSET "ISO-8859-1";
+/* Colour scheme generated from : http://colorschemedesigner.com/#3x12P6mIILt..*/
+html, body {
+    height: 100%;
+    color: black;
+    font-family: Verdana,Arial,Tahoma,Helvetica,Sans-Serif;
+    font-size: 0.8em;
+    margin: 0;
+}
+element.style {
+    padding-bottom: 0px\9;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: left;
+}
+body {
+	background-image:url(../images/watermark.png);
+	background-repeat:no-repeat;
+	background-position:right bottom;
+	background-color: #FFF;		
+	background-attachment:fixed;
+}
+legend {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+table {
+    background-color: #FFF;     
+}
+
+.Uploadform input[type="file"]{
+  z-index: 999;
+  line-height: 0;
+  font-size: 50px;
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+  cursor: pointer;
+  _cursor: hand;
+  margin: 0;
+  padding:0;
+  left:0;
+  }
+ .add-photo-btn{
+   position:relative;
+   overflow:hidden;
+   cursor:pointer;
+   text-align:center;
+   background-color:#133E5F;
+   color:#fff;
+   display:block;
+   width:88px;
+   height: 22px;
+   line-height: 22px;
+   font-size:10px;
+   float:left;
+ }
+ .add-photo-btn:hover {
+	background: none repeat scroll 0 0 #CADBE9;
+    border-style: none;
+    color: #336699;
+}
+label
+{
+    font-weight: bold;
+}
+
+#page {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+  /*  margin: 0 auto -4em; /* the bottom margin is the negative value of the footer's height */
+}
+
+#footer{
+	border-top-style: solid;
+	border-top-color: gray;
+	border-top-width: 1px;
+}
+
+#footer, #push {
+    height: 4em; /* .push must be the same height as .footer */
+}
+
+#footerTile {
+	float: left;
+}
+
+
+.sub-heading-1 {
+    padding-left: 50px;
+    vertical-align: top;
+    color: #182E50;
+    font-size: 2.6em;
+}
+#appVersion {
+	float: right;
+}
+
+#header {
+	margin-top:10px;
+	}
+		
+#topbar {
+	float:right;
+	}	
+
+#local {
+    height: 100%;
+}
+
+#welcomeBanner {
+	background: none repeat scroll 0 0 white;
+    box-shadow: 0 3px 2px #CCCCCC;
+    font-size: 1.5em;
+    padding: 10px;	
+}
+
+a,a:visited,a:link,a:active {
+	color: #0373A9;
+	background-color: transparent;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a:hover {
+	color: #336699;
+	background-color: #CADBE9;
+	text-decoration: none;
+	font-weight: bold;
+}
+html, body {
+    height: 100%;
+    color: black;
+    font-family: Verdana,Arial,Tahoma,Helvetica,Sans-Serif;
+    font-size: 0.8em;
+}
+fieldset {
+    padding: 1.4em;
+    margin: 0 0 1.5em 0;
+    border: 1px solid #ccc;
+}
+#footer {
+    border-top-style: solid;
+    border-top-color: gray;
+    border-top-width: 1px;
+    position: relative;
+    margin-top: 300px; 
+    
+}
+
+form{
+	
+	margin-top:60px
+}
+div {
+    display: block;
+}
+#footer, #push {
+    height: 4em;
+}
+.span-24, div.span-24 {
+    width: 950px;
+    margin-right: 0;
+}
+button {
+	color: #fff;
+	background: #133E5F;
+	border-style: none;
+}
+.notLoggedIn div {
+    margin-left: auto;
+    margin-right: auto;
+}
+.container {
+    width: 950px;
+    margin: 0 auto;
+}
+#page {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
+#footerTile {
+    float: left;
+}
+#appVersion {
+    float: right;
+}
+button:hover {
+	background: #CADBE9;
+	border-style: none;
+}
+
+fieldset {
+    background-color: #FFF;
+    clear: both;
+    margin-top:0px\9;
+    margin-bottom:0px\9;
+}
+
+.sub-heading {
+    display: block;
+    font-family: Georgia;
+    padding-bottom: 15px;
+}

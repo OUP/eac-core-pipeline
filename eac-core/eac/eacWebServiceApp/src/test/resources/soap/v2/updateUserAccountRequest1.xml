@@ -1,0 +1,24 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:eac="http://eac.oup.com/2.0/eac-access-services" xmlns:eac1="http://eac.oup.com/2.0/eac-common-types">
+	<soapenv:Header />
+	<soapenv:Body>
+		<eac:UpdateUserAccountRequest>
+		    <eac1:wsUserId>
+         		<eac1:sessionToken>123456</eac1:sessionToken>
+         	</eac1:wsUserId>
+			<eac:user>				
+				<eac1:emailAddress>david.hay@test.com</eac1:emailAddress>
+				<eac1:firstName>david</eac1:firstName>
+				<eac1:lastName>hay</eac1:lastName>
+				<eac1:locale language="en" country="GB" variant="scots" />			
+				<eac1:timeZone>GMT</eac1:timeZone>
+				<eac1:credentials>
+					<eac1:passwordCredential>
+						<eac1:userName>davidjhay</eac1:userName>
+						<eac1:Password></eac1:Password><!--  empty password element means don't update the password -->
+					</eac1:passwordCredential>
+				</eac1:credentials>
+			</eac:user>
+		</eac:UpdateUserAccountRequest>
+	</soapenv:Body>
+</soapenv:Envelope>

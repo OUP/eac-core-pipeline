@@ -1,0 +1,197 @@
+html {
+	font-family: Verdana,Arial,Tahoma,Helvetica,Sans-Serif;
+	font-size: 0.8em;
+}
+
+body {
+	background-image: url(../images/watermark.png);
+	background-attachment:fixed;
+    background-repeat: no-repeat;
+	background-position: right bottom;
+	background-color: #FFFFFF;
+	height: 100%;
+	line-height: 1.5;
+}
+
+h3 {
+	font-family: Verdana,Arial,Tahoma,Helvetica,Sans-Serif;
+	font-weight: bold;
+}
+
+#content {
+	position: relative;
+	left: 30%;
+	width: 60%;
+}
+
+#header {
+	margin-top: 10px;
+}
+
+fieldset {
+	border: 2px solid #CCC;
+	margin-top: 25px;
+	padding: 20px;
+	padding-top: 0px\9;
+	margin-top: 0px\9;
+	background-color: #FFFFFF;
+	border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: relative;
+    width: 54em;
+    width: 58em\9;
+    display: block;
+}
+
+.heading-1 {
+    color: #182E50;
+    font-size: 2.0em;
+    padding-left: 50px;
+    vertical-align: top;
+}
+
+.heading-2 {
+	color: #182E50;
+    font-size: 1.3em;
+}
+
+div.field {
+	clear: both;
+	min-height: 30px;
+	margin-bottom: 5px\9;
+}
+
+div.label {
+	float: left;
+	width: 120px;
+}
+
+div.value {
+	float: left;
+	min-width: auto;
+}
+
+legend {
+	margin-bottom: 10px\9
+}
+
+textarea {
+	margin: 10px;
+	background-color: #EEEEEE;
+	display: inline;
+	border: 1px solid #DDD;
+}
+
+#submit {
+	position: absolute;
+	top: 200;
+	left: 630;
+}
+
+label.error {
+	color: red;
+	display: block;
+	font-size: 0.7em;
+}
+
+.error {
+	background-color: #FFCCCC;
+}
+
+.infoIcon {
+	vertical-align: middle;
+	margin-left: 5px;
+	margin-left: 2px\9;
+	margin-top: 6px;
+	margin-top: 2px\9;
+}
+
+#loginWidgetJavascript {
+	margin-top: 20px;
+}
+
+#loginLinksJavascript {
+	margin-top: 20px;
+}
+
+/** Style the example login widget **/
+
+#loginWidgetExample {
+	position: absolute;
+	top: 250;
+	left: 800;
+	width: 20em;
+}
+
+#loginWidgetContainer {
+	background-color: #CCC;
+	border: 2px solid #AAA;
+	padding: 5px;
+}
+
+#eacLoginHeader {
+	font-size: 1.2em;
+	font-family: Verdana,Arial,Tahoma,Helvetica,Sans-Serif;
+	padding-bottom: 3px; 
+	background-color: #666699;
+	color: #FFF;
+	text-align: center;
+}
+
+#eacLoginBody {
+	padding-top: 20px;
+}
+
+#eacLoginFooter {
+	padding-top: 20px;
+}
+
+#eacBasicLoginForm {
+	margin: 0px\9;	
+}
+
+#eacBasicLoginForm label {
+	display: block;
+	width: 6em;
+	float: left;
+}
+
+#eacLoginUsername {
+	margin-bottom: 3px;
+}
+
+#eacUsername {
+	width: 12em;
+}
+
+#eacPassword {
+	width: 12em;
+}
+
+/** Style the example login links **/
+
+#loginLinksExample {
+	position: absolute;
+	top: 550;
+	left: 800;
+	width: 20em;
+}
+
+#loginLinksList {
+	background-color: #CCC;
+	border: 2px solid #AAA;
+	padding: 10px;
+	list-style: none outside none;
+	margin: 0;
+}
+
+#loginLinksList li {
+	display: block;
+}
+
+#tiptip_content {
+	background-color: #000000;
+	width: 200px\9;
+}

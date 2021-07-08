@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eac:UserNameRequest xmlns:eac="http://eac.oup.com/2.0/eac-user-data-services"
+	xmlns:cmn="http://eac.oup.com/2.0/eac-common-types">
+	<cmn:wsUserId>
+		<cmn:sessionToken>ABCDEF</cmn:sessionToken>
+	</cmn:wsUserId>
+</eac:UserNameRequest>
+

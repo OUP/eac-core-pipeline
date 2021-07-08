@@ -1,0 +1,1 @@
+HE Essentials of Managerial Economics (Student Account)

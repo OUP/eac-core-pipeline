@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="EAC JSP Precompiler" default="create-war" basedir=".">
+
+	<path id="jbossweb.classpath">
+	    <fileset dir="${jboss.lib}">
+	        <include name="jboss-common-core.jar" />
+	        <include name="jboss-logging-spi.jar" />
+	    </fileset>
+	    <fileset dir="${jboss.common.lib}">
+	        <include name="servlet-api.jar" />
+	        <include name="jsp-api.jar" />
+	        <include name="el-api.jar" />
+	        <include name="commons-logging.jar" />
+	    </fileset>
+	    <fileset dir="${jboss.profile.jbossweb.lib}">
+	        <include name="*.jar" />
+	    </fileset>
+	    <fileset dir="${jboss.profile.jbossweb.sar.lib}">
+	        <include name="jbossweb.jar" />
+	    </fileset>
+	    <fileset dir="${webapp.lib}"> 
+	        <include name="*.jar"/> 
+	    </fileset> 
+	</path>                                        
+                         
+    <target name="jspc">               
+	    <taskdef classname="org.apache.jasper.JspC" name="jasper2"> 
+	        <classpath id="jspc.classpath"> 
+	            <pathelement location="${env.JAVA_HOME}/../lib/tools.jar"/> 
+	            <path refid="jbossweb.classpath"/>
+	        </classpath> 
+	    </taskdef> 
+	    <jasper2 validateXml="false" uriroot="${webapp.path}"
+	        webXmlFragment="${web.xml.gen}" outputDir="${webapp.jsp.src}" />
+	</target>
+                                
+    <target name="compile" depends="jspc">
+	    <javac destdir="${webapp.path}/WEB-INF/classes" optimize="off" debug="on"
+	        failonerror="false" srcdir="${webapp.jsp.src}" excludes="**/*.smap">
+	        <classpath>
+	            <pathelement location="${webapp.path}/WEB-INF/classes" />
+	            <path refid="jbossweb.classpath"/>
+	        </classpath>
+	        <include name="**" />
+	        <exclude name="tags/**" />
+	    </javac>
+	</target>
+	
+	<target name="generate-web-xml" depends="compile">
+	    <loadfile property="generatedXML" srcFile="${web.xml.gen}" />
+	    <copy tofile="${web.xml.new}" file="${web.xml.orig}" filtering="true" overwrite="true">
+	        <filterset>
+	            <filter token="start.compiled.jsps" value="--&gt;" />
+	            <filter token="end.compiled.jsps" value="&lt;!--" />
+	            <filter token="compiled.jsps" value="${generatedXML}" />
+	        </filterset>
+	    </copy>
+    </target>
+    
+    <target name="create-war" depends="generate-web-xml">
+        <jar destfile="${project.build.directory}/${finalName}.${project.packaging}" basedir="${project.build.directory}/${finalName}"
+        	excludes="**/sqlserver-3.0.jar"/>  
+    </target>
+    
+</project>

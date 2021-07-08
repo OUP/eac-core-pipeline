@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	
+	<definition name="standardLayout" template="/WEB-INF/layouts/standard.jsp">
+		<put-attribute name="navMenuTile" value="/WEB-INF/layouts/navMenu.jsp"/>
+		<put-attribute name="footerTile" value="/WEB-INF/layouts/footer.jsp"/>
+	</definition>
+	
+	<definition name="notLoggedInLayout" template="/WEB-INF/layouts/notLoggedIn.jsp">
+		<put-attribute name="footerTile" value="/WEB-INF/layouts/footer.jsp"/>
+	</definition>
+	
+</tiles-definitions>

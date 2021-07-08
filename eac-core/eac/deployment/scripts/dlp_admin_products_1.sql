@@ -1,0 +1,4 @@
+insert into asset(id, obj_version, erights_id, product_name, division_id) values('60CFA546-E842-4A47-BA2A-7215A677838E', 0, '30402', 'Oxford Learn Teacher', 'bfdc5888-c26b-4ed5-a580-6aa363a25e12');
+insert into product (product_type,id,obj_version,landing_page, registerable_product_id, email, service_level_agreement, home_page, activation_method, asset_id, registerable_type) values ('REGISTERABLE','C590FBF5-FCF3-4290-92F2-A86C2C411D1C', 0, '', null, 'eacsystemadmin@oup.com', '30 minutes', null, null, '60CFA546-E842-4A47-BA2A-7215A677838E', 'SELF_REGISTERABLE');
+insert into registration_definition (registration_definition_type,id,obj_version,product_id,registration_activation_id,page_definition_id,licence_template_id) values ('ACTIVATION_CODE_REGISTRATION', 'D1AA1B67-725F-4F52-A028-ED0F8B86DD00', 0, 'C590FBF5-FCF3-4290-92F2-A86C2C411D1C', '166F6F3C-3C0F-46C8-93C5-797BA8F178DF', null, '552C200A-7FC4-42E6-91FD-730720D02895');
+

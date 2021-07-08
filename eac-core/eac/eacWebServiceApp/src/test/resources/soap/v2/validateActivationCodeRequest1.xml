@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-access-services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:ValidateActivationCodeRequest>
+         <eac:systemId>system1</eac:systemId>
+         <eac:activationCode>ABCDEF</eac:activationCode>
+      </eac:ValidateActivationCodeRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

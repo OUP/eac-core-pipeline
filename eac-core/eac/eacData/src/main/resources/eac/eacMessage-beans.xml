@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.1.xsd
+            http://www.springframework.org/schema/task
+            http://www.springframework.org/schema/task/spring-task-3.1.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-3.1.xsd
+            ">
+
+    <task:executor id="eac-executor" />
+    <task:scheduler id="eac-scheduler" />
+    
+    <bean abstract="true" id="base.dbMessageSource" class="org.synyx.messagesource.InitializableMessageSource">
+        <property name="messageProvider">
+            <bean class="org.synyx.messagesource.jdbc.JdbcMessageProvider">
+                <property name="dataSource" ref="dataSource" />
+                <property name="ldelimiter" value="${db.message.source.left.delim}" />
+                <property name="rdelimiter" value="${db.message.source.right.delim}" />
+            </bean>
+        </property>
+        <property name="autoInitialize" value="true" />
+        <property name="defaultLocale" value="en_GB" />        
+    </bean>
+    
+    <bean id="dbMessageSourceReloader" class="com.oup.eac.data.message.DbMessageSourceReloader" init-method="init">        
+        <property name="description" value="${db.message.source.reloader.description}" />
+        <property name="enabled" value="true" />        
+        <property name="delayMs" value="${db.message.source.reloader.delay}" />
+    </bean>
+
+
+    <task:scheduled-tasks>
+        <task:scheduled ref="dbMessageSourceReloader" method="onMessageSourceReload" fixed-delay="${db.message.source.reloader.delay}" />
+    </task:scheduled-tasks>
+    
+    <bean id="dbMessageSourceBeanPostProcessor" class="com.oup.eac.data.message.DbMessageSourceBeanPostProcessor" >
+        <constructor-arg index="0" ref="dbMessageSourceReloader" />
+    </bean>
+
+    <!--  production message sources (these will exist in test too)-->
+
+    <bean name="messageSource" parent="base.dbMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+    
+</beans>

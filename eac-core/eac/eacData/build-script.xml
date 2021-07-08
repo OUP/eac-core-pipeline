@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="EAC Deployment Script Builder" default="create-scripts" basedir=".">
+    
+    <target name="create-scripts">
+    	<concat destfile="./target/classes/eac/uat-script.sql" append="true" encoding="UTF-8" outputencoding="UTF-8" fixlastline="true" eol="crlf">
+    	    <filelist dir="../deployment/scripts" files="${uat-scripts}"/>
+    	</concat>
+        <concat destfile="./target/classes/eac/prod-script.sql" append="true" encoding="UTF-8" outputencoding="UTF-8" fixlastline="true" eol="crlf">
+            <filelist dir="../deployment/scripts" files="${prod-scripts}"/>
+        </concat>
+    </target>
+    
+</project>

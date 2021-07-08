@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<context:property-placeholder properties-ref="appConfig" system-properties-mode="OVERRIDE"/> 
+	
+	<!-- Scans for @Repository, @Service  -->
+    <context:component-scan base-package="com.oup.eac">
+    	<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+		<!-- Scanning for SpringMVC Controllers is best done in each web application - that way the Controllers get picked up by the post processors of each web application context -->
+    </context:component-scan>        
+	
+	<bean id="appConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath*:/eac/eac*.properties</value>
+				<!-- <value>file:/usr/share/tomcat7/resources/eacSettings.properties</value> --> 
+				<!-- <value>file:/D:/eac/eacSettings.properties</value> -->
+				<value>file:${config.file.location}/eacSettings.properties</value>
+				
+			</list>
+	    </property>
+	</bean>
+	
+	<bean id="runtimeContext" class="com.oup.eac.common.utils.RuntimeContextImpl">
+		<constructor-arg ref="appConfig"/>
+		<constructor-arg value="true"/>
+	</bean>
+	
+	<!-- Default system properties are specified here. These may be overridden by eac.properties -->
+	<bean id="systemPreRequisites" class="com.oup.eac.common.utils.SystemPreRequisites">
+	    <constructor-arg>
+	        <util:properties>
+	            <prop key="ehcache.multicast.address">230.0.0.1</prop>
+	            <prop key="ehcache.multicast.port">4480</prop>
+	            <prop key="ehcache.multicast.ttl">0</prop>
+	            <prop key="ehcache.rmi.listen.host">localhost</prop>
+	            <prop key="ehcache.rmi.listen.web.port">40006</prop>
+	            <prop key="ehcache.rmi.listen.ws.port">40007</prop>
+	            <prop key="ehcache.rmi.listen.admin.port">40008</prop>
+	        </util:properties>
+	    </constructor-arg>
+	</bean>
+	
+	<!-- ApplicationContextAware bean that provides access to spring context from non-spring managed beans -->
+	<bean id="appContextSupport" class="com.oup.eac.common.utils.spring.ApplicationContextSupport"/>
+	
+	    <!-- Caching     
+    <ehcache:annotation-driven cache-manager="cacheManager" create-missing-caches="true" />
+    
+    <ehcache:config cache-manager="cacheManager">
+        <ehcache:evict-expired-elements interval="60" />
+    </ehcache:config>
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    	<property name="configLocation"  value="classpath:/ehcache.xml"/>
+    </bean> 
+	 -->
+	
+	<bean id="usernameValidator" class="com.oup.eac.common.utils.username.impl.UsernameValidatorImpl">
+	   <constructor-arg name="usernamePolicyRegex" value="${username.policy.regex}"/>
+	</bean> 
+	
+</beans>

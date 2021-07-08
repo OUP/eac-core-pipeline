@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="packagesToScan" value="com.oup.eac.domain"/>
+
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.use_sql_comments">${hibernate.use_sql_comments}</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.max_fetch_depth">${hibernate.max_fetch_depth}</prop>
+                <prop key="hibernate.default_batch_fetch_size">${hibernate.default_batch_fetch_size}</prop>
+                <prop key="hibernate.query.factory_class">${hibernate.query.factory_class}</prop>
+                <!-- <prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop> -->
+                <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+				<prop key="hibernate.cache.use_structured_entries">${hibernate.cache.use_structured_entries}</prop>
+				<!-- <prop key="hibernate.cache.provider_configuration_file_resource_path">${hibernate.cache.provider_configuration_file_resource_path}</prop> -->
+				<prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+				<prop key="hibernate.order_inserts">${hibernate.order_inserts}</prop>
+				<prop key="hibernate.order_updates">${hibernate.order_updates}</prop>
+				<prop key="hibernate.session_factory_name">${hibernate.session_factory_name}</prop>
+				<!-- <prop key="net.sf.ehcache.disabled">${net.sf.ehcache.disabled}</prop> -->								
+            </props>
+        </property>
+	  
+        <property name="eventListeners">
+            <map>
+                <entry key="post-load">
+                    <bean class="com.oup.eac.data.hibernate.listeners.EacPostLoadEventListener"/>
+                </entry>
+            </map>
+        </property>
+
+		<property name="namingStrategy">
+			<ref bean="namingStrategy"/>
+		</property>
+		  
+	    <property name="dataSource">
+	        <ref bean="dataSource"/>
+	    </property>
+	    
+		<property name="entityInterceptor">
+			<ref local="eacEntityInterceptor"/>
+		</property>
+	    
+	</bean>
+	
+	<bean id="namingStrategy" class="org.hibernate.cfg.ImprovedNamingStrategy"/>
+	
+	<bean id="eacEntityInterceptor"  class="com.oup.eac.data.hibernate.interceptors.EACEntiyInterceptor" />
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory"><ref bean="sessionFactory"/></property>
+	</bean>
+    
+    <!-- <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/> -->
+    
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
+    
+</beans>

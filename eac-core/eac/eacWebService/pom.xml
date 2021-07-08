@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<parent>
+		<groupId>com.oup.eac</groupId>
+		<artifactId>eacBuild</artifactId>
+		<version>26.90-SNAPSHOT</version>
+        <relativePath>../eacBuild/pom.xml</relativePath>	
+	</parent> 
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>eacWebService</artifactId>
+    <packaging>war</packaging>
+    
+    <name>eacWebService Spring-WS Application</name>    
+    <url>http://site.eac.uk.oup.com/eacWebService</url>
+    
+    <scm>
+        <connection>scm:svn:https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild</connection>
+        <developerConnection>scm:svn:https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild</developerConnection>
+        <url>https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild</url>
+    </scm>
+	
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eacWebServiceApp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <!-- <scope>provided</scope> -->
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <!-- <scope>provided</scope> -->
+        </dependency>   
+        <dependency>
+            <groupId>com.oup.eac</groupId>
+            <artifactId>eacLog4j</artifactId>
+        	<version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId> 
+			<artifactId>sqljdbc4</artifactId> 
+            <!-- <scope>provided</scope> -->
+        </dependency>
+        <dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator-legacy</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<finalName>eacWebService</finalName>
+	</build>
+	
+	<profiles>
+		<profile>
+  			<id>jboss</id>
+  			<build>
+  				<plugins>
+	  				<plugin>
+				        <groupId>org.codehaus.mojo</groupId>
+	       				<artifactId>jboss-maven-plugin</artifactId>
+	       				<executions>
+			          		<execution>
+			          			<phase>integration-test</phase>
+				            	<goals>
+				            		<goal>hard-undeploy</goal>
+				            		<goal>hard-deploy</goal>
+				            	</goals>
+			          		</execution>
+			        	</executions>	       				
+	  				</plugin>
+  				</plugins>
+  			</build>
+  		</profile>
+	</profiles>
+	
+</project>

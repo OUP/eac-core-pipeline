@@ -1,0 +1,18 @@
+{"Parameters":{
+    "AmiId":"<<AMI-ID>>",
+    "VpcId":"<<VPC-ID>>",
+    "SubnetId":"<<SUBNET-ID>>",
+    "KeyName":"<<KEYNAME>>",
+    "AtyponAppRole": "eac-dev-AtyponStack-2I6CICJ9H1P7-AtyponAppRole-C3FW13DKMNPK",
+    "S3TemplateBucketName": "eac-cloudformation",
+    "Environment": "dev-primary",
+    "CESaccountID": "412557633786",
+    "LambdaPrincipalARN": "arn:aws:iam::412557633786:saml-provider/Shibboleth-v3-aces-dev",
+    "LambdaPrincipalARNManagedUser": "arn:aws:iam::412557633786:saml-provider/Shibboleth-v3-cesdev-managed-user",
+    "HostedZone": "dev.access.the-infra.com",
+    "AtyponInternalLoadBalancer": "internal-eac-dev-A-AtyponIn-ANDP03NV8MQF-1497627964.eu-west-1.elb.amazonaws.com",
+    "RDSMasterUser": "uatdbadmin",
+    "RDSMasterPassword": "NOPASS",
+    "AuthAPIUrl": "https://0lfgf5gmk1.execute-api.eu-west-1.amazonaws.com"
+    }
+}

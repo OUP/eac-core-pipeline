@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<REGISTRATION_ACTIVATION ID="[ID]" ACTIVATION_TYPE="[ACTIVATION_TYPE]" VALIDATOR_EMAIL="[VALIDATOR_EMAIL]" OBJ_VERSION="0"/>
+</dataset>
+	

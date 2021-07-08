@@ -1,0 +1,6 @@
+$resource.getString("label.dear") ${username},
+
+$resource.getString("label.yourreg") ${productname}. $resource.getString("label.regprocess")
+
+#parse("com/oup/eac/service/velocity/licenceDetails.vm")##
+#parse("com/oup/eac/service/velocity/regards.vm")##

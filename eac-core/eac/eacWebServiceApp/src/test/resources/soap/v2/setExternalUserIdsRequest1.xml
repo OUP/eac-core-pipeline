@@ -1,0 +1,30 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-access-services" xmlns:eac1="http://eac.oup.com/2.0/eac-common-types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:SetExternalUserIdsRequest>
+         <eac:systemId>LMS</eac:systemId>
+         <eac1:wsUserId>
+            <eac1:userId>
+               <eac1:internalId>
+                  <eac1:id>06AC88B5-B8BC-478D-A72D-372EC7C98123</eac1:id>
+               </eac1:internalId>
+            </eac1:userId>
+         </eac1:wsUserId>
+         <eac:external>
+            <eac1:id>0321356683</eac1:id>
+            <eac1:systemId>LMS</eac1:systemId>
+            <eac1:typeId>ISBN-10</eac1:typeId>
+         </eac:external>
+         <eac:external>
+            <eac1:id>978-0321356680</eac1:id>
+            <eac1:systemId>LMS</eac1:systemId>
+            <eac1:typeId>ISBN-1313</eac1:typeId>
+         </eac:external>
+         <eac:external>
+            <eac1:id>123456</eac1:id>
+            <eac1:systemId>LMS</eac1:systemId>
+            <eac1:typeId>LMSID</eac1:typeId>
+         </eac:external>
+      </eac:SetExternalUserIdsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

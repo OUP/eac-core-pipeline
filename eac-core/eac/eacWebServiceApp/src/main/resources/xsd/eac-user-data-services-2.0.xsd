@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://eac.oup.com/2.0/eac-user-data-services"
+	xmlns:cmn="http://eac.oup.com/2.0/eac-common-types" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://eac.oup.com/2.0/eac-common-types"
+		schemaLocation="eac-common-types-2.0.xsd" />
+
+	<xsd:element name="UserNameRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmn:wsUserId" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="UserNameResponse">
+		<xsd:complexType>
+			<xsd:choice minOccurs="1">
+				<xsd:element ref="cmn:errorStatus" />
+				<xsd:element name="userName" type="xsd:string" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="RegistrationInformationRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="systemId" type="xsd:string" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="cmn:wsUserId" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="RegistrationInformationResponse">
+		<xsd:complexType>
+			<xsd:choice minOccurs="1">
+				<xsd:element ref="cmn:errorStatus" />
+				<xsd:sequence>
+					<xsd:element name="user" type="cmn:User" />
+					<xsd:element name="registrationInformation" type="cmn:RegistrationInformation"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

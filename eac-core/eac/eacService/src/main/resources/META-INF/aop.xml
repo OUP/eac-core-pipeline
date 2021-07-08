@@ -1,0 +1,21 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+
+	<!--   <weaver options="-debug -Xset:weaveJavaxPackages=true"> -->
+    <weaver options="-Xset:weaveJavaxPackages=true">
+        <!-- packages for aspectj to consider for weaving -->
+        <include within="com.oup.eac.service.impl..*"/>
+        
+        <!--  we need to put the aspects in here too for some reason -->
+        <include within="com.oup.eac.common.advice..*" />
+        <include within="com.oup.eac.advice..*"/>        
+    </weaver>
+
+    <aspects>
+    	<!--  
+        <aspect name="com.oup.eac.advice.ServiceTimeLoggingAdvice"/>
+        -->
+    </aspects>
+
+</aspectj>

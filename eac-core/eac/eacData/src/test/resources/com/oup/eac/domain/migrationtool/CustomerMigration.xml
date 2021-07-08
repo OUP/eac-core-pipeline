@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<CUSTOMER_MIGRATION
+	    ID="[ID]"
+	    OBJ_VERSION="0"	    
+    	EAC_CUSTOMER_ID="[EAC_CUSTOMER_ID]"        
+        MIGRATION_STATE="[MIGRATION_STATE]"        
+        CREATED_DATE="[CREATED_DATE]"
+        UPDATED_DATE="[UPDATED_DATE]"
+	/>
+</dataset>
+	
+	
+	

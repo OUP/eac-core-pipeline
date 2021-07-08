@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd" parent="common/parent">
+
+	<secured attributes="ROLE_LIST_CUSTOMER" />
+	<persistence-context/>
+	
+	<on-start>
+		<set name="flowScope.statusMessageKey" value="requestParameters.statusMessageKey" />		
+		<set name="flowScope.errorMessageKey" value="requestParameters.errorMessageKey" />
+	</on-start>
+	
+	<action-state id="createNewCustomerSearchCriteria">
+		<evaluate expression="new com.oup.eac.admin.beans.CustomerSearchCriteriaBean()" result="flowScope.customerSearchCriteriaBean"/>
+ 		<transition to="searchCustomers"/>
+	</action-state>
+
+	<view-state id="searchCustomers" model="customerSearchCriteriaBean">
+		<!-- <on-render>
+			<evaluate expression="customerAction.searchCustomers"/>
+		</on-render> -->
+
+		<transition on="search">
+			<evaluate expression="customerSearchCriteriaBean.pageNumber = 1"/>
+			<evaluate expression="customerAction.searchCustomers"/>
+			<render fragments="searchResultsTile"/>
+		</transition>
+		<transition on="reset">
+			<evaluate expression="new com.oup.eac.admin.beans.CustomerSearchCriteriaBean()" result="flowScope.customerSearchCriteriaBean"/>
+			<render fragments="searchResultsTile"/>
+		</transition>
+		<transition on="previousPage">
+			<evaluate expression="customerSearchCriteriaBean.pageNumber = (customerSearchCriteriaBean.pageNumber - 1)"/>
+			<evaluate expression="customerAction.searchCustomers"/>
+			<render fragments="searchResultsTile"/>
+		</transition>
+		<transition on="nextPage">
+			<evaluate expression="customerSearchCriteriaBean.pageNumber = (customerSearchCriteriaBean.pageNumber + 1)"/>
+			<evaluate expression="customerAction.searchCustomers"/>
+			<render fragments="searchResultsTile"/>
+		</transition>
+		<transition on="edit" to="checkCustomerInEright">
+			<set value="requestParameters.id" name="flashScope.customerId"/>
+		</transition>
+	</view-state>
+	
+	<action-state id="checkCustomerInEright">
+		<evaluate expression="customerAction.checkCustomerInEright" />
+		<transition on="success" to="editCustomer" />
+		<transition on="error" to="customerNotFoundTile"/>
+	</action-state>
+	
+	<view-state id="customerNotFoundTile"/>
+	
+	<subflow-state id="editCustomer" subflow="customer/create">
+		<input name="customerId" value="flashScope.customerId"/>
+		<transition on="success" to="searchCustomers">
+			<evaluate expression="persistenceContext.clear()"/>
+		</transition>
+		<transition on="cancel" to="searchCustomers">
+			<evaluate expression="persistenceContext.clear()"/>
+		</transition>
+		<transition on="errorFlow" to="errorFlow"/>
+		<transition on="staleObjectState" to="staleObjectState"/>
+	</subflow-state>
+</flow>

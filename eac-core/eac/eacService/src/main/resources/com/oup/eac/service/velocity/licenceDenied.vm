@@ -1,0 +1,6 @@
+$resource.getString("label.dear") ${username},
+
+$resource.getString("label.yourreg") ${productname}. $resource.getString("label.unfortunate")
+$resource.getString("label.ifrequire") ${validatoremail} .
+
+#parse( "com/oup/eac/service/velocity/regards.vm" )

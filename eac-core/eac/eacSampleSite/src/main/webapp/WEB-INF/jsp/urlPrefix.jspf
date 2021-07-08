@@ -1,0 +1,8 @@
+	<%
+		int port = request.getServerPort();
+		String serverName = request.getServerName();
+		String protocol = request.getScheme();
+		String portSuffix = port == 80 ? "" : ":"+port;
+		String prefix = String.format("%s://%s%s",protocol,serverName,portSuffix);
+		pageContext.setAttribute("urlPrefix",prefix);
+	%>

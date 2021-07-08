@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+	<tlib-version>2.5</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>eac</short-name>
+	<uri>http://www.oup.com/tags</uri>
+	<description>EAC JSP Tag Library</description>
+
+   <tag>
+        <name>productHomeUrl</name>
+        <tag-class>com.oup.eac.web.tags.ProductHomeUrlTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with the supplied product's home URL or default skin url (configured)
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+		<attribute>
+            <name>product</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The product to get the home url for</description>
+        </attribute>
+   </tag>
+   <tag>
+        <name>currentProductHomeUrl</name>
+        <tag-class>com.oup.eac.web.tags.CurrentProductHomeUrlTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with the current product's home URL or default skin url (configured)
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+   <tag>
+        <name>homeMenuLinkGenerator</name>
+        <tag-class>com.oup.eac.web.tags.HomeMenuLinkGeneratorTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with a list of UrlSkins filtered based on what products the customer has access to.
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+   <tag>
+        <name>logoutLandingUrl</name>
+        <tag-class>com.oup.eac.web.tags.LogoutLandingUrlTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope which contains the URL to the landing page for the logout link. 
+            Within the context of a product, this URL will be the current product's home URL. When no product
+            context, this URL will be the default EAC logout view.
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+   <tag>
+        <name>skinUrl</name>
+        <tag-class>com.oup.eac.web.tags.SkinUrlTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with the Skin's URL or configured default.
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+   <tag>
+        <name>skinContactUs</name>
+        <tag-class>com.oup.eac.web.tags.SkinContactUsTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with the Skin's Contact Us URL or configured default.
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+   <tag>
+        <name>skinSiteName</name>
+        <tag-class>com.oup.eac.web.tags.SkinSiteNameTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with the Skin's Site Name or configured default.
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+   <tag>
+        <name>skinCss</name>
+        <tag-class>com.oup.eac.web.tags.SkinCssTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with the Skin's Css Path or configured default.
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+   
+   <tag>
+        <name>isLoggedIn</name>
+        <tag-class>com.oup.eac.web.tags.IsLoggedInTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with a flag - true for logged in false otherwise.
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+      <tag>
+        <name>isError</name>
+        <tag-class>com.oup.eac.web.tags.IsErrorTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            sets the 'var' in request scope with a flag - true when an erro has occurred and false otherwise.
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>The name of the variable to set</description>
+        </attribute>
+   </tag>
+   
+   <tag>
+        <name>loginurl</name>
+        <tag-class>com.oup.eac.web.tags.EACLoginUrlTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            Creates the eac login url
+        </description>
+        <attribute>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The variable to populate</description>
+        </attribute>
+        <attribute>
+            <name>propertyName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The name of an EACSettings property to resolve</description>
+        </attribute>
+        <attribute>
+            <name>defaultValue</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>An optional default value to return when the propertyName does not resolve to a value</description>
+        </attribute>
+   </tag>
+   
+   <tag>
+        <name>progressbar</name>
+        <tag-class>com.oup.eac.web.tags.ProgressBarTag</tag-class>
+        <body-content>JSP</body-content>
+        <description>
+            Create the progress bar
+        </description>
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The variable to populate</description>
+        </attribute>
+   </tag>
+   
+   <tag>
+        <name>setDateTimeZone</name>
+        <tag-class>com.oup.eac.web.tags.EacSetDateTimeZoneTag</tag-class>
+        <body-content>JSP</body-content>
+        <description>
+            Wrapper around Joda Time's SetDateTimeZoneTag to workaround problems with JodaTime not being able to load timezone resource files. 
+        </description>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The olson timezone id as a string</description>
+        </attribute>
+   </tag>
+   
+</taglib>

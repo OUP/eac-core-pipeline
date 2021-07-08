@@ -1,0 +1,200 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  RepositoryName:
+    Description: GitHub repository name
+    Type: String
+    Default: eac-core-pipeline
+  BranchName:
+    Description: Github Branch name
+    Type: String
+    Default: infra
+  GitHubOwner:
+    Type: String
+    Default: OUP
+  GitHubToken:
+    Type: 'String'
+    Description: GitHub token
+    Default: ec338d9c7516a20105695327e9cf35bbc57ae8f4
+    NoEcho: True
+  SourceBucket:
+    Type: String
+    Default: eac-core-cloudformation
+  PipelineName:
+    Type: String
+    Default: CoreBuilder
+Resources:
+  Artifacts:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+    DeletionPolicy: Delete
+  Build:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      ServiceRole: !Ref CodeBuildServiceRole
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:4.0
+        EnvironmentVariables:
+          - Name: SourceBucket
+            Value: !Ref SourceBucket
+      Source:
+        BuildSpec: buildspec.yml
+        Type: CODEPIPELINE
+      TimeoutInMinutes: 15
+      Name: !Sub ${PipelineName}_build
+
+  MainCodePipeline:
+      Type: AWS::CodePipeline::Pipeline
+      Properties:
+        Name: !Sub ${PipelineName}
+        RoleArn: !GetAtt
+          - CodePipelineServiceRole
+          - Arn
+        ArtifactStore:
+          Type: S3
+          Location: !Ref 'Artifacts'
+        Stages:
+          - Name: Source
+            Actions:
+              - Name: SourceAction
+                ActionTypeId:
+                  Category: Source
+                  Owner: ThirdParty
+                  Version: '1'
+                  Provider: GitHub
+                OutputArtifacts:
+                  - Name: SourceArtifact
+                Configuration:
+                  Owner: !Ref 'GitHubOwner'
+                  Repo: !Ref 'RepositoryName'
+                  Branch: !Ref 'BranchName'
+                  OAuthToken: !Ref GitHubToken
+                RunOrder: 1
+          - Name: Build
+            Actions:
+              - Name: BuildAction
+                ActionTypeId:
+                  Category: Build
+                  Owner: AWS
+                  Version: '1'
+                  Provider: CodeBuild
+                InputArtifacts:
+                  - Name: SourceArtifact
+                OutputArtifacts:
+                  - Name: BuildArtifact
+                Configuration:
+                  ProjectName: !Ref Build
+                RunOrder: 2
+  CodePipelineServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+                - codepipeline.amazonaws.com
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+        - PolicyName: CodePipelineAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                  - s3:*
+                  - cloudformation:*
+                  - iam:PassRole
+                  - sns:Publish
+                  - lambda:*
+                  - codebuild:*
+                Effect: Allow
+                Resource: '*'
+  CodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        {
+            "Statement": [{
+                "Effect": "Allow",
+                "Principal": { "Service": [ "codebuild.amazonaws.com" ]},
+                "Action": [ "sts:AssumeRole" ]
+            }]
+        }
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+              - Resource: "*"
+                Effect: Allow
+                Action:
+                  - ssm:GetParameters
+                  - ssm:GetParameter
+                  - ssm:GetParametersByPath
+              - Resource: !Sub arn:aws:s3:::${Artifacts}/*
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:GetObjectVersion
+              - Resource: !Sub arn:aws:s3:::${SourceBucket}/*
+                Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:GetObjectVersion
+              - Resource: !Sub arn:aws:s3:::${SourceBucket}
+                Effect: Allow
+                Action:
+                  - s3:List*
+  CFNRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+                - cloudformation.amazonaws.com
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+        - PolicyName: CloudFormationRole
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                  - cloudformation:*
+                  - s3:*
+                  - ec2:*
+                  - lambda:*
+                  - ssm:*
+                  - iam:*
+                  - inspector:*
+                  - sns:*
+                  - codebuild:*
+                  - codepipeline:*
+                  - events:*
+                Effect: Allow
+                Resource: '*'

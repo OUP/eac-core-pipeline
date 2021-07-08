@@ -1,0 +1,11 @@
+$resource.getString("label.dear") ${username},
+
+$resource.getString("label.register.thanks")
+
+$resource.getString("label.validateemail")
+
+${validationlink}
+
+$resource.getString("label.please.ignore")
+
+#parse( "com/oup/eac/service/velocity/regards.vm" )

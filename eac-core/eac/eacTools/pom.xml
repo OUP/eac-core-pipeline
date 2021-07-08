@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>eacBuild</artifactId>
+		<groupId>com.oup.eac</groupId>
+		<version>26.90-SNAPSHOT</version>
+        <relativePath>../eacBuild/pom.xml</relativePath>	
+	</parent>
+	<artifactId>eacTools</artifactId>
+	<packaging>jar</packaging>
+	<name>EAC Tools</name>
+	<description>Tools for various tasks</description>
+	<url>http://site.eac.uk.oup.com/eacTools</url>
+	
+    <scm>
+        <connection>scm:svn:https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild</connection>
+        <developerConnection>scm:svn:https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild</developerConnection>
+        <url>https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild</url>
+    </scm>
+
+	<profiles>
+		<profile>
+			<id>jboss-reboot</id>
+			<properties>
+				<profile.jboss.port>8090</profile.jboss.port>
+				<profile.jboss.hostname>localhost</profile.jboss.hostname>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>jboss-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+									<goal>start-and-wait</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jboss-stop</id>
+			<properties>
+				<profile.jboss.port>8090</profile.jboss.port>
+				<profile.jboss.hostname>localhost</profile.jboss.hostname>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>jboss-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:sws="http://www.springframework.org/schema/web-services"
+    xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/web-services
+            http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+            http://www.springframework.org/schema/oxm
+            http://www.springframework.org/schema/oxm/spring-oxm-1.5.xsd
+            http://www.springframework.org/schema/security 
+            http://www.springframework.org/schema/security/spring-security-3.1.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-3.0.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!-- Imports -->
+    <import resource="classpath*:/eac/eac*-beans.xml" />
+
+    <!--
+        Uses the latest feature from 2.0.0 RC2. Enables @Endpoint and related
+        Spring-WS annotations. See Spring WS Reference 5.4
+    -->
+    <sws:annotation-driven />
+
+	<util:list id="schemas.v1">
+		<value>classpath:xsd/eac-user-data-services-1.0.xsd</value>
+	</util:list>
+	<util:list id="schemas.v2">
+		<value>classpath:xsd/eac-access-services-2.0.xsd</value>
+		<value>classpath:xsd/eac-user-data-services-2.0.xsd</value>
+		<value>classpath:xsd/eac-common-types-2.0.xsd</value>
+	</util:list>
+	
+	<bean abstract="true" id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="validateRequest" value="true" />
+		<!-- <property name="validateResponse" value="true"/> -->
+	</bean>
+
+	<bean id="validatingInterceptor.v1" parent="validatingInterceptor" p:validateResponse="false" p:schemas-ref="schemas.v1" />
+	<bean id="validatingInterceptor.v2" parent="validatingInterceptor" p:validateResponse="false" p:schemas-ref="schemas.v2" />
+	<bean id="securityHeaderFilter" class="com.oup.eac.ws.endpoint.SecurityHeaderEndpointInterceptor" />
+	
+	<!--  this ensures that exceptions that occur in spring-ws interceptors are logged -->
+	<bean class="com.oup.eac.ws.endpoint.EacExceptionResolverConfigurer" />
+	
+    <!--
+        Uses the latest feature from 2.0.0. Enables interceptor endpoints. See
+        Spring WS Reference 5.5.2 Here we have an interceptor that validates
+        XML request and a logger
+        class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+    -->
+    <sws:interceptors>
+		<sws:payloadRoot namespaceUri="http://eac.oup.com/eac-user-data-services">
+			<bean parent="validatingInterceptor.v1" />
+		</sws:payloadRoot>
+		<sws:payloadRoot namespaceUri="http://eac.oup.com/2.0/eac-user-data-services">
+			<bean parent="validatingInterceptor.v2" />
+		</sws:payloadRoot>
+		<sws:payloadRoot namespaceUri="http://eac.oup.com/2.0/eac-access-services">
+			<bean parent="validatingInterceptor.v2" />
+		</sws:payloadRoot>
+		
+        <bean id="loggingInterceptor2"
+        	class="com.oup.eac.ws.filter.LoggingSOAPHandler" >
+            <property name="logRequest" value="true" />
+            <property name="logResponse" value="true" />
+            <property name="logFault" value="true" />
+        </bean>
+
+		<bean parent="securityHeaderFilter" />
+		
+        <bean id="wsSecurityInterceptor"
+            class="org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor">
+            <description>
+                <![CDATA[ 
+                This config of the security interceptor expects the username/ plain text password to be sent like this.
+                Within the UsernameToken element - the nonce and created elements are optional. 
+                <soapenv:Header>
+                    <wsse:Security soapenv:mustUnderstand="1"
+                        xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+                        <wsse:UsernameToken wsu:Id="UsernameToken-3"
+                            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                            <wsse:Username>username</wsse:Username>
+                            <wsse:Password
+                                Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">password</wsse:Password>
+                            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">ZW9mSJbe823QXA+kwA1MNA==</wsse:Nonce>
+            				<wsu:Created>2011-11-11T10:10:27.808Z</wsu:Created>
+                        </wsse:UsernameToken>
+                    </wsse:Security>
+                </soapenv:Header>
+                ]]>
+            </description>
+            <property name="secureResponse" value="false" />
+            <property name="policyConfiguration" value="classpath:/securityPolicy.xml" />
+            <property name="callbackHandler" ref="callbackHandler" />
+        </bean>
+    </sws:interceptors>
+
+    <bean id="callbackHandler"
+        class="org.springframework.ws.soap.security.xwss.callback.SpringPlainTextPasswordValidationCallbackHandler">
+        <property name="authenticationManager" ref="authenticationManager" />
+    </bean>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="eacAuthenticationProvider" />
+    </security:authentication-manager>
+
+	<security:global-method-security pre-post-annotations="enabled" />
+
+	<bean id="eacAuthenticationProvider" class="com.oup.eac.common.utils.security.AuthenticationProvider">
+		<!-- <property name="passwordEncoder" ref="passwordEncoder"/>-->
+		<property name="authoritiesMapper" ref="rbacAuthoritiesMapper"/>
+		<property name="userDetailsService" ref="${ws.sec.admin.service.bean}"/>
+	</bean>
+	
+
+	<bean id="rbacAuthoritiesMapper" class="com.oup.eac.service.security.RBACAuthorityMapper"/>
+
+	<!-- Castor marshaling -->
+	<bean id="castorMarshallerV1" class="com.oup.eac.ws.endpoint.EacCastorMarshaller"
+		p:mappingLocation="classpath:castorMappingV1.xml"
+		p:suppressNamespaces="true" p:packagePrefix="com.oup.eac.ws.v1" />
+
+	<bean id="castorMarshallerV2" class="com.oup.eac.ws.endpoint.EacCastorMarshaller"
+		p:suppressNamespaces="false" p:packagePrefix="com.oup.eac.ws.v2" >
+		<property name="targetPackages" >
+			<list>
+				<value>com.oup.eac.ws.v2.binding.access</value>
+				<value>com.oup.eac.ws.v2.binding.common</value>
+				<value>com.oup.eac.ws.v2.binding.userdata</value>
+			</list>
+		</property>
+	</bean>
+
+    <!--
+        Uses the latest feature from 2.0.0. Enables publishing of wsdl. See
+        Spring WS Reference 3.7 For dynamic location transformation to work, a
+        special parameter must be added to the web.xml. The locationUri here
+        has no use when integrated with Spring MVC because it has been
+        overriden by the SimpleUrlHandlerMapping
+    -->
+    <sws:dynamic-wsdl id="user-data-service" portTypeName="user-data-service"
+        locationUri="/services/" targetNamespace="http://eac.oup.com/eac-user-data-services">
+        <sws:xsd location="classpath:xsd/eac-user-data-services-1.0.xsd" />
+    </sws:dynamic-wsdl>
+    
+    <sws:dynamic-wsdl id="user-data-service-v2.0" portTypeName="user-data-service-v2.0"
+        locationUri="/services/" targetNamespace="http://eac.oup.com/2.0/eac-user-data-services">
+        <sws:xsd location="classpath:xsd/eac-user-data-services-2.0.xsd" />
+    </sws:dynamic-wsdl>
+    
+    <sws:dynamic-wsdl id="access-service-v2.0" portTypeName="access-service-v2.0"
+        locationUri="/services/" targetNamespace="http://eac.oup.com/2.0/eac-access-services">
+        <sws:xsd location="classpath:xsd/eac-access-services-2.0.xsd" />
+    </sws:dynamic-wsdl>
+    
+    <!--
+        Normally we use the GenericMarshallingMethodEndpointAdapter however if
+        you read the Spring WS 2.0 API for this adapter: "Deprecated. as of
+        Spring Web Services 2.0, in favor of DefaultMethodEndpointAdapter and
+        MarshallingPayloadMethodProcessor." See
+        http://static.springsource.org/spring-ws/sites/2.0/apidocs/org/springframework/ws/server/endpoint/adapter/GenericMarshallingMethodEndpointAdapter.html
+
+        So we have to implement using the recommended implementation. The
+        advantage of these two classes is that we have a pluggable adapter.
+        For more info, check the Spring WS 2.0 API and its source code.
+    -->
+	<bean id="marshallingPayloadMethodProcessorV1"
+		class="org.springframework.ws.server.endpoint.adapter.method.MarshallingPayloadMethodProcessor">
+		<constructor-arg ref="castorMarshallerV1" />
+		<constructor-arg ref="castorMarshallerV1" />
+	</bean>
+	<bean id="marshallingPayloadMethodProcessorV2"
+		class="org.springframework.ws.server.endpoint.adapter.method.MarshallingPayloadMethodProcessor">
+		<constructor-arg ref="castorMarshallerV2" />
+		<constructor-arg ref="castorMarshallerV2" />
+	</bean>
+
+	<bean id="defaultMethodEndpointAdapter"
+		class="org.springframework.ws.server.endpoint.adapter.DefaultMethodEndpointAdapter">
+		<property name="methodArgumentResolvers">
+			<list>
+				<ref bean="marshallingPayloadMethodProcessorV1" />
+				<ref bean="marshallingPayloadMethodProcessorV2" />
+			</list>
+		</property>
+		<property name="methodReturnValueHandlers">
+			<list>
+				<ref bean="marshallingPayloadMethodProcessorV1" />
+				<ref bean="marshallingPayloadMethodProcessorV2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="wsSetEacApp" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" >
+           <property name="targetClass" value="com.oup.eac.domain.utils.audit.EacApp" />
+           <property name="targetMethod" value="setType" />
+           <property name="arguments" >
+   		     <list>
+				<value>WEB_SERVICES</value>
+				<value>eacWebServices</value>
+			  </list>
+		   </property>
+    </bean>
+	
+
+</beans>

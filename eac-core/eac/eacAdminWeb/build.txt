@@ -1,0 +1,267 @@
+Apache Maven 3.0.3 (r1075438; 2011-02-28 17:31:09+0000)
+Maven home: C:\dev\tools\apache-maven-3.0.3\bin\..
+Java version: 1.6.0_26, vendor: Sun Microsystems Inc.
+Java home: C:\dev\tools\Java\jdk1.6.0_26\jre
+Default locale: en_GB, platform encoding: Cp1252
+OS name: "windows 7", version: "6.1", arch: "x86", family: "windows"
+[INFO] Error stacktraces are turned on.
+[DEBUG] Reading global settings from C:\dev\tools\apache-maven-3.0.3\bin\..\conf\settings.xml
+[DEBUG] Reading user settings from C:\Users\packardi\.m2\settings.xml
+[DEBUG] Using local repository at C:\Users\packardi\.m2\repository
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10 for C:\Users\packardi\.m2\repository
+[INFO] Scanning for projects...
+[DEBUG] Extension realms for project com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT: (none)
+[DEBUG] Looking up lifecyle mappings for packaging war from ClassRealm[plexus.core, parent: null]
+[DEBUG] Resolving plugin prefix dependency from [org.apache.maven.plugins, org.codehaus.mojo]
+[DEBUG] Resolved plugin prefix dependency to org.apache.maven.plugins:maven-dependency-plugin from POM com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT
+[DEBUG] === REACTOR BUILD PLAN ================================================
+[DEBUG] Project: com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT
+[DEBUG] Tasks:   [dependency:tree]
+[DEBUG] Style:   Regular
+[DEBUG] =======================================================================
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building eacAdminWeb 1.6-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[DEBUG] Resolving plugin prefix dependency from [org.apache.maven.plugins, org.codehaus.mojo]
+[DEBUG] Resolved plugin prefix dependency to org.apache.maven.plugins:maven-dependency-plugin from POM com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] === PROJECT BUILD PLAN ================================================
+[DEBUG] Project:       com.oup.eacadmin:eacAdminWeb:1.6-SNAPSHOT
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): [test]
+[DEBUG] Repositories (dependencies): [nexus (http://10.114.63.13:8081/nexus/content/groups/public, releases+snapshots)]
+[DEBUG] Repositories (plugins)     : [nexus (http://10.114.63.13:8081/nexus/content/groups/public, releases+snapshots)]
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-dependency-plugin:2.1:tree (default-cli)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <excludes>${excludes}</excludes>
+  <includes>${includes}</includes>
+  <localRepository>${localRepository}</localRepository>
+  <output>${output}</output>
+  <outputFile>${outputFile}</outputFile>
+  <project>${project}</project>
+  <scope>${scope}</scope>
+  <tokens default-value="standard">${tokens}</tokens>
+  <verbose default-value="false">${verbose}</verbose>
+</configuration>
+[DEBUG] =======================================================================
+[DEBUG] Skipped remote update check for com.oup.eacadmin:eacAdminWebApp:1.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.oup.eacadmin:eacAdminWebApp:1.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.oup.eacadmin:eacAdminBuild:1.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[DEBUG] Skipped remote update check for com.oup.eac:eacBuild:1.6-SNAPSHOT/maven-metadata.xml, locally built metadata up-to-date.
+[WARNING] The POM for com.oup.eacadmin:eacAdminWebApp:jar:1.6-SNAPSHOT is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model for com.oup.eacadmin:eacAdminWebApp:1.6-SNAPSHOT
+[ERROR] 'dependencies.dependency.version' for com.oup.eac:eacService:test-jar is missing. @ 
+
+[DEBUG] com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT
+[DEBUG]    com.oup.eacadmin:eacAdminWebApp:jar:1.6-SNAPSHOT:compile
+[DEBUG]    org.jboss.snowdrop:snowdrop-vfs:jar:1.0.0.GA:compile
+[DEBUG]    log4j:log4j:jar:1.2.12:provided
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.1:tree (default-cli) @ eacAdminWeb ---
+[DEBUG] Created new class realm maven.api
+[DEBUG] Importing foreign packages into class realm maven.api
+[DEBUG]   Imported: org.apache.maven.wagon.events < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.transfer < plexus.core
+[DEBUG]   Imported: org.apache.maven.exception < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.metadata < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.Xpp3Dom < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.collection < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.version < plexus.core
+[DEBUG]   Imported: org.apache.maven.monitor < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.resource < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.logging < plexus.core
+[DEBUG]   Imported: org.apache.maven.profiles < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.classrealm < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.artifact < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.spi < plexus.core
+[DEBUG]   Imported: org.apache.maven.reporting < plexus.core
+[DEBUG]   Imported: org.apache.maven.usability < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.container < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.component < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlSerializer < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authentication < plexus.core
+[DEBUG]   Imported: org.apache.maven.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.classworlds < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.graph < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.settings < plexus.core
+[DEBUG]   Imported: org.codehaus.classworlds < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.impl < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.toolchain < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.deployment < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.observers < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParserException < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParser < plexus.core
+[DEBUG]   Imported: org.apache.maven.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.cli < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.installation < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.context < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authorization < plexus.core
+[DEBUG]   Imported: org.apache.maven.project < plexus.core
+[DEBUG]   Imported: org.apache.maven.rtinfo < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.artifact < plexus.core
+[DEBUG]   Imported: org.apache.maven.model < plexus.core
+[DEBUG]   Imported: org.apache.maven.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.proxy < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.resolution < plexus.core
+[DEBUG]   Imported: org.apache.maven.plugin < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.* < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.personality < plexus.core
+[DEBUG] Populating class realm maven.api
+[DEBUG] org.apache.maven.plugins:maven-dependency-plugin:jar:2.1:
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-core:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.0.9:compile
+[DEBUG]       commons-cli:commons-cli:jar:1.0:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.0.9:compile
+[DEBUG]       org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4:compile
+[DEBUG]       org.apache.maven:maven-monitor:jar:2.0.9:compile
+[DEBUG]       classworlds:classworlds:jar:1.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-archiver:jar:1.0-alpha-9:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:1.4.6:compile
+[DEBUG]    org.apache.maven.shared:file-management:jar:1.1:compile
+[DEBUG]       org.apache.maven.shared:maven-shared-io:jar:1.0:compile
+[DEBUG]          org.apache.maven.wagon:wagon-provider-api:jar:1.0-alpha-6:compile
+[DEBUG]    org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]       junit:junit:jar:3.8.1:compile
+[DEBUG]    org.apache.maven.shared:maven-dependency-analyzer:jar:1.1:compile
+[DEBUG]       asm:asm:jar:3.0:compile
+[DEBUG]    org.apache.maven.shared:maven-dependency-tree:jar:1.2:compile
+[DEBUG]    org.apache.maven.shared:maven-common-artifact-filters:jar:1.0:compile
+[DEBUG]       org.apache.maven.shared:maven-plugin-testing-harness:jar:1.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-io:jar:1.0-alpha-1:compile
+[DEBUG]    org.apache.maven.reporting:maven-reporting-api:jar:2.0.6:compile
+[DEBUG]       org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-7:compile
+[DEBUG]    org.apache.maven.reporting:maven-reporting-impl:jar:2.0.4:compile
+[DEBUG]       commons-validator:commons-validator:jar:1.2.0:compile
+[DEBUG]          commons-beanutils:commons-beanutils:jar:1.7.0:compile
+[DEBUG]          commons-digester:commons-digester:jar:1.6:compile
+[DEBUG]             commons-collections:commons-collections:jar:2.1:compile
+[DEBUG]          commons-logging:commons-logging:jar:1.0.4:compile
+[DEBUG]          xml-apis:xml-apis:jar:1.0.b2:compile
+[DEBUG]       org.apache.maven.doxia:doxia-core:jar:1.0-alpha-7:compile
+[DEBUG]       oro:oro:jar:2.0.7:compile
+[DEBUG]       org.apache.maven.doxia:doxia-site-renderer:jar:1.0-alpha-7:compile
+[DEBUG]          org.codehaus.plexus:plexus-i18n:jar:1.0-beta-6:compile
+[DEBUG]          org.codehaus.plexus:plexus-velocity:jar:1.1.2:compile
+[DEBUG]             plexus:plexus-utils:jar:1.0.2:compile
+[DEBUG]             commons-logging:commons-logging-api:jar:1.0.4:compile
+[DEBUG]             velocity:velocity:jar:1.4:compile
+[DEBUG]                velocity:velocity-dep:jar:1.4:runtime
+[DEBUG]          org.apache.maven.doxia:doxia-decoration-model:jar:1.0-alpha-7:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-dependency-plugin:2.1
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-dependency-plugin:2.1
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-dependency-plugin:2.1
+[DEBUG]   Included: org.apache.maven.plugins:maven-dependency-plugin:jar:2.1
+[DEBUG]   Included: commons-cli:commons-cli:jar:1.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:1.0-alpha-9
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:1.4.6
+[DEBUG]   Included: org.apache.maven.shared:file-management:jar:1.1
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-io:jar:1.0
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.apache.maven.shared:maven-dependency-analyzer:jar:1.1
+[DEBUG]   Included: asm:asm:jar:3.0
+[DEBUG]   Included: org.apache.maven.shared:maven-dependency-tree:jar:1.2
+[DEBUG]   Included: org.apache.maven.shared:maven-common-artifact-filters:jar:1.0
+[DEBUG]   Included: org.apache.maven.shared:maven-plugin-testing-harness:jar:1.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:1.0-alpha-1
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:2.0.6
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-7
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-impl:jar:2.0.4
+[DEBUG]   Included: commons-validator:commons-validator:jar:1.2.0
+[DEBUG]   Included: commons-beanutils:commons-beanutils:jar:1.7.0
+[DEBUG]   Included: commons-digester:commons-digester:jar:1.6
+[DEBUG]   Included: commons-collections:commons-collections:jar:2.1
+[DEBUG]   Included: commons-logging:commons-logging:jar:1.0.4
+[DEBUG]   Included: xml-apis:xml-apis:jar:1.0.b2
+[DEBUG]   Included: org.apache.maven.doxia:doxia-core:jar:1.0-alpha-7
+[DEBUG]   Included: oro:oro:jar:2.0.7
+[DEBUG]   Included: org.apache.maven.doxia:doxia-site-renderer:jar:1.0-alpha-7
+[DEBUG]   Included: org.codehaus.plexus:plexus-i18n:jar:1.0-beta-6
+[DEBUG]   Included: org.codehaus.plexus:plexus-velocity:jar:1.1.2
+[DEBUG]   Included: plexus:plexus-utils:jar:1.0.2
+[DEBUG]   Included: commons-logging:commons-logging-api:jar:1.0.4
+[DEBUG]   Included: velocity:velocity:jar:1.4
+[DEBUG]   Included: velocity:velocity-dep:jar:1.4
+[DEBUG]   Included: org.apache.maven.doxia:doxia-decoration-model:jar:1.0-alpha-7
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.0.9
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1
+[DEBUG]   Excluded: org.apache.maven.wagon:wagon-provider-api:jar:1.0-alpha-6
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-dependency-plugin:2.1:tree from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-dependency-plugin:2.1, parent: sun.misc.Launcher$AppClassLoader@11b86e7]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-dependency-plugin:2.1:tree' with basic configurator -->
+[DEBUG]   (f) includes = *:*slf*
+[DEBUG]   (f) localRepository =        id: local
+      url: file:///C:/Users/packardi/.m2/repository/
+   layout: none
+
+[DEBUG]   (f) project = MavenProject: com.oup.eacadmin:eacAdminWeb:1.6-SNAPSHOT @ C:\dev\workspaces\eac\maven.1296236346714\eacAdminWeb\pom.xml
+[DEBUG]   (f) tokens = standard
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[DEBUG] Dependency tree resolution listener events:
+[DEBUG] testArtifact: artifact=com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT
+[DEBUG] includeArtifact: artifact=com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT
+[DEBUG] startProcessChildren: artifact=com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT
+[WARNING] Invalid POM for com.oup.eacadmin:eacAdminWebApp:jar:1.6-SNAPSHOT, transitive dependencies (if any) will not be available, enable debug logging for more details: 1 problem was encountered while building the effective model for com.oup.eacadmin:eacAdminWebApp:1.6-SNAPSHOT
+[ERROR] 'dependencies.dependency.version' for com.oup.eac:eacService:test-jar is missing. @ line 76, column 15
+ for project com.oup.eacadmin:eacAdminWebApp:1.6-SNAPSHOT
+[DEBUG]   testArtifact: artifact=com.oup.eacadmin:eacAdminWebApp:jar:1.6-SNAPSHOT:compile
+[DEBUG]   includeArtifact: artifact=com.oup.eacadmin:eacAdminWebApp:jar:1.6-SNAPSHOT:compile
+[DEBUG]   startProcessChildren: artifact=com.oup.eacadmin:eacAdminWebApp:jar:1.6-SNAPSHOT:compile
+[DEBUG]   endProcessChildren: artifact=com.oup.eacadmin:eacAdminWebApp:jar:1.6-SNAPSHOT:compile
+[DEBUG]   testArtifact: artifact=org.jboss.snowdrop:snowdrop-vfs:jar:1.0.0.GA:compile
+[DEBUG]   includeArtifact: artifact=org.jboss.snowdrop:snowdrop-vfs:jar:1.0.0.GA:compile
+[DEBUG]   startProcessChildren: artifact=org.jboss.snowdrop:snowdrop-vfs:jar:1.0.0.GA:compile
+[DEBUG]   endProcessChildren: artifact=org.jboss.snowdrop:snowdrop-vfs:jar:1.0.0.GA:compile
+[DEBUG]   testArtifact: artifact=log4j:log4j:jar:1.2.12:provided
+[DEBUG]   includeArtifact: artifact=log4j:log4j:jar:1.2.12:provided
+[DEBUG]   startProcessChildren: artifact=log4j:log4j:jar:1.2.12:provided
+[DEBUG]   endProcessChildren: artifact=log4j:log4j:jar:1.2.12:provided
+[DEBUG] endProcessChildren: artifact=com.oup.eacadmin:eacAdminWeb:war:1.6-SNAPSHOT
+[DEBUG] + Filtering omitted nodes from dependency tree
+[DEBUG] + Filtering dependency tree by artifact include patterns: [*:*slf*]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.198s
+[INFO] Finished at: Tue Jun 14 15:31:32 BST 2011
+[INFO] Final Memory: 6M/15M
+[INFO] ------------------------------------------------------------------------
+[WARNING] The requested profile "local" could not be activated because it does not exist.

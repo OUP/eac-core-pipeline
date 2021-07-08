@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	
+	<definition name="createOrEditCustomer" extends="standardLayout">
+		<put-attribute name="body" value="customerTabsTile" />
+	</definition>
+	
+	<definition name="customerTabsTile" template="/WEB-INF/flows/customer/create/createOrEditCustomer.jsp">
+		<put-attribute name="customerTile" value="customerTile" />
+		<put-attribute name="credentialsTile" value="credentialsTile" />
+		<put-attribute name="registrationsTile" value="registrationsTile" />
+		<put-attribute name="problemRegistrationsTile" value="problemRegistrationsTile" />
+		<put-attribute name="externalIdsTile" value="externalIdsTile" />
+		<put-attribute name="statusTile" value="statusTile" />
+	</definition>
+	
+	<definition name="customerTile" template="/WEB-INF/flows/customer/create/customerTile.jsp">
+	</definition>
+	
+	<definition name="credentialsTile" template="/WEB-INF/flows/customer/create/credentialsTile.jsp">
+	</definition>
+	
+	<definition name="registrationsTile" template="/WEB-INF/flows/customer/create/registrationsTile.jsp">
+		<put-attribute name="registrationSummaryTableBodyTile" value="registrationSummaryTableBodyTile" />
+	</definition>
+	
+	<!-- <definition name="problemRegistrationsTile" template="/WEB-INF/flows/customer/create/problemRegistrationsTile.jsp" /> -->
+	
+	<definition  name="problemRegistrationsTile" template="/WEB-INF/flows/customer/create/problemRegistrationsTile.jsp">
+		<put-attribute name="registrationDetailsTile" value="registrationDetailsTile" />
+		<put-attribute name="licencesTile" value="licencesTile" />
+	</definition>
+
+	<definition name="licencesTile" template="/WEB-INF/flows/customer/create/licencesTile.jsp">
+	</definition>	
+	<definition name="linkedLicenceTile" template="/WEB-INF/flows/customer/create/linkedLicenceTile.jsp">
+	</definition>
+	
+	<definition name="registrationDetailsTile" template="/WEB-INF/flows/customer/create/registrationDetailsTile.jsp">
+	</definition>	
+
+	<definition name="externalIdsTile" template="/WEB-INF/flows/externalIds/addReference/externalIdsTile.jsp">
+		<put-attribute name="externalIdsTableBodyTile" value="externalIdsTableBodyTile" />
+		<put-attribute name="externalSystemIdTypeTile" value="externalSystemIdTypeTile" />
+	</definition>
+	
+	<definition name="externalIdsTableBodyTile" template="/WEB-INF/flows/externalIds/addReference/externalIdsTableBodyTile.jsp">
+	</definition>
+	
+	<definition name="externalSystemIdTypeTile" template="/WEB-INF/flows/externalIds/addReference/externalSystemIdTypeTile.jsp">
+	</definition>
+	
+	<definition name="statusTile" template="/WEB-INF/flows/customer/create/statusTile.jsp">
+	</definition>
+	
+	<definition name="registrationSummaryTableBodyTile" template="/WEB-INF/flows/customer/create/registrationSummaryTableBodyTile.jsp">
+	<put-attribute name="registrationSummaryTile" value="registrationSummaryTile" />
+	</definition>
+	
+	<definition name="registrationSummaryTile" template="/WEB-INF/flows/customer/create/registrationSummaryTile.jsp">
+		<put-attribute name="registrationDetailsTile" value="registrationDetailsTile" />
+		<put-attribute name="licencesTile" value="licencesTile" />
+		<put-attribute name="linkedLicenceTile" value="linkedLicenceTile" />
+	</definition>
+		
+</tiles-definitions>

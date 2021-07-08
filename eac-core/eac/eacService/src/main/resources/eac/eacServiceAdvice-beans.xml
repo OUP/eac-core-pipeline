@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+    <bean id="transactionAdvice"
+        class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager">
+            <ref bean="transactionManager" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+            	<prop key="process*">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="save*">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="create*">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="send*">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="insert*">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="getCustomerByUsernameAndPassword">PROPAGATION_REQUIRED,+ServiceLayerException</prop>                
+                <prop key="log*">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="redeemActivationCode">PROPAGATION_REQUIRED,-ServiceLayerException</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+	<bean id="serviceProxyCreator"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<value>*Service</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionAdvice</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

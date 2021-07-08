@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+   <!-- ================================= -->
+   <!-- Preserve messages in a local file -->
+   <!-- ================================= -->
+
+   
+    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+      <param name="File" value="${catalina.home}/logs/server.log"/>
+      <param name="MaxFileSize" value="100MB"/>
+      <param name="MaxBackupIndex" value="10"/>
+      <param name="threshold" value="debug"/>
+      <param name="append" value="true"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="conversionPattern" value="%d %-5p [%c] (%t) %m%n"/>
+      </layout>
+   </appender>   
+   
+    <appender name="EAC" class="org.apache.log4j.RollingFileAppender">
+      <param name="File" value="${catalina.home}/logs/eac.log"/>
+      <param name="MaxFileSize" value="100MB"/>
+      <param name="MaxBackupIndex" value="10"/>
+      <param name="threshold" value="debug"/>
+      <param name="append" value="true"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="conversionPattern" value="%d %-5p [%c] (%t) %m%n"/>
+      </layout>
+   </appender>
+
+    <appender name="EACWS" class="org.apache.log4j.RollingFileAppender">
+      <param name="File" value="${catalina.home}/logs/eac-ws.log"/>
+      <param name="MaxFileSize" value="100MB"/>
+      <param name="MaxBackupIndex" value="10"/>
+      <param name="threshold" value="debug"/>
+      <param name="append" value="true"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="conversionPattern" value="%d %-5p [%c] (%t) %m%n"/>
+      </layout>
+   </appender>
+   
+   <appender name="AUDIT" class="org.apache.log4j.RollingFileAppender">
+      <param name="File" value="${catalina.home}/logs/audit.log"/>
+      <param name="MaxFileSize" value="100MB"/>
+      <param name="MaxBackupIndex" value="10"/>
+      <param name="threshold" value="debug"/>
+      <param name="append" value="true"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="conversionPattern" value="%d %m%n"/>
+      </layout>
+   </appender>    
+  
+   <appender name="ERIGHTS" class="org.apache.log4j.RollingFileAppender">
+      <param name="File" value="${catalina.home}/logs/erights.log"/>
+      <param name="MaxFileSize" value="100MB"/>
+      <param name="MaxBackupIndex" value="10"/>
+      <param name="threshold" value="debug"/>
+      <param name="append" value="true"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="conversionPattern" value="%d %-5p [%c] (%t) %m%n"/>
+      </layout>
+   </appender>   
+   
+   <appender name="ERIGHTS_PERFORMANCE" class="org.apache.log4j.RollingFileAppender">
+      <param name="File" value="${catalina.home}/logs/erights-performance.log"/>
+      <param name="MaxFileSize" value="10240KB"/>
+      <param name="MaxBackupIndex" value="10"/>
+      <param name="threshold" value="debug"/>
+      <param name="append" value="true"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="conversionPattern" value="%m%n"/>
+      </layout>
+   </appender>
+
+   <!-- Email errors to an administrator -->
+   <appender name="SMTP" class="org.apache.log4j.net.SMTPAppender">
+     <errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler"/>
+     <param name="Threshold" value="ERROR"/>
+     <param name="To" value="eacdevadmin@oup.com"/>
+     <param name="From" value="eacdev@oup.com"/>
+     <param name="Subject" value="EAC Application Server Errors"/>
+     <param name="SMTPHost" value="localhost"/>
+     <param name="BufferSize" value="10"/>
+     <layout class="org.apache.log4j.PatternLayout">
+       <param name="ConversionPattern" value="%5p [%t] (%F:%L) - %m%X{info}%n"/>
+     </layout>
+     <filter class="com.oup.eac.log4j.BurstFilter">
+        <param name="numberOfEvents" value="100" />
+        <param name="timeWindowMs" value="60000" />
+
+        <param name="stderrCheckEnabled" value="true" />
+	<param name="stderrLoggerName" value="STDERR" />
+	<param name="stderrFirstLineInfoText" value=" [PLEASE SEE LOG FILES FOR FULL DETAILS.]" />
+	<param name="stderrAtLinePrefix" value="at" />
+     </filter>
+   </appender>
+
+  
+
+   <!-- ============================== -->
+   <!-- Append messages to the console -->
+   <!-- ============================== -->
+
+   <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+      <errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler"/>
+      <param name="Target" value="System.out"/>
+      <param name="Threshold" value="INFO"/>
+
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
+      </layout>
+   </appender>
+
+  
+   
+   <!-- ================ -->
+   <!-- Limit categories -->
+   <!-- ================ -->
+
+   <!-- Limit the org.apache category to INFO as its DEBUG is verbose -->
+   <category name="org.apache">
+      <priority value="INFO"/>
+   </category>
+   
+   <!-- Limit the jacorb category to WARN as its INFO is verbose -->
+   <category name="jacorb">
+      <priority value="WARN"/>
+   </category>
+   
+   <!-- Set the logging level of the JSF implementation that uses
+      | java.util.logging. The jdk logging levels can be controlled
+      | through the org.jboss.logging.log4j.JDKLevel class that
+      | in addition to the standard log4j levels it adds support for
+      | SEVERE, WARNING, CONFIG, FINE, FINER, FINEST nikunj
+   -->
+   <!--<category name="javax.enterprise.resource.webcontainer.jsf">
+     <priority value="INFO" class="org.jboss.logging.log4j.JDKLevel"/>
+   </category>-->
+   
+   <!-- Limit the org.jgroups category to WARN as its INFO is verbose -->
+   <category name="org.jgroups">
+      <priority value="WARN"/>
+   </category>
+   
+   <!-- Limit the org.quartz category to INFO as its DEBUG is verbose -->
+   <category name="org.quartz">
+      <priority value="INFO"/>
+   </category>
+   
+   <!-- Limit the com.sun category to INFO as its FINE is verbose -->
+   <category name="com.sun">
+      <priority value="INFO"/>
+   </category>
+   
+   <!-- Limit the sun category to INFO as its FINE is verbose -->
+   <category name="sun">
+      <priority value="INFO"/>
+   </category>
+   
+   <!-- Limit the javax.xml.bind category to INFO as its FINE is verbose -->
+   <category name="javax.xml.bind">
+      <priority value="INFO"/>
+   </category>
+   
+   
+   <!-- Limit the verbose facelets compiler -->
+   <category name="facelets.compiler">
+      <priority value="WARN"/>
+   </category>
+   
+   <!-- Limit the verbose ajax4jsf cache initialization -->
+   <category name="org.ajax4jsf.cache">
+      <priority value="WARN"/>
+   </category>
+   
+   <!-- Limit the verbose embedded jopr categories -->
+   <category name="org.rhq">
+      <priority value="WARN"/>
+   </category>
+   
+    
+   
+   <logger name="auditLogger" additivity="false">
+    <!-- level info logs -->
+    <level value="INFO" />
+    <appender-ref ref="AUDIT"/>
+  </logger>
+  
+  <logger name="com.oup.eac.integration.erights">
+    <!-- level info logs -->
+    <level value="DEBUG" />
+    <appender-ref ref="ERIGHTS"/>
+  </logger>
+
+  <logger name="ERIGHTS_PERFORMANCE">
+    <level value="DEBUG" />
+    <appender-ref ref="ERIGHTS_PERFORMANCE"/>
+  </logger>
+  
+  <logger name="com.oup.eac.integration.facade.impl.ErightsFacadeImpl" additivity="false">
+    <!-- level info logs -->
+    <level value="DEBUG" />
+    <appender-ref ref="ERIGHTS"/>
+  </logger>  
+  
+  <logger name="com.oup.eac">
+    <level value="DEBUG" />
+    <appender-ref ref="EAC"/>
+    <appender-ref ref="EACWS"/>
+  </logger>
+
+  <logger name="org.quartz">
+    <level value="INFO"/>
+    <appender-ref ref="FILE"/>
+  </logger>
+
+  <logger name="org.springframework.scheduling.quartz">
+    <level value="INFO"/>
+    <appender-ref ref="FILE"/>
+  </logger>
+ 
+  <logger name="org.springframework.ws.soap.server.endpoint.interceptor.SoapEnvelopeLoggingInterceptor">
+    <level value="DEBUG"/>
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="EACWS"/>
+  </logger>
+  
+  <logger name="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+    <level value="DEBUG"/>
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="EACWS"/>
+  </logger>
+
+  <logger name="org.apache.catalina.connector.InputBuffer">
+    <level value="ERROR"/>
+    <appender-ref ref="FILE"/>
+  </logger>  
+
+   <!-- ======================= -->
+   <!-- Setup the Root category -->
+   <!-- ======================= -->
+
+   <root>     
+      <!--<appender-ref ref="CONSOLE"/>-->
+      <appender-ref ref="FILE"/>
+      <appender-ref ref="SMTP"/>
+   </root>
+
+</log4j:configuration>

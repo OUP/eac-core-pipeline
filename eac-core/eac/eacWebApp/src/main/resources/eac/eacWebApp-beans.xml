@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xmlns="http://www.springframework.org/schema/beans"	  
+	   	xmlns:aop="http://www.springframework.org/schema/aop"
+	   	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   		http://www.springframework.org/schema/util
+      		http://www.springframework.org/schema/util/spring-util-3.1.xsd			
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<bean abstract="true" id="regNotAllowed.baseCustomer"  class="com.oup.eac.web.controllers.helpers.impl.RegistrationNotAllowedMessageCodeConfig" p:notAllowedReason="CUSTOMER" />
+	<bean abstract="true" id="regNotAllowed.baseCustomerSelfRegSelfService" parent="regNotAllowed.baseCustomer"  p:registerableType="SELF_REGISTERABLE" p:customerType="SELF_SERVICE" />
+	<bean abstract="true" id="regNotAllowed.baseCustomerSelfRegShared"      parent="regNotAllowed.baseCustomer"  p:registerableType="SELF_REGISTERABLE" p:customerType="SHARED" />
+	<bean abstract="true" id="regNotAllowed.baseCustomerSelfRegSpecificConcurrency" parent="regNotAllowed.baseCustomer"  p:registerableType="SELF_REGISTERABLE" p:customerType="SPECIFIC_CONCURRENCY" />
+	
+	<bean abstract="true" id="regNotAllowed.baseCustomerAdminRegSelfService" parent="regNotAllowed.baseCustomer"  p:registerableType="ADMIN_REGISTERABLE" p:customerType="SELF_SERVICE" />
+	<bean abstract="true" id="regNotAllowed.baseCustomerAdminRegShared"      parent="regNotAllowed.baseCustomer"  p:registerableType="ADMIN_REGISTERABLE" p:customerType="SHARED" />
+    <bean abstract="true" id="regNotAllowed.baseCustomerAdminRegSpecificConcurrency" parent="regNotAllowed.baseCustomer"  p:registerableType="ADMIN_REGISTERABLE" p:customerType="SPECIFIC_CONCURRENCY" />	
+
+	<!-- CUSTOMER / SELF_REGISTERABLE / SELF SERVICE -->
+	<bean id="regNotAllowed.customerSelfRegSelfServiceActive"
+		parent="regNotAllowed.baseCustomerSelfRegSelfService" p:lifecycleState="ACTIVE" />
+		
+	<bean id="regNotAllowed.customerSelfRegSelfServiceSuspended"
+		parent="regNotAllowed.baseCustomerSelfRegSelfService" p:lifecycleState="SUSPENDED" />
+		
+	<bean id="regNotAllowed.customerSelfRegSelfServiceRemoved"
+		parent="regNotAllowed.baseCustomerSelfRegSelfService" p:lifecycleState="REMOVED" />
+		
+	<bean id="regNotAllowed.customerSelfRegSelfServiceRetired"
+		parent="regNotAllowed.baseCustomerSelfRegSelfService" p:lifecycleState="RETIRED" />
+		
+		
+    <!-- CUSTOMER / SELF_REGISTERABLE / SPECIFIC_CONCURRENCY -->
+    <bean id="regNotAllowed.customerSelfRegSpecificConcurrencyActive"
+        parent="regNotAllowed.baseCustomerSelfRegSpecificConcurrency" p:lifecycleState="ACTIVE" />
+        
+    <bean id="regNotAllowed.customerSelfRegSpecificConcurrencySuspended"
+        parent="regNotAllowed.baseCustomerSelfRegSpecificConcurrency" p:lifecycleState="SUSPENDED" />
+        
+    <bean id="regNotAllowed.customerSelfRegSpecificConcurrencyRemoved"
+        parent="regNotAllowed.baseCustomerSelfRegSpecificConcurrency" p:lifecycleState="REMOVED" />
+        
+    <bean id="regNotAllowed.customerSelfRegSpecificConcurrencyRetired"
+        parent="regNotAllowed.baseCustomerSelfRegSpecificConcurrency" p:lifecycleState="RETIRED" />
+        		
+        		
+	<!-- CUSTOMER / SELF_REGISTERABLE / SHARED -->
+	<bean id="regNotAllowed.customerSelfRegSharedActive"
+		parent="regNotAllowed.baseCustomerSelfRegShared" p:lifecycleState="ACTIVE" />
+		
+	<bean id="regNotAllowed.customerSelfRegSharedSuspended"
+		parent="regNotAllowed.baseCustomerSelfRegShared" p:lifecycleState="SUSPENDED" />
+		
+	<bean id="regNotAllowed.customerSelfRegSharedRemoved"
+		parent="regNotAllowed.baseCustomerSelfRegShared" p:lifecycleState="REMOVED" />
+		
+	<bean id="regNotAllowed.customerSelfRegSharedRetired"
+		parent="regNotAllowed.baseCustomerSelfRegShared" p:lifecycleState="RETIRED" />
+
+		
+	<!-- CUSTOMER / ADMIN_REGISTERABLE / SELF_SERVICE -->
+	<bean id="regNotAllowed.customerAdminRegSelfServiceActive"
+		parent="regNotAllowed.baseCustomerAdminRegSelfService" p:lifecycleState="ACTIVE" />
+		
+	<bean id="regNotAllowed.customerAdminRegSelfServiceSuspended"
+		parent="regNotAllowed.baseCustomerAdminRegSelfService" p:lifecycleState="SUSPENDED" />
+		
+	<bean id="regNotAllowed.customerAdminRegSelfServiceRemoved"
+		parent="regNotAllowed.baseCustomerAdminRegSelfService" p:lifecycleState="REMOVED" />
+		
+	<bean id="regNotAllowed.customerAdminRegSelfServiceRetired"
+		parent="regNotAllowed.baseCustomerAdminRegSelfService" p:lifecycleState="RETIRED" />
+
+
+    <!-- CUSTOMER / ADMIN_REGISTERABLE / SPECIFIC_CONCURRENCY -->
+    <bean id="regNotAllowed.customerAdminRegSpecificConcurrencyActive"
+        parent="regNotAllowed.baseCustomerAdminRegSpecificConcurrency" p:lifecycleState="ACTIVE" />
+        
+    <bean id="regNotAllowed.customerAdminRegSpecificConcurrencySuspended"
+        parent="regNotAllowed.baseCustomerAdminRegSpecificConcurrency" p:lifecycleState="SUSPENDED" />
+        
+    <bean id="regNotAllowed.customerAdminRegSpecificConcurrencyRemoved"
+        parent="regNotAllowed.baseCustomerAdminRegSpecificConcurrency" p:lifecycleState="REMOVED" />
+        
+    <bean id="regNotAllowed.customerAdminRegSpecificConcurrencyRetired"
+        parent="regNotAllowed.baseCustomerAdminRegSpecificConcurrency" p:lifecycleState="RETIRED" />
+
+		
+	<!-- CUSTOMER / ADMIN_REGISTERABLE / SHARED -->
+	<bean id="regNotAllowed.customerAdminRegSharedActive"
+		parent="regNotAllowed.baseCustomerAdminRegShared" p:lifecycleState="ACTIVE" />
+		
+	<bean id="regNotAllowed.customerAdminRegSharedSuspended"
+		parent="regNotAllowed.baseCustomerAdminRegShared" p:lifecycleState="SUSPENDED" />
+		
+	<bean id="regNotAllowed.customerAdminRegSharedRemoved"
+		parent="regNotAllowed.baseCustomerAdminRegShared" p:lifecycleState="REMOVED" />
+		
+	<bean id="regNotAllowed.customerAdminRegSharedRetired"
+		parent="regNotAllowed.baseCustomerAdminRegShared" p:lifecycleState="RETIRED" />
+		
+
+	<util:list id="test.registrationNotAllowedValues">
+
+        <ref bean="regNotAllowed.customerSelfRegSelfServiceActive"   />       
+        <ref bean="regNotAllowed.customerSelfRegSelfServiceSuspended" />
+        <ref bean="regNotAllowed.customerSelfRegSelfServiceRemoved"   />
+        <ref bean="regNotAllowed.customerSelfRegSelfServiceRetired"   />
+                		
+		<ref bean="regNotAllowed.customerSelfRegSpecificConcurrencyActive"   />		
+		<ref bean="regNotAllowed.customerSelfRegSpecificConcurrencySuspended" />
+		<ref bean="regNotAllowed.customerSelfRegSpecificConcurrencyRemoved"   />
+		<ref bean="regNotAllowed.customerSelfRegSpecificConcurrencyRetired"   />
+		
+		<ref bean="regNotAllowed.customerSelfRegSharedActive"        />		
+		<ref bean="regNotAllowed.customerSelfRegSharedSuspended"      />
+		<ref bean="regNotAllowed.customerSelfRegSharedRemoved"        />
+		<ref bean="regNotAllowed.customerSelfRegSharedRetired"        />
+
+
+		<ref bean="regNotAllowed.customerAdminRegSelfServiceActive"   />		
+		<ref bean="regNotAllowed.customerAdminRegSelfServiceSuspended" />
+		<ref bean="regNotAllowed.customerAdminRegSelfServiceRemoved"   />
+		<ref bean="regNotAllowed.customerAdminRegSelfServiceRetired"   />
+
+        <ref bean="regNotAllowed.customerAdminRegSpecificConcurrencyActive"   />        
+        <ref bean="regNotAllowed.customerAdminRegSpecificConcurrencySuspended" />
+        <ref bean="regNotAllowed.customerAdminRegSpecificConcurrencyRemoved"   />
+        <ref bean="regNotAllowed.customerAdminRegSpecificConcurrencyRetired"   />
+        
+		<ref bean="regNotAllowed.customerAdminRegSharedActive"   />		
+		<ref bean="regNotAllowed.customerAdminRegSharedSuspended" />
+		<ref bean="regNotAllowed.customerAdminRegSharedRemoved"   />
+		<ref bean="regNotAllowed.customerAdminRegSharedRetired"   />
+	</util:list>
+	
+	<util:map  id="registrationNotAllowedMessageConfig"
+		key-type="com.oup.eac.web.controllers.helpers.impl.RegistrationNotAllowedMessageCodeConfig"
+		value-type="java.lang.String" map-class="java.util.LinkedHashMap">
+		
+		<entry key-ref="regNotAllowed.customerSelfRegSharedActive"         value-ref="registration.denied.msg.1" /><!--1-->
+		<entry key-ref="regNotAllowed.customerAdminRegSharedActive"        value-ref="registration.denied.msg.2" /><!--2-->
+		<entry key-ref="regNotAllowed.customerSelfRegSelfServiceActive"    value="N/A" /><!-- UNDEFINED - THIS COMBINATION IS *ALLOWED*, NOT AN ERROR -->
+		<entry key-ref="regNotAllowed.customerAdminRegSelfServiceActive"   value-ref="registration.denied.msg.4" /><!--4-->
+		<entry key-ref="regNotAllowed.customerSelfRegSpecificConcurrencyActive"    value="N/A" /><!-- UNDEFINED - THIS COMBINATION IS *ALLOWED*, NOT AN ERROR -->
+        <entry key-ref="regNotAllowed.customerAdminRegSpecificConcurrencyActive"   value-ref="registration.denied.msg.4" /><!--4-->
+						
+		<entry key-ref="regNotAllowed.customerSelfRegSharedRetired"         value-ref="registration.denied.msg.1" /><!--6-->
+		<entry key-ref="regNotAllowed.customerSelfRegSelfServiceRetired"    value-ref="registration.denied.msg.5" /><!--7-->
+		<entry key-ref="regNotAllowed.customerSelfRegSpecificConcurrencyRetired"    value-ref="registration.denied.msg.5" /><!--7-->
+		<entry key-ref="regNotAllowed.customerAdminRegSharedRetired"        value-ref="registration.denied.msg.1" /><!--8-->
+		<entry key-ref="regNotAllowed.customerAdminRegSelfServiceRetired"   value-ref="registration.denied.msg.5" /><!--9-->
+		<entry key-ref="regNotAllowed.customerAdminRegSpecificConcurrencyRetired"   value-ref="registration.denied.msg.5" /><!--9-->
+		
+		<entry key-ref="regNotAllowed.customerSelfRegSharedSuspended"       value-ref="registration.denied.msg.5" /><!--10-->
+		<entry key-ref="regNotAllowed.customerSelfRegSelfServiceSuspended"  value-ref="registration.denied.msg.5" /><!--11-->
+		<entry key-ref="regNotAllowed.customerSelfRegSpecificConcurrencySuspended"  value-ref="registration.denied.msg.5" /><!--11-->
+		<entry key-ref="regNotAllowed.customerAdminRegSharedSuspended"      value-ref="registration.denied.msg.5" /><!--12-->
+		<entry key-ref="regNotAllowed.customerAdminRegSelfServiceSuspended" value-ref="registration.denied.msg.5" /><!--13-->
+		<entry key-ref="regNotAllowed.customerAdminRegSpecificConcurrencySuspended" value-ref="registration.denied.msg.5" /><!--13-->
+		
+		<entry key-ref="regNotAllowed.customerSelfRegSharedRemoved"         value-ref="registration.denied.msg.5" /><!--14-->
+		<entry key-ref="regNotAllowed.customerSelfRegSelfServiceRemoved"    value-ref="registration.denied.msg.5" /><!--15-->
+		<entry key-ref="regNotAllowed.customerSelfRegSpecificConcurrencyRemoved"    value-ref="registration.denied.msg.5" /><!--15-->
+		<entry key-ref="regNotAllowed.customerAdminRegSharedRemoved"        value-ref="registration.denied.msg.5" /><!--16-->
+		<entry key-ref="regNotAllowed.customerAdminRegSelfServiceRemoved"   value-ref="registration.denied.msg.5" /><!--17-->
+		<entry key-ref="regNotAllowed.customerAdminRegSpecificConcurrencyRemoved"   value-ref="registration.denied.msg.5" /><!--17-->
+
+	</util:map>
+
+	<!-- beans for String messages to prevent typos! -->
+	<!-- You are logged on with a shared user account that does not permit you to access this resource. Please <log out> and then log back in again with your personal username/password. In case of difficulty please contact  <product email address>. -->
+	<bean id="registration.denied.msg.1" class="java.lang.String">	
+		<constructor-arg index="0" value="registration.denied.msg.1"/>
+	</bean>
+	
+	<!-- You are logged on with a shared user account that does not permit you to access this resource. Please check that you have entered the correct username/password for the product you are trying to access. In case of difficulty please contact <product email address>. -->
+	<bean id="registration.denied.msg.2" class="java.lang.String">
+		<constructor-arg index="0" value="registration.denied.msg.2"/>
+	</bean>
+	
+	<!-- You have attempted to access a resource which does not exist. Please check you have entered the address correctly and <contact us> if you require any further assistance. -->
+	<bean id="registration.denied.msg.3" class="java.lang.String">
+		<constructor-arg index="0" value="registration.denied.msg.3"/>
+	</bean>
+	
+	<!-- You do not have access this resource. If you think you should have access, please contact <product email address>. -->
+	<bean id="registration.denied.msg.4" class="java.lang.String">
+		<constructor-arg index="0" value="registration.denied.msg.4"/>
+	</bean>
+	
+	<!-- It is not currently possible to register for <product name>.  For more information please contact <product email address>. -->
+	<bean id="registration.denied.msg.5" class="java.lang.String">
+		<constructor-arg index="0" value="registration.denied.msg.5"/>
+	</bean>
+	
+	<bean id="registrationNotAllowedMessageCodeSource" class="com.oup.eac.web.controllers.helpers.impl.RegistrationNotAllowedMessageCodeSourceImpl">
+		<constructor-arg index="0" ref="registrationNotAllowedMessageConfig" />
+		<constructor-arg index="1" ref="registration.denied.msg.3" />
+		<constructor-arg index="2" ref="registration.denied.msg.3" />
+	</bean>
+	
+</beans>

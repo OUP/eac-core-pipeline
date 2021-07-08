@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" />
+	<SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		<CreateUserAccountResponse
+			xmlns="http://eac.oup.com/2.0/eac-access-services">
+			<userStatus xmlns="http://eac.oup.com/2.0/eac-access-services">
+				<userId xmlns="http://eac.oup.com/2.0/eac-access-services">
+					<ns1:id xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">12312123123131231231231</ns1:id>
+				</userId>
+			</userStatus>
+			<userStatus xmlns="http://eac.oup.com/2.0/eac-access-services">
+				<ns2:errorStatus xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">
+					<ns2:statusCode xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">CLIENT_ERROR
+					</ns2:statusCode>
+					<ns2:statusReason xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">reason 2
+					</ns2:statusReason>
+				</ns2:errorStatus>
+			</userStatus>
+			<userStatus xmlns="http://eac.oup.com/2.0/eac-access-services">
+				<ns3:errorStatus xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">
+					<ns3:statusCode xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">CLIENT_ERROR
+					</ns3:statusCode>
+					<ns3:statusReason xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">reason 3
+					</ns3:statusReason>
+				</ns3:errorStatus>
+			</userStatus>
+		</CreateUserAccountResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/util
+      		http://www.springframework.org/schema/util/spring-util-3.1.xsd
+      		http://www.springframework.org/schema/security 
+      		http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    
+	 <!-- Configure Spring Security -->
+	<security:http entry-point-ref="authEntryPoint" access-decision-manager-ref="accessDecisionManager" auto-config="true">
+	
+		<security:form-login  
+			always-use-default-target="true"
+			login-processing-url="/loginProcess" 
+			default-target-url="/home"
+			login-page="/login"
+			authentication-failure-handler-ref="eacAuthenticationFailureHandler" />
+			
+		<security:logout 
+			logout-url="/logout" 
+			logout-success-url="/logoutSuccess" />
+		
+		<security:intercept-url pattern="/customer/create/**" access="ROLE_CREATE_CUSTOMER" />
+		<security:intercept-url pattern="/customer/search/**" access="ROLE_LIST_CUSTOMER" />
+		<security:intercept-url pattern="/mvc/activationCodeBatch/search.htm" access="ROLE_LIST_ACTIVATION_CODE_BATCH" />			
+		<security:intercept-url pattern="/mvc/customer/editRegistrationAnswers.htm" access="ROLE_UPDATE_REGISTRATION" />
+		<security:intercept-url pattern="/mvc/customer/editRegistration.htm" access="ROLE_UPDATE_REGISTRATION" />			
+		<security:intercept-url pattern="/mvc/customer/addRegistration.htm" access="ROLE_CREATE_REGISTRATION" />			 
+		<security:intercept-url pattern="/mvc/product/finder.htm" access="ROLE_LIST_PRODUCT,ROLE_READ_PRODUCT,ROLE_LIST_REGISTRATION_DEFINITION,ROLE_READ_REGISTRATION_DEFINITION" />					
+		<security:intercept-url pattern="/mvc/product/search.htm" access="ROLE_LIST_PRODUCT,ROLE_LIST_REGISTRATION_DEFINITION" />				
+		<security:intercept-url pattern="/mvc/product/create.htm" access="ROLE_CREATE_PRODUCT" />			
+		<security:intercept-url pattern="/mvc/product/edit.htm" access="ROLE_READ_PRODUCT,ROLE_UPDATE_PRODUCT" />	
+		<security:intercept-url pattern="/mvc/reports/registrations/report.htm" access="ROLE_CREATE_REGISTRATION_REPORT" />
+		<security:intercept-url pattern="/mvc/reports/registrations/activationCodeReport.htm" access="ROLE_CREATE_REGISTRATION_REPORT" />
+		<security:intercept-url pattern="/mvc/batch/create.htm" access="ROLE_CREATE_ACTIVATION_CODE_BATCH" />
+		<security:intercept-url pattern="/mvc/batch/edit.htm"   access="ROLE_UPDATE_ACTIVATION_CODE_BATCH" />
+		<security:intercept-url pattern="/mvc/batch/delete.htm"   access="ROLE_DELETE_ACTIVATION_CODE_BATCH" />
+		<security:intercept-url pattern="/mvc/externalsystem/manage.htm"   access="ROLE_MANAGE_EXTERNAL_SYSTEM" />
+		<security:intercept-url pattern="/mvc/account/manage.htm"   access="ROLE_MANAGE_ACCOUNT" />
+		<security:custom-filter ref="eacLogoutFilter" before="LOGOUT_FILTER" />
+		<security:intercept-url pattern="/mvc/product/delete.htm"   access="ROLE_DELETE_PRODUCT" />
+		<security:intercept-url pattern="/mvc/customer/delete.htm"   access="ROLE_DELETE_CUSTOMER" />
+		<security:intercept-url pattern="/mvc/roles/manage.htm"   access="ROLE_MANAGE_ROLES" />
+		<security:intercept-url pattern="/mvc/activationCode/search.htm" access="ROLE_LIST_ACTIVATION_CODE" /> 
+		<security:intercept-url pattern="/mvc/reports/registrations/activationCodeBatchReport.htm" access="ROLE_CREATE_REGISTRATION_REPORT" />
+		<security:intercept-url pattern="/mvc/skin/manage.htm" access="ROLE_MANAGE_SKIN" />
+		<security:intercept-url pattern="/mvc/language/manage.htm" access="ROLE_MANAGE_LANGUAGE" />
+		<security:intercept-url pattern="/mvc/question/manage.htm" access="ROLE_MANAGE_PAGE" />
+		<security:intercept-url pattern="/mvc/element/manage.htm" access="ROLE_MANAGE_PAGE" />
+		<security:intercept-url pattern="/mvc/component/manage.htm" access="ROLE_MANAGE_PAGE" />
+		<security:intercept-url pattern="/mvc/page/manage.htm" access="ROLE_MANAGE_PAGE" />
+		<security:intercept-url pattern="/mvc/page/preview.htm" access="ROLE_MANAGE_PAGE" />
+		<security:intercept-url pattern="/mvc/orgunits/manage.htm" access="ROLE_MANAGE_ORG_UNITS" />
+		<security:intercept-url pattern="/mvc/eacGroups/search.htm" access="ROLE_LIST_PRODUCT_GROUP" />	
+		<security:intercept-url pattern="/mvc/eacGroups/create.htm" access="ROLE_CREATE_PRODUCT_GROUP,ROLE_CHANGE_ISEDITABLE_PRODUCT_GROUP" />			
+		<security:intercept-url pattern="/mvc/eacGroups/edit.htm" access="ROLE_READ_PRODUCT_GROUP,ROLE_UPDATE_PRODUCT_GROUP,ROLE_CHANGE_ISEDITABLE_PRODUCT_GROUP" />
+		<security:intercept-url pattern="/mvc/eacGroups/delete.htm"   access="ROLE_DELETE_PRODUCT_GROUP" />
+		<security:intercept-url pattern="/mvc/uploadProducts/formUpload.htm" access="ROLE_UPLOAD_PRODUCTS" />
+		<security:intercept-url pattern="/mvc/uploadProducts/upload.htm" access="ROLE_UPLOAD_PRODUCTS" />
+		<security:intercept-url pattern="/mvc/mergeCustomer/formMerge.htm" access="ROLE_MERGE_CUSTOMER" />
+		<security:intercept-url pattern="/mvc/BulkCreateActivationCodes/bulkActivationcodeupload.htm" access="ROLE_BULK_CREATE_ACTIVTION_CODE" />
+		<security:intercept-url pattern="/mvc/BulkCreateActivationCodes/Activationcodeupload.htm" access="ROLE_BULK_CREATE_ACTIVTION_CODE" />
+		<security:intercept-url pattern="/mvc/PlatformMaster/platformMaster.htm" access="ROLE_PLATFORM_MASTER" />
+		<security:intercept-url pattern="/mvc/reports/userDetails.htm" access="ROLE_USER_REPORT_MASTER" />
+		<security:intercept-url pattern="/mvc/trustedSystems/manage.htm" access="ROLE_TRUSTED_SYSTEM_MASTER" />
+		<security:intercept-url pattern="/mvc/support/cacheEviction.htm" access="ROLE_INTERNAL_SUPPORT" />
+		<security:intercept-url pattern="/mvc/support/insertToFailFeeder.htm" access="ROLE_INTERNAL_SUPPORT" />
+	<!-- 	<security:intercept-url pattern="/mvc/mergeCustomer/mergeCustomer.htm" access="MERGE_CUSTOMER" /> -->
+	</security:http>
+	
+	<bean id="authEntryPoint" class="com.oup.eac.admin.security.AjaxAwareLoginUrlAuthenticationEntryPoint">
+		<constructor-arg value="/login"/>
+	</bean>
+	
+	<bean id="eacLogoutFilter" class="com.oup.eac.admin.filter.EacLogoutFilter" />
+	 
+	<bean id="eacAuthenticationFailureHandler" class="com.oup.eac.admin.security.UsernameCachingAuthenticationFailureHandler">
+		<property name="authenticationFailureHandler">
+			<bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+				<property name="defaultFailureUrl" value="/login?login_error=1"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="accessDecisionManager"
+        class="org.springframework.security.access.vote.AffirmativeBased">
+        <constructor-arg>
+            <list>
+                <bean
+                    class="org.springframework.security.access.vote.AuthenticatedVoter" />
+                <bean class="org.springframework.security.access.vote.RoleVoter" />
+                <bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
+            </list>
+        </constructor-arg>
+</bean>
+	 
+</beans>

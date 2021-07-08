@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <CUSTOMER_ROLES CUSTOMER_ID="[CUSTOMER_ID]" ROLE_ID="[ROLE_ID]"/>
+</dataset>

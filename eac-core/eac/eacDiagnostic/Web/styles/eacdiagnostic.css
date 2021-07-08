@@ -1,0 +1,1040 @@
+/* Colour scheme generated from : http://colorschemedesigner.com/#3x12P6mIILt..*/
+html, body {
+    height: 100%;
+    color: black;
+    font-family: Verdana,Arial,Tahoma,Helvetica,Sans-Serif;
+    font-size: 0.8em;
+}
+
+body {
+	background-image:url(../images/watermark.png);
+	background-repeat:no-repeat;
+	background-position:right bottom;
+	background-color: #FFF;		
+	background-attachment:fixed;
+}
+
+table {
+    background-color: #FFF;     
+}
+
+.Uploadform input[type="file"]{
+  z-index: 999;
+  line-height: 0;
+  font-size: 50px;
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+  cursor: pointer;
+  _cursor: hand;
+  margin: 0;
+  padding:0;
+  left:0;
+  }
+ .add-photo-btn{
+   position:relative;
+   overflow:hidden;
+   cursor:pointer;
+   text-align:center;
+   background-color:#133E5F;
+   color:#fff;
+   display:block;
+   width:88px;
+   height: 22px;
+   line-height: 22px;
+   font-size:10px;
+   float:left;
+ }
+ .add-photo-btn:hover {
+	background: none repeat scroll 0 0 #CADBE9;
+    border-style: none;
+    color: #336699;
+}
+
+
+#page {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+  /*  margin: 0 auto -4em; /* the bottom margin is the negative value of the footer's height */
+}
+
+#footer{
+	border-top-style: solid;
+	border-top-color: gray;
+	border-top-width: 1px;
+}
+
+#footer, #push {
+    height: 4em; /* .push must be the same height as .footer */
+}
+
+#footerTile {
+	float: left;
+}
+
+#appVersion {
+	float: right;
+}
+
+#header {
+	margin-top:10px;
+	}
+		
+#topbar {
+	float:right;
+	}	
+
+#local {
+    height: 100%;
+}
+
+#welcomeBanner {
+	background: none repeat scroll 0 0 white;
+    box-shadow: 0 3px 2px #CCCCCC;
+    font-size: 1.5em;
+    padding: 10px;	
+}
+
+a,a:visited,a:link,a:active {
+	color: #0373A9;
+	background-color: transparent;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a:hover {
+	color: #336699;
+	background-color: #CADBE9;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+button {
+	color: #fff;
+	background: #133E5F;
+	border-style: none;
+}
+
+button:hover {
+	background: #CADBE9;
+	border-style: none;
+}
+
+fieldset {
+    background-color: #FFF;
+    clear: both;
+    margin-top:0px\9;
+    margin-bottom:0px\9;
+}
+
+legend {
+	padding-bottom: 0.5em\9;	
+	padding-top: 0.5em\9;	
+}
+
+.summary {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.summary thead th {
+	border: 1px solid #AAAAAA;
+	background:#CADBE9;
+	padding: 6px;
+	text-align: left;
+}
+
+.summary td.createdDate, .summary th.createdDate {
+	width: 105px;
+}
+
+.summary tbody td {
+	border: 1px solid #BBBBBB;
+	padding: 4px;
+	font-size: 8pt;
+}
+
+.label {
+	font-weight: bold;	
+}
+
+.mandatory {
+    color: red;
+    font-weight:bold;
+}
+
+/*Override conflict between css framework and digit css */
+input[type="text"], 
+input[type="password"], 
+input.text, input.title, 
+textarea, select {
+	margin: 0 0;
+}
+
+input[type="text"], input[type="password"], select, textarea, button {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 1em;
+}
+
+input[type="text"], input[type="password"], select {
+	width: 25em;
+}
+
+input[type="text"].wide, input[type="password"].wide, select.wide {
+	min-width: 40em;
+}
+
+select {
+	width: 25.5em;
+	height: 18px;
+}
+
+input[type="text"], input[type="password"] {
+	height: 1.4em;
+}
+
+optgroup {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 1em;
+}
+
+#regdefinition {
+	width: 20em;
+}
+
+#buttons {
+	float:right;
+	}
+
+	
+h1 {
+    color:white;
+    font-size: 1.2em;  
+    font-weight:bold;
+}
+
+.error h2 {
+	font-size: 1.2em;
+	font-weight: normal;
+	color: #8A1F11;
+}
+
+.sub-heading {
+	display: block;
+	font-family: Georgia;
+	padding-bottom: 15px;
+}
+
+.sub-heading-1 {
+    padding-left: 50px;
+	vertical-align: top;
+    color: #182E50;
+    font-size: 2.6em;
+}
+
+#heading {
+	padding: 7px 0 3px 7px;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	background: #133E5F;
+	margin-bottom:5px;
+	
+}
+
+#navmenu{
+	border-bottom-width: 0;
+}
+
+#navmenu ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 1.1em;
+	line-height: 2.5em;
+}
+
+#navmenu li a{
+	display: block;
+	padding: 1px 0;
+	padding-left: 9px;
+	text-decoration: none;
+	color: #0373A9;
+	background-color: transparent;
+	border-bottom: 1px dashed #AAA;
+	border-left: 7px solid #70787E;
+}
+
+#navmenu li a:hover {
+	background-color: #CCC;
+	border-left-color: #A5BBCB;
+}
+
+#navmenu div.menutitle{
+	padding: 7px 0 3px 7px;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	background: #133E5F;
+}
+
+.menutitle{
+	padding: 7px 0 3px 7px;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	background: #133E5F;
+}
+
+.activeLicence {
+	background: #DCE8DC;
+	color: #354875;
+	border-color: #7E8187;
+}
+
+.error #msg {
+	text-align: center;
+}
+
+.ui-dialog {
+	padding: 0px;
+	overflow: visible;
+}
+
+.ui-dialog-titlebar {
+	margin-bottom: 5px;
+	padding: 7px 0px 4px 7px;
+	font-size: 1.3em;
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+    background: none repeat scroll 0 0 #133E5F;
+    border-style: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: "Lucida Grande",Tahoma,Arial,Verdana,sans-serif;
+    font-size: 1em;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 2px 4px 3px 2px;
+}
+
+.ui-dialog .ui-dialog-buttonpane button:hover {
+    background: none repeat scroll 0 0 #CADBE9;
+    border-style: none;
+    color: #336699;
+}
+
+.infoIcon {
+	vertical-align: middle;
+	padding-top:2px; 
+	margin-left: 8px;
+}
+
+input.checkbox {
+	width: 13px;
+	height: 13px;
+	margin: 0px;
+}
+
+input.radio {
+	width: 13px;
+	height: 13px;
+	margin: 0px;
+}
+
+div.field {
+	min-height: 20px;
+	margin-bottom:6px;
+	clear: both;
+}
+
+div.checkboxField {
+	width: 200px; 
+	float:left; 
+	margin-right: 20px; 
+	clear: none
+}
+
+div.fieldCompact {
+	min-height: 15px;
+	margin-bottom:3px;
+	clear: both;
+}
+
+div.fieldLabel {
+	float:left;
+	width: 150px;
+}
+
+div.fieldLabelNarrow {
+	float:left;
+	width: 100px;
+}
+
+.fieldValue {
+	float: left;
+	max-width: 25em;
+}
+
+.progressMessageContainer {
+	text-align: center;
+}
+
+.progressMessage {
+	color: #CCCCCC; 
+	padding-top: 3em;
+}
+
+#assetSearchTabsTile .progressMessage {
+	padding-top: 0;
+}
+
+#assetSearchTabsTile .progressMessageContainer {
+	padding-top: 3em;
+	padding-top: 2em\9;
+	padding-bottom: 4em;
+}
+
+#addRegistrationPopup fieldset {
+	/* IE only hack*/
+	margin-right: 0px\9;
+	padding-top: 5px\9;
+}
+
+#searchControlTile {
+	float: left; 
+	padding-top: 22px/9;
+}
+
+#assetSearchTabsTile #pagetabs {
+	overflow: hidden;
+}
+
+#assetSearchTabsTile #pagetab-1 {
+	min-height: 280px\9;
+}
+
+#assetSearchTabsTile #pagetab-2 {
+	min-height: 100px\9;
+}
+
+#searchResultsTile {
+	clear:both;
+	margin-top: 18px;
+}
+
+.ui-widget {
+	font-size: 1em;
+}
+
+.ui-widget-overlay 
+{ 
+	opacity: .60;
+	filter: Alpha(Opacity=60);
+	background: black;
+	background-color: black;
+}
+
+/* Hack to get tiptip rendering in IE in JQuery dialogs */
+#tiptip_content {
+	background-color: #000000;
+}
+
+#assetUrlsTile fieldset {
+	margin-bottom: 20px\9;
+}
+
+#searchResultsTile table a:hover {
+	background-color: #FFFFFF;
+}
+
+.actionImg {
+	vertical-align: middle;
+	border: 2px solid #FFF;
+	border-radius: 3px;
+	padding: 2px
+}
+
+.actionLink:hover {
+	background-color: #FFFFFF;
+}
+
+#editBatchHelp2 {
+	position: relative;
+	left:-1px;
+	top:-12px;
+	margin:0px;
+	padding:4px 0px 0px 0px;
+}
+.summaryAction {
+	text-align: right;
+}
+.summaryAction.deleteBatch {	
+	width: 16%;
+}
+
+.externalSystemId {
+	margin-top: 10px;
+}
+
+.externalSystemTypeId,.exportName,.restriction,.option,.pageField,.component {
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+.restriction {
+	position: relative;
+	padding-top: 15px;
+}
+
+.exportName {
+	position: relative;
+}
+
+.option,.pageField,.component {
+	padding-left: 20px;
+	position: relative;
+	background: url(/eacAdmin/resources/images/move_row.gif) repeat-y scroll left center;
+}
+
+.component {
+	padding-top: 15px;
+}
+    
+#manageElementFormTile .scrollArrow {
+	position: absolute; 
+	top: 27px; 
+	right: 25px
+}
+
+#manageComponentFormTile .scrollArrow {
+	position: absolute; 
+	top: 40px; 
+	right: 25px
+}
+
+#managePageFormTile .scrollArrow {
+	position: absolute; 
+	top: 6px; 
+	right: 20px
+}
+
+.removeRestriction,.removeNewRestriction {
+	position: absolute;
+	cursor: pointer; 
+	top: 12px; 
+	right: 25px	
+}
+
+.removeOption,.removeNewOption {
+	position: absolute;
+	cursor: pointer; 
+	top: 32px; 
+	right: 50px	
+}
+
+.elementActions {
+	position: absolute;
+	cursor: pointer; 
+	top: 45px; 
+	right: 50px	
+}
+
+.removeExportName,.removeNewExportName {
+	position: absolute;
+	cursor: pointer; 
+	top: 32px; 
+	right: 30px	
+}
+
+.componentActions {
+	position: absolute;
+	cursor: pointer; 
+	top: 12px; 
+	right: 45px	
+}
+
+.productActions {	
+	text-align: right;
+}
+
+.productActions.deleteProduct {	
+	width: 9%;
+}
+
+.assetActions {
+	text-align: right;
+}
+
+.assetActions.deleteAsset {	
+	width: 9%;
+}
+
+.customerActions {
+	text-align: right;
+}
+
+#resetPasswordTile fieldset {
+	width: 380px;
+}
+
+#changePasswordTile fieldset {
+	width: 420px;
+}
+
+#changePasswordTile div.error {
+	width: 430px;
+}
+
+.notLoggedIn #logo, .notLoggedIn .error, .notLoggedIn .success {
+	text-align: center
+}
+
+.notLoggedIn #main {
+	margin-top: 50px;
+}
+
+.notLoggedIn div {
+	margin-left:auto; 
+	margin-right: auto;
+}
+
+.notLoggedIn fieldset {
+	margin-left:auto; 
+	margin-right: auto;
+}
+
+.confirmDialog {
+	text-align: center;
+	font-size: large;
+}
+.confirmDialogMessage .confirmDialogLine {
+	font-weight: normal;
+}
+.confirmDialogLabel {
+	font-weight: bold;
+}
+.confirmDialogWarning {
+	font-style: italic;
+}
+
+.role_row {
+    padding: 2px 2px;
+    vertical-align: middle;
+}
+
+.role_row input {
+    top: 0;
+}
+
+.fieldValue .fieldError {
+    border: 1px #9C132E solid;
+}
+
+.orgUnitError {
+	color: red;
+}
+
+fieldset .newOrgUnit,.orgUnit {
+	margin-bottom: 10px\9;
+	margin-right: 10px;
+	padding-bottom: 0.8em;
+}
+
+.ui-autocomplete {
+	box-shadow: 1px 1px 2px #BBB;
+	filter: progid:DXImageTransform.Microsoft.Shadow( Strength=2, Direction=135, Color='#BBBBBB' );	
+}
+
+.ui-autocomplete .ui-menu-item a {
+	font-weight: normal;
+}
+
+.ui-autocomplete.ui-corner-all,.ui-autocomplete.ui-corner-all .ui-corner-all {
+	border-radius: 0
+}
+
+#pageHelp a:hover {
+	background-color: transparent;
+}
+
+div#logo div.sub-heading a:hover {
+	background-color: transparent
+}
+
+/********************* Styling for the edit registration answers popup **********************/
+
+/* #editRegistrationAnswersForm fieldset {
+	border-bottom: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	margin-bottom: 0px;
+}
+
+#editRegistrationAnswersForm h2 {
+	font-fmaily: Verdana,Arial,sans-serif;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+#editRegistrationAnswersForm .component-label-checkbox {
+	width:39em;	
+}
+
+#editRegistrationAnswersForm .component-label-radio {
+	width:100%;	
+}
+
+#editRegistrationAnswersForm .component-radio-items {
+	float:left;
+	padding-top:1.5em;
+	padding-bottom:1.5em;
+	width: 100%;
+}
+
+#editRegistrationAnswersForm .component-radio-item {
+	float:left;
+	width: 49%;
+}
+
+#editRegistrationAnswersForm .component-radio-item-label {
+	float:left;
+	text-align:right;
+}
+
+#editRegistrationAnswersForm .component-urllink {
+	float:left;
+	clear: both;
+}
+
+#editRegistrationAnswersForm .section {
+    width: 100%;
+    float:left;
+    margin-bottom: 3px;
+}
+
+#editRegistrationAnswersForm label {
+	display: block;
+	float: left;
+    margin-right: 0.5em;
+    width:18em;
+}
+
+#editRegistrationAnswersForm .section span label {
+    width: 80%;
+}
+
+#editRegistrationAnswersForm .section input, #editRegistrationAnswersForm .section select, #editRegistrationAnswersForm .section textarea {
+    width: 23em;
+    float: left;
+}
+
+#editRegistrationAnswersForm .section input[type="radio"] {
+	width:2em;
+}
+
+#editRegistrationAnswersForm .section input[type="checkbox"] {
+	width:2em;
+}
+
+#editRegistrationAnswersForm .section .fieldError {
+    border: 1px #9C132E solid;
+}
+
+#editRegistrationAnswersForm .section span.component-checkbox span {
+    float: left;
+    width: 100%;
+}
+
+#editRegistrationAnswersForm .section span.component-checkbox span label {
+    width: 14em;
+    margin-left: 4em;
+    float: left;
+    padding: 0px 0px 4px 4px;
+}
+
+#editRegistrationAnswersForm .section span.component-checkbox span input {
+    width: 20%;
+    float: left;
+    margin-left: 10px;
+}
+
+#manageLanguageFormTile .locale, #manageElementFormTile .locale {
+	width: 40px; 
+	margin-right: 20px
+}
+
+#manageLanguageFormTile table input.key {
+	width: 250px; 
+	border: none;
+}
+
+#manageLanguageFormTile table input.message {
+	width: 353px; 
+	border: none;
+}
+
+ *//********************* End styling for edit registration answers popup ************************/
+
+/********************* Styling for the asset/product finder **********************/
+
+.finder {
+	position: relative;
+	//height: 100%;
+}
+
+.finder .textField {
+	float:left; 
+	width: 347px;
+	height: 14px;
+	margin-right: 3px;
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 1em;
+}
+
+.finder .inputWrapper .textField {
+	border: none;
+}
+
+.finder .openButton {
+	float: left; 
+	width: 4em; 
+	height: 18px;
+	line-height:5px;
+	margin-top: 0px;
+	margin-bottom: 3px;
+}
+
+.buttonPressed {
+	background-color: #CADBE9;
+	color: #133E5F;
+}
+
+.finderPopup {
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF;
+	min-width: 42em;
+	height: 40em;
+	position: absolute;
+	//left: 0;
+	top: 21px;
+	z-index: 9999;
+	float: left;
+	clear: both;
+	text-align: left;
+	box-shadow: 1px 1px 2px #000;
+	filter: progid:DXImageTransform.Microsoft.Shadow( Strength=2, Direction=135, Color='#000000' );
+}
+
+.finderPopup .finderForm {
+	padding: 10px;
+	background-color: #EEEEEE;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.finderPopup .searchButton {
+	float: left; 
+	width: 3em; 
+	height: 2.0em;
+	height: 1.9em\9;
+	line-height:5px\9;	
+	margin-top: 0px;
+	margin-bottom: 3px;
+	padding-top: 0px;
+	padding-left: 10px;
+}
+
+.finderPopup .textField {
+	width: 380px;
+	margin-right: 0px;
+	margin-top: 4px;
+}
+
+.finderPopup .searchImage {
+	width: 26px; 
+	height: 26px;
+}
+
+.finderPopup div a:hover {
+	background-color: #EEEEEE;
+}
+
+.finderPopup .searchOption {
+	margin-right: 2em;
+}
+
+.finderResults {
+	position: absolute;
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 33em;
+	width: 100%;
+}
+
+.finderResults .result {
+	float:left;
+	overflow: hidden;
+	width: 100%;
+	height: 5em;
+	padding: 5px;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.finderResults .asset {
+	height: 2em;
+}
+
+.finderResults .assetName {
+	float: left;
+	width: 28em;
+	height: 5em;
+	margin-right: 10px;
+}
+
+.finderResults .assetName span {
+	font-weight: bold;
+}
+
+.finderResults a {
+	font-weight: normal;
+	color: #000000;
+	cursor: pointer;
+}
+
+.inputWrapper {
+	float: left; 
+	padding-right: 17px; 
+	margin-right: 3px; 
+	border: 1px solid #BBBBBB;
+	position: relative;
+}
+
+.iconClear {
+	position: absolute; 
+	right: 5px; 
+	bottom: 2px;
+	cursor: pointer; 
+	display: none;
+}
+
+#activationCodeBatchSearchFormTile .finder .textField {
+	width: 236px;
+}
+
+#activationCodeBatchSearchFormTile .finder .finderForm .textField {
+	width: 380px;
+}
+
+/********************** End styling for asset/product finder ***********************/
+
+/********************** Styling for drop down menu ***********************/
+
+.dropdown dd,.dropdown dt,.dropdown ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+.dropdown dd {
+	position: relative;
+}
+
+.dropdown a,.dropdown a:visited {
+	text-decoration: none;
+	outline: none;
+}
+
+.dropdown dt a {
+	background: url(/eacAdmin/resources/images/arrow.png) no-repeat scroll right center;
+	display: block;
+	border: none;
+	padding-right: 20px;
+	color: #000000;
+	font-weight: normal;
+}
+
+.dropdown dt a span {
+	cursor: pointer;
+	display: block;
+	padding: 5px;
+}
+
+.dropdown dd ul {
+	background: #FFFFFF none repeat scroll 0 0;
+	border: 1px solid #CCCCCC;
+	display: none;
+	left: 0px;
+	padding: 5px 0px;
+	position: absolute;
+	top: -1px;
+	width: auto;
+	min-width: 195px;
+	list-style: none;
+	z-index: 9999;
+}
+
+.dropdown span.value {
+	display: none;
+}
+
+.dropdown dd ul li a {
+	padding: 5px;
+	display: block;
+	color: #000000;
+	font-weight: normal;
+}
+
+.dropdown dd ul li a:hover {
+	background-color: #CADBE9;
+}
+
+/********************** End styling for drop down menu ***********************/
+
+/********************** Styling for breadcrumb menu in manage page area ***********************/
+
+#breadcrumb {
+    font: 11px Arial, Helvetica, sans-serif;
+    background-image:url('/eacAdmin/resources/images/bc_bg.png');
+    background-repeat:repeat-x;
+    height:30px;
+    line-height:30px;
+    color:#9b9b9b;
+    border:solid 1px #cacaca;
+    width:auto;
+    overflow:hidden;
+    margin:0px;
+    padding:0px;
+    margin-bottom: 10px;
+    margin-bottom: 0px\9;
+    position: relative;
+}
+
+#breadcrumb li {
+    list-style-type:none;
+    float:left;
+    padding-left:10px;
+    height:30px;
+    display:block;
+    background-image:url('/eacAdmin/resources/images/bc_separator.png');
+    background-repeat:no-repeat;
+    background-position:right;
+    padding-right: 15px;
+    text-decoration: none;
+}
+
+#breadcrumb a {
+    color:#454545;
+}
+
+#breadcrumb a:hover {
+	color: #0373A9;
+	background-color: transparent;
+}
+
+#breadcrumb li.last {
+	color: #AAAAAA;
+	font-weight: bold;
+}
+
+/********************** End styling for breadcrumb menu in manage page area ***********************/
+

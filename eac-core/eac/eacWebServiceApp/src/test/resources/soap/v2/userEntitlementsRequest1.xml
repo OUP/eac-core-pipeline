@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:eac="http://eac.oup.com/2.0/eac-access-services"
+	xmlns:cmn="http://eac.oup.com/2.0/eac-common-types">
+	<soapenv:Header>
+		<!--  the security headers are added by the test -->
+	</soapenv:Header>
+	<soapenv:Body>
+		<eac:GetUserEntitlementsRequest>
+			<cmn:wsUserId>
+				<cmn:sessionToken>123456</cmn:sessionToken>
+			</cmn:wsUserId>
+			<eac:systemId>SYSTEM2</eac:systemId>
+		</eac:GetUserEntitlementsRequest>
+	</soapenv:Body>
+</soapenv:Envelope>

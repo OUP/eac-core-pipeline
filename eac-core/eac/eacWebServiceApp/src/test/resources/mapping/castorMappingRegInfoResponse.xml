@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://castor.exolab.org/" xmlns:cst="http://castor.exolab.org/"
+	xmlns:udsv1="http://eac.oup.com/eac-user-data-services" xmlns:cmnv2="http://eac.oup.com/2.0/eac-common-types"
+	xmlns:asv2="http://eac.oup.com/2.0/eac-access-services" xmlns:udsv2="http://eac.oup.com/2.0/eac-user-data-services"
+	xmlns:ssv2="http://eac.oup.com/2.0/eac-subscription-services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="mapping">
+	<description>Castor mapping file for testing mapping where the response is a choice between some data and an error status </description>
+	<class
+		name="com.oup.eac.ws.v2.binding.userdata.RegistrationInformationResponse">
+		<map-to xml="RegistrationInformationResponse" ns-uri="http://eac.oup.com/2.0/eac-user-data-services"
+			ns-prefix="eac" />
+		<field name="errorStatus" type="com.oup.eac.ws.v2.binding.common.ErrorStatus">
+			<bind-xml name="cmnv2:errorStatus" node="element" />
+		</field>
+		<field name="registrationInformationResponseSequence.user" type="com.oup.eac.ws.v2.binding.common.User">
+			<bind-xml name="udsv2:user" node="element" />
+		</field>
+		<field
+			name="registrationInformationResponseSequence.registrationInformation"
+			type="com.oup.eac.ws.v2.binding.common.RegistrationInformation"
+			collection="array">
+			<bind-xml name="udsv2:registrationInformation" node="element" />
+		</field>
+	</class>
+</mapping>

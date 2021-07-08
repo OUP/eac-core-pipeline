@@ -1,0 +1,23 @@
+	<%
+	Cookie eacCookie = null;
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null){
+		for(int i=0;i<cookies.length && eacCookie == null;i++){
+		    Cookie cookie = cookies[i];
+	    	if("EAC".equals(cookie.getName())){
+	    	    eacCookie = cookie;
+	    	}
+		}
+	}
+	pageContext.setAttribute("eacCookie",eacCookie);
+	%>
+	<hr/>
+	<c:choose>
+		<c:when test="${empty eacCookie}">
+			There is no eac cookie.
+		</c:when>
+		<c:otherwise>
+			The eac cookie is name[${eacCookie.name}] value[${eacCookie.value}] domain[${eacCookie.domain}] path[${eacCookie.path}]
+		</c:otherwise>
+	</c:choose>
+	<hr/>

@@ -1,0 +1,9 @@
+#header-middle-middle {
+     background: url("../images/elt-header.jpg") no-repeat scroll 0pt 0pt transparent;
+     height: 60px;
+     width: 340px;
+     float: left;
+     margin-left: 20px;
+}
+
+.form_hint {display:none}

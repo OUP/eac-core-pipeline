@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+<!--
+   The hibernate test datasource. 
+-->
+
+	<!-- Registration Service with fake erights facade -->
+	<bean id="registrationService" class="com.oup.eac.service.impl.RegistrationServiceImpl">
+    	<constructor-arg ref="answerDao"/>
+    	<constructor-arg ref="registrationDao"/>
+    	<constructor-arg ref="erightsFacade"/>
+        <constructor-arg ref="emailService"/>
+        <constructor-arg ref="velocityEngine"/>
+        <constructor-arg ref="activationCodeService"/>
+        <constructor-arg ref="activationCodeDao"/>
+        <constructor-arg ref="registrationDefinitionDao"/>
+        <constructor-arg ref="linkedRegistrationDao"/>
+        <constructor-arg ref="messageSource"/>
+        <constructor-arg ref="licenceService"/>
+        <constructor-arg ref="productService"/>
+        <constructor-arg ref="registrationDefinitionService"/>
+    </bean>
+    
+    <bean id="customerService" class="com.oup.eac.service.impl.CustomerServiceImpl">
+    	<constructor-arg ref="emailService"/>
+    	<constructor-arg ref="velocityEngine"/>
+    	<constructor-arg ref="customerDao"/>
+    	<constructor-arg ref="answerDao"/>
+    	<constructor-arg ref="erightsFacade"/>
+    	<constructor-arg ref="registrationDao"/>
+    	<constructor-arg ref="messageSource"/>
+    	<constructor-arg ref="passwordEncoder"/>
+    	<constructor-arg ref="licenceService"/>
+    	<constructor-arg ref="productService"/>
+    </bean>
+    
+    <bean id="productService" class="com.oup.eac.service.impl.ProductServiceImpl">
+        <constructor-arg ref="erightsFacade"/>
+    	<constructor-arg ref="productDao"/>
+    	<!-- <constructor-arg ref="divisionDao"/> --> 	
+    </bean>
+    
+     <bean id="licenceService" class="com.oup.eac.service.impl.LicenceServiceImpl">
+        <constructor-arg ref="erightsFacade"/>
+    </bean>
+
+	<bean id="mailSession" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName">
+        	<value>java:/Mail</value>
+        </property>
+	</bean>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="defaultEncoding" value="UTF-8"/>
+	  	<property name="host"><value>mailhost2007.uk.oup.com</value></property>
+	</bean>
+	
+	<bean id="externalIdService" class="com.oup.eac.service.impl.ExternalIdServiceImpl">
+    	<constructor-arg ref="externalSystemDao"/>
+    	<constructor-arg ref="externalSystemIdTypeDao"/>
+    	<constructor-arg ref="externalIdDao"/>
+    	<constructor-arg ref="productService"/>
+    	<constructor-arg ref="customerService"/>
+    	<constructor-arg ref="erightsFacade"/>
+	</bean>
+
+</beans>

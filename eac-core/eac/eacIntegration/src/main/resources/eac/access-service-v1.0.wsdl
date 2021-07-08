@@ -1,0 +1,4179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://aces.oup.com/1.0/aces-access-services" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://aces.oup.com/1.0/aces-access-services" targetNamespace="http://aces.oup.com/1.0/aces-access-services">
+  <wsdl:types>
+    <xs:schema xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:s="http://aces.oup.com/1.0/aces-access-services" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="2.0" targetNamespace="http://aces.oup.com/1.0/aces-access-services">
+
+	<xs:annotation>
+		<xs:appinfo>
+			<jaxb:globalBindings generateIsSetMethod="true">
+				<xjc:serializable uid="12343"/>
+			</jaxb:globalBindings>
+		</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:simpleType name="OupIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[{]?[a-fA-F0-9]{8}[-]?[a-fA-F0-9]{4}[-]?[a-fA-F0-9]{4}[-]?[a-fA-F0-9]{4}[-]?[a-fA-F0-9]{12}[}]?"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+	<xs:element name="CreateUserAccountRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:oupUserWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="AbstractUserAccountResponse">
+		<xs:sequence>
+			<xs:element name="status" type="tns:UserAccountResponseSTATUS"/>
+			<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+			<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="CreateUserAccountResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence>
+						<xs:element name="userId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetUserAccountRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="userId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetUserAccountResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="user" type="tns:oupGetUserWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- start: Added for GetUserAccountByUsername -->
+
+	<xs:element name="GetUserAccountByUsernameRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="username" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetUserAccountByUsernameResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="user" type="tns:oupGetUserWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- end: Added for GetUserAccountByUsername -->
+
+	<!-- start: Added for GetUserAccountByExternalId -->
+
+	<xs:element name="GetUserAccountByExternalIdRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="externalUserId" type="tns:ExternalIdentifier"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetUserAccountByExternalIdResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="user" type="tns:oupGetUserWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- end: Added for GetUserAccountByExternalId -->
+
+	<xs:element name="RemoveUserExternalIdRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="externalId" type="xs:string"/>
+				<xs:element minOccurs="1" name="userId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RemoveUserExternalIdResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence>
+						<xs:element name="status" type="tns:UserAccountResponseSTATUS"/>
+						<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteUserAccountRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="userId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteUserAccountResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:UserAccountResponseSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateUserAccountRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:oupUserWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateUserAccountResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AuthenticationRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="credentialWS" type="tns:oupCredentialWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AuthenticationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:AuthenticationResponseSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+				<xs:element minOccurs="0" name="sessionKey" type="xs:string"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="userIds" nillable="true" type="xs:string"/>
+				<xs:element maxOccurs="1" minOccurs="0" name="user" type="tns:oupGetUserWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="LogoutRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="sessionToken" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="LogoutResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:AuthenticationResponseSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ChangePasswordByUserIdRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="password" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ChangePasswordByUserIdResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ChangePasswordByExternalIdRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="externalUserId" type="tns:ExternalIdentifier"/>
+				<xs:element name="password" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ChangePasswordByExternalIdResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ChangePasswordByUsernameRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="username" type="xs:string"/>
+				<xs:element name="password" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ChangePasswordByUsernameResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetUserIdsFromSessionRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="sessionToken" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetUserIdsFromSessionResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:UserAccountResponseSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="userIds" nillable="true" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetSessionByUserIdRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetSessionByUserIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:UserAccountResponseSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="session" nillable="true" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:complexType name="oupUserWS">
+		<xs:sequence>
+			<!-- <xs:element minOccurs="0" name="id" type="xs:int" /> <xs:element 
+				minOccurs="0" name="externalUserId" type="tns:ExternalIdentifier" /> -->
+			<xs:choice>
+				<xs:element minOccurs="0" name="id" type="tns:OupIdType"/>
+				<xs:element minOccurs="0" name="externalId" type="tns:ExternalIdentifier"/>
+			</xs:choice>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="authProfile" type="tns:oupAuthProfileWS"/>
+			<xs:element default="5" name="concurrency" type="xs:int"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="emailAddress" type="xs:string"/>
+			<xs:element default="false" name="suspended" type="xs:boolean"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="groupIds" type="tns:OupIdType"/>
+			<!-- <xs:element name="resetPassword" type="xs:boolean" default="false" 
+				/> -->
+			<xs:element minOccurs="0" name="forceResetPassword" type="xs:boolean"/>
+			<xs:element minOccurs="0" name="emailVerificationState" type="xs:string"/>
+			<xs:element minOccurs="0" name="firstName" type="xs:string"/>
+			<xs:element minOccurs="0" name="lastName" type="xs:string"/>
+			<xs:element minOccurs="0" name="timeZone" type="xs:string"/>
+			<xs:element minOccurs="0" name="locale" type="tns:LocaleType"/>
+			<xs:element minOccurs="0" name="userType" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="externalUserId" type="tns:ExternalIdentifier"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupGetUserWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="id" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="authProfile" type="tns:oupGetAuthProfileWS"/>
+			<xs:element default="5" name="concurrency" type="xs:int"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="emailAddress" type="xs:string"/>
+			<xs:element minOccurs="1" name="lastLoginDate" type="xs:dateTime"/>
+				<xs:element minOccurs="1" name="createdDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="failedLoginAtempt" type="xs:int"/>
+			<xs:element default="false" name="suspended" type="xs:boolean"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="groupIds" type="xs:string"/>
+			<xs:element minOccurs="0" name="emailVerificationState" type="xs:string"/>
+			<xs:element minOccurs="0" name="firstName" type="xs:string"/>
+			<xs:element minOccurs="0" name="lastName" type="xs:string"/>
+			<xs:element minOccurs="0" name="timeZone" type="xs:string"/>
+			<xs:element minOccurs="0" name="locale" type="tns:LocaleType"/>			
+			<xs:element minOccurs="0" name="userType" type="xs:string"/>
+			<xs:element minOccurs="0" name="forceResetPassword" type="xs:boolean"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="external" type="tns:ExternalIdentifier"/>
+		</xs:sequence>
+
+	</xs:complexType>
+
+
+	<xs:complexType name="oupAuthProfileWS">
+		<xs:sequence>
+			<xs:element name="matchMode" type="tns:matchMODE"/>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="credentials" nillable="true" type="tns:oupCredentialWS"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupGetAuthProfileWS">
+		<xs:sequence>
+			<xs:element name="matchMode" type="tns:matchMODE"/>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="credentials" type="tns:oupGetCredentialWS"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+	<xs:simpleType name="matchMODE">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ANY"/>
+			<xs:enumeration value="ALL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="addedInPool">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NONE"/>
+			<xs:enumeration value="ALL"/>
+			<xs:enumeration value="PARTIAL"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="oupCredentialWS">
+		<xs:choice>
+			<xs:element ref="tns:loginPasswordCredential"/>
+			<xs:element ref="tns:placeholderCredential"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="oupGetCredentialWS">
+		<xs:choice>
+			<xs:element ref="tns:getLoginPasswordCredential"/>
+			<xs:element ref="tns:placeholderCredential"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:element name="loginPasswordCredential" type="tns:oupCredentialLoginPasswordWS"/>
+	<xs:element name="placeholderCredential" type="tns:oupCredentialPlaceholderWS"/>
+
+	<xs:element name="getLoginPasswordCredential" type="tns:oupGetCredentialLoginPasswordWS"/>
+
+	<xs:complexType name="oupCredentialDataWS">
+		<xs:sequence/>
+	</xs:complexType>
+
+	<xs:complexType name="oupCredentialLoginPasswordWS">
+		<xs:complexContent>
+			<xs:extension base="tns:oupCredentialDataWS">
+				<xs:sequence>
+					<xs:element name="password" type="xs:string"/>
+					<xs:element name="username" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="oupGetCredentialLoginPasswordWS">
+		<xs:complexContent>
+			<xs:extension base="tns:oupCredentialDataWS">
+				<xs:sequence>
+					<xs:element name="username" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="LocaleType">
+		<xs:annotation>
+			<xs:documentation>
+				see
+				http://download.oracle.com/javase/6/docs/api/java/util/Locale.html
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="language" type="tns:LanguageType" use="required"/>
+		<xs:attribute name="country" type="tns:CountryType" use="optional"/>
+		<xs:attribute name="variant" type="xs:string" use="optional"/>
+	</xs:complexType>
+
+	<xs:simpleType name="LanguageType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CountryType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+
+	<xs:complexType name="oupCredentialPlaceholderWS">
+		<xs:complexContent>
+			<xs:extension base="tns:oupCredentialDataWS">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:simpleType name="UserAccountResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="USER_ALREADY_EXISTS"/>
+			<xs:enumeration value="USER_NOT_FOUND"/>
+			<xs:enumeration value="GROUP_NOT_FOUND"/>
+			<xs:enumeration value="PASSWORD_POLICY_VIOLATED"/>
+			<xs:enumeration value="USER_LOGIN_CREDENTIAL_ALREADY_EXIST"/>
+			<xs:enumeration value="ERROR"/>
+			<xs:enumeration value="SESSION_NOT_FOUND"/>
+			<xs:enumeration value="PASSWORD_VERIFICATION_FAILED"/>
+			<xs:enumeration value="LOGIN_PASSWORD_CREDENTIAL_NOT_FOUND"/>
+			<xs:enumeration value="MULTIPLE_LOGIN_PASSWORD_CREDENTIALS_FOUND"/>
+			<xs:enumeration value="MULTIPLE_USERS_FOUND"/>
+			<xs:enumeration value="EXTERNAL_ID_NOT_FOUND"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AuthenticationResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="FAILURE_ADMIN_TYPE_USER_CANNOT_LOGIN"/>
+			<xs:enumeration value="FAILURE_EXPLICIT_USER_NOT_FOUND"/>
+			<xs:enumeration value="FAILURE_INTERNAL_ERROR"/>
+			<xs:enumeration value="FAILURE_MAX_USERS_IN_SESSION_EXCEEDED"/>
+			<xs:enumeration value="FAILURE_NO_AUTH_PROFILE_MATCHED"/>
+			<xs:enumeration value="FAILURE_NO_CREDENTIALS"/>
+			<xs:enumeration value="FAILURE_NO_CREDENTIALS_MATCHED"/>
+			<xs:enumeration value="FAILURE_NO_LICENSES_FOUND"/>
+			<xs:enumeration value="FAILURE_NO_USERS_IN_SESSION"/>
+			<xs:enumeration value="FAILURE_SESSION_CONCURRENCY_EXCEEDED"/>
+			<xs:enumeration value="FAILURE_TIMEOUT"/>
+			<xs:enumeration value="FAILURE_TOO_MANY_GLOBAL_POLICY"/>
+			<xs:enumeration value="FAILURE_ACCOUNT_LOCKED"/>
+			<xs:enumeration value="SESSION_NOT_FOUND"/>
+			<xs:enumeration value="ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="CreateProductRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="product" type="tns:oupProductWS"/>
+				
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="AbstractProductResponse">
+		<xs:sequence>
+			<xs:element name="status" type="tns:ProductResponseSTATUS"/>
+			<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+			<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="CreateProductResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="productId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- <xs:element name="UpdateProductRequest"> <xs:complexType> <xs:sequence> 
+		<xs:element name="product" type="tns:oupProductWS" /> </xs:sequence> </xs:complexType> 
+		</xs:element> -->
+
+	<xs:element name="UpdateProductRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="product" type="tns:oupUpdateProductWS"/>
+				
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="oupUpdateProductWS">
+		<xs:sequence>
+			<!-- <xs:element minOccurs="0" name="id" type="xs:int" /> -->
+			<xs:choice>
+				<xs:element name="id" type="tns:OupIdType"/>
+				<xs:element name="externalId" type="tns:ExternalIdentifier"/>
+			</xs:choice>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="divisionId" type="xs:int"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="urls" type="tns:oupProductUrlWS"/>
+			<xs:element default="false" name="suspended" type="xs:boolean"/>
+			<xs:element name="state" type="xs:string"/>
+			<xs:element minOccurs="0" name="registerableType" type="xs:string"/>
+			<xs:element minOccurs="0" name="landingPage" type="xs:string"/>
+			<xs:element minOccurs="1" name="adminEmail" type="xs:string"/>
+			<xs:element minOccurs="0" name="sla" type="xs:string"/>
+			<xs:element minOccurs="0" name="homePage" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="activationDetail" type="tns:activationDetail"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="productLicense" type="tns:oupProductLicenseWS"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="external" type="tns:ExternalIdentifier"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="sendUserConfirmationEmail" type="xs:boolean"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="platformIds" type="tns:PlatformIdentifier"/>
+			<!-- <xs:element name="registrationDefinitionType" type="tns:RegistrationDefinitionType" 
+				minOccurs="0" maxOccurs="1" /> -->
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:simpleType name="RegistrationDefinitionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PRODUCT_REGISTRATION"/>
+			<xs:enumeration value="ACTIVATION_CODE_REGISTRATION"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="UpdateProductResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetProductsFromURLRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="url" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetProductsFromURLResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="productIds" nillable="true" type="xs:string"/>
+							
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetProductRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="productId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetProductResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="product" type="tns:oupGetProductWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- start: Added for GetProductByExternalId -->
+
+	<xs:element name="GetProductByExternalIdRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="externalProductId" type="tns:ExternalIdentifier"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetProductByExternalIdResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="product" type="tns:oupGetProductWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- end: Added for GetProductByExternalId -->
+	
+	<!-- start: Added for GetProductByProductName -->
+
+	<xs:element name="GetProductByProductNameRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="productName" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetProductByProductNameResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="product" type="tns:oupGetProductWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- end: Added for GetProductByProductName -->
+
+
+	<xs:element name="DeleteProductRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="productId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteProductResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="childrenIds" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RemoveProductExternalIdRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="externalId" type="xs:string"/>
+				<xs:element minOccurs="1" name="productId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RemoveProductExternalIdResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence>
+						<xs:element name="status" type="tns:ProductResponseSTATUS"/>
+						<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+						<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ActivateLicenseRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="licenseId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ActivateLicenseResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="licenseId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="AbstractGroupResponse">
+		<xs:sequence>
+			<xs:element name="status" type="tns:GroupResponseSTATUS"/>
+			<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+			<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="GetLicensesForUserRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element minOccurs="0" name="licenseId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetLicensesForUserResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="licenses" type="tns:oupLicenseInfoWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="OupUsageLicenseInfoWS">
+		<xs:complexContent>
+			<xs:extension base="tns:oupLicenseInfoWS">
+				<xs:sequence>
+					<xs:element name="usageRemaining" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="oupLicenseInfoWS">
+		<xs:sequence>
+			<xs:element name="oupLicense" type="tns:oupGetLicenseWS"/>
+			<xs:element name="active" type="xs:boolean"/>
+			<xs:element name="expired" type="xs:boolean"/>
+			<xs:element name="expiryDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="awaitingValidation" type="xs:boolean"/>
+			<xs:element minOccurs="0" name="completed" type="xs:boolean"/>
+			<xs:element minOccurs="0" name="denied" type="xs:boolean"/>
+			<xs:element minOccurs="1" name="createdDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="updatedDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="activationCode" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OupRollingLicenseInfoWS">
+		<xs:complexContent>
+			<xs:extension base="tns:oupLicenseInfoWS">
+				<xs:sequence>
+					<xs:element name="firstUse" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="oupGroupWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="id" type="xs:int"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="parentIds" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="OupUserRoleWS">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="1" name="userId" type="xs:string"/>
+
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="CreateGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="oupGroupWS" type="tns:oupGroupWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CreateGroupResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractGroupResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="groupId" type="xs:int"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="groupId" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteGroupResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractGroupResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetGroupRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="groupId" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetGroupResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractGroupResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="oupGroupWS" type="tns:oupGroupWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetGroupUsersRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="groupId" type="xs:int"/>
+				<xs:element default="true" minOccurs="0" name="includeIndirectParents" type="xs:boolean"/>
+			</xs:sequence>
+
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="GetGroupUsersResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractGroupResponse">
+					<xs:sequence>
+						<!-- <xs:element maxOccurs="unbounded" minOccurs="0" name="userIds" 
+							type="xs:int" /> -->
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="oupUserRoleWS" type="tns:OupUserRoleWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="oupGroupWS" type="tns:oupGroupWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateGroupResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractGroupResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="groupId" type="xs:int"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AddLicenseRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="license" type="tns:oupLicenseWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddLicenseResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="licenseId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateLicenseRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element minOccurs="0" name="completed" type="xs:boolean"/>
+				<xs:element name="license" type="tns:oupLicenseWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UpdateLicenseResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetLicensesForUserProductRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="productId" type="tns:OupIdType"/>
+				<xs:element minOccurs="0" name="licenseId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetLicensesForUserProductResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="licenses" type="tns:oupLicenseInfoWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CreateUserAccountAddLicenseRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:oupUserWS"/>
+				<xs:element name="license" type="tns:oupLicenseWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CreateUserAccountAddLicenseResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+				<xs:element minOccurs="0" name="licenseId" type="xs:string"/>
+				<xs:element name="status" type="tns:createUserAccountAddLicenseResponseSTATUS"/>
+				<xs:element minOccurs="0" name="userId" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="createUserAccountAddLicenseResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="PRODUCT_NOT_FOUND"/>
+			<xs:enumeration value="LICENSE_TEMPLATE_NOT_FOUND"/>
+			<xs:enumeration value="USER_ALREADY_EXISTS"/>
+			<xs:enumeration value="ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--CreateUserAccountAddLicense -->
+
+	<xs:complexType name="AbstractLicenseResponse">
+		<xs:sequence>
+			<xs:element name="status" type="tns:LicenseResponseSTATUS"/>
+			<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+			<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="oupLicenseWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="id" type="tns:OupIdType"/>
+			<xs:element name="enabled" type="xs:boolean"/>
+			<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="licenseTemplateId" type="xs:int"/>
+			<xs:element maxOccurs="unbounded" name="productIds" type="tns:OupIdType"/>
+			<xs:element minOccurs="0" name="licenseDetail" type="tns:oupLicenseDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="activationDetail">
+		<xs:sequence>
+			<xs:element name="activationType" type="tns:activationType"/>
+			<xs:element minOccurs="0" name="validatorEmail" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="activationType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="INSTANT"/>
+			<xs:enumeration value="SELF"/>
+			<xs:enumeration value="VALIDATED"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="oupLicenseDetail">
+		<xs:choice>
+			<xs:element ref="tns:oupRollingLicenseData"/>
+			<xs:element ref="tns:oupStandardConcurrencyLicenseData"/>
+			<xs:element ref="tns:oupUsageLicenseData"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:element name="oupRollingLicenseData" type="tns:oupRollingLicenseData"/>
+	<xs:element name="oupStandardConcurrencyLicenseData" type="tns:oupStandardConcurrencyLicenseData"/>
+	<xs:element name="oupUsageLicenseData" type="tns:oupUsageLicenseData"/>
+	<xs:complexType name="oupStandardConcurrencyLicenseData">
+		<xs:complexContent>
+			<xs:extension base="tns:oupLicenseData">
+				<xs:sequence>
+					<xs:element name="totalConcurrency" type="xs:int"/>
+					<xs:element name="userConcurrency" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="oupRollingLicenseData">
+		<xs:complexContent>
+			<xs:extension base="tns:oupLicenseData">
+				<xs:sequence>
+					<xs:element name="beginOn" type="tns:rollingBEGINON"/>
+					<xs:element name="periodUnit" type="tns:rollingUNITTYPE"/>
+					<xs:element name="periodValue" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="oupUsageLicenseData">
+		<xs:complexContent>
+			<xs:extension base="tns:oupLicenseData">
+				<xs:sequence>
+					<xs:element name="quantityLimit" type="xs:int"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="oupLicenseData">
+		<xs:sequence/>
+	</xs:complexType>
+
+	<xs:simpleType name="rollingBEGINON">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FIRST_USE"/>
+			<xs:enumeration value="CREATION"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="rollingUNITTYPE">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="YEAR"/>
+			<xs:enumeration value="MONTH"/>
+			<xs:enumeration value="WEEK"/>
+			<xs:enumeration value="DAY"/>
+			<xs:enumeration value="HOUR"/>
+			<xs:enumeration value="MINUTE"/>
+			<xs:enumeration value="SECOND"/>
+			<xs:enumeration value="MILLISECOND"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ProductResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="NO_PRODUCTS_FOUND"/>
+			<xs:enumeration value="PRODUCT_NOT_FOUND"/>
+			<xs:enumeration value="PARENT_PRODUCT_NOT_FOUND"/>
+			<xs:enumeration value="CHILD_PRODUCT_FOUND"/>
+			<xs:enumeration value="ERROR"/>
+			<xs:enumeration value="EXTERNAL_ID_NOT_FOUND"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="GroupResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="PARENT_GROUP_NOT_FOUND"/>
+			<xs:enumeration value="GROUP_NOT_FOUND"/>
+			<xs:enumeration value="ERROR"/>
+			<xs:enumeration value="USER_NOT_FOUND"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="LicenseResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="USER_NOT_FOUND"/>
+			<xs:enumeration value="PRODUCT_NOT_FOUND"/>
+			<xs:enumeration value="LICENSE_NOT_FOUND"/>
+			<xs:enumeration value="LICENSE_TEMPLATE_NOT_FOUND"/>
+			<xs:enumeration value="USER_ALREADY_EXISTS"/>
+			<xs:enumeration value="ERROR"/>
+			<xs:enumeration value="ACCESS_DENIED"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="oupProductWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="id" type="tns:OupIdType"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="divisionId" type="xs:int"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="urls" type="tns:oupProductUrlWS"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="parentIds" type="tns:oupProductIds"/>
+			<xs:element default="false" name="suspended" type="xs:boolean"/>
+			<xs:element name="state" type="xs:string"/>
+			<xs:element minOccurs="0" name="registerableType" type="xs:string"/>
+			<xs:element minOccurs="0" name="landingPage" type="xs:string"/>
+			<xs:element minOccurs="1" name="adminEmail" type="xs:string"/>
+			<xs:element minOccurs="0" name="sla" type="xs:string"/>
+			<xs:element minOccurs="0" name="homePage" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="activationDetail" type="tns:activationDetail"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="productLicense" type="tns:oupProductLicenseWS"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="external" type="tns:ExternalIdentifier"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="sendUserConfirmationEmail" type="xs:boolean"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="registrationDefinitionType" type="tns:RegistrationDefinitionType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="platformIds" type="tns:PlatformIdentifier"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupGetProductWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="id" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="divisionId" type="xs:int"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="urls" type="tns:oupProductUrlWS"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="parentIds" type="tns:oupProductIds"/>
+			<xs:element default="false" name="suspended" type="xs:boolean"/>
+			<xs:element name="state" type="xs:string"/>
+			<xs:element minOccurs="0" name="registerableType" type="xs:string"/>
+			<xs:element minOccurs="0" name="landingPage" type="xs:string"/>
+			<xs:element minOccurs="0" name="adminEmail" type="xs:string"/>
+			<xs:element minOccurs="0" name="sla" type="xs:string"/>
+			<xs:element minOccurs="0" name="homePage" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="activationDetail" type="tns:activationDetail"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="productLicense" type="tns:oupProductLicenseWS"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="external" type="tns:ExternalIdentifier"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="sendUserConfirmationEmail" type="xs:boolean"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="linkedProducts" type="tns:oupProductIds"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="registrationDefinitionType" type="tns:RegistrationDefinitionType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="platformDetails" type="tns:PlatformIdentifier"/>	
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupProductUrlWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="protocol" type="xs:string"/>
+			<xs:element minOccurs="0" name="host" type="xs:string"/>
+			<xs:element minOccurs="0" name="path" type="xs:string"/>
+			<xs:element minOccurs="0" name="query" type="xs:string"/>
+			<xs:element minOccurs="0" name="fragment" type="xs:string"/>
+			<xs:element minOccurs="0" name="matchExp" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="DeactivateLicenseRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="licenseId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeactivateLicenseResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AdminDeactivateLicenseRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="licenseId" type="tns:OupIdType"/>
+				<xs:element name="sendMail" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AdminDeactivateLicenseResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AuthorizeRequestRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="sessionKey" type="xs:string"/>
+				<xs:element name="url" type="xs:string"/>
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="licenseId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AuthorizeRequestResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="RemoveLicenseRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="licenseId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RemoveLicenseResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="IdentifierBase">
+		<xs:sequence>
+			<xs:element name="id" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="ExternalIdentifier">
+		<xs:complexContent>
+			<xs:extension base="tns:IdentifierBase">
+				<xs:sequence>
+					<xs:element name="systemId" type="xs:string"/>
+					<xs:element name="typeId" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="CreateExternalSystemRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="externalSystem" type="tns:ExternalSystemWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CreateExternalSystemResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:ExternalSystemsResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetExternalSystemRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="systemId" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetExternalSystemResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:ExternalSystemSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+				<xs:element minOccurs="0" name="externalSystem" type="tns:ExternalSystemWS"/>
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetAllExternalSystemsRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetAllExternalSystemsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:ExternalSystemSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="externalSystem" type="tns:ExternalSystemWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateExternalSystemRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="currentSystemId" type="xs:string"/>
+				<xs:element name="externalSystem" type="tns:SystemId"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateExternalSystemResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:ExternalSystemsResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateExternalSystemIdTypeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="systemId" type="xs:string"/>
+				<xs:element minOccurs="0" name="currentTypeId" type="xs:string"/>
+				<xs:element name="systemTypeIdentifier" type="tns:SystemTypeId"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateExternalSystemIdTypeResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:ExternalSystemsResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteExternalSystemAndIdTypeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="systemId" type="xs:string"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="typeIds" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteExternalSystemAndIdTypeResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:ExternalSystemsResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="ExternalSystemWS">
+		<xs:sequence>
+			<xs:element name="systemId" type="xs:string"/>
+			<xs:element minOccurs="0" name="description" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="typeIds" type="tns:SystemTypeId"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SystemId">
+		<xs:sequence>
+			<xs:element name="systemId" type="xs:string"/>
+			<xs:element minOccurs="0" name="description" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SystemTypeId">
+		<xs:sequence>
+			<xs:element name="typeId" type="xs:string"/>
+			<xs:element minOccurs="0" name="description" type="xs:string"/>
+			<xs:element minOccurs="0" name="isDeletable" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ExternalSystemsResponse">
+		<xs:sequence>
+			<xs:element name="status" type="tns:ExternalSystemSTATUS"/>
+			<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+			<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="ExternalSystemSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="SearchUserAccountsRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="searchUser" type="tns:oupSearchUserWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="SearchUserAccountsResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="searchUserResults" type="tns:oupSearchUserResultWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="oupSearchUserWS">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="username" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="emailAddress" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="firstName" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="lastName" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="createdDateFrom" type="xs:date"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="createdDateTo" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupSearchUserResultWS">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="id" type="xs:int"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="eacId" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="username" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="emailAddress" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="firstName" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="lastName" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="createdDate" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="lastLogin" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="CreateActivationCodeBatchRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element maxOccurs="1" minOccurs="1" name="activationCodeBatch" type="tns:ActivationCodeBatch"/>
+				<xs:element maxOccurs="1" minOccurs="1" name="activationCodeLicense" type="tns:ActivationCodeLicense"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CreateActivationCodeBatchResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="activationCode" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="UpdateActivationCodeBatchRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="currentbatchId" type="xs:string"/>
+				<xs:element maxOccurs="1" minOccurs="0" name="batchId">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="255"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+				<xs:element minOccurs="0" name="validTo" type="xs:dateTime"/>
+				<xs:element maxOccurs="1" minOccurs="1" name="activationCodeLicense" type="tns:ActivationCodeLicense"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateActivationCodeBatchResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="ActivationCodeBatch">
+		<xs:sequence>
+			<xs:element name="batchId">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element minOccurs="1" name="codeFormat" type="tns:CodeFormatEnum"/>
+			<xs:element minOccurs="1" name="numberOfTokens" type="xs:int"/>
+			<xs:element minOccurs="1" name="allowedUsages" type="xs:int"/>
+			<xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="validTo" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="CodeFormatEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EAC_NUMERIC"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:complexType name="ActivationCodeLicense">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="productId" type="tns:OupIdType"/>
+				<xs:element name="productGroupId" type="tns:OupIdType"/>
+				<xs:element name="externalProductId" type="tns:ExternalIdentifier"/>
+			</xs:choice>
+
+			<xs:element minOccurs="1" name="licenseDetails" type="tns:oupActivationCodeLicenseWS"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupActivationCodeLicenseWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+			<xs:element minOccurs="1" name="licenseDetail" type="tns:oupLicenseDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupProductLicenseWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="licenseDetail" type="tns:oupLicenseDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AbstractActivationCodeResponse">
+		<xs:sequence>
+			<xs:element name="status" type="tns:ActivationCodeResponseSTATUS"/>
+			<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+			<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="ActivationCodeResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="ERROR"/>
+			<xs:enumeration value="PRODUCT_NOT_FOUND"/>
+			<xs:enumeration value="USER_NOT_FOUND"/>
+			<xs:enumeration value="LICENSE_NOT_FOUND"/>
+			<xs:enumeration value="LICENSE_TEMPLATE_NOT_FOUND"/>
+			<xs:enumeration value="ACCESS_DENIED"/>
+			<xs:enumeration value="GROUP_NOT_FOUND"/>
+			<xs:enumeration value="EXTERNAL_PRODUCT_NOT_FOUND"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="DeleteActivationCodeBatchRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="batchId" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteActivationCodeBatchResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="GetActivationCodeBatchByBatchIdRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="batchId" type="xs:string"/>
+				<xs:element minOccurs="0" name="activationCodeRequired" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetActivationCodeBatchByBatchIdResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence>
+						<xs:sequence minOccurs="0">
+							<xs:element minOccurs="1" name="batchId" type="xs:string"/>
+							<xs:element minOccurs="1" name="numberOfTokens" type="xs:int"/>
+							<xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+							<xs:element minOccurs="0" name="validTo" type="xs:dateTime"/>
+							<xs:element minOccurs="0" name="activationCodeLicense" type="tns:ActivationCodeLicense"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="activationCode" type="xs:string"/>
+								<xs:element name="addedInPool" type="tns:addedInPool"/>
+						</xs:sequence>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="GetActivationCodeBatchByActivationCodeRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="activationCode" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetActivationCodeBatchByActivationCodeResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence>
+						<xs:sequence minOccurs="0">
+							<xs:element minOccurs="1" name="batchId" type="xs:string"/>
+							<xs:element minOccurs="1" name="numberOfTokens" type="xs:int"/>
+							<xs:element minOccurs="0" name="validFrom" type="xs:dateTime"/>
+							<xs:element minOccurs="0" name="validTo" type="xs:dateTime"/>
+							<xs:element minOccurs="0" name="activationCodeLicense" type="tns:ActivationCodeLicense"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="activationCode" type="xs:string"/>
+							<xs:element name="addedInPool" type="tns:addedInPool"/>
+						</xs:sequence>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetActivationCodeDetailsByActivationCodeRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="activationCode" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetActivationCodeDetailsByActivationCodeResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence>
+						<xs:sequence minOccurs="0">
+							<xs:element name="batchId" type="xs:string"/>
+							<xs:choice>
+								<xs:element name="productId" type="xs:string"/>
+								<xs:element name="productGroupId" type="xs:string"/>
+							</xs:choice>
+							<xs:element name="validityPeriod" type="xs:dateTime"/>
+							<xs:element name="allowedUsage" type="xs:int"/>
+							<xs:element name="actualUsage" type="xs:int"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="redeemActivatoinCodeUserDetails" type="tns:redeemActivatoinCodeUserDetails"/>
+							<xs:element name="addedInPool" type="tns:addedInPool"/>
+						</xs:sequence>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="redeemActivatoinCodeUserDetails">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="userName" type="xs:string"/>
+			<xs:element minOccurs="0" name="activationDate" type="xs:dateTime"/>
+				<xs:element minOccurs="0" name="firstName" type="xs:string"/>
+			<xs:element minOccurs="0" name="lastName" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="SearchActivationCodeRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="searchActivationCode" type="tns:oupSearchActivationCodeWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="SearchActivationCodeResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence minOccurs="0">
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="searchActivationCodeResults" type="tns:oupSearchActivationCodeResultWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="ActivationCodeState">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AVAILABLE"/>
+			<xs:enumeration value="UNAVAILABLE"/>
+			<xs:enumeration value="ALL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SearchLicenseType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STANDARD"/>
+			<xs:enumeration value="CONCURRENT"/>
+			<xs:enumeration value="USAGE"/>
+			<xs:enumeration value="ROLLING"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="SearchActivationCodeBatchRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="searchActivationCodeBatch" type="tns:oupSearchActivationCodeBatchWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="SearchActivationCodeBatchResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="searchActivationCodeBatchResults" type="tns:oupSearchActivationCodeBatchResultWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="oupSearchActivationCodeBatchWS">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="batchName" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="productId" type="xs:int"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="activationCode" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="validDate" type="xs:date"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="licenseType" type="tns:SearchLicenseType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupSearchActivationCodeWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="activationCode" type="xs:string"/>
+			<xs:element minOccurs="0" name="productId" type="xs:int"/>
+			<xs:element minOccurs="1" name="state" type="tns:ActivationCodeState"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupSearchActivationCodeBatchResultWS">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="batchName" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="productName" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="productId" type="xs:int"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="licenseType" type="tns:SearchLicenseType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="createdDate" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="startDate" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="endDate" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupSearchActivationCodeResultWS">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="activationCode" type="xs:string"/>
+			<xs:element minOccurs="0" name="productId" type="xs:int"/>
+			<xs:element minOccurs="0" name="productName" type="xs:string"/>
+			<xs:element minOccurs="1" name="state" type="tns:ActivationCodeState"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="RedeemActivationCodeRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:choice>
+					<xs:element name="userId" type="tns:OupIdType"/>
+					<xs:element name="externalId" type="tns:ExternalIdentifier"/>
+				</xs:choice>
+				<xs:element minOccurs="1" name="activationCode" type="xs:string"/>
+				<xs:element minOccurs="0" name="url" type="xs:string"/>
+				<xs:element minOccurs="0" name="completed" type="xs:boolean"/>
+				<xs:element default="true" minOccurs="0" name="sendActivationMail" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RedeemActivationCodeResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="licenses" type="tns:oupLicenseInfoWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AddLicenseUserProductRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="productId" type="tns:OupIdType"/>
+				<xs:element minOccurs="0" name="url" type="xs:string"/>
+				<xs:element default="true" minOccurs="0" name="sendActivationMail" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AddLicenseUserProductResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="licenseId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetAllValidatorEmailsRequest">
+		<xs:complexType/>
+	</xs:element>
+
+	<xs:element name="GetAllValidatorEmailsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="tns:ActivationCodeResponseSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+				<xs:element minOccurs="0" name="validatorEmails" type="tns:validatorEmails"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="validatorEmails">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="validatorEmail" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="AdminActivateLicenseRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element name="userId" type="tns:OupIdType"/>
+				<xs:element name="licenseId" type="tns:OupIdType"/>
+				<xs:element name="sendMail" type="xs:boolean"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AdminActivateLicenseResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="licenseId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- start: Added for CreateProductGroupRequest -->
+	<xs:element name="CreateProductGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="productGroup" type="tns:oupProductGroupWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CreateProductGroupResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductGroupResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="productGroupId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="oupProductGroupWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="id" type="tns:OupIdType"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="productIds" type="tns:oupProductIds"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="oupProductIds">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="productId" type="tns:OupIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="oupGetLicenseWS">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="id" type="xs:string"/>
+			<xs:element name="enabled" type="xs:boolean"/>
+			<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+			<xs:element minOccurs="0" name="licenseTemplateId" type="xs:int"/>
+			<xs:element maxOccurs="unbounded" name="products" type="tns:oupProducts"/>
+			<xs:element minOccurs="0" name="licenseDetail" type="tns:oupLicenseDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	
+		<xs:complexType name="oupProducts">
+		<xs:sequence>
+		<xs:element maxOccurs="1" minOccurs="0" name="productId" type="xs:string"/>		
+		<xs:element maxOccurs="1" minOccurs="0" name="productName" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="homePage" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="landingPage" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="divisionName" type="xs:string"/>
+		<xs:element maxOccurs="unbounded" minOccurs="0" name="externalSystem" type="tns:ExternalIdentifier"/>
+		<xs:element maxOccurs="unbounded" minOccurs="0" name="linkedProducts" type="tns:oupLinkedProductDetails"/>
+		</xs:sequence>
+		</xs:complexType>
+
+
+	<xs:simpleType name="ProductGroupResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="ERROR"/>
+			<xs:enumeration value="NO_PRODUCT_GROUP_FOUND"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="AbstractProductGroupResponse">
+		<xs:sequence>
+			<xs:element name="status" type="tns:ProductGroupResponseSTATUS"/>
+			<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+			<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- end: Added for CreateProductGroupRequest -->
+
+	<xs:element name="UpdateProductGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="currentName" type="xs:string"/>
+				<xs:element name="productGroup" type="tns:oupProductGroupWS"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateProductGroupResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductGroupResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetProductGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="id" type="tns:OupIdType"/>
+					<xs:element name="name" type="xs:string"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetProductGroupResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductGroupResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="productGroup" type="tns:oupProductGroupWS"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteProductGroupRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteProductGroupResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductGroupResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AddLinkedProductsRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="1" name="parentProductId" type="tns:OupIdType"/>
+				<xs:element maxOccurs="1" minOccurs="1" name="linkedProductId" type="tns:oupLinkedProductIds"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AddLinkedProductsResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+		<xs:complexType name="oupLinkedProductDetails">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="linkedProductId" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="productName" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="homePage" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="landingPage" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="divisionName" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="externalSystem" type="tns:ExternalIdentifier"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="oupLinkedProductIds">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="linkedProductId" type="tns:OupIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="RemoveLinkedProductRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="1" minOccurs="1" name="parentProductId" type="tns:OupIdType"/>
+				<xs:element maxOccurs="1" minOccurs="1" name="linkedProductId" type="tns:oupLinkedProductIds"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RemoveLinkedProductResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractProductResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ResetPasswordRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="userId" type="tns:OupIdType"/>
+					<xs:element name="externalUserId" type="tns:ExternalIdentifier"/>
+				</xs:choice>
+				<xs:element minOccurs="1" name="successUrl" type="xs:string"/>
+				<xs:element minOccurs="1" name="failureUrl" type="xs:string"/>
+				<xs:element minOccurs="0" name="tokenId" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ResetPasswordResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:simpleType name="InvitationSentSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SENT"/>
+			<xs:enumeration value="NOT SENT"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="InvitationSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="APPROVED"/>
+			<xs:enumeration value="REJECTED"/>
+			<xs:enumeration value="PENDING"/>
+			<xs:enumeration value="NONE"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="OupDivisions">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="1" name="divisionType" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="divisionId" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="CreateDivisionRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="1" name="divisions" type="tns:OupDivisions"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CreateDivisionResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractDivisionResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="divisions" type="tns:OupDivisions"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="AbstractDivisionResponse">
+		<xs:sequence>
+			<xs:element name="status" type="tns:DivsionResponseSTATUS"/>
+			<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+			<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="DivsionResponseSTATUS">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SUCCESS"/>
+			<xs:enumeration value="DIVISION_NOT_FOUND"/>
+			<xs:enumeration value="DIVISION_ALREADY_EXISTS"/>
+			<xs:enumeration value="ERROR"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="UpdateDivisionRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="1" name="divisions" type="tns:OupDivisions"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UpdateDivisionResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractDivisionResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="divisions" type="tns:OupDivisions"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="DeleteDivisionRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="1" name="divisionId" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DeleteDivisionResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractDivisionResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="GetAllDivisionsRequest">
+		<xs:complexType>
+			<xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetAllDivisionsResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractDivisionResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="divisions" type="tns:OupDivisions"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- <xs:element name="GetActivationCodeBatchReportDetailsRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="event" type="xs:string" minOccurs="1" />
+				<xs:choice>
+						<xs:element minOccurs="0" name="productId" type="xs:int" />
+						<xs:element minOccurs="0" name="productGroupId" type="xs:int" />
+				</xs:choice>
+				<xs:element name="divisionId" type="xs:int" minOccurs="0"/>
+				<xs:element name="batchName" type="xs:string" minOccurs="0" />
+				<xs:element name="maxResults" type="xs:int" minOccurs="1" />
+				<xs:element name="adminEmail" type="xs:string" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GetActivationCodeBatchReportDetailsResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="activationCodeBatchCount" type="xs:int" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element> -->
+	
+	<xs:element name="MergeCustomerRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="masterUserId" type="tns:OupIdType"/>
+				<xs:element minOccurs="1" name="emailAddress" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MergeCustomerResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="GuestRedeemActivationCodeRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="activationCode" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="GuestRedeemActivationCodeResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractActivationCodeResponse">
+					<xs:sequence>
+						<xs:element maxOccurs="unbounded" minOccurs="0" name="entitlement" type="tns:oupGuestRedeemProduct"/>
+						<xs:element minOccurs="0" name="allowedUsages" type="xs:int"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="oupGuestRedeemProduct">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="product" type="tns:oupGetProductWS"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="activationCode" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="BulkCreateActivationCodeBatchRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" name="requesterId" type="xs:string"/>
+				<xs:element minOccurs="1" name="requesterEmail" type="xs:string"/>
+				<xs:element maxOccurs="unbounded" minOccurs="1" name="ActivationCodeBatchDetails" type="tns:ActivationCodeBatchDetails"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="ActivationCodeBatchDetails">
+		<xs:sequence minOccurs="1">
+			<xs:element maxOccurs="1" minOccurs="1" name="activationCodeBatch" type="tns:ActivationCodeBatch"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="activationCodeLicense" type="tns:BulkActivationCodeLicense"/>
+	</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="BulkCreateActivationCodeBatchResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractBulkActivationCodeResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+		<xs:complexType name="AbstractBulkActivationCodeResponse">
+			<xs:sequence>
+				<xs:element name="status" type="tns:BulkActivationCodeBatchResponseSTATUS"/>
+				<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+				<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:simpleType name="BulkActivationCodeBatchResponseSTATUS">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="SUCCESS"/>
+				<xs:enumeration value="ERROR"/>
+			</xs:restriction>
+		</xs:simpleType>
+	<xs:complexType name="BulkActivationCodeLicense">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="productName" type="xs:string"/>
+				<xs:element name="productGroupName" type="xs:string"/>
+			</xs:choice>
+
+			<xs:element minOccurs="1" name="licenseDetails" type="tns:oupActivationCodeLicenseWS"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ValidateUserAccountRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:oupUserIdentifier"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ValidateUserAccountResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+					<xs:sequence>
+						<xs:element name="userId" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="oupUserIdentifier">
+		<xs:choice>
+			<xs:element name="userId" type="tns:OupIdType"/>
+			<xs:element name="username" type="xs:string"/>
+			<xs:element name="externalUserId" type="tns:ExternalIdentifier"/>
+			<xs:element name="sessionToken" type="xs:string"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:element name="KillUserSessionRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="user" type="tns:oupUserIdentifier"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="KillUserSessionResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractUserAccountResponse">
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	
+	<xs:element name="ValidateActivationCodeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="systemId" type="xs:string"/>
+				<xs:element name="activationCode" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="ValidateActivationCodeResponse">
+	<xs:complexType>
+		<xs:complexContent>
+			<xs:extension base="tns:AbstractActivationCodeResponse">
+				<xs:sequence>
+					<xs:element minOccurs="1" name="activationCode" type="xs:string"/>
+					<xs:element maxOccurs="unbounded" minOccurs="1" name="products" type="tns:oupProducts"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="PlatformIdentifier">
+		<xs:sequence>
+			<xs:element minOccurs="1" name="platformId" type="xs:int"/>
+			<xs:element minOccurs="0" name="platformCode" type="xs:string"/>
+			<xs:element minOccurs="0" name="platformName" type="xs:string"/>
+		</xs:sequence>	
+	</xs:complexType>
+	
+	<xs:element name="UpdateLicenseModifiedDateRequest">
+		<xs:complexType>
+			<xs:sequence minOccurs="1">
+				<xs:element minOccurs="1" name="licenseId" type="tns:OupIdType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UpdateLicenseModifiedDateResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:AbstractLicenseResponse">
+					<xs:sequence/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateProductRequest">
+    <wsdl:part element="tns:CreateProductRequest" name="CreateProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MergeCustomerResponse">
+    <wsdl:part element="tns:MergeCustomerResponse" name="MergeCustomerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountByExternalIdResponse">
+    <wsdl:part element="tns:GetUserAccountByExternalIdResponse" name="GetUserAccountByExternalIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductRequest">
+    <wsdl:part element="tns:GetProductRequest" name="GetProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateProductRequest">
+    <wsdl:part element="tns:UpdateProductRequest" name="UpdateProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductByProductNameRequest">
+    <wsdl:part element="tns:GetProductByProductNameRequest" name="GetProductByProductNameRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteExternalSystemAndIdTypeRequest">
+    <wsdl:part element="tns:DeleteExternalSystemAndIdTypeRequest" name="DeleteExternalSystemAndIdTypeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SearchActivationCodeRequest">
+    <wsdl:part element="tns:SearchActivationCodeRequest" name="SearchActivationCodeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddLinkedProductsRequest">
+    <wsdl:part element="tns:AddLinkedProductsRequest" name="AddLinkedProductsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteActivationCodeBatchRequest">
+    <wsdl:part element="tns:DeleteActivationCodeBatchRequest" name="DeleteActivationCodeBatchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateProductResponse">
+    <wsdl:part element="tns:CreateProductResponse" name="CreateProductResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AdminDeactivateLicenseRequest">
+    <wsdl:part element="tns:AdminDeactivateLicenseRequest" name="AdminDeactivateLicenseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RedeemActivationCodeResponse">
+    <wsdl:part element="tns:RedeemActivationCodeResponse" name="RedeemActivationCodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ActivateLicenseResponse">
+    <wsdl:part element="tns:ActivateLicenseResponse" name="ActivateLicenseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveLinkedProductRequest">
+    <wsdl:part element="tns:RemoveLinkedProductRequest" name="RemoveLinkedProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordByUserIdRequest">
+    <wsdl:part element="tns:ChangePasswordByUserIdRequest" name="ChangePasswordByUserIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateProductGroupRequest">
+    <wsdl:part element="tns:UpdateProductGroupRequest" name="UpdateProductGroupRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductResponse">
+    <wsdl:part element="tns:GetProductResponse" name="GetProductResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllDivisionsRequest">
+    <wsdl:part element="tns:GetAllDivisionsRequest" name="GetAllDivisionsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteUserAccountRequest">
+    <wsdl:part element="tns:DeleteUserAccountRequest" name="DeleteUserAccountRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="BulkCreateActivationCodeBatchRequest">
+    <wsdl:part element="tns:BulkCreateActivationCodeBatchRequest" name="BulkCreateActivationCodeBatchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteProductGroupRequest">
+    <wsdl:part element="tns:DeleteProductGroupRequest" name="DeleteProductGroupRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateExternalSystemIdTypeRequest">
+    <wsdl:part element="tns:UpdateExternalSystemIdTypeRequest" name="UpdateExternalSystemIdTypeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddLicenseResponse">
+    <wsdl:part element="tns:AddLicenseResponse" name="AddLicenseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateDivisionResponse">
+    <wsdl:part element="tns:UpdateDivisionResponse" name="UpdateDivisionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductByExternalIdRequest">
+    <wsdl:part element="tns:GetProductByExternalIdRequest" name="GetProductByExternalIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserIdsFromSessionResponse">
+    <wsdl:part element="tns:GetUserIdsFromSessionResponse" name="GetUserIdsFromSessionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteGroupRequest">
+    <wsdl:part element="tns:DeleteGroupRequest" name="DeleteGroupRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteGroupResponse">
+    <wsdl:part element="tns:DeleteGroupResponse" name="DeleteGroupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserIdsFromSessionRequest">
+    <wsdl:part element="tns:GetUserIdsFromSessionRequest" name="GetUserIdsFromSessionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveUserExternalIdRequest">
+    <wsdl:part element="tns:RemoveUserExternalIdRequest" name="RemoveUserExternalIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SearchActivationCodeBatchResponse">
+    <wsdl:part element="tns:SearchActivationCodeBatchResponse" name="SearchActivationCodeBatchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetLicensesForUserResponse">
+    <wsdl:part element="tns:GetLicensesForUserResponse" name="GetLicensesForUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateProductResponse">
+    <wsdl:part element="tns:UpdateProductResponse" name="UpdateProductResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductByExternalIdResponse">
+    <wsdl:part element="tns:GetProductByExternalIdResponse" name="GetProductByExternalIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductGroupResponse">
+    <wsdl:part element="tns:GetProductGroupResponse" name="GetProductGroupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateProductGroupResponse">
+    <wsdl:part element="tns:UpdateProductGroupResponse" name="UpdateProductGroupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SearchActivationCodeBatchRequest">
+    <wsdl:part element="tns:SearchActivationCodeBatchRequest" name="SearchActivationCodeBatchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="KillUserSessionRequest">
+    <wsdl:part element="tns:KillUserSessionRequest" name="KillUserSessionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveProductExternalIdRequest">
+    <wsdl:part element="tns:RemoveProductExternalIdRequest" name="RemoveProductExternalIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordByUserIdResponse">
+    <wsdl:part element="tns:ChangePasswordByUserIdResponse" name="ChangePasswordByUserIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateExternalSystemRequest">
+    <wsdl:part element="tns:UpdateExternalSystemRequest" name="UpdateExternalSystemRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateLicenseModifiedDateRequest">
+    <wsdl:part element="tns:UpdateLicenseModifiedDateRequest" name="UpdateLicenseModifiedDateRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveLinkedProductResponse">
+    <wsdl:part element="tns:RemoveLinkedProductResponse" name="RemoveLinkedProductResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteProductRequest">
+    <wsdl:part element="tns:DeleteProductRequest" name="DeleteProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountResponse">
+    <wsdl:part element="tns:GetUserAccountResponse" name="GetUserAccountResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateActivationCodeBatchResponse">
+    <wsdl:part element="tns:CreateActivationCodeBatchResponse" name="CreateActivationCodeBatchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountByUsernameRequest">
+    <wsdl:part element="tns:GetUserAccountByUsernameRequest" name="GetUserAccountByUsernameRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateUserAccountAddLicenseResponse">
+    <wsdl:part element="tns:CreateUserAccountAddLicenseResponse" name="CreateUserAccountAddLicenseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllDivisionsResponse">
+    <wsdl:part element="tns:GetAllDivisionsResponse" name="GetAllDivisionsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSessionByUserIdResponse">
+    <wsdl:part element="tns:GetSessionByUserIdResponse" name="GetSessionByUserIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteProductGroupResponse">
+    <wsdl:part element="tns:DeleteProductGroupResponse" name="DeleteProductGroupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddLicenseUserProductResponse">
+    <wsdl:part element="tns:AddLicenseUserProductResponse" name="AddLicenseUserProductResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddLicenseRequest">
+    <wsdl:part element="tns:AddLicenseRequest" name="AddLicenseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllValidatorEmailsResponse">
+    <wsdl:part element="tns:GetAllValidatorEmailsResponse" name="GetAllValidatorEmailsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateDivisionRequest">
+    <wsdl:part element="tns:UpdateDivisionRequest" name="UpdateDivisionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductsFromURLRequest">
+    <wsdl:part element="tns:GetProductsFromURLRequest" name="GetProductsFromURLRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateLicenseModifiedDateResponse">
+    <wsdl:part element="tns:UpdateLicenseModifiedDateResponse" name="UpdateLicenseModifiedDateResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateGroupRequest">
+    <wsdl:part element="tns:UpdateGroupRequest" name="UpdateGroupRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateActivationCodeBatchRequest">
+    <wsdl:part element="tns:CreateActivationCodeBatchRequest" name="CreateActivationCodeBatchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateDivisionRequest">
+    <wsdl:part element="tns:CreateDivisionRequest" name="CreateDivisionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeactivateLicenseRequest">
+    <wsdl:part element="tns:DeactivateLicenseRequest" name="DeactivateLicenseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetGroupResponse">
+    <wsdl:part element="tns:GetGroupResponse" name="GetGroupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteExternalSystemAndIdTypeResponse">
+    <wsdl:part element="tns:DeleteExternalSystemAndIdTypeResponse" name="DeleteExternalSystemAndIdTypeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetExternalSystemResponse">
+    <wsdl:part element="tns:GetExternalSystemResponse" name="GetExternalSystemResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddLinkedProductsResponse">
+    <wsdl:part element="tns:AddLinkedProductsResponse" name="AddLinkedProductsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateUserAccountRequest">
+    <wsdl:part element="tns:UpdateUserAccountRequest" name="UpdateUserAccountRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordByUsernameResponse">
+    <wsdl:part element="tns:ChangePasswordByUsernameResponse" name="ChangePasswordByUsernameResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateProductGroupResponse">
+    <wsdl:part element="tns:CreateProductGroupResponse" name="CreateProductGroupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllValidatorEmailsRequest">
+    <wsdl:part element="tns:GetAllValidatorEmailsRequest" name="GetAllValidatorEmailsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AdminDeactivateLicenseResponse">
+    <wsdl:part element="tns:AdminDeactivateLicenseResponse" name="AdminDeactivateLicenseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountRequest">
+    <wsdl:part element="tns:GetUserAccountRequest" name="GetUserAccountRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateUserAccountResponse">
+    <wsdl:part element="tns:ValidateUserAccountResponse" name="ValidateUserAccountResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetActivationCodeBatchByActivationCodeResponse">
+    <wsdl:part element="tns:GetActivationCodeBatchByActivationCodeResponse" name="GetActivationCodeBatchByActivationCodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetGroupRequest">
+    <wsdl:part element="tns:GetGroupRequest" name="GetGroupRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GuestRedeemActivationCodeRequest">
+    <wsdl:part element="tns:GuestRedeemActivationCodeRequest" name="GuestRedeemActivationCodeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AuthenticationResponse">
+    <wsdl:part element="tns:AuthenticationResponse" name="AuthenticationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetGroupUsersRequest">
+    <wsdl:part element="tns:GetGroupUsersRequest" name="GetGroupUsersRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateExternalSystemRequest">
+    <wsdl:part element="tns:CreateExternalSystemRequest" name="CreateExternalSystemRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddLicenseUserProductRequest">
+    <wsdl:part element="tns:AddLicenseUserProductRequest" name="AddLicenseUserProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetActivationCodeBatchByBatchIdResponse">
+    <wsdl:part element="tns:GetActivationCodeBatchByBatchIdResponse" name="GetActivationCodeBatchByBatchIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateActivationCodeBatchRequest">
+    <wsdl:part element="tns:UpdateActivationCodeBatchRequest" name="UpdateActivationCodeBatchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetLicensesForUserRequest">
+    <wsdl:part element="tns:GetLicensesForUserRequest" name="GetLicensesForUserRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateLicenseRequest">
+    <wsdl:part element="tns:UpdateLicenseRequest" name="UpdateLicenseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetActivationCodeBatchByActivationCodeRequest">
+    <wsdl:part element="tns:GetActivationCodeBatchByActivationCodeRequest" name="GetActivationCodeBatchByActivationCodeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateDivisionResponse">
+    <wsdl:part element="tns:CreateDivisionResponse" name="CreateDivisionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GuestRedeemActivationCodeResponse">
+    <wsdl:part element="tns:GuestRedeemActivationCodeResponse" name="GuestRedeemActivationCodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductsFromURLResponse">
+    <wsdl:part element="tns:GetProductsFromURLResponse" name="GetProductsFromURLResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordRequest">
+    <wsdl:part element="tns:ResetPasswordRequest" name="ResetPasswordRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteProductResponse">
+    <wsdl:part element="tns:DeleteProductResponse" name="DeleteProductResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveLicenseResponse">
+    <wsdl:part element="tns:RemoveLicenseResponse" name="RemoveLicenseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SearchUserAccountsResponse">
+    <wsdl:part element="tns:SearchUserAccountsResponse" name="SearchUserAccountsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AdminActivateLicenseRequest">
+    <wsdl:part element="tns:AdminActivateLicenseRequest" name="AdminActivateLicenseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductGroupRequest">
+    <wsdl:part element="tns:GetProductGroupRequest" name="GetProductGroupRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SearchActivationCodeResponse">
+    <wsdl:part element="tns:SearchActivationCodeResponse" name="SearchActivationCodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RedeemActivationCodeRequest">
+    <wsdl:part element="tns:RedeemActivationCodeRequest" name="RedeemActivationCodeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AdminActivateLicenseResponse">
+    <wsdl:part element="tns:AdminActivateLicenseResponse" name="AdminActivateLicenseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateUserAccountAddLicenseRequest">
+    <wsdl:part element="tns:CreateUserAccountAddLicenseRequest" name="CreateUserAccountAddLicenseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetActivationCodeBatchByBatchIdRequest">
+    <wsdl:part element="tns:GetActivationCodeBatchByBatchIdRequest" name="GetActivationCodeBatchByBatchIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateGroupRequest">
+    <wsdl:part element="tns:CreateGroupRequest" name="CreateGroupRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveLicenseRequest">
+    <wsdl:part element="tns:RemoveLicenseRequest" name="RemoveLicenseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ResetPasswordResponse">
+    <wsdl:part element="tns:ResetPasswordResponse" name="ResetPasswordResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateExternalSystemResponse">
+    <wsdl:part element="tns:CreateExternalSystemResponse" name="CreateExternalSystemResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AuthenticationRequest">
+    <wsdl:part element="tns:AuthenticationRequest" name="AuthenticationRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateExternalSystemIdTypeResponse">
+    <wsdl:part element="tns:UpdateExternalSystemIdTypeResponse" name="UpdateExternalSystemIdTypeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetLicensesForUserProductRequest">
+    <wsdl:part element="tns:GetLicensesForUserProductRequest" name="GetLicensesForUserProductRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="KillUserSessionResponse">
+    <wsdl:part element="tns:KillUserSessionResponse" name="KillUserSessionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetProductByProductNameResponse">
+    <wsdl:part element="tns:GetProductByProductNameResponse" name="GetProductByProductNameResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateLicenseResponse">
+    <wsdl:part element="tns:UpdateLicenseResponse" name="UpdateLicenseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LogoutRequest">
+    <wsdl:part element="tns:LogoutRequest" name="LogoutRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordByExternalIdRequest">
+    <wsdl:part element="tns:ChangePasswordByExternalIdRequest" name="ChangePasswordByExternalIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SearchUserAccountsRequest">
+    <wsdl:part element="tns:SearchUserAccountsRequest" name="SearchUserAccountsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteDivisionResponse">
+    <wsdl:part element="tns:DeleteDivisionResponse" name="DeleteDivisionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetGroupUsersResponse">
+    <wsdl:part element="tns:GetGroupUsersResponse" name="GetGroupUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllExternalSystemsResponse">
+    <wsdl:part element="tns:GetAllExternalSystemsResponse" name="GetAllExternalSystemsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordByExternalIdResponse">
+    <wsdl:part element="tns:ChangePasswordByExternalIdResponse" name="ChangePasswordByExternalIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetActivationCodeDetailsByActivationCodeRequest">
+    <wsdl:part element="tns:GetActivationCodeDetailsByActivationCodeRequest" name="GetActivationCodeDetailsByActivationCodeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordByUsernameRequest">
+    <wsdl:part element="tns:ChangePasswordByUsernameRequest" name="ChangePasswordByUsernameRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LogoutResponse">
+    <wsdl:part element="tns:LogoutResponse" name="LogoutResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateGroupResponse">
+    <wsdl:part element="tns:UpdateGroupResponse" name="UpdateGroupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountByExternalIdRequest">
+    <wsdl:part element="tns:GetUserAccountByExternalIdRequest" name="GetUserAccountByExternalIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetExternalSystemRequest">
+    <wsdl:part element="tns:GetExternalSystemRequest" name="GetExternalSystemRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateActivationCodeBatchResponse">
+    <wsdl:part element="tns:UpdateActivationCodeBatchResponse" name="UpdateActivationCodeBatchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateActivationCodeResponse">
+    <wsdl:part element="tns:ValidateActivationCodeResponse" name="ValidateActivationCodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateUserAccountRequest">
+    <wsdl:part element="tns:ValidateUserAccountRequest" name="ValidateUserAccountRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetActivationCodeDetailsByActivationCodeResponse">
+    <wsdl:part element="tns:GetActivationCodeDetailsByActivationCodeResponse" name="GetActivationCodeDetailsByActivationCodeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="BulkCreateActivationCodeBatchResponse">
+    <wsdl:part element="tns:BulkCreateActivationCodeBatchResponse" name="BulkCreateActivationCodeBatchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveUserExternalIdResponse">
+    <wsdl:part element="tns:RemoveUserExternalIdResponse" name="RemoveUserExternalIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateUserAccountRequest">
+    <wsdl:part element="tns:CreateUserAccountRequest" name="CreateUserAccountRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AuthorizeRequestRequest">
+    <wsdl:part element="tns:AuthorizeRequestRequest" name="AuthorizeRequestRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeactivateLicenseResponse">
+    <wsdl:part element="tns:DeactivateLicenseResponse" name="DeactivateLicenseResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSessionByUserIdRequest">
+    <wsdl:part element="tns:GetSessionByUserIdRequest" name="GetSessionByUserIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateActivationCodeRequest">
+    <wsdl:part element="tns:ValidateActivationCodeRequest" name="ValidateActivationCodeRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveProductExternalIdResponse">
+    <wsdl:part element="tns:RemoveProductExternalIdResponse" name="RemoveProductExternalIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteActivationCodeBatchResponse">
+    <wsdl:part element="tns:DeleteActivationCodeBatchResponse" name="DeleteActivationCodeBatchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateExternalSystemResponse">
+    <wsdl:part element="tns:UpdateExternalSystemResponse" name="UpdateExternalSystemResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ActivateLicenseRequest">
+    <wsdl:part element="tns:ActivateLicenseRequest" name="ActivateLicenseRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateProductGroupRequest">
+    <wsdl:part element="tns:CreateProductGroupRequest" name="CreateProductGroupRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AuthorizeRequestResponse">
+    <wsdl:part element="tns:AuthorizeRequestResponse" name="AuthorizeRequestResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllExternalSystemsRequest">
+    <wsdl:part element="tns:GetAllExternalSystemsRequest" name="GetAllExternalSystemsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateUserAccountResponse">
+    <wsdl:part element="tns:UpdateUserAccountResponse" name="UpdateUserAccountResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetLicensesForUserProductResponse">
+    <wsdl:part element="tns:GetLicensesForUserProductResponse" name="GetLicensesForUserProductResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteDivisionRequest">
+    <wsdl:part element="tns:DeleteDivisionRequest" name="DeleteDivisionRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteUserAccountResponse">
+    <wsdl:part element="tns:DeleteUserAccountResponse" name="DeleteUserAccountResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountByUsernameResponse">
+    <wsdl:part element="tns:GetUserAccountByUsernameResponse" name="GetUserAccountByUsernameResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateUserAccountResponse">
+    <wsdl:part element="tns:CreateUserAccountResponse" name="CreateUserAccountResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MergeCustomerRequest">
+    <wsdl:part element="tns:MergeCustomerRequest" name="MergeCustomerRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateGroupResponse">
+    <wsdl:part element="tns:CreateGroupResponse" name="CreateGroupResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="access-service-v1.0">
+    <wsdl:operation name="CreateProduct">
+      <wsdl:input message="tns:CreateProductRequest" name="CreateProductRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateProductResponse" name="CreateProductResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MergeCustomer">
+      <wsdl:input message="tns:MergeCustomerRequest" name="MergeCustomerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:MergeCustomerResponse" name="MergeCustomerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountByExternalId">
+      <wsdl:input message="tns:GetUserAccountByExternalIdRequest" name="GetUserAccountByExternalIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetUserAccountByExternalIdResponse" name="GetUserAccountByExternalIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProduct">
+      <wsdl:input message="tns:GetProductRequest" name="GetProductRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetProductResponse" name="GetProductResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <wsdl:input message="tns:UpdateProductRequest" name="UpdateProductRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateProductResponse" name="UpdateProductResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductByProductName">
+      <wsdl:input message="tns:GetProductByProductNameRequest" name="GetProductByProductNameRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetProductByProductNameResponse" name="GetProductByProductNameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExternalSystemAndIdType">
+      <wsdl:input message="tns:DeleteExternalSystemAndIdTypeRequest" name="DeleteExternalSystemAndIdTypeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteExternalSystemAndIdTypeResponse" name="DeleteExternalSystemAndIdTypeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchActivationCode">
+      <wsdl:input message="tns:SearchActivationCodeRequest" name="SearchActivationCodeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:SearchActivationCodeResponse" name="SearchActivationCodeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLinkedProducts">
+      <wsdl:input message="tns:AddLinkedProductsRequest" name="AddLinkedProductsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AddLinkedProductsResponse" name="AddLinkedProductsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteActivationCodeBatch">
+      <wsdl:input message="tns:DeleteActivationCodeBatchRequest" name="DeleteActivationCodeBatchRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteActivationCodeBatchResponse" name="DeleteActivationCodeBatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminDeactivateLicense">
+      <wsdl:input message="tns:AdminDeactivateLicenseRequest" name="AdminDeactivateLicenseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AdminDeactivateLicenseResponse" name="AdminDeactivateLicenseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemActivationCode">
+      <wsdl:input message="tns:RedeemActivationCodeRequest" name="RedeemActivationCodeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:RedeemActivationCodeResponse" name="RedeemActivationCodeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateLicense">
+      <wsdl:input message="tns:ActivateLicenseRequest" name="ActivateLicenseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ActivateLicenseResponse" name="ActivateLicenseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLinkedProduct">
+      <wsdl:input message="tns:RemoveLinkedProductRequest" name="RemoveLinkedProductRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:RemoveLinkedProductResponse" name="RemoveLinkedProductResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordByUserId">
+      <wsdl:input message="tns:ChangePasswordByUserIdRequest" name="ChangePasswordByUserIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ChangePasswordByUserIdResponse" name="ChangePasswordByUserIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductGroup">
+      <wsdl:input message="tns:UpdateProductGroupRequest" name="UpdateProductGroupRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateProductGroupResponse" name="UpdateProductGroupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDivisions">
+      <wsdl:input message="tns:GetAllDivisionsRequest" name="GetAllDivisionsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllDivisionsResponse" name="GetAllDivisionsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccount">
+      <wsdl:input message="tns:DeleteUserAccountRequest" name="DeleteUserAccountRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteUserAccountResponse" name="DeleteUserAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BulkCreateActivationCodeBatch">
+      <wsdl:input message="tns:BulkCreateActivationCodeBatchRequest" name="BulkCreateActivationCodeBatchRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:BulkCreateActivationCodeBatchResponse" name="BulkCreateActivationCodeBatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProductGroup">
+      <wsdl:input message="tns:DeleteProductGroupRequest" name="DeleteProductGroupRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteProductGroupResponse" name="DeleteProductGroupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExternalSystemIdType">
+      <wsdl:input message="tns:UpdateExternalSystemIdTypeRequest" name="UpdateExternalSystemIdTypeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateExternalSystemIdTypeResponse" name="UpdateExternalSystemIdTypeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLicense">
+      <wsdl:input message="tns:AddLicenseRequest" name="AddLicenseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AddLicenseResponse" name="AddLicenseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDivision">
+      <wsdl:input message="tns:UpdateDivisionRequest" name="UpdateDivisionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateDivisionResponse" name="UpdateDivisionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductByExternalId">
+      <wsdl:input message="tns:GetProductByExternalIdRequest" name="GetProductByExternalIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetProductByExternalIdResponse" name="GetProductByExternalIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserIdsFromSession">
+      <wsdl:input message="tns:GetUserIdsFromSessionRequest" name="GetUserIdsFromSessionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetUserIdsFromSessionResponse" name="GetUserIdsFromSessionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <wsdl:input message="tns:DeleteGroupRequest" name="DeleteGroupRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteGroupResponse" name="DeleteGroupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserExternalId">
+      <wsdl:input message="tns:RemoveUserExternalIdRequest" name="RemoveUserExternalIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:RemoveUserExternalIdResponse" name="RemoveUserExternalIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchActivationCodeBatch">
+      <wsdl:input message="tns:SearchActivationCodeBatchRequest" name="SearchActivationCodeBatchRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:SearchActivationCodeBatchResponse" name="SearchActivationCodeBatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLicensesForUser">
+      <wsdl:input message="tns:GetLicensesForUserRequest" name="GetLicensesForUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetLicensesForUserResponse" name="GetLicensesForUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductGroup">
+      <wsdl:input message="tns:GetProductGroupRequest" name="GetProductGroupRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetProductGroupResponse" name="GetProductGroupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KillUserSession">
+      <wsdl:input message="tns:KillUserSessionRequest" name="KillUserSessionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:KillUserSessionResponse" name="KillUserSessionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveProductExternalId">
+      <wsdl:input message="tns:RemoveProductExternalIdRequest" name="RemoveProductExternalIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:RemoveProductExternalIdResponse" name="RemoveProductExternalIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExternalSystem">
+      <wsdl:input message="tns:UpdateExternalSystemRequest" name="UpdateExternalSystemRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateExternalSystemResponse" name="UpdateExternalSystemResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLicenseModifiedDate">
+      <wsdl:input message="tns:UpdateLicenseModifiedDateRequest" name="UpdateLicenseModifiedDateRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateLicenseModifiedDateResponse" name="UpdateLicenseModifiedDateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProduct">
+      <wsdl:input message="tns:DeleteProductRequest" name="DeleteProductRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteProductResponse" name="DeleteProductResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccount">
+      <wsdl:input message="tns:GetUserAccountRequest" name="GetUserAccountRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetUserAccountResponse" name="GetUserAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateActivationCodeBatch">
+      <wsdl:input message="tns:CreateActivationCodeBatchRequest" name="CreateActivationCodeBatchRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateActivationCodeBatchResponse" name="CreateActivationCodeBatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountByUsername">
+      <wsdl:input message="tns:GetUserAccountByUsernameRequest" name="GetUserAccountByUsernameRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetUserAccountByUsernameResponse" name="GetUserAccountByUsernameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserAccountAddLicense">
+      <wsdl:input message="tns:CreateUserAccountAddLicenseRequest" name="CreateUserAccountAddLicenseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateUserAccountAddLicenseResponse" name="CreateUserAccountAddLicenseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionByUserId">
+      <wsdl:input message="tns:GetSessionByUserIdRequest" name="GetSessionByUserIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetSessionByUserIdResponse" name="GetSessionByUserIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLicenseUserProduct">
+      <wsdl:input message="tns:AddLicenseUserProductRequest" name="AddLicenseUserProductRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AddLicenseUserProductResponse" name="AddLicenseUserProductResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllValidatorEmails">
+      <wsdl:input message="tns:GetAllValidatorEmailsRequest" name="GetAllValidatorEmailsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllValidatorEmailsResponse" name="GetAllValidatorEmailsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsFromURL">
+      <wsdl:input message="tns:GetProductsFromURLRequest" name="GetProductsFromURLRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetProductsFromURLResponse" name="GetProductsFromURLResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <wsdl:input message="tns:UpdateGroupRequest" name="UpdateGroupRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateGroupResponse" name="UpdateGroupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDivision">
+      <wsdl:input message="tns:CreateDivisionRequest" name="CreateDivisionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateDivisionResponse" name="CreateDivisionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateLicense">
+      <wsdl:input message="tns:DeactivateLicenseRequest" name="DeactivateLicenseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeactivateLicenseResponse" name="DeactivateLicenseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroup">
+      <wsdl:input message="tns:GetGroupRequest" name="GetGroupRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetGroupResponse" name="GetGroupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExternalSystem">
+      <wsdl:input message="tns:GetExternalSystemRequest" name="GetExternalSystemRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetExternalSystemResponse" name="GetExternalSystemResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserAccount">
+      <wsdl:input message="tns:UpdateUserAccountRequest" name="UpdateUserAccountRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateUserAccountResponse" name="UpdateUserAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordByUsername">
+      <wsdl:input message="tns:ChangePasswordByUsernameRequest" name="ChangePasswordByUsernameRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ChangePasswordByUsernameResponse" name="ChangePasswordByUsernameResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProductGroup">
+      <wsdl:input message="tns:CreateProductGroupRequest" name="CreateProductGroupRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateProductGroupResponse" name="CreateProductGroupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUserAccount">
+      <wsdl:input message="tns:ValidateUserAccountRequest" name="ValidateUserAccountRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ValidateUserAccountResponse" name="ValidateUserAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivationCodeBatchByActivationCode">
+      <wsdl:input message="tns:GetActivationCodeBatchByActivationCodeRequest" name="GetActivationCodeBatchByActivationCodeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetActivationCodeBatchByActivationCodeResponse" name="GetActivationCodeBatchByActivationCodeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GuestRedeemActivationCode">
+      <wsdl:input message="tns:GuestRedeemActivationCodeRequest" name="GuestRedeemActivationCodeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GuestRedeemActivationCodeResponse" name="GuestRedeemActivationCodeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authentication">
+      <wsdl:input message="tns:AuthenticationRequest" name="AuthenticationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AuthenticationResponse" name="AuthenticationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupUsers">
+      <wsdl:input message="tns:GetGroupUsersRequest" name="GetGroupUsersRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetGroupUsersResponse" name="GetGroupUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateExternalSystem">
+      <wsdl:input message="tns:CreateExternalSystemRequest" name="CreateExternalSystemRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateExternalSystemResponse" name="CreateExternalSystemResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivationCodeBatchByBatchId">
+      <wsdl:input message="tns:GetActivationCodeBatchByBatchIdRequest" name="GetActivationCodeBatchByBatchIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetActivationCodeBatchByBatchIdResponse" name="GetActivationCodeBatchByBatchIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateActivationCodeBatch">
+      <wsdl:input message="tns:UpdateActivationCodeBatchRequest" name="UpdateActivationCodeBatchRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateActivationCodeBatchResponse" name="UpdateActivationCodeBatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLicense">
+      <wsdl:input message="tns:UpdateLicenseRequest" name="UpdateLicenseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateLicenseResponse" name="UpdateLicenseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <wsdl:input message="tns:ResetPasswordRequest" name="ResetPasswordRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ResetPasswordResponse" name="ResetPasswordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLicense">
+      <wsdl:input message="tns:RemoveLicenseRequest" name="RemoveLicenseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:RemoveLicenseResponse" name="RemoveLicenseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserAccounts">
+      <wsdl:input message="tns:SearchUserAccountsRequest" name="SearchUserAccountsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:SearchUserAccountsResponse" name="SearchUserAccountsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminActivateLicense">
+      <wsdl:input message="tns:AdminActivateLicenseRequest" name="AdminActivateLicenseRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AdminActivateLicenseResponse" name="AdminActivateLicenseResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <wsdl:input message="tns:CreateGroupRequest" name="CreateGroupRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateGroupResponse" name="CreateGroupResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLicensesForUserProduct">
+      <wsdl:input message="tns:GetLicensesForUserProductRequest" name="GetLicensesForUserProductRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetLicensesForUserProductResponse" name="GetLicensesForUserProductResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input message="tns:LogoutRequest" name="LogoutRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:LogoutResponse" name="LogoutResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordByExternalId">
+      <wsdl:input message="tns:ChangePasswordByExternalIdRequest" name="ChangePasswordByExternalIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ChangePasswordByExternalIdResponse" name="ChangePasswordByExternalIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDivision">
+      <wsdl:input message="tns:DeleteDivisionRequest" name="DeleteDivisionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteDivisionResponse" name="DeleteDivisionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllExternalSystems">
+      <wsdl:input message="tns:GetAllExternalSystemsRequest" name="GetAllExternalSystemsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllExternalSystemsResponse" name="GetAllExternalSystemsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivationCodeDetailsByActivationCode">
+      <wsdl:input message="tns:GetActivationCodeDetailsByActivationCodeRequest" name="GetActivationCodeDetailsByActivationCodeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetActivationCodeDetailsByActivationCodeResponse" name="GetActivationCodeDetailsByActivationCodeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateActivationCode">
+      <wsdl:input message="tns:ValidateActivationCodeRequest" name="ValidateActivationCodeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ValidateActivationCodeResponse" name="ValidateActivationCodeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserAccount">
+      <wsdl:input message="tns:CreateUserAccountRequest" name="CreateUserAccountRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateUserAccountResponse" name="CreateUserAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizeRequest">
+      <wsdl:input message="tns:AuthorizeRequestRequest" name="AuthorizeRequestRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AuthorizeRequestResponse" name="AuthorizeRequestResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="access-service-v1.0Soap11" type="tns:access-service-v1.0">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CreateProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MergeCustomer">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="MergeCustomerRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="MergeCustomerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountByExternalId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetUserAccountByExternalIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetUserAccountByExternalIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductByProductName">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetProductByProductNameRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetProductByProductNameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExternalSystemAndIdType">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeleteExternalSystemAndIdTypeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteExternalSystemAndIdTypeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchActivationCode">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="SearchActivationCodeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SearchActivationCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLinkedProducts">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AddLinkedProductsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AddLinkedProductsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteActivationCodeBatch">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeleteActivationCodeBatchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteActivationCodeBatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminDeactivateLicense">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AdminDeactivateLicenseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AdminDeactivateLicenseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemActivationCode">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="RedeemActivationCodeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RedeemActivationCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateLicense">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ActivateLicenseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ActivateLicenseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLinkedProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="RemoveLinkedProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RemoveLinkedProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordByUserId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ChangePasswordByUserIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ChangePasswordByUserIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProductGroup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateProductGroupRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateProductGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDivisions">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAllDivisionsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAllDivisionsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccount">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeleteUserAccountRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteUserAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BulkCreateActivationCodeBatch">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="BulkCreateActivationCodeBatchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="BulkCreateActivationCodeBatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProductGroup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeleteProductGroupRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteProductGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExternalSystemIdType">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateExternalSystemIdTypeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateExternalSystemIdTypeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLicense">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AddLicenseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AddLicenseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDivision">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateDivisionRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateDivisionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductByExternalId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetProductByExternalIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetProductByExternalIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserIdsFromSession">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetUserIdsFromSessionRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetUserIdsFromSessionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeleteGroupRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserExternalId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="RemoveUserExternalIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RemoveUserExternalIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchActivationCodeBatch">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="SearchActivationCodeBatchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SearchActivationCodeBatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLicensesForUser">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetLicensesForUserRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetLicensesForUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductGroup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetProductGroupRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetProductGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KillUserSession">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="KillUserSessionRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="KillUserSessionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveProductExternalId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="RemoveProductExternalIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RemoveProductExternalIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExternalSystem">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateExternalSystemRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateExternalSystemResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLicenseModifiedDate">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateLicenseModifiedDateRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateLicenseModifiedDateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeleteProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccount">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetUserAccountRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetUserAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateActivationCodeBatch">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateActivationCodeBatchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateActivationCodeBatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountByUsername">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetUserAccountByUsernameRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetUserAccountByUsernameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserAccountAddLicense">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateUserAccountAddLicenseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateUserAccountAddLicenseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionByUserId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetSessionByUserIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetSessionByUserIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLicenseUserProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AddLicenseUserProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AddLicenseUserProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllValidatorEmails">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAllValidatorEmailsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAllValidatorEmailsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductsFromURL">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetProductsFromURLRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetProductsFromURLResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateGroupRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDivision">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateDivisionRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateDivisionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateLicense">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeactivateLicenseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeactivateLicenseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetGroupRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExternalSystem">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetExternalSystemRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetExternalSystemResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserAccount">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateUserAccountRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateUserAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordByUsername">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ChangePasswordByUsernameRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ChangePasswordByUsernameResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProductGroup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateProductGroupRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateProductGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUserAccount">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ValidateUserAccountRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ValidateUserAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivationCodeBatchByActivationCode">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetActivationCodeBatchByActivationCodeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetActivationCodeBatchByActivationCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GuestRedeemActivationCode">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GuestRedeemActivationCodeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GuestRedeemActivationCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Authentication">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AuthenticationRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AuthenticationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupUsers">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetGroupUsersRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetGroupUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateExternalSystem">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateExternalSystemRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateExternalSystemResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivationCodeBatchByBatchId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetActivationCodeBatchByBatchIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetActivationCodeBatchByBatchIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateActivationCodeBatch">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateActivationCodeBatchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateActivationCodeBatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLicense">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="UpdateLicenseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateLicenseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPassword">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ResetPasswordRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ResetPasswordResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLicense">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="RemoveLicenseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RemoveLicenseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUserAccounts">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="SearchUserAccountsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SearchUserAccountsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminActivateLicense">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AdminActivateLicenseRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AdminActivateLicenseResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateGroup">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateGroupRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLicensesForUserProduct">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetLicensesForUserProductRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetLicensesForUserProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="LogoutRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="LogoutResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordByExternalId">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ChangePasswordByExternalIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ChangePasswordByExternalIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDivision">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeleteDivisionRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteDivisionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllExternalSystems">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAllExternalSystemsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAllExternalSystemsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActivationCodeDetailsByActivationCode">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetActivationCodeDetailsByActivationCodeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetActivationCodeDetailsByActivationCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateActivationCode">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ValidateActivationCodeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ValidateActivationCodeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserAccount">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="CreateUserAccountRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateUserAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizeRequest">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AuthorizeRequestRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AuthorizeRequestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="access-service-v1.0Service">
+    <wsdl:port binding="tns:access-service-v1.0Soap11" name="access-service-v1.0Soap11">
+      <soap:address location="http://localhost:8081/acesWebService/soap/services/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

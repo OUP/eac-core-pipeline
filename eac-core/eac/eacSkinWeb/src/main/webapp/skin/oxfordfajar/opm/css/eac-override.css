@@ -1,0 +1,114 @@
+body {
+    background: url("../images/bg-header-login.jpg") repeat-x scroll 0 0 #ffffff;
+    color: #666666;
+}
+
+fieldset {
+    border: medium none;
+}
+
+#header {
+    width: 90em;
+}
+
+#header-top {
+	margin:0 auto;
+	height:auto;
+}
+
+#header-middle {
+	margin-top:10px;
+}
+
+#header-middle-left a {
+    background: url("../images/logo-cw.png") no-repeat scroll 0 0 transparent;
+   	height:133px;
+    width: 160px;
+}
+
+#navbar {
+    background-color: #F26421;
+    *margin-top:80px; 
+}
+
+#navbar li .sub-container {
+	box-shadow: none;
+}
+    
+#site-info ul {
+	background-color:#ffffff;
+}
+
+#content {
+    margin-bottom: 50px;
+    width: 90em;
+}
+
+#errors {
+	background-color:#ffffff;
+}
+
+#errors li {
+	background-color:#ffffff;
+}
+
+#content-middle-bottom {
+    padding: 20px 40px 50px;
+	background-color:#ffffff;
+}
+
+#content-right {
+	background-image: url("../images/logo-oxford.png");
+    overflow:auto;
+    height:60px;
+    width:238px;
+	display:block;
+}
+
+#footer {
+    background-color: #F26421;
+}
+
+.component-radio {
+	float:left;	
+}
+
+.component-radio-item {
+	margin-top: 10px;
+	float:right;
+}
+
+#progress_bar li {
+	color: #ffffff;
+}
+
+#navbar li.mega-hover a, #navbar li.mega-hover a:hover {
+	background: #CC0000;
+}
+
+#navbar li .sub-container.non-mega li {
+	background: #FFFFFF;
+}
+
+#navbar li a:hover {
+	background: #CC0000;
+}
+
+#navbar li .sub-container.non-mega li a {
+	background: #FFF;
+	color: #CC0000;
+}
+
+.siteTitle_division{
+    font-size: 1.7rem;
+}
+
+.siteTitle_division p {
+	padding: 0.4rem;
+    font-size: 1.0rem;     
+} 
+
+.topNav {
+    margin-bottom: 0.1rem;
+    display: block;
+}

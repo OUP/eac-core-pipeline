@@ -1,0 +1,25 @@
+<!--
+    <RequireUsernameToken 
+            ?id=unique_policy_identifier
+            ?nonceRequired=("true")|"false"
+            ?passwordDigestRequired=("true")|"false"
+            ?maxClockSkew=("60")
+            ?timestampFreshnessLimit=("300")
+            ?maxNonceAge=("900")/>
+
+nonceRequired="false" means that an error will be thrown if a 'nonce security header' is supplied.
+nonceRequired="true" means that an error will be thrown if a 'nonce security header' is NOT supplied.
+see com.sun.xml.wss.impl.filter.AuthenticationTokenFilter [library code]
+
+To allow flexibility, we set nonRequired="false" AND we have a filter which removes nonce security header
+see com.oup.eac.ws.endpoint.SecurityHeaderEndpointInterceptor [eac code]
+-->
+
+<xwss:SecurityConfiguration dumpMessages="false" xmlns:xwss="http://java.sun.com/xml/ns/xwss/config">
+	<xwss:RequireUsernameToken
+		passwordDigestRequired="false" 
+		nonceRequired="false"
+		maxClockSkew="60"
+		timestampFreshnessLimit="300" />
+</xwss:SecurityConfiguration>
+ 

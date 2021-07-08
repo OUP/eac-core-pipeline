@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-user-data-services" xmlns:eac1="http://eac.oup.com/2.0/eac-common-types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:RegistrationInformationRequest>
+         <eac:systemId>SYS1</eac:systemId>
+         <eac1:wsUserId>
+            <eac1:userId>
+               <eac1:internalId>
+                  <eac1:id>ID1</eac1:id>
+               </eac1:internalId>
+            </eac1:userId>
+         </eac1:wsUserId>
+      </eac:RegistrationInformationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

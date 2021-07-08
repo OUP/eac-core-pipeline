@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://castor.exolab.org/" xmlns:cst="http://castor.exolab.org/"
+	xmlns:udsv1="http://eac.oup.com/eac-user-data-services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:type="mapping">
+	<description>Castor mapping file</description>
+	
+	<class name="com.oup.eac.ws.v1.userdata.binding.UserNameRequest">
+		<map-to xml="UserNameRequest" />
+		<field name="sessionToken" type="string">
+			<bind-xml name="udsv1:sessionToken" node="element" />
+		</field>
+	</class>
+
+	<class name="com.oup.eac.ws.v1.userdata.binding.UserNameResponse">
+		<map-to xml="UserNameResponse" ns-uri="http://castor.org/sample/mapping/" ns-prefix="castor" />
+		<field name="userName" type="string">
+			<bind-xml name="userName" node="element" />
+		</field>
+	</class>
+	
+	<class
+		name="com.oup.eac.ws.v1.userdata.binding.RegistrationInformationRequest">
+		<map-to xml="RegistrationInformationRequest" />
+		<field name="sessionToken" type="string">
+			<bind-xml name="sessionToken" node="element" />
+		</field>
+	</class>
+
+	<class
+		name="com.oup.eac.ws.v1.userdata.binding.RegistrationInformationResponse">
+		<map-to xml="RegistrationInformationResponse" />
+		<field name="user" type="com.oup.eac.ws.v1.userdata.binding.User">
+			<bind-xml name="user" node="element" />
+		</field>
+		<field name="registrationInformation"
+			type="com.oup.eac.ws.v1.userdata.binding.RegistrationInformation"
+			collection="array">
+			<bind-xml name="registrationInformation" node="element" />
+		</field>
+	</class>
+
+	<class name="com.oup.eac.ws.v1.userdata.binding.User">
+		<map-to xml="user"  />
+		<field name="userName" type="string">
+			<bind-xml name="userName" node="element" />
+		</field>
+		<field name="emailAddress" type="string">
+			<bind-xml name="emailAddress" node="element" />
+		</field>
+		<field name="firstName" type="string">
+			<bind-xml name="firstName" node="element" />
+		</field>
+		<field name="lastName" type="string">
+			<bind-xml name="lastName" node="element" />
+		</field>
+	</class>
+
+	<class name="com.oup.eac.ws.v1.userdata.binding.RegistrationInformation">
+		<map-to xml="registrationInformation" />
+		<field name="registrationKey" type="string">
+			<bind-xml name="registrationKey" node="element" />
+		</field>
+		<field name="registrationValue" type="string">
+			<bind-xml name="registrationValue" node="element" />
+		</field>
+	</class>
+	
+</mapping>

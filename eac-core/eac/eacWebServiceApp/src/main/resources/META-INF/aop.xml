@@ -1,0 +1,25 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+
+	<!--   <weaver options="-verbose -debug -showWeaveInfo -Xset:weaveJavaxPackages=true"> -->
+    <weaver options="-Xset:weaveJavaxPackages=true">
+        <!-- packages for aspectj to consider for weaving -->
+        <include within="com.oup.eac.ws.v1.endpoint..*"/>
+        <include within="com.oup.eac.ws.v2.endpoint..*"/>
+        <include within="com.oup.eac.ws.v2.service.impl.*"/>
+        <include within="org.springframework.xml.validation.*"/>
+        <include within="com.sun.xml.wss.impl.misc.*"/>
+        
+        <!--  we need to weave in the aspects too -->
+        <include within="com.oup.eac.advice..*"/>        
+        <include within="com.oup.eac.common.advice..*" />
+    </weaver>
+
+    <aspects>
+        <aspect name="com.oup.eac.advice.EndpointTimeLoggingAdvice" />     
+        <aspect name="com.oup.eac.advice.EndpointResponseStatusAdvice" />
+        <aspect name="com.oup.eac.advice.XmlValidationAdvice" />
+    </aspects>
+
+</aspectj>

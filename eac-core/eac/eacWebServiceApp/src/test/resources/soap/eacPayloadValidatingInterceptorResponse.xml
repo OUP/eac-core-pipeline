@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope 	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope/">
+	<SOAP-ENV:Header />
+	<SOAP-ENV:Body>
+		<SOAP-ENV:Fault>
+			<faultcode>SOAP-ENV:Client</faultcode>
+			<faultstring>Validation error</faultstring>
+			<detail>
+				<spring-ws:ValidationError
+					xmlns:spring-ws="http://springframework.org/spring-ws">cvc-complex-type.2.4.d: Invalid content was found
+					starting with element 'eac:userName'. No child element is expected
+					at this point.</spring-ws:ValidationError>
+			</detail>
+		</SOAP-ENV:Fault>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

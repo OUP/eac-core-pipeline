@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/util
+      		http://www.springframework.org/schema/util/spring-util-3.1.xsd
+      		http://www.springframework.org/schema/security 
+      		http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<context:property-placeholder properties-ref="appConfig" system-properties-mode="OVERRIDE"/>
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>        
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    	<property name="targetClass" value="com.oup.eac.domain.utils.audit.EacApp" />
+        <property name="targetMethod" value="setType" />
+        <property name="arguments" >
+   		     <list>
+				<value>WEB</value>
+				<value>eacWeb</value>
+			  </list>
+		</property>
+    </bean>
+
+    <bean id="ELTUrlCustomiser" class="com.oup.eac.web.utils.impl.ELTUrlCustomiser" />
+    
+    <!-- 
+    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+        <property name="beans">
+            <map>
+                <entry key="eac:web=messageReloader" value-ref="dbMessageSourceReloader"/>
+            </map>
+        </property>
+    </bean>
+     -->
+    
+</beans>

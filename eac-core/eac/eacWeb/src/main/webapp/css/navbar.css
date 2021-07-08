@@ -1,0 +1,161 @@
+.navbar ul,.navbar ul li {
+	list-style: none;
+}
+
+.navbar ul {
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+.navbar ul li ul {
+	display: none;
+}
+
+.navbar .sub {
+	display: none;
+}
+
+.navbar .sub ul {
+	display: block;
+}
+
+#navbar {
+	background: #0B5FA5;
+    font-family: Heletica,sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+	list-style: none;
+	position: relative;
+	padding: 0;
+	width: 100%;
+    height:34px;
+    margin-top:10px;
+    margin-bottom:10px; 
+}
+
+#navbar .sub ul {
+	display: block;
+}
+
+#navbar li {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#navbar li a {
+	float: left;
+	display: block;
+	color: #fff;
+    padding-top:8px;
+    padding-bottom:9px;
+    padding-left: 50px;
+    padding-right: 50px;
+	text-decoration: none;
+}
+
+#navbar li.mega-hover a,#navbar li.mega-hover a:hover {
+	background: #003366;
+	color: #FFF;
+}
+
+#navbar li a:hover {
+	background: #003366;
+	color: #FFF;
+}
+
+#navbar li .sub-container {
+	position: absolute;
+	-webkit-box-shadow: 0 1px 1px #CCCCCC;
+	-moz-box-shadow: 0 1px 1px #CCCCCC;
+}
+
+#navbar li .sub {
+	background: #FFF;
+	padding: 15px;
+	border: 1px solid #ccc;
+}
+
+#navbar li .sub .row {
+	width: 100%;
+	overflow: hidden;
+	clear: both;
+}
+
+#navbar li .sub li {
+	list-style: none;
+	float: none;
+	font-size: 1em;
+	font-weight: normal;
+}
+
+#navbar li .sub li.mega-hdr {
+	margin: 0 10px 10px 0;
+	float: left;
+}
+
+#navbar li .sub li.mega-hdr.last {
+	margin-right: 0;
+}
+
+#navbar li .sub a {
+	background: none;
+	color: #111;
+	padding: 3px 10px;
+	display: block;
+	float: none;
+	font-size: 0.9em;
+}
+
+#navbar li .sub li.mega-hdr a.mega-hdr-a {
+	padding: 5px 15px;
+	margin-bottom: 5px;
+	background: #6B6B6B;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #fff;
+}
+
+#navbar li .sub li.mega-hdr a.mega-hdr-a:hover {
+	color: #000;
+}
+
+#navbar .sub li.mega-hdr li a {
+	padding: 4px 5px;
+	font-weight: normal;
+}
+
+#navbar .sub li.mega-hdr li a:hover {
+	color: #a32403;
+}
+
+#navbar .sub ul li {
+	padding-right: 0;
+}
+
+#navbar li .sub-container.non-mega {
+	left:0; 
+	top:2em;
+}
+
+#navbar li .sub-container.non-mega .sub {
+	padding: 10px;
+}
+
+#navbar li .sub-container.non-mega li {
+	background: url("../images/bg/more-than-4.gif") no-repeat scroll 1px 7px transparent;
+	padding: 0px 0px 0px 6px;
+}
+
+#navbar li .sub-container.non-mega li a {
+	color: #4E7A00;
+	font-size: 12px;
+	font-weight: bold;
+	zoom: 1;
+}
+
+#navbar li .sub-container.non-mega li a:hover {
+	text-decoration: underline;
+	background: #FFF;
+}

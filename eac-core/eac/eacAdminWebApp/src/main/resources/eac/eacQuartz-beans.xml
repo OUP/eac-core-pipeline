@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd            
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-3.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <bean name="cmdpDataExport" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="com.oup.eac.schedule.CMDPDataExportJob" />   
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="dataExportServiceName" value="${eac.elt.dataExport.serviceName}" />
+                <entry key="divisionType" value="ELT" />
+                <entry key="cmdpSupportEmail" value="${elt.cmdpt.support.email}" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="cmdpDataExportTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="cmdpDataExport" />
+        <property name="cronExpression" value="${eac.cmdp.dataExport.schedule}" />
+    </bean>
+
+    <bean name="malaysiaDataExport" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="com.oup.eac.schedule.DataExportJob" />                                         
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="dataExportServiceName" value="${eac.malaysia.dataExport.serviceName}" />
+                <entry key="emailTo" value="${fajar.admin.email}" />
+                <entry key="eacEmailBcc" value="${eac.admin.email}" />
+                <entry key="divisionType" value="MALAYSIA" />
+            </map>
+        </property>
+        <property name="requestsRecovery" value="true" />
+    </bean>
+
+    <bean id="malaysiaDataExportTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="malaysiaDataExport" />
+        <property name="cronExpression" value="${eac.malaysia.dataExport.schedule}" />
+    </bean>
+
+    <bean name="oxedDataExport" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="com.oup.eac.schedule.DataExportJob" />                                         
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="dataExportServiceName" value="${eac.oxed.dataExport.serviceName}" />
+                <entry key="emailTo" value="${oxed.admin.email}" />
+                <entry key="eacEmailBcc" value="${eac.admin.email}" />
+                <entry key="divisionType" value="OXED" />
+            </map>
+        </property>
+        <property name="requestsRecovery" value="true" />
+    </bean>
+
+    <bean id="oxedDataExportTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="oxedDataExport" />
+        <property name="cronExpression" value="${eac.oxed.dataExport.schedule}" />
+    </bean>
+
+    <bean name="orgUnitDataExport" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="com.oup.eac.schedule.OrgUnitDataExportJob" />                                         
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="orgUnitReportServiceName" value="${eac.orgUnit.dataExport.serviceName}" />
+                <entry key="emailTo"     value="${group.it.finance.email}" />
+                <entry key="eacEmailBcc" value="${eac.admin.email}" />
+            </map>
+        </property>
+        <property name="requestsRecovery" value="true" />
+    </bean>
+
+    <bean id="orgUnitDataExportTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="orgUnitDataExport" />
+        <property name="cronExpression" value="${eac.orgUnit.dataExport.schedule}" />
+    </bean>
+
+    <bean id="quartzLoggingTriggerListener" class="com.oup.eac.schedule.QuartzLoggingTriggerListener" >
+        <constructor-arg index="0" ref="quartzLoggingService" />
+    </bean>
+
+    <util:list id="quartzTriggers">
+        <!-- <ref bean="malaysiaDataExportTrigger" />
+        <ref bean="oxedDataExportTrigger" />
+        <ref bean="cmdpDataExportTrigger" />
+        <ref bean="orgUnitDataExportTrigger" /> -->
+    </util:list>
+     
+    <util:list id="quartzTriggerListeners">
+        <ref bean="quartzLoggingTriggerListener" /><!--  this logs quartz events to the db -->
+    </util:list>
+
+<!-- 
+    <bean id="scheduler"
+        class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="quartzProperties" ref="quartz.properties" />
+        <property name="startupDelay" value="0" />
+        <property name="waitForJobsToCompleteOnShutdown" value="true" />
+        <property name="dataSource" ref="dataSource" />
+        <property name="applicationContextSchedulerContextKey" value="applicationContext" />
+        <property name="triggers" ref="${eac.quartz.triggers.bean.name}" />
+        <property name="globalTriggerListeners" ref="${eac.quartz.trigger.listeners.bean.name}" />
+        <property name="autoStartup" value="${eac.quartz.auto.startup}" />
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="overwriteExistingJobs" value="true"/>without this trigger cron expression doesn't get reset in db on app startup
+    </bean>
+
+    <util:properties id="quartz.properties">
+        <prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+        <prop key="org.quartz.scheduler.instanceName">JobCluster</prop>
+        <prop key="org.quartz.jobStore.driverDelegateClass">${eac.quartz.delegate.class}</prop>
+        <prop key="org.quartz.jobStore.isClustered">true</prop>
+        <prop key="org.quartz.jobStore.useProperties">false</prop> allow serializable but non-string data in the jobDataMaps
+        <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+        <prop key="org.quartz.threadPool.threadCount">10</prop>
+        <prop key="org.quartz.threadPool.threadPriority">4</prop>
+        <prop key="org.quartz.jobStore.lockHandler.class">org.quartz.impl.jdbcjobstore.StdRowLockSemaphore</prop>
+        <prop key="org.quartz.jobStore.lockHandler.selectWithLockSQL">${eac.quartz.lock.sql}</prop>        
+        <prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+    </util:properties> -->
+    
+    
+</beans>

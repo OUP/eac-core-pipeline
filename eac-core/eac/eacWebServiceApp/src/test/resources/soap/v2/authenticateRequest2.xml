@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-access-services" xmlns:eac1="http://eac.oup.com/2.0/eac-common-types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:AuthenticateRequest>
+         <eac:systemId>SYSTEM1</eac:systemId>
+         <eac:credential>
+            <eac1:passwordCredential>
+               <eac1:userName>npe</eac1:userName>
+               <eac1:Password>npe</eac1:Password>
+            </eac1:passwordCredential>
+         </eac:credential>
+      </eac:AuthenticateRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

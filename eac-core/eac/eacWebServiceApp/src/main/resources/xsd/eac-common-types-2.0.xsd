@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://eac.oup.com/2.0/eac-common-types" xmlns="http://eac.oup.com/2.0/eac-common-types"
+	xmlns:tns="http://eac.oup.com/2.0/eac-common-types" elementFormDefault="qualified">
+
+	<xsd:element name="errorStatus" type="tns:ErrorStatus" />
+	<xsd:element name="userName" type="xsd:string" />
+	<xsd:element name="IP" type="IP4" />
+	<xsd:element name="credentials" type="Credential" />
+
+	<xsd:simpleType name="IP4">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"/>
+		</xsd:restriction>		
+	</xsd:simpleType>
+	
+	<xsd:complexType name="Identifiers">
+		<xsd:complexContent>
+			<xsd:extension base="InternalIdentifier">
+				<xsd:sequence>
+					<xsd:element name="external" type="ExternalIdentifier"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+
+	<!-- 8.8.2 - Registration Information -->
+	<xsd:complexType name="RegistrationInformation">
+		<xsd:sequence>
+			<xsd:element name="registrationKey" type="xsd:string"
+				minOccurs="1" />
+			<xsd:element name="registrationValue" type="xsd:string"
+				minOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- 8.8.3 - Credentials -->
+	<xsd:complexType name="PasswordCredential">
+		<xsd:complexContent>
+			<xsd:extension base="CredentialBase">
+				<xsd:sequence>
+					<xsd:element ref="userName" />
+					<xsd:element name="Password" type="xsd:string"
+						minOccurs="1" >
+					<xsd:annotation>
+						<xsd:documentation>For UpdateUser, a blank password indicates that the password should not be updated.</xsd:documentation>
+					</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="IPCredential">
+		<xsd:complexContent>
+			<xsd:extension base="CredentialBase">
+				<xsd:sequence>
+					<xsd:element ref="IP" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="CredentialBase" abstract="true" />
+
+	<!--  for requests only, for responses see CredentialName -->
+	<xsd:complexType name="Credential">
+		<xsd:choice>
+			<xsd:element name="passwordCredential" type="PasswordCredential" />
+			<xsd:element name="ipCredential" type="IPCredential" />
+		</xsd:choice>
+	</xsd:complexType>
+
+
+	<!-- 8.8.4 - Orgranisational Unit -->
+	<xsd:complexType name="OrganisationalUnit">
+		<xsd:sequence maxOccurs="1" minOccurs="0">
+			<xsd:element name="orgUnitId" type="Identifier" />
+			<xsd:element name="orgUnitName" type="xsd:string" />
+			<xsd:element name="parentId" type="Identifier" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- 8.8.5 - Entitlements -->
+	<xsd:complexType name="ProductEntitlement">
+		<xsd:sequence>
+			<xsd:element name="product" type="ProductDetails" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="licence" type="LicenceDetails" minOccurs="1" />
+			<xsd:element name="info" type="LicenceInfo" minOccurs="1" />
+			<xsd:element name="activationCode" type="xsd:string" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ProductEntitlementGroup">
+		<xsd:sequence>
+			<xsd:element name="entitlement" type="tns:ProductEntitlement" /> 
+			<xsd:element name="linkedEntitlement" type="tns:ProductEntitlement" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+    <xsd:complexType name="LicenceInfo">
+        <xsd:sequence>
+            <xsd:element name="active" type="xsd:boolean" />
+            <xsd:element name="expired" type="xsd:boolean" />
+            <xsd:element name="expiryDateAndTime" type="xsd:dateTime" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="UsageLicenceInfo">
+	    <xsd:complexContent>
+	      <xsd:extension base="tns:LicenceInfo">    
+	        <xsd:sequence>        
+	            <xsd:element name="usagesRemaining" type="xsd:int" />
+	        </xsd:sequence>
+	      </xsd:extension>
+	    </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RollingLicenceInfo">
+	    <xsd:complexContent>
+	      <xsd:extension base="tns:LicenceInfo">    
+	        <xsd:sequence>        
+	            <xsd:element name="firstUsedDate" type="xsd:dateTime" minOccurs="0"/>
+	        </xsd:sequence>
+	      </xsd:extension>
+	    </xsd:complexContent>
+    </xsd:complexType>    
+
+	<xsd:complexType name="LicenceDetails">
+		<xsd:sequence>
+			<xsd:element name="enabled" type="xsd:boolean" minOccurs="1" />
+			<xsd:element name="startDate" type="xsd:date" minOccurs="0" />
+			<xsd:element name="endDate" type="xsd:date"
+				minOccurs="0" />
+			<xsd:element name="extendedDetails" type="ExtendedLicenceDetails"
+				minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ExtendedLicenceDetails">
+		<xsd:choice>
+			<xsd:element name="rollingLicence" type="RollingLicenceDetail" />
+			<xsd:element name="concurrentLicence" type="ConcurrencyLicenceDetails" />
+			<xsd:element name="usageLicence" type="UsageLicenceDetails" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="RollingLicenceDetail">
+		<xsd:sequence>
+			<xsd:element name="beginOn" type="BeginEnum" />
+			<xsd:element name="periodUnit" type="UnitEnum" />
+			<xsd:element name="periodValue" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="BeginEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FIRST_USE" />
+			<xsd:enumeration value="CREATION" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="UnitEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="YEAR" />
+			<xsd:enumeration value="MONTH" />
+			<xsd:enumeration value="WEEK" />
+			<xsd:enumeration value="DAY" />
+			<xsd:enumeration value="HOUR" />
+			<xsd:enumeration value="MINUTE" />
+			<xsd:enumeration value="SECOND" />
+			<xsd:enumeration value="MILLISECOND" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="ConcurrencyLicenceDetails">
+		<xsd:sequence>
+			<xsd:element name="concurrency" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="UsageLicenceDetails">
+		<xsd:sequence>
+			<xsd:element name="allowedUsages" type="xsd:int" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ProductDetails">
+		<xsd:sequence maxOccurs="1" minOccurs="0">
+			<xsd:element name="productIds" type="Identifiers" />
+			<xsd:element name="productName" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- 8.8.7 -->
+	<xsd:complexType name="ActivationCodeBatch">
+        <xsd:sequence>
+            <xsd:element name="batchId" type="xsd:string"
+                minOccurs="1"/>
+            <xsd:element name="codeFormat" type="CodeFormatEnum"
+                minOccurs="1" />
+            <xsd:element name="numberOfTokens" type="xsd:int"
+                minOccurs="1" />
+            <xsd:element name="allowedUsages" type="xsd:int"
+                minOccurs="1" />
+            <xsd:element name="validFrom" type="xsd:date"
+                minOccurs="0" />
+            <xsd:element name="validTo" type="xsd:date"
+                minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ActivationCodeLicence">
+        <xsd:sequence>
+            <xsd:element name="productId" type="Identifier"
+                minOccurs="1"/>
+            <xsd:element name="licenceDetails" type="LicenceDetails"
+                minOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="RedeemedInfo">
+        <xsd:sequence>
+			<xsd:element name="userId" type="Identifiers" minOccurs="1" />
+            <xsd:element name="redeemedDate" type="xsd:dateTime" minOccurs="1" />
+        </xsd:sequence>
+    </xsd:complexType>    
+    
+    <xsd:complexType name="ActivationCodeInfo">
+        <xsd:sequence>
+			<xsd:element name="activationCode" type="xsd:string"
+                    minOccurs="1" maxOccurs="1" />
+            <xsd:element name="productId" type="Identifiers"
+                minOccurs="1"/>
+            <xsd:element name="allowedUsages" type="xsd:int"
+                minOccurs="1" />
+            <xsd:element name="actualUsages" type="xsd:int"
+                minOccurs="1" />
+            <xsd:element name="validStart" type="xsd:date" 
+            	minOccurs="0" />
+            <xsd:element name="validEnd" type="xsd:date" 
+            	minOccurs="0" />
+            <xsd:element name="activationCodeLicence" type="RedeemedInfo"
+                minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+	<!-- 8.8.8 - Status -->
+	<xsd:complexType name="ErrorStatus">
+		<xsd:sequence>
+			<xsd:element name="statusCode" type="StatusCode" />
+			<xsd:element minOccurs="0" name="statusReason" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="StatusCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CLIENT_ERROR" />
+			<xsd:enumeration value="SERVER_ERROR" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- 8.8.9 - Identifier -->
+	<xsd:complexType name="Identifier">
+		<xsd:choice>
+			<xsd:element name="internalId" type="InternalIdentifier" />
+			<xsd:element name="externalId" type="ExternalIdentifier" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="IdentifierBase">
+		<xsd:sequence>
+			<xsd:element name="id" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ExternalIdentifier">
+		<xsd:complexContent>
+			<xsd:extension base="IdentifierBase">
+				<xsd:sequence>
+					<xsd:element name="systemId" type="xsd:string" />
+					<xsd:element name="typeId" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="InternalIdentifier">
+		<xsd:complexContent>
+			<xsd:extension base="IdentifierBase">
+				<xsd:sequence />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+    <xsd:simpleType name="ProductType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="REGISTERABLE" />
+            <xsd:enumeration value="LINKED" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="CodeFormatEnum">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="EAC_NUMERIC" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="LanguageType">
+        <xsd:restriction base="xsd:string">
+        	<xsd:pattern value="[a-z]{2}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="CountryType">
+        <xsd:restriction base="xsd:string">
+        	<xsd:pattern value="[A-Z]{2}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+	<xsd:complexType name="LocaleType">
+		<xsd:annotation>
+			<xsd:documentation>
+			see http://download.oracle.com/javase/6/docs/api/java/util/Locale.html
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="language" type="LanguageType" use="required" />
+		<xsd:attribute name="country" type="CountryType" use="optional" />
+		<xsd:attribute name="variant" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	
+	<xsd:element name="wsUserId">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element name="userId" type="Identifier" />
+				<xsd:element ref="userName" />
+				<xsd:element name="sessionToken" type="xsd:string" />
+				<xsd:element ref="IP" /><!-- not sure if we need this for completeness -->
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="BaseUser" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="emailAddress" type="xsd:string" minOccurs="1" />
+			<xsd:element name="firstName" type="xsd:string" minOccurs="0" /><!-- a user does not require a first name -->
+			<xsd:element name="lastName" type="xsd:string" minOccurs="0" /><!--  a user does not required a last name-->
+			<xsd:element name="locale" type="LocaleType" minOccurs="0"/>
+			<xsd:element name="timeZone" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  for create user account request -->
+	<xsd:complexType name="CreateUser">
+		<xsd:complexContent>
+			<xsd:extension base="BaseUser">
+				<xsd:sequence>
+					<xsd:element name="external"  type="ExternalIdentifier" minOccurs="0" maxOccurs="unbounded"/><!--  external ids optional when creating a user-->
+					<xsd:element ref="credentials" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!--  for update user account request -->	
+	<xsd:complexType name="UpdateUser">		
+		<xsd:complexContent>
+			<xsd:extension base="BaseUser">
+				<xsd:sequence>
+					<xsd:element ref="credentials" /><!-- business logic will prevent changing credential type from userName to IP (or vice versa) -->
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!--  this will be used to send User data back in response messages -->	
+	<xsd:complexType name="User">
+		<xsd:complexContent>
+			<xsd:extension base="BaseUser">
+				<xsd:sequence>
+					<xsd:element name="userIds" type="Identifiers" />
+					<xsd:group ref="CredentialName" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- for responses only, for requests see Credential -->
+	<!-- 'CredentialName' isn't a great name but it doesn't appear in XML -->
+	<xsd:group name="CredentialName" >		
+		<xsd:choice>
+			<xsd:element ref="userName" />
+			<!--  OR -->
+			<xsd:element ref="IP" />
+		</xsd:choice>
+	</xsd:group>
+	
+	<!--  for create user account request -->
+    <xsd:complexType name="CreateUserWithConcurrency">
+        <xsd:complexContent>
+            <xsd:extension base="BaseUser">
+                <xsd:sequence>
+                    <xsd:element name="external"  type="ExternalIdentifier" minOccurs="0" maxOccurs="unbounded"/><!--  external ids optional when creating a user-->
+                    <xsd:element ref="credentials" />
+                    <xsd:element name="userConcurrency" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+	
+	
+	<!--  for update user account request -->  
+    <xsd:complexType name="UpdateUserWithConcurrency">     
+        <xsd:complexContent>
+            <xsd:extension base="BaseUser">
+                <xsd:sequence>
+                    <xsd:element ref="credentials" /><!-- business logic will prevent changing credential type from userName to IP (or vice versa) -->
+                    <xsd:element name="userConcurrency" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    
+    <!--  for full Product Entitlements -->    
+    <xsd:complexType name="FullProductEntitlementGroup">
+        <xsd:sequence>
+            <xsd:element name="entitlement" type="tns:FullProductEntitlement" /> 
+            <xsd:element name="linkedEntitlement" type="tns:FullProductEntitlement" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <!-- 8.8.5 - Entitlements -->    
+    <xsd:complexType name="FullProductEntitlement">
+        <xsd:sequence>
+            <xsd:element name="product" type="FullProductDetails" minOccurs="1" maxOccurs="unbounded" />
+            <xsd:element name="licence" type="LicenceDetails" minOccurs="1" />
+            <xsd:element name="info" type="LicenceInfo" minOccurs="1" />
+            <xsd:element name="activationCode" type="xsd:string" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FullProductDetails">
+        <xsd:sequence maxOccurs="1" minOccurs="0">
+            <xsd:element name="productIds" type="Identifiers" />
+            <xsd:element name="productName" type="xsd:string" />
+            <xsd:element name="productOrgUnit" type="xsd:string"/>
+            <xsd:element name="productHomePage" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="productLandingPage" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GuestProductEntitlement">
+        <xsd:sequence>
+            <xsd:element name="product" type="ProductDetails" minOccurs="1" maxOccurs="unbounded" />
+            <xsd:element name="activationCode" type="xsd:string" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="UsernamePolicy">
+    	<xsd:sequence>
+			<xsd:element name="text" type="xsd:string" minOccurs="1" />
+			<xsd:element name="regex" type="xsd:string" minOccurs="1" />
+		</xsd:sequence>
+	 </xsd:complexType>
+	    
+	<xsd:complexType name="PasswordPolicy">
+		<xsd:sequence>
+			<xsd:element name="text" type="xsd:string" minOccurs="1" />
+			<xsd:element name="regex" type="xsd:string" minOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+    
+</xsd:schema>

@@ -1,0 +1,7 @@
+$resource.getString("label.dear") ${username},
+
+$resource.getString("label.requestedreset")
+
+$resource.getString("label.no.account.found")
+
+#parse( "com/oup/eac/service/velocity/regards.vm" )

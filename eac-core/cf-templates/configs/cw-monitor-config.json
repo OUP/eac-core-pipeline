@@ -1,0 +1,63 @@
+{
+    "agent": {
+        "metrics_collection_interval": 60,
+        "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
+    },
+    "metrics": {
+        "namespace":"|GROUP|",
+        "metrics_collected": {
+            "disk": {
+                "measurement": [
+                        {"name": "used_percent", "rename": "DISK_USAGE"},
+                        "used_percent",
+                        "inodes_free"
+                ],
+                "metrics_collection_interval": 60,
+                "resources": [
+                        "*"
+                ],
+                "append_dimensions": {"Environment": "|ENVIRONMENT|"}
+            },
+            "mem": {
+                "measurement": [
+                        {"name": "mem_used_percent", "rename": "MEMORY_USAGE"},
+                        "mem_used_percent"
+                ],
+                "metrics_collection_interval": 60,
+                "append_dimensions": {"Environment": "|ENVIRONMENT|"}
+            },
+            "swap": {
+                "measurement": [
+                        {"name": "swap_used_percent", "rename": "SWAP_USAGE"},
+                        "swap_used_percent"
+                ],
+                "metrics_collection_interval": 60,
+                "append_dimensions": {"Environment": "|ENVIRONMENT|"}
+            }
+        },
+        "append_dimensions": {
+          "ImageId": "${aws:ImageId}",
+          "InstanceId": "${aws:InstanceId}",
+          "InstanceType": "${aws:InstanceType}",
+          "AutoScalingGroupName": "${aws:AutoScalingGroupName}",          
+          "Environment": "|ENVIRONMENT|"
+        },
+        "aggregation_dimensions" : [["AutoScalingGroupName","Environment"], ["InstanceId","Environment"],["Environment"]]
+    },
+    "logs": {
+        "logs_collected": {
+          "files": {
+            "collect_list": [
+              {
+                "file_path": "/var/log/httpd/error_log",
+                "log_group_name": "|GROUP|-|ENVIRONMENT|-Apache-Error-Log",
+                "log_stream_name": "{instance_id}/var/log/httpd/error.log",
+                "timezone": "UTC",
+                "timestamp_format": "[%a %b %d %H:%M:%S %Y]"
+              }
+            ]
+          }
+        },
+        "log_stream_name": "|GROUP|-|ENVIRONMENT|-Logs"
+    }
+}

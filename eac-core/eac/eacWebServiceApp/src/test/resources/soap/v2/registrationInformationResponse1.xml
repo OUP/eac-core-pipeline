@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" />
+	<SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		<RegistrationInformationResponse
+			xmlns="http://eac.oup.com/2.0/eac-user-data-services">
+			<user xmlns="http://eac.oup.com/2.0/eac-user-data-services">
+				<ns1:emailAddress xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">david.hay@oup.com
+				</ns1:emailAddress>
+				<ns2:firstName xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">David</ns2:firstName>
+				<ns3:lastName xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">Hay</ns3:lastName>
+				<ns4:locale xmlns:ns4="http://eac.oup.com/2.0/eac-common-types"
+					country="CA" language="fr" />
+				<ns5:userIds xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">
+					<ns5:id xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">internal1</ns5:id>
+					<ns5:external xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">
+						<ns5:id xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">extUserId1</ns5:id>
+						<ns5:systemId xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">SYSTEM1</ns5:systemId>
+						<ns5:typeId xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">ISBN</ns5:typeId>
+					</ns5:external>
+				</ns5:userIds>
+				<ns6:userName xmlns:ns6="http://eac.oup.com/2.0/eac-common-types">davidhay</ns6:userName>
+			</user>
+			<registrationInformation
+				xmlns="http://eac.oup.com/2.0/eac-user-data-services">
+				<ns7:registrationKey xmlns:ns7="http://eac.oup.com/2.0/eac-common-types">regKey1
+				</ns7:registrationKey>
+				<ns8:registrationValue xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">regValue1
+				</ns8:registrationValue>
+			</registrationInformation>
+			<registrationInformation
+				xmlns="http://eac.oup.com/2.0/eac-user-data-services">
+				<ns9:registrationKey xmlns:ns9="http://eac.oup.com/2.0/eac-common-types">regKey2
+				</ns9:registrationKey>
+				<ns10:registrationValue xmlns:ns10="http://eac.oup.com/2.0/eac-common-types">regValue2
+				</ns10:registrationValue>
+			</registrationInformation>
+		</RegistrationInformationResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

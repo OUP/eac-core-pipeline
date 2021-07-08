@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eac:RedeemActivationCodesResponse
+	xmlns:eac="http://eac.oup.com/2.0/eac-access-services">
+	<eac:responseStatus>
+		<ns1:statusCode xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">SERVER_ERROR</ns1:statusCode>
+		<ns2:statusReason xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">oops</ns2:statusReason>
+	</eac:responseStatus>
+</eac:RedeemActivationCodesResponse>
+

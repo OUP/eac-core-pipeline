@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eac:UserNameResponse xmlns:eac="http://eac.oup.com/2.0/eac-user-data-services">
+	<eac:userName>Mr John Doe1</eac:userName>
+</eac:UserNameResponse>

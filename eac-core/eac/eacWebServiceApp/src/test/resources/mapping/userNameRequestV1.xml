@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eac:UserNameRequest xmlns:eac="http://eac.oup.com/eac-user-data-services">
+	<eac:sessionToken>ABCDEF</eac:sessionToken>
+</eac:UserNameRequest>

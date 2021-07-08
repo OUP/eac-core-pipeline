@@ -1,0 +1,123 @@
+body {
+    background-image: none;	
+    background-color: white;
+}
+
+#header {
+	margin-top: 1px;
+}
+
+#header-top-right li {
+    background: none;
+    display: block;
+    line-height: 1.2;
+    padding: 0 2px;
+}
+
+#header-middle {
+    background-color:#000066;
+	height:54px;
+	margin-bottom: 0px;
+}
+
+#header-middle-left {
+	margin-left: 0;
+}
+
+#header-middle-left a {
+    background: url("../images/orclogo_combined.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    text-indent: -9999px;
+    width: 350px;
+    height: 54px;
+}
+
+#header-top {
+	position: relative;
+	height: 0;
+}
+
+#header-bottom {
+	height: 0px;
+}
+
+#navbar {
+	background: url("../images/breadcrumb.jpg") repeat scroll 0 0 transparent;
+	margin-top: 0px;
+	font-size: 12px;
+	height: 28px;
+}
+
+#navbar li a {
+	color: #000066;
+	text-decoration: underline;
+	padding: 6px 14px 6px;
+	font-size: 10px;
+}
+
+#navbar li.mega-hover a,#navbar li.mega-hover a:hover {
+	background: #000066;
+}
+
+#navbar li a:hover {
+	background: #000066;
+}
+
+#navbar li .sub a {
+	background: none;
+}
+
+#navbar li .sub-container.non-mega li a {
+    color: #000;
+    font-size: 10px;
+    font-weight: normal;
+}
+
+#navbar li .sub-container.non-mega li {
+	background: none;
+	padding: 0px 0px 0px 0px;
+}
+
+#navbar li .sub-container.non-mega li a:hover {
+	background: #ECF3FE;
+}
+
+#footer {
+	background-color: white;
+	color: #4D4D4D;
+}
+
+#footer a {
+    color: #000066;
+    text-decoration: underline;
+}
+
+#footer-top {
+	padding: 0;
+}
+
+#footer_left, #footer_right {
+    float: none;
+    width: 100%;
+    text-align: center;    
+}
+
+#footer-bottom {
+	padding: 0;
+}
+
+#site-info {
+	padding-right: 30px;
+	padding-top: 4px;
+	color: #FFF;
+	font-size: 10px;
+	font-family: Arial,helvetica,Tahoma,Sans-Serif;
+	text-align: right;
+}
+
+#site-info a {
+	color: #FFF;
+	font-weight: bold;
+	text-decoration: underline;
+}

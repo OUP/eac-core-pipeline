@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd" parent="common/parent">
+
+	<secured attributes="ROLE_CREATE_CUSTOMER" />
+	<persistence-context/>
+
+	<input name="customerId"/>
+	<input name="statusMessageKey"/>
+	<input name="errorMessageKey"/>
+
+	<action-state id="detectEdit">
+		<evaluate expression="customerId ne null" result="flowScope.editMode"/>
+		<transition to="createCustomer"/>
+	</action-state>
+	
+	<action-state id="createCustomer">
+		<evaluate expression="customerAction.createCustomerBean(customerId)" result="flowScope.customerBean"/>				
+		<transition to="createOrEditCustomer"/>		
+	</action-state>
+	
+	<view-state id="createOrEditCustomer" model="customerBean">
+		<on-entry>
+			<set name="viewScope.customerTypes" value="T(com.oup.eac.domain.Customer$CustomerType).values()"/>
+			<set name="viewScope.rollingUnitTypes" value="T(com.oup.eac.domain.RollingLicenceTemplate$RollingUnitType).values()"/>
+			<set name="viewScope.rollingBeginOns" value="T(com.oup.eac.domain.RollingLicenceTemplate$RollingBeginOn).values()"/>
+			<set name="viewScope.locales" value="T(com.oup.eac.common.utils.lang.LocaleUtils).getOrderedLocales(customerBean.customer.locale)"/>
+			<set name="viewScope.timezones" value="T(com.oup.eac.common.date.utils.DateUtils).getOrderedTimeZoneIds()"/>
+			<set name="viewScope.emailVerificationStates" value="T(com.oup.eac.domain.User$EmailVerificationState).values()"/>
+			<set name="viewScope.externalSystems" value="externalIdService.allExternalSystemsOrderedByName"/>
+			<set name="viewScope.externalSystemIdTypes" value="externalIdService.getExternalSystemIdTypesOrderedByName(externalSystems.get(0))"/>
+		</on-entry>
+		
+		<transition on="changeExternalSystem" validate="false">
+			<render fragments="externalSystemIdTypeTile"/>
+			<set name="viewScope.externalSystemIdTypes" value="externalIdService.getExternalSystemIdTypesOrderedByName(customerBean.externalSystem)"/>
+		</transition>		
+		
+		<transition on="addExternalId" validate="false">
+			<render fragments="externalIdsTableBodyTile"/>
+			<evaluate expression="customerAction.addExternalIdToCustomer"/>			
+		</transition>
+		
+		<transition on="updateExternalId" validate="false">
+			<render fragments="externalIdsTableBodyTile"/>
+			<evaluate expression="customerAction.updateExternalId"/>			
+		</transition>
+		
+		<transition on="removeExternalId" validate="false">		
+			<render fragments="externalIdsTableBodyTile"/>
+			<evaluate expression="customerAction.removeExternalIdFromCustomer"/>			
+		</transition>
+		
+		<transition on="reloadRegistrations" to="createOrEditCustomer">
+			<evaluate expression="customerAction.reloadRegistrations" />				
+		</transition>
+		
+		<transition on="reloadRegistrationsError" to="createOrEditCustomer">
+			<set name="flashScope.errorMessageKey" value="'failed.to.add.registration.product.state.invalid'" />
+			<evaluate expression="customerAction.reloadRegistrations" />
+		</transition>
+		
+		<transition on="save" to="saveSuccess">
+			<evaluate expression="customerAction.saveCustomer"/>
+		</transition>
+		
+		<!-- <transition on="edit" to="success">
+			<evaluate expression="customerAction.refreshRegistrations(flowRequestContext, persistenceContext)"/>
+			<evaluate expression="customerAction.updateCustomer"/>
+			<set name="flashScope.statusMessageKey" value="'status.customer.update.success'"/>
+		</transition> -->
+		
+		<!-- individual updates start -->
+		<transition on="editCustomer" to="success"  validate="false">
+			<!-- <set value="requestParameters.isAccountLocked" name="flashScope.sessionId"/> -->
+			<evaluate expression="customerAction.updateCustomerProfile"/>			
+			<set name="flashScope.statusMessageKey" value="'status.customer.update.success'"/>
+		</transition>
+		
+		<transition on="editCredentials" to="success"  validate="false">
+			<evaluate expression="customerAction.updateCredentials"/>
+			<set name="flashScope.statusMessageKey" value="'status.customer.update.success'"/>
+		</transition>
+		
+		<transition on="editExternalIds" to="success"  validate="false">
+			<evaluate expression="customerAction.updateExternalIds"/>
+			<set name="flashScope.statusMessageKey" value="'status.customer.update.success'"/>
+		</transition>
+		<!-- individual updates end -->
+		
+		<transition on="cancel" to="cancel" bind="false"/>
+		
+		<transition on="killUserSession" to="createOrEditCustomer">
+			<set value="requestParameters.sessionId" name="flashScope.sessionId"/>
+            <evaluate expression="customerAction.killUserSession"/>
+           <set name="flashScope.statusMessageKey" value="'status.kill.user.session.success'"/>
+        </transition>
+		
+		<transition on="removeLicence" to="createOrEditCustomer">
+			<set value="requestParameters.eRightsLicenceID" name="flashScope.eRightsLicenceID"/>
+            <evaluate expression="customerAction.removeLicence"/>
+           <set name="flashScope.statusMessageKey" value="'status.remove.licence.success'"/>
+        </transition>
+	</view-state>
+
+	<end-state id="success" commit="true"/>
+	
+	<end-state id="saveSuccess" commit="true" view="flowRedirect:customer/search?statusMessageKey=status.customer.create.success"/>
+	
+	<end-state id="cancel" commit="false"/>
+
+</flow>

@@ -1,0 +1,29 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-access-services" xmlns:eac1="http://eac.oup.com/2.0/eac-common-types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:SetExternalProductIdsRequest>
+         <eac:systemId>sys1</eac:systemId>
+         <eac:productId>
+            <!--You have a CHOICE of the next 2 items at this level-->
+            <eac1:internalId>
+               <eac1:id>038a1171-466c-4b8e-82e1-7e23f0d29924</eac1:id>
+            </eac1:internalId>
+         </eac:productId>
+         <eac:external>
+            <eac1:id>1111</eac1:id>
+            <eac1:systemId>sys1</eac1:systemId>
+            <eac1:typeId>type1</eac1:typeId>
+         </eac:external>
+         <eac:external>
+            <eac1:id>2222</eac1:id>
+            <eac1:systemId>sys1</eac1:systemId>
+            <eac1:typeId>type1</eac1:typeId>
+         </eac:external>
+         <eac:external>
+            <eac1:id>3333</eac1:id>
+            <eac1:systemId>sys1</eac1:systemId>
+            <eac1:typeId>type3</eac1:typeId>
+         </eac:external>
+      </eac:SetExternalProductIdsRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

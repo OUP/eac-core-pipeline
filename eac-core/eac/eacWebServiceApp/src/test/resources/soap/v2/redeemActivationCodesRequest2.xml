@@ -1,0 +1,18 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:eac="http://eac.oup.com/2.0/eac-access-services" xmlns:cmn="http://eac.oup.com/2.0/eac-common-types">
+	<soapenv:Header />
+	<soapenv:Body>
+		<eac:RedeemActivationCodeRequest>
+			<cmn:wsUserId>
+				<cmn:userId>
+					<cmn:internalId>
+						<cmn:id>serviceLayerException</cmn:id>
+					</cmn:internalId><!-- this simulates a service layer exception -->
+				</cmn:userId>
+			</cmn:wsUserId>
+			<eac:activationCode>AC1</eac:activationCode>
+			<eac:locale language="es" />
+		</eac:RedeemActivationCodeRequest>
+	</soapenv:Body>
+</soapenv:Envelope>
+		

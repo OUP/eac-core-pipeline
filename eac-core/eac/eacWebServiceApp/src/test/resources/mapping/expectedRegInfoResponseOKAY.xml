@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eac:RegistrationInformationResponse
+	xmlns:eac="http://eac.oup.com/2.0/eac-user-data-services">
+	<eac:user>
+		<ns1:userIds xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">
+			<ns1:id>12345</ns1:id>
+			<ns1:external>
+				<ns1:id>USER123</ns1:id>
+				<ns1:typeId>ISBN</ns1:typeId>
+				<ns1:systemId>SYSTEM123</ns1:systemId>
+			</ns1:external>
+		</ns1:userIds>
+		<ns2:emailAddress xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">david.hay@test.com</ns2:emailAddress>
+		<ns3:firstName xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">Davidy</ns3:firstName>
+		<ns4:lastName xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">Hay</ns4:lastName>
+		<ns5:userName xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">davidhay</ns5:userName>
+	</eac:user>
+	<eac:registrationInformation>
+		<ns5:registrationKey xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">REGKEY1</ns5:registrationKey>
+		<ns6:registrationValue xmlns:ns6="http://eac.oup.com/2.0/eac-common-types">REGVALUE1</ns6:registrationValue>
+	</eac:registrationInformation>
+	<eac:registrationInformation>
+		<ns7:registrationKey xmlns:ns7="http://eac.oup.com/2.0/eac-common-types">REGKEY2</ns7:registrationKey>
+		<ns8:registrationValue xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">REGVALUE2</ns8:registrationValue>
+	</eac:registrationInformation>
+</eac:RegistrationInformationResponse>
+

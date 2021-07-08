@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/eac-user-data-services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:RegistrationInformationRequest>
+         <eac:sessionToken>123456</eac:sessionToken>
+      </eac:RegistrationInformationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

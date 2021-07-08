@@ -1,0 +1,55 @@
+$resource.getString("label.dear") ${adminName},
+
+${customer.username} $resource.getString("label.hasregistered") ${productname}.
+
+$resource.getString("label.account"):	
+	$resource.getString("label.firstname"):	$!{customer.firstName}
+	$resource.getString("label.familyname"):	$!{customer.familyName}
+	$resource.getString("label.username"):	${customer.username}
+	$resource.getString("label.email"):	${customer.emailAddress}
+	$resource.getString("label.locale"):		$!{locale}
+	$resource.getString("label.timezone"):	$!{customer.timeZone}
+#foreach( $component in $accountRegDto.components )
+#foreach( $field in $component.fields )
+#set( $tagName = '' )
+#set( $tagName = $field.element.tag.tagType.name )
+#if( $tagName != '' && $tagName != 'URLLINK' && $tagName != 'LABEL' && $tagName != 'PASSWORDFIELD' )
+#set( $answer = $accountRegDto.answers.get($field.element.question.id) )
+#set( $answerTxt = '' )
+#set( $answerTxt = $answer )
+#set( $labelTxt = '' )
+#set( $labelTxt = $resource.getString($field.element.question.elementText) )
+#if( $answerTxt == '' )
+	$labelTxt:
+#else
+	$labelTxt:	$answerTxt
+#end
+#end
+#end
+#end
+
+$resource.getString("label.application"):
+#foreach( $component in $regDto.components )
+#foreach( $field in $component.fields )
+#set( $tagName = '' )
+#set( $tagName = $field.element.tag.tagType.name )
+#if( $tagName != '' && $tagName != 'URLLINK' && $tagName != 'LABEL' && $tagName != 'PASSWORDFIELD' )
+#set( $answer = $regDto.getQuestionAnswer($field.element.question.id) )
+#set( $answerTxt = '' )
+#set( $answerTxt = $answer )
+#set( $labelTxt = '' )
+#set( $labelTxt = $resource.getString($field.element.question.elementText) )
+#if( $answerTxt == '' )
+	$labelTxt:
+#else
+	$labelTxt:	$answerTxt
+#end
+#end
+#end
+#end
+
+$resource.getString("label.allow") ${productname} $resource.getString("label.clickhere"): ${allowlink} 
+
+$resource.getString("label.deny") ${productname} $resource.getString("label.clickhere"): ${denylink} 
+
+#parse( "com/oup/eac/service/velocity/regards.vm" )

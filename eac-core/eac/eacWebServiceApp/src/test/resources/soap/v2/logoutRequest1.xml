@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-access-services">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:LogoutRequest>
+         <eac:sessionToken>123456</eac:sessionToken>
+      </eac:LogoutRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

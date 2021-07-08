@@ -1,0 +1,7 @@
+$resource.getString("label.report")
+
+#parse( "com/oup/eac/service/velocity/regards.vm" )
+
+
+#parse( "com/oup/eac/service/velocity/confidentiality.vm" )
+

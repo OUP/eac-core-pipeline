@@ -1,0 +1,19 @@
+-- Smart English 1 Workbook (International Edition) - 9249A60A-6007-4E8E-BE52-78D3E31CC301 learner
+insert into asset(id,obj_version,erights_id, product_name, division_id) values('C86F299D-6602-4964-8901-8B76D1A31537', 0, 31301, 'Smart English 1 Workbook (International Edition)', (select id from division where division_type='ELT'));
+insert into product (product_type, id ,obj_version, asset_id, landing_page, registerable_product_id, email, service_level_agreement, registerable_type) values ('REGISTERABLE','9249A60A-6007-4E8E-BE52-78D3E31CC301', 0, 'C86F299D-6602-4964-8901-8B76D1A31537', '', null, '', '', 'SELF_REGISTERABLE');
+insert into registration_definition (registration_definition_type,id,obj_version,product_id,registration_activation_id,page_definition_id,licence_template_id) values ('ACTIVATION_CODE_REGISTRATION', newId(), 0, '9249A60A-6007-4E8E-BE52-78D3E31CC301', 'D7FEFBDF-94D9-4D15-9579-4EF312E4054E', null, '552C200A-7FC4-42E6-91FD-730720D02895');
+
+-- Smart English 1 Workbook (Czech Edition) - 2F944972-1C82-4EF7-85E7-E5FE2B958FAB learner
+insert into asset(id,obj_version,erights_id, product_name, division_id) values('CFD175B4-3A58-4FBA-95B8-562AD6BEF302', 0, 31510, 'Smart English 1 Workbook (Czech Edition)', (select id from division where division_type='ELT'));
+insert into product (product_type, id ,obj_version, asset_id, landing_page, registerable_product_id, email, service_level_agreement, registerable_type) values ('REGISTERABLE','2F944972-1C82-4EF7-85E7-E5FE2B958FAB', 0, 'CFD175B4-3A58-4FBA-95B8-562AD6BEF302', '', null, '', '', 'SELF_REGISTERABLE');
+insert into registration_definition (registration_definition_type,id,obj_version,product_id,registration_activation_id,page_definition_id,licence_template_id) values ('ACTIVATION_CODE_REGISTRATION', newId(), 0, '2F944972-1C82-4EF7-85E7-E5FE2B958FAB', 'D7FEFBDF-94D9-4D15-9579-4EF312E4054E', null, '552C200A-7FC4-42E6-91FD-730720D02895');
+
+-- Smart English 1 Workbook (International Edition) - E11B83AB-A0D2-4045-B9CE-D5B7CFF95EB9 instructor
+insert into asset(id,obj_version,erights_id, product_name, division_id) values('FAD2D119-FA87-41D5-BC18-2FD1ABADB92C', 0, 31302, 'Smart English 1 Workbook (International Edition)', (select id from division where division_type='ELT'));
+insert into product (product_type, id, obj_version, asset_id, landing_page, registerable_product_id, email, service_level_agreement, registerable_type) values ('REGISTERABLE','E11B83AB-A0D2-4045-B9CE-D5B7CFF95EB9', 0, 'FAD2D119-FA87-41D5-BC18-2FD1ABADB92C', '', null, '', '', 'ADMIN_REGISTERABLE');
+insert into registration_definition (registration_definition_type,id,obj_version,product_id,registration_activation_id,page_definition_id,licence_template_id) values ('PRODUCT_REGISTRATION', newId(), 0, 'E11B83AB-A0D2-4045-B9CE-D5B7CFF95EB9', 'D7FEFBDF-94D9-4D15-9579-4EF312E4054E', null, '552C200A-7FC4-42E6-91FD-730720D02895');
+
+-- Smart English 1 Workbook (Czech Edition) - 157BC58E-7090-4AD5-85FD-492AB13CDD93 instructor
+insert into asset(id,obj_version,erights_id, product_name, division_id) values('F5E4C985-CC2E-466E-9C5D-488051F41541', 0, 31511, 'Smart English 1 Workbook (Czech Edition)', (select id from division where division_type='ELT'));
+insert into product (product_type, id, obj_version, asset_id, landing_page, registerable_product_id, email, service_level_agreement, registerable_type) values ('REGISTERABLE','157BC58E-7090-4AD5-85FD-492AB13CDD93', 0, 'F5E4C985-CC2E-466E-9C5D-488051F41541', '', null, '', '', 'ADMIN_REGISTERABLE');
+insert into registration_definition (registration_definition_type,id,obj_version,product_id,registration_activation_id,page_definition_id,licence_template_id) values ('PRODUCT_REGISTRATION', newId(), 0, '157BC58E-7090-4AD5-85FD-492AB13CDD93', 'D7FEFBDF-94D9-4D15-9579-4EF312E4054E', null, '552C200A-7FC4-42E6-91FD-730720D02895');

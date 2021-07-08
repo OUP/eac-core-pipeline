@@ -1,0 +1,12 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+
+    <aspects>
+    	<!--  these aspects are abstract -->
+        <aspect name="com.oup.eac.common.advice.BaseTimeLoggingAdvice"/>
+        <aspect name="com.oup.eac.common.advice.BaseSecurityLoggingAdvice"/>
+        <aspect name="com.oup.eac.common.advice.EacPointcuts"/>
+    </aspects>
+
+</aspectj>

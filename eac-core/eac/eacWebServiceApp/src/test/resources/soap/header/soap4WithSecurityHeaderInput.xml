@@ -1,0 +1,22 @@
+<soapenv:Envelope xmlns:eac="http://eac.oup.com/eac-user-data-services" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:extra="http://test/extra">
+   <soapenv:Header>
+      <extra:before/>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+            <wsse:Username>admin</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Passw0rd</wsse:Password>
+			<extra:before/>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">fNupZfuukpksm9d3uOnJbw==</wsse:Nonce>
+            <wsu:Created>2011-11-03T16:00:39.461Z</wsu:Created>
+            <extra:after/>
+         </wsse:UsernameToken>
+      </wsse:Security>
+     <extra:after/>
+   </soapenv:Header>
+   <soapenv:Body>
+      <eac:UserNameRequest>
+         <eac:sessionToken>ABCDEF</eac:sessionToken>
+      </eac:UserNameRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

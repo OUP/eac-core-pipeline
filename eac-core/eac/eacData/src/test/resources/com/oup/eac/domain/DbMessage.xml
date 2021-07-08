@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <MESSAGE    BASENAME="[BASENAME]" 
+                COUNTRY="[COUNTRY]"
+                LANGUAGE="[LANGUAGE]"
+                VARIANT="[VARIANT]"
+                KEY="[KEY]"
+                MESSAGE="[MESSAGE]"
+    />
+</dataset>

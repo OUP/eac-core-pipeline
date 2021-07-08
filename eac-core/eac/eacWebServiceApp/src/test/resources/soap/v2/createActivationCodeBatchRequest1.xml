@@ -1,0 +1,32 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-access-services" xmlns:eac1="http://eac.oup.com/2.0/eac-common-types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:CreateActivationCodeBatchRequest>
+         <eac:activationCodeBatch>
+            <eac1:batchId>ABCDEF</eac1:batchId>
+            <eac1:codeFormat>EAC_NUMERIC</eac1:codeFormat>
+            <eac1:numberOfTokens>4</eac1:numberOfTokens>
+            <eac1:allowedUsages>1</eac1:allowedUsages>
+            <eac1:validFrom>2011-11-01</eac1:validFrom>
+            <eac1:validTo>2012-11-01</eac1:validTo>
+         </eac:activationCodeBatch>
+         <eac:activationCodeLicence>
+            <eac1:productId>
+               <eac1:externalId>
+                  <eac1:id>PROD123</eac1:id>
+                  <eac1:systemId>SYSTEM1</eac1:systemId>
+                  <eac1:typeId>ISBN</eac1:typeId>
+               </eac1:externalId>
+            </eac1:productId>
+            <eac1:licenceDetails>
+               <eac1:enabled>true</eac1:enabled>
+               <eac1:extendedDetails>
+                  <eac1:concurrentLicence>
+                     <eac1:concurrency>3</eac1:concurrency>
+                  </eac1:concurrentLicence>
+               </eac1:extendedDetails>
+            </eac1:licenceDetails>
+         </eac:activationCodeLicence>
+      </eac:CreateActivationCodeBatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

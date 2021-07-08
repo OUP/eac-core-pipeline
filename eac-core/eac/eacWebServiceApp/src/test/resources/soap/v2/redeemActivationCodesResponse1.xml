@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xsi:schemaLocation="http://eac.oup.com/2.0/eac-common-types ../../../../main/resources/xsd/eac-common-types-2.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cmn="http://eac.oup.com/2.0/eac-common-types">
+	<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" />
+	<SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		<RedeemActivationCodeResponse
+			xmlns="http://eac.oup.com/2.0/eac-access-services">
+			<entitlement xmlns="http://eac.oup.com/2.0/eac-access-services">
+				<ns1:product xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">
+					<ns1:productIds xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">
+						<ns1:id xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">indProdId1</ns1:id>
+						<ns1:external xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">
+							<ns1:id xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">extProdId1</ns1:id>
+							<ns1:systemId xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">system1</ns1:systemId>
+							<ns1:typeId xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">ISBN</ns1:typeId>
+						</ns1:external>
+					</ns1:productIds>
+					<ns1:productName xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">PRODUCT NUMBER ONE
+					</ns1:productName>
+				</ns1:product>
+				<ns2:product xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">
+					<ns2:productIds xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">
+						<ns2:id xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">indProdId2</ns2:id>
+						<ns2:external xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">
+							<ns2:id xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">extProdId2</ns2:id>
+							<ns2:systemId xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">system1</ns2:systemId>
+							<ns2:typeId xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">ISBN</ns2:typeId>
+						</ns2:external>
+					</ns2:productIds>
+					<ns2:productName xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">LINKED PROD1
+					</ns2:productName>
+				</ns2:product>
+				<ns3:product xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">
+					<ns3:productIds xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">
+						<ns3:id xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">indProdId3</ns3:id>
+						<ns3:external xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">
+							<ns3:id xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">extProdId3</ns3:id>
+							<ns3:systemId xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">system1</ns3:systemId>
+							<ns3:typeId xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">ISBN</ns3:typeId>
+						</ns3:external>
+					</ns3:productIds>
+					<ns3:productName xmlns:ns3="http://eac.oup.com/2.0/eac-common-types">LINKED PROD2
+					</ns3:productName>
+				</ns3:product>
+				<ns4:licence xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">
+					<ns4:enabled xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">true</ns4:enabled>
+					<ns4:startDate xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">2011-03-03</ns4:startDate>
+					<ns4:endDate xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">2012-03-03</ns4:endDate>
+					<ns4:extendedDetails xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">
+						<ns4:rollingLicence xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">
+							<ns4:beginOn xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">FIRST_USE</ns4:beginOn>
+							<ns4:periodUnit xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">YEAR</ns4:periodUnit>
+							<ns4:periodValue xmlns:ns4="http://eac.oup.com/2.0/eac-common-types">2</ns4:periodValue>
+						</ns4:rollingLicence>
+					</ns4:extendedDetails>
+				</ns4:licence>
+				<ns5:info xmlns:ns5="http://eac.oup.com/2.0/eac-common-types"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns5:RollingLicenceInfo">
+					<ns5:active xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">true</ns5:active>
+					<ns5:expired xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">false</ns5:expired>
+					<ns5:expiryDateAndTime xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">2011-11-15T00:00:00.000Z
+					</ns5:expiryDateAndTime>
+					<ns5:firstUsedDate xmlns:ns5="http://eac.oup.com/2.0/eac-common-types">2011-11-15T00:00:00.000Z
+					</ns5:firstUsedDate>
+				</ns5:info>
+				<ns6:activationCode xmlns:ns6="http://eac.oup.com/2.0/eac-common-types">ACTIVATION_CODE_123
+				</ns6:activationCode>
+			</entitlement>
+			<entitlement xmlns="http://eac.oup.com/2.0/eac-access-services">
+				<ns7:product xmlns:ns7="http://eac.oup.com/2.0/eac-common-types">
+					<ns7:productIds xmlns:ns7="http://eac.oup.com/2.0/eac-common-types">
+						<ns7:id xmlns:ns7="http://eac.oup.com/2.0/eac-common-types">indProdId2</ns7:id>
+					</ns7:productIds>
+					<ns7:productName xmlns:ns7="http://eac.oup.com/2.0/eac-common-types">PRODUCT 2
+					</ns7:productName>
+				</ns7:product>
+				<ns8:licence xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">
+					<ns8:enabled xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">true</ns8:enabled>
+					<ns8:startDate xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">2011-02-02</ns8:startDate>
+					<ns8:endDate xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">2012-02-02</ns8:endDate>
+					<ns8:extendedDetails xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">
+						<ns8:usageLicence xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">
+							<ns8:allowedUsages xmlns:ns8="http://eac.oup.com/2.0/eac-common-types">12
+							</ns8:allowedUsages>
+						</ns8:usageLicence>
+					</ns8:extendedDetails>
+				</ns8:licence>
+				<ns9:info xmlns:ns9="http://eac.oup.com/2.0/eac-common-types"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns9:UsageLicenceInfo">
+					<ns9:active xmlns:ns9="http://eac.oup.com/2.0/eac-common-types">true</ns9:active>
+					<ns9:expired xmlns:ns9="http://eac.oup.com/2.0/eac-common-types">false</ns9:expired>
+					<ns9:expiryDateAndTime xmlns:ns9="http://eac.oup.com/2.0/eac-common-types">2011-11-15T00:00:00.000Z
+					</ns9:expiryDateAndTime>
+					<ns9:usagesRemaining xmlns:ns9="http://eac.oup.com/2.0/eac-common-types">11
+					</ns9:usagesRemaining>
+				</ns9:info>
+			</entitlement>
+		</RedeemActivationCodeResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

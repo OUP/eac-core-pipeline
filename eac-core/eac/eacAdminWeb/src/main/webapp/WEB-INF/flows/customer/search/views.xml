@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	
+	<definition name="searchCustomers" extends="standardLayout">
+		<put-attribute name="body" value="customerSearchTile" />
+	</definition>
+	
+	<definition name="customerSearchTile" template="/WEB-INF/flows/customer/search/customerSearch.jsp">
+		<put-attribute name="customerSearchFormTile" value="/WEB-INF/flows/customer/search/customerSearchForm.jsp" />
+		<put-attribute name="searchControlTile" value="/WEB-INF/jsp/searchControl.jsp" />
+		<put-attribute name="searchResultsTile" value="searchResultsTile" />
+	</definition>
+	
+	<definition name="searchResultsTile" template="/WEB-INF/flows/customer/search/searchResults.jsp">
+		<put-attribute name="searchNavigationTile" value="/WEB-INF/jsp/searchNavigation.jsp" />
+	</definition>
+	
+	<definition name="customerNotFoundTile" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/flows/customer/search/CustomerNotFound.jsp" />
+	</definition>
+	
+</tiles-definitions>

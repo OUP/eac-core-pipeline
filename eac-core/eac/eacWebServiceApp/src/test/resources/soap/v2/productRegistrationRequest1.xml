@@ -1,0 +1,25 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-access-services" xmlns:eac1="http://eac.oup.com/2.0/eac-common-types">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <eac:ProductRegistrationRequest>
+         <eac:productId>
+            <eac1:internalId>
+               <eac1:id>E6CC13C4-1D79-4FC6-B0AC-19C2A767B2CB</eac1:id>
+            </eac1:internalId>
+         </eac:productId>
+         <eac:userId>
+            <eac1:internalId>
+               <eac1:id>4259c882-aa57-45a7-9bee-0de4d85d8d9d</eac1:id>
+            </eac1:internalId>
+         </eac:userId>
+         <eac:registrationInformation>
+            <eac1:registrationKey>key1</eac1:registrationKey>
+            <eac1:registrationValue>value1</eac1:registrationValue>
+         </eac:registrationInformation>
+         <eac:registrationInformation>
+            <eac1:registrationKey>key2</eac1:registrationKey>
+            <eac1:registrationValue>value2</eac1:registrationValue>
+         </eac:registrationInformation>
+      </eac:ProductRegistrationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

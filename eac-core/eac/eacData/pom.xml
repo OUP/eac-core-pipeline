@@ -1,0 +1,472 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.oup.eac</groupId>
+        <artifactId>eacBuild</artifactId>
+        <version>26.90-SNAPSHOT</version>
+        <relativePath>../eacBuild/pom.xml</relativePath>        
+    </parent> 
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>eacData</artifactId>
+    <packaging>jar</packaging>
+    
+    <name>eacData</name>
+    <url>http://site.eac.uk.oup.com/eacData</url>
+    
+    <scm>
+        <connection>scm:svn:https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild-25.85-SNAPSHOT/eacBuild</connection>
+        <developerConnection>scm:svn:https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild-25.85-SNAPSHOT/eacBuild</developerConnection>
+        <url>https://gbhubapp21.oup.com/svn/EACDEV/branches/aces-production-14.0/eacBuild-25.85-SNAPSHOT/eacBuild</url>
+    </scm>
+    
+    <properties>
+        <!-- 
+        <test.schema.dir>target/test-classes</test.schema.dir>
+        <target.schema.dir>target/hibernate3/sql</target.schema.dir>
+        <target.schema-file>${target.schema.dir}/schema.sql</target.schema-file>
+        <test.schema-file>${test.schema.dir}/schema.sql</test.schema-file>
+        <eac.hibernate.properties.file>/src/test/resources/hibernate-test.properties</eac.hibernate.properties.file>
+         -->
+        <profile.hibernate.hbm2ddl.auto.test>update</profile.hibernate.hbm2ddl.auto.test>   
+        <profile.hibernate.connection.driver_class.test>org.hsqldb.jdbcDriver</profile.hibernate.connection.driver_class.test>  
+        <profile.hibernate.connection.url.test>jdbc:hsqldb:mem:eac</profile.hibernate.connection.url.test>  
+        <profile.hibernate.connection.username.test>SA</profile.hibernate.connection.username.test> 
+        <profile.hibernate.connection.password.test />  
+        <profile.hibernate.dialect.test>org.hibernate.dialect.HSQLDialect</profile.hibernate.dialect.test>
+        <!-- Uncomment if sql server schema export is required -->
+<!--         <profile.hibernate.dialect.test>com.oup.eac.data.util.SQLServer2008NativeDialect</profile.hibernate.dialect.test> -->
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eacCommon</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eacCommon</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eacDomain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eacDomain</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>          
+        </dependency>
+        <!-- <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+        </dependency> -->
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+       <!--  <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+        </dependency>  -->      
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId> 
+			<artifactId>sqljdbc4</artifactId> 
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>  
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-hibernate</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>antlr</groupId>
+            <artifactId>antlr</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+        </dependency>
+        <dependency>
+            <artifactId>commons-io</artifactId>
+            <groupId>commons-io</groupId>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+        </dependency> 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>  
+         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.orm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>org.springframework.test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+            <dependency>
+            <groupId>org.synyx</groupId>
+            <artifactId>messagesource</artifactId>
+        </dependency>
+        
+    </dependencies>
+    
+    <build>
+        <plugins>           
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <configuration>
+                          <target>
+                                <!-- SCRIPTS TO BE RUN ON UAT FOR NEXT DEPLOYMENT -->
+                                <!--  Sample
+                               <property name="uat-scripts">r13.0-to-r14.0-data.sql,
+                                                            r13.0-to-r14.0-schema.sql
+                                </property> 
+                                
+                                <property name="uat-scripts">r14.0-to-r15.0-data.sql
+                                </property>
+                                 <property name="uat-scripts">r15.0-to-r16.0-data.sql,
+                                                           	 r15.0-to-r16.0-schema.sql-->
+                                   <property name="uat-scripts">r16.0-to-r17.0-data.sql</property>                      	 
+                                                           	 
+                               <!-- SCRIPTS TO BE RUN ON PRODUCTION FOR NEXT DEPLOYMENT
+                              <property name="prod-scripts">r15.0-to-r16.0-data.sql, r15.0-to-r16.0-schema.sql -->
+                                 <property name="prod-scripts">r16.0-to-r17.0-data.sql</property>
+                                 
+                               <ant antfile="${basedir}/build-script.xml" target="create-scripts" inheritRefs="true" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                	<argLine>-XX:-UseSplitVerifier</argLine>
+            	</configuration>
+            </plugin>  
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <excludes>-->
+<!--                        <exclude>**/users/*</exclude>-->
+<!--                        <exclude>**/applicationContext-test.xml</exclude>-->
+<!--                        <exclude>**/db-test.properties</exclude>-->
+<!--                        <exclude>**/datasource-test.xml</exclude>-->
+<!--                        <exclude>**/hibernate.cfg.xml</exclude>-->
+<!--                        <exclude>**/hibernate.properties</exclude>-->
+<!--                        <exclude>**/log4j.properties</exclude>-->
+<!--                    </excludes>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>benerator</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.databene</groupId>
+                        <artifactId>maven-benerator-plugin</artifactId>
+                        <version>0.5.4</version>
+                        <configuration>
+                            <descriptor>src/test/benerator/eacData.ben.xml</descriptor>
+                            <encoding>iso-8859-1</encoding>
+                            <dbDriver>${profile.hibernate.connection.driver_class}</dbDriver>
+                            <dbUrl>${profile.hibernate.connection.url}</dbUrl>                          
+                            <dbUser>${profile.hibernate.connection.username}</dbUser>
+                            <dbPassword>${profile.hibernate.connection.password}</dbPassword>
+<!--                            <xmlRoot>eacData</xmlRoot>-->
+                        </configuration>
+                        <executions>
+                          <execution>
+                            <phase>integration-test</phase>
+                            <goals>
+                              <goal>dbsnapshot</goal>
+                            </goals>
+                          </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.microsoft.sqlserver</groupId> 
+								<artifactId>sqljdbc4</artifactId> 
+                                <version>4.0</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>database</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.4</version>
+                        <configuration>
+                            <driver>${profile.hibernate.connection.driver_class}</driver>
+                            <url>${profile.hibernate.connection.url}</url>
+                            <username>${profile.hibernate.connection.username}</username>
+                            <password>${profile.hibernate.connection.password}</password>
+                            <!-- You can comment out username/password configurations and
+                               have maven to look them up in your settings.xml using ${settingsKey}
+                            -->
+                            <settingsKey>sensibleKey</settingsKey>
+                            <!--all executions are ignored if -Dmaven.test.skip=true
+                            <skip>${maven.test.skip}</skip>-->
+                            <!-- no transaction -->
+                            <delimiterType>row</delimiterType>
+                            <autocommit>true</autocommit>
+                            <onError>abort</onError>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>drop-and-create-db</id>
+                                <phase>package</phase>  
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <srcFiles>                                      
+                                        <srcFile>../deployment/scripts/recreate-db.sql</srcFile>
+                                    </srcFiles>                                 
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>create-db-options</id>
+                                <phase>package</phase>  
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <delimiterType>row</delimiterType>
+                                    <delimiter>/</delimiter>
+                                    <srcFiles>
+                                        <srcFile>../deployment/scripts/r1-to-r2-database-options.sql</srcFile>  
+                                    </srcFiles>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>create-db</id>
+                                <phase>package</phase>  
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <delimiterType>row</delimiterType>
+                                    <srcFiles>
+                                        <srcFile>../deployment/scripts/r1-schema.sql</srcFile>                                  
+                                        <srcFile>../deployment/scripts/r1-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r1-to-r2-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r1-to-r2-data.sql</srcFile>  
+                                        <srcFile>../deployment/scripts/r1-to-r2-malaysia-tokens.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r2-to-r3-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r2-to-r3-data.sql</srcFile>  
+                                        <srcFile>../deployment/scripts/r3-to-r4-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r3-to-r4-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/dlp_network_products.sql</srcFile>
+                                        <srcFile>../deployment/scripts/ofcw-products-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r4-to-r4.1-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/ofcw-products2-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r4-to-r5-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r4-to-r5-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r4-to-r5-test-admin-users.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r4-to-r5-schema-post.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5-to-r5.1-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.1-to-r5.2-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.3-to-r5.4-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.4-to-r5.5-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/ofcw-products3-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/ofcw-products3-dataDEV.sql</srcFile>
+                                        <srcFile>../deployment/scripts/customer_migration_tables.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.6_huw_ramsay_admin_script.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.6-to-r6.0-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.6-to-r6.0-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.6-to-r6.0-storedp-role-tokenizer.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.6-to-r6.0-storedp-create-admin.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r5.6-to-r6.0-admin-users.sql</srcFile>
+                                        <srcFile>../deployment/scripts/remove-dup-page-defs.sql</srcFile>
+                                        <srcFile>../deployment/scripts/update-page-def-names.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r6.0-to-6.1-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r6.1-to-6.2-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r6.2-to-6.3-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r6.3-to-6.4-data.sql</srcFile>
+                                        <!-- DO NOT ENTER ANYMORE SCRIPTS HERE !!!!! ADD THEM BELOW TO create-db-v2 -->
+                                    </srcFiles>                                 
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>create-db-v2</id>
+                                <phase>package</phase>  
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <delimiterType>row</delimiterType>
+                                    <delimiter>GO</delimiter>
+                                    <srcFiles>
+                                        <!-- USE GO DELIMITER ON ITS OWN LINE AFTER EACH DDL, DML, FUNCTION or PROCEDURE -->
+                                        <srcFile>../deployment/scripts/ofcw-create-student-product.sql</srcFile>
+                                        <srcFile>../deployment/scripts/ofcw-products4-dataDEV.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r6.4-to-7.0-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r7.22_schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r7.22_data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r7.32-to-r8.0-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r7.32-to-r8.0-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/remove-dup-page-defs-8.sql</srcFile>
+                                        <srcFile>../deployment/scripts/orcs_migration_tables.sql</srcFile>
+                                        <srcFile>../deployment/scripts/orcs-product-migration.sql</srcFile>
+                                        <srcFile>../deployment/scripts/orcs-test-products.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r8.20-to-r8.21-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r8.26-to-r8.27-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r8.28-to-r9.0-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r8.28-to-r9.0-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/lowercase_external_id_fixup.sql</srcFile>
+                                        <srcFile>../deployment/scripts/admin_roles_management.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r9.0-to-r9.1-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r9.22-to-r9.23-data.sql</srcFile>
+                                        <!--  post release 9.27  : Monday 26th Nov 2012 -->                                                 
+                                        <srcFile>../deployment/scripts/archive_activation_code_batch_tables.sql</srcFile>
+                                        <srcFile>../deployment/scripts/archive_activation_code_batch_sp.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r9.27-to-r10.0-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r9.27-to-r10.0-data.sql</srcFile>
+                                        <!--  post release 10.41 : Monday 21st January 2013 -->
+                                        <srcFile>../deployment/scripts/r10.41-to-r11.0-schema.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r10.41-to-r11.0-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/archive_activation_code_batch_support_tables.sql</srcFile>
+                                        <srcFile>../deployment/scripts/archive_activation_code_batch_support_sp.sql</srcFile>
+                                        <srcFile>../deployment/scripts/archive_activation_code_batch_support_populate.sql</srcFile>
+                                        <srcFile>../deployment/scripts/archive_activation_code_batch_sp_V2.sql</srcFile>
+                                        <srcFile>../deployment/scripts/delete_asset_for_good_sp.sql</srcFile>
+                                        <srcFile>../deployment/scripts/oxed-owl-product-pages.sql</srcFile>                                        
+                                        <srcFile>../deployment/scripts/oxed-owl-dev-product.sql</srcFile>
+                                        <srcFile>../deployment/scripts/delete_archived_batch_for_good.sql</srcFile>                                        
+                                        <srcFile>../deployment/scripts/purge_orphaned_components.sql</srcFile>                                        
+                                        <srcFile>../deployment/scripts/create_component_names.sql</srcFile>                                        
+                                        <srcFile>../deployment/scripts/create_element_names.sql</srcFile>
+                                        <!-- post relase 11.30 : Monday 4th March 2013 -->
+                                        <srcFile>../deployment/scripts/r11.30-to-r11.0-data.sql</srcFile>   
+                                        <!-- post relase 11.35 : Monday 11th March 2013 -->
+                                        <srcFile>../deployment/scripts/r11.35-to-r11.0-data.sql</srcFile>   
+                                        <!-- post relase 11.37 : Wednesday 13th March 2013 -->
+                                        <srcFile>../deployment/scripts/r11.37-to-r11.0-data.sql</srcFile>   
+                                        <!-- post relase 11.43 : Thursday 21st March 2013 -->
+                                        <srcFile>../deployment/scripts/r11.43-to-r11.0-schema.sql</srcFile>
+                                        <!-- post relase 11    : Monday 25th March 2013 -->
+                                        <srcFile>../deployment/scripts/r11.43-to-r12.0-data.sql</srcFile>
+                                        <!-- post relase 12 : Monday 22nd April 2013 -->
+                                        <srcFile>../deployment/scripts/r12.0-to-r13.0-data.sql</srcFile>
+                                        <!-- post relase 12.20 : Monday 29nd April 2013 -->
+                                        <srcFile>../deployment/scripts/r12.20-to-r13.0-data.sql</srcFile>
+                                        <!-- post relase 13.0 : On UAT Monday 22nd July 2013 -->
+                                        <srcFile>../deployment/scripts/r13.0-to-r14.0-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r13.0-to-r14.0-schema.sql</srcFile>
+                                        <!-- For Release 14-->
+                                        <srcFile>../deployment/scripts/r14.0-to-r15.0-data.sql</srcFile>
+                                         <!-- For Release 15-->
+                                        <srcFile>../deployment/scripts/r15.0-to-r16.0-data.sql</srcFile>
+                                        <srcFile>../deployment/scripts/r15.0-to-r16.0-schema.sql</srcFile>
+                                         <!-- For Release 16-->
+              							<srcFile>../deployment/scripts/r16.0-to-r17.0-data.sql</srcFile>
+                                    </srcFiles>                                 
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.microsoft.sqlserver</groupId> 
+								<artifactId>sqljdbc4</artifactId> 
+                                <version>4.0</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profile.hibernate.hbm2ddl.auto>validate</profile.hibernate.hbm2ddl.auto>
+                <profile.hibernate.connection.driver_class>com.microsoft.sqlserver.jdbc.SQLServerDriver</profile.hibernate.connection.driver_class>
+                <profile.hibernate.connection.url>jdbc:sqlserver://10.114.63.139:1433;databaseName=eactest</profile.hibernate.connection.url>
+                <profile.hibernate.connection.username>eactest</profile.hibernate.connection.username>
+                <profile.hibernate.connection.password>eactest</profile.hibernate.connection.password>
+                <profile.hibernate.dialect>com.oup.eac.data.util.SQLServer2008NativeDialect</profile.hibernate.dialect> 
+            </properties>
+        </profile>
+        <profile>
+            <id>local</id>
+            <properties>
+                <profile.hibernate.hbm2ddl.auto>validate</profile.hibernate.hbm2ddl.auto>
+                <profile.hibernate.connection.driver_class>com.microsoft.sqlserver.jdbc.SQLServerDriver</profile.hibernate.connection.driver_class>
+                <profile.hibernate.connection.url>jdbc:sqlserver://localhost:1433;databaseName=eactest</profile.hibernate.connection.url>
+                <profile.hibernate.connection.username>eactest</profile.hibernate.connection.username>
+                <profile.hibernate.connection.password>eactest</profile.hibernate.connection.password>
+                <profile.hibernate.dialect>com.oup.eac.data.util.SQLServer2008NativeDialect</profile.hibernate.dialect> 
+            </properties>
+        </profile>
+        <profile>
+            <id>localdb</id>
+            <properties>
+                <profile.hibernate.hbm2ddl.auto>create</profile.hibernate.hbm2ddl.auto>
+                <profile.hibernate.connection.driver_class>com.microsoft.sqlserver.jdbc.SQLServerDriver</profile.hibernate.connection.driver_class>
+                <profile.hibernate.connection.url>jdbc:sqlserver://localhost:1433;databaseName=eactest</profile.hibernate.connection.url>
+                <profile.hibernate.connection.username>eactest</profile.hibernate.connection.username>
+                <profile.hibernate.connection.password>eactest</profile.hibernate.connection.password>
+                <profile.hibernate.dialect>com.oup.eac.data.util.SQLServer2008NativeDialect</profile.hibernate.dialect> 
+            </properties>
+        </profile>
+    </profiles>
+</project>

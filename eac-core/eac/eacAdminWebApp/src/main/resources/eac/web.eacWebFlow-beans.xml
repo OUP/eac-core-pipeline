@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/webflow-config
+           http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
+
+	<!-- Executes flows: the entry point into the Spring Web Flow system -->
+	<webflow:flow-executor id="flowExecutor" flow-registry="flowRegistry">
+		<webflow:flow-execution-listeners>
+			<webflow:listener ref="securityFlowExecutionListener" />
+			<webflow:listener ref="hibernateFlowExecutionListener" />
+			<webflow:listener ref="exceptionLoggingExecutionListener" />
+		</webflow:flow-execution-listeners>
+		<!-- See http://static.springsource.org/spring-webflow/docs/2.0.x/reference/html/ch09s05.html -->
+		<webflow:flow-execution-repository max-executions="5" max-execution-snapshots="25" />
+		<webflow:flow-execution-attributes>
+			<webflow:always-redirect-on-pause value="true"/>
+		</webflow:flow-execution-attributes>
+	</webflow:flow-executor>
+	
+	<!--  The registry of executable flow definitions -->
+<!-- 	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="classpath*:flows"> -->
+	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="/WEB-INF/flows/">
+		<webflow:flow-location-pattern value="/**/*-flow.xml" />
+	</webflow:flow-registry>
+
+	<!-- Plugs in a custom creator for Web Flow views -->
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" 
+		development="true" validator="validator" conversion-service="defaultConversionService"/>
+
+	<!-- Default conversion service using custom Spring 3 binding -->
+	<bean id="defaultConversionService" class="org.springframework.binding.convert.service.DefaultConversionService">
+    	<constructor-arg ref="applicationConversionService"/>
+    </bean>
+
+	<!-- Configures Web Flow to use Tiles to create views for rendering; Tiles allows for applying consistent layouts to your views -->
+	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator"> 
+		<property name="viewResolvers" ref="tilesViewResolver"/>
+		<property name="useSpringBeanBinding" value="true" />
+	</bean>
+	
+	<!-- Installs a listener to apply Spring Security authorities -->
+	<bean id="securityFlowExecutionListener" class="org.springframework.webflow.security.SecurityFlowExecutionListener" />
+
+	<!-- Bootstraps JSR-303 validation and exposes it through Spring's Validator interface -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+	<bean id="hibernateFlowExecutionListener" class="org.springframework.webflow.persistence.HibernateFlowExecutionListener">
+    	<constructor-arg ref="sessionFactory" />
+    	<constructor-arg ref="transactionManager" />
+	</bean>
+	
+	<bean id="exceptionLoggingExecutionListener" class="com.oup.eac.admin.webflow.ExceptionLoggingListener"/>
+	
+</beans>

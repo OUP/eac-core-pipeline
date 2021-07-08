@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://eac.oup.com/2.0/eac-access-services" xmlns:cmn="http://eac.oup.com/2.0/eac-common-types"
+	xmlns:tns="http://eac.oup.com/2.0/eac-access-services"
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://eac.oup.com/2.0/eac-common-types"
+		schemaLocation="eac-common-types-2.0.xsd" />
+
+	<xsd:element name="AuthenticateRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element name="systemId" type="xsd:string"
+					minOccurs="0" maxOccurs="1" />
+				<xsd:element name="credential" type="cmn:Credential" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="AuthenticateResponse">
+		<xsd:complexType>
+			<xsd:choice minOccurs="1">
+				<xsd:element ref="cmn:errorStatus" />
+				<!--  OR -->
+				<xsd:sequence>
+					<xsd:element name="sessionToken" type="xsd:string" />
+					<xsd:element name="user" type="cmn:User" />
+				</xsd:sequence>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="LogoutRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element name="sessionToken" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="LogoutResponse">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="cmn:errorStatus" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ChangePasswordRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element ref="cmn:wsUserId" />
+				<xsd:element name="newPassword" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ChangePasswordResponse">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="cmn:errorStatus" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="ResetPasswordRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element ref="cmn:wsUserId" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ResetPasswordResponse">
+		<xsd:complexType>
+			<xsd:choice minOccurs="1">
+				<xsd:element ref="cmn:errorStatus" />
+				<!--  OR -->
+				<xsd:element name="newPassword" type="xsd:string"
+					minOccurs="0" /><!-- OPTIONAL NEW PASSWORD -->
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="RedeemActivationCodeRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element name="systemId" type="xsd:string" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="cmn:wsUserId" />
+				<xsd:element name="activationCode" type="xsd:string"
+					minOccurs="1" maxOccurs="1" />
+				<xsd:element name="locale" type="cmn:LocaleType"
+					minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="RedeemActivationCodeResponse">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="cmn:errorStatus" />
+				<!--  OR -->
+    	        <xsd:element name="entitlement" type="cmn:ProductEntitlement" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	
+    <xsd:element name="ValidateActivationCodeRequest">
+        <xsd:complexType>
+            <xsd:sequence minOccurs="1">
+                <xsd:element name="systemId" type="xsd:string"
+                    minOccurs="0" maxOccurs="1" />
+                <xsd:element name="activationCode" type="xsd:string"
+                    minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="ValidateActivationCodeResponse">
+        <xsd:complexType>
+            <xsd:choice minOccurs="1">
+                <xsd:element ref="cmn:errorStatus" />
+                <!--  OR -->
+                <xsd:sequence maxOccurs="unbounded">
+                	<xsd:element name="activationCode" type="xsd:string" minOccurs="1" maxOccurs="1" />
+                    <xsd:element name="product" type="cmn:ProductDetails" />
+                </xsd:sequence>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="SearchActivationCodeRequest">
+        <xsd:complexType>
+            <xsd:sequence minOccurs="1">
+                <xsd:element name="systemId" type="xsd:string"
+                    minOccurs="0" maxOccurs="1" />          
+                <xsd:element name="activationCode" type="xsd:string"
+                    minOccurs="1" maxOccurs="1" />
+                <xsd:element name="likeMatch" type="xsd:boolean" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="SearchActivationCodeResponse">
+        <xsd:complexType>
+            <xsd:choice minOccurs="1">
+                <xsd:element ref="cmn:errorStatus" />
+                <!--  OR -->
+                <xsd:element name="activationCodeInfo" type="cmn:ActivationCodeInfo"
+                    minOccurs="0" maxOccurs="unbounded" />
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+
+	<xsd:element name="GetUserEntitlementsRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element ref="cmn:wsUserId" minOccurs="1" />
+				<xsd:element name="systemId" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="GetUserEntitlementsResponse">
+		<xsd:complexType>
+			<xsd:choice minOccurs="1">
+				<xsd:element ref="cmn:errorStatus" />
+				<!--
+					added for consistency
+				-->
+				<!--  OR -->
+				<xsd:sequence>
+					<xsd:element name="user" type="cmn:User" />
+					<xsd:element name="entitlementGroup" type="cmn:ProductEntitlementGroup" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="CreateActivationCodeBatchRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element name="activationCodeBatch" type="cmn:ActivationCodeBatch"
+					minOccurs="1" maxOccurs="1" />
+				<xsd:element name="activationCodeLicence" type="cmn:ActivationCodeLicence"
+					minOccurs="1" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="CreateActivationCodeBatchResponse">
+		<xsd:complexType>
+			<xsd:choice minOccurs="1">
+				<xsd:element ref="cmn:errorStatus" />
+				<!--  OR -->
+				<xsd:element name="activationCode" type="xsd:string"
+					minOccurs="0" maxOccurs="unbounded" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="CreateUserAccountRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="user" minOccurs="1" maxOccurs="unbounded" type="cmn:CreateUser" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="userStatusType">
+		<xsd:sequence>
+			<xsd:choice>
+				<!--  SUCCESS -->
+				<xsd:element name="userId" type="cmn:InternalIdentifier" />
+				<!--  OR FAILURE -->
+				<xsd:element ref="cmn:errorStatus" />
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="CreateUserAccountResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="userStatus" type="tns:userStatusType" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- for updating external ids see UpdateExternalUserIds -->
+	<xsd:element name="UpdateUserAccountRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmn:wsUserId" /><!--  the user we are going to update -->
+				<xsd:element name="user" type="cmn:UpdateUser" /><!-- the updated user record -->
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="UpdateUserAccountResponse">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="cmn:errorStatus" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!--  Replaces current set of external ids for the specified system with those in the request. -->
+	<!--  It seems sensible to set the external Ids on an per system basis. -->
+	<!--  If no external ids are currently associated with this system, then this request will add them. -->		
+	<xsd:element name="SetExternalUserIdsRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="systemId" type="xsd:string" />
+				<xsd:element ref="cmn:wsUserId" /><!--  the user we are going to update -->
+				<xsd:element name="external"  type="cmn:ExternalIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="SetExternalUserIdsResponse">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="cmn:errorStatus" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="SetExternalProductIdsRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="systemId" type="xsd:string" />
+				<xsd:element name="productId" type="cmn:Identifier" /><!--  the prodcuct we are going to update -->
+				<xsd:element name="external"  type="cmn:ExternalIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="SetExternalProductIdsResponse">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="cmn:errorStatus" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+    <xsd:element name="ValidatePasswordCredentialsRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="credentials" type="cmn:PasswordCredential" minOccurs="1" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="ValidatePasswordCredentialsResponse">
+        <xsd:complexType>
+	        <xsd:sequence>
+	            <xsd:element name="status" type="tns:CredentialStatusCode" minOccurs="1" maxOccurs="1" />
+                <xsd:element minOccurs="0" maxOccurs="unbounded"  name="statusReason" type="xsd:string" />
+	        </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="CredentialStatusCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="VALID" />
+            <xsd:enumeration value="INVALID_USERNAME" />
+            <xsd:enumeration value="INVALID_PASSWORD" />
+            <xsd:enumeration value="INVALID_USERNAME_PASSWORD" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:element name="ProductRegistrationRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element name="productId" type="cmn:Identifier" />
+				<xsd:element name="userId" type="cmn:Identifier" />
+				<xsd:element name="registrationInformation" type="cmn:RegistrationInformation"
+					minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ProductRegistrationResponse">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="cmn:errorStatus" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- for Kill User Session -->
+    <xsd:element name="KillUserSessionRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="cmn:wsUserId" /><!--  the user we are going to kill session -->                
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="KillUserSessionResponse">
+        <xsd:complexType>
+            <xsd:sequence minOccurs="0">
+                <xsd:element ref="cmn:errorStatus" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    
+    <!-- for creating user with concurrency -->
+    <xsd:element name="CreateUserAccountWithConcurrencyRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="user" minOccurs="1" maxOccurs="unbounded" type="cmn:CreateUserWithConcurrency" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="CreateUserAccountWithConcurrencyResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="userStatus" type="tns:userStatusType" minOccurs="1" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <!-- for updating user with concurrency -->
+    <xsd:element name="UpdateUserAccountWithConcurrencyRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="cmn:wsUserId" /><!--  the user we are going to update -->
+                <xsd:element name="user" type="cmn:UpdateUserWithConcurrency" /><!-- the updated user record -->
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="UpdateUserAccountWithConcurrencyResponse">
+        <xsd:complexType>
+            <xsd:sequence minOccurs="0">
+                <xsd:element ref="cmn:errorStatus" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    
+    <!-- for getting full user entitlements -->
+    
+    <xsd:element name="GetFullUserEntitlementsRequest">
+        <xsd:complexType>
+                <xsd:sequence minOccurs="1">
+                <xsd:element ref="cmn:wsUserId" minOccurs="1" />
+                <xsd:element name="systemId" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+                <xsd:element name="productSystemId" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+                <xsd:element name="productOrgUnit" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+                <xsd:element name="licenceState" type="xsd:string" minOccurs="0" maxOccurs="1"  />                
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="GetFullUserEntitlementsResponse">
+        <xsd:complexType>
+            <xsd:choice minOccurs="1">
+                <xsd:element ref="cmn:errorStatus" />
+                <!--
+                    added for consistency
+                -->
+                <!--  OR -->
+                <xsd:sequence>
+                    <xsd:element name="user" type="cmn:User" />
+                    <xsd:element name="userConcurrency" type="xsd:int" />
+                    <xsd:element name="entitlementGroup" type="cmn:FullProductEntitlementGroup" minOccurs="0" maxOccurs="unbounded" />
+                </xsd:sequence>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    
+    
+    <!-- for Anonymous code redeemn  -->
+    <xsd:element name="GuestRedeemActivationCodeRequest">
+        <xsd:complexType>
+            <xsd:sequence minOccurs="1">                                
+                <xsd:element name="activationCode" type="xsd:string" minOccurs="1" maxOccurs="1" />                
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="GuestRedeemActivationCodeResponse">
+        <xsd:complexType>
+            <xsd:choice>
+                <xsd:element ref="cmn:errorStatus" />
+                <!--  OR -->
+                <xsd:element name="entitlement" type="cmn:GuestProductEntitlement" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="GetCredentialPolicyRequest">
+		<xsd:complexType/>
+	</xsd:element>
+	
+	<xsd:element name="GetCredentialPolicyResponse">
+		<xsd:complexType>
+			<xsd:choice minOccurs="1">
+				<xsd:element ref="cmn:errorStatus" />
+				<!-- Or -->
+				<xsd:sequence>
+					<xsd:element name="usernamePolicy" type="cmn:UsernamePolicy" minOccurs="1" />
+					<xsd:element name="passwordPolicy" type="cmn:PasswordPolicy" minOccurs="1" />
+				</xsd:sequence>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="ResetPasswordWithUrlRequest">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="1">
+				<xsd:element ref="cmn:wsUserId" />
+				<xsd:element name="successUrl" type="xsd:string" minOccurs="1" />
+				<xsd:element name="failureUrl" type="xsd:string" minOccurs="1" />
+				<xsd:element name="tokenId" type="xsd:string" minOccurs="0" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="ResetPasswordWithUrlResponse">
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="cmn:errorStatus" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+    
+</xsd:schema>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-user-data-services" xmlns:cmn="http://eac.oup.com/2.0/eac-common-types">
+   <soapenv:Header>
+       <!--  the security headers are added by the test -->
+   </soapenv:Header>
+   <soapenv:Body>
+      <eac:UserNameRequest xmlns:eac="http://eac.oup.com/2.0/eac-user-data-services">
+      	 <!--  this will get the DummyUserServiceAdpter to return a object graph which will convert into an invalid response -->
+		<cmn:wsUserId>
+			<cmn:sessionToken>INVALID</cmn:sessionToken>
+		</cmn:wsUserId>
+      </eac:UserNameRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+

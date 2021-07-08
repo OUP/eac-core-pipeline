@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	
+	<definition name="intro" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/intro.jsp" />
+	</definition>
+	
+	<definition name="login" extends="notLoggedInLayout">
+		<put-attribute name="body" value="/WEB-INF/login.jsp" />
+	</definition>	 
+	 
+	<definition name="logoutSuccess" extends="notLoggedInLayout">
+		<put-attribute name="body" value="/WEB-INF/login.jsp" />
+	</definition>
+	
+	<definition name="searchProducts" extends="standardLayout">
+		<put-attribute name="body" value="productSearchTabsTile" />
+	</definition>
+	
+    <definition name="registrationsReport" extends="standardLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/registrationsReport.jsp" />
+    </definition>
+    
+    <definition name="roles" extends="standardLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/roles.jsp" />
+    </definition>
+    
+    <definition name="rolesPermissions" extends="standardLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/rolesPermissions.jsp" />
+    </definition>
+    
+    <definition name="activationCodeReport" extends="standardLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/activationCodeReport.jsp" />
+    </definition>
+    
+    <definition name="activationCodeBatchReport" extends="standardLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/activationCodeBatchReport.jsp" />
+    </definition>
+	
+	<definition name="searchNavigationTile" template="/WEB-INF/jsp/searchNavigation.jsp">
+	</definition>
+	
+	<definition name="searchControlTile" template="/WEB-INF/jsp/searchControl.jsp">
+	</definition>
+	
+	<definition name="productSearchTabsTile" template="/WEB-INF/jsp/productSearchTabs.jsp">
+		<put-attribute name="productSearchTile" value="productSearchTile" />
+		<put-attribute name="productMatchTile" value="productMatchTile" />
+		<put-attribute name="productSearchResultsTile" value="productSearchResultsTile" />
+	</definition>
+	
+	<definition name="productSearchTile" template="/WEB-INF/jsp/productSearch.jsp">
+		<put-attribute name="productSearchFormTile" value="/WEB-INF/jsp/productSearchForm.jsp" />
+		<put-attribute name="searchControlTile" value="searchControlTile" />
+	</definition>
+	
+	<definition name="productMatchTile" template="/WEB-INF/jsp/productMatch.jsp">
+		<put-attribute name="productMatchFormTile" value="/WEB-INF/jsp/productMatchForm.jsp" />
+	</definition>
+	
+	<definition name="productSearchResultsTile" template="/WEB-INF/jsp/productSearchResults.jsp">
+		<put-attribute name="searchNavigationTile" value="searchNavigationTile" />
+	</definition>
+	
+	
+    <definition name="searchActivationCodes" extends="standardLayout">
+        <put-attribute name="body" value="searchActivationCodeSearchTile" />
+    </definition>
+	
+    <definition name="searchActivationCodeSearchTile" template="/WEB-INF/jsp/activationCodeSearchMain.jsp">
+        <put-attribute name="activationCodeSearchTile" value="activationCodeSearchTile" />
+        <put-attribute name="activationCodeSearchResultsTile" value="activationCodeSearchResultsTile" />
+    </definition>
+    
+    <definition name="activationCodeSearchTile" template="/WEB-INF/jsp/activationCodeSearch.jsp">
+        <put-attribute name="activationCodeSearchFormTile" value="/WEB-INF/jsp/activationCodeSearchForm.jsp" />
+        <put-attribute name="searchControlTile" value="/WEB-INF/jsp/activationCodeSearchControl.jsp" />
+    </definition>
+    
+    <definition name="activationCodeSearchResultsTile" template="/WEB-INF/jsp/activationCodeSearchResults.jsp">
+        <put-attribute name="searchNavigationTile" value="searchNavigationTile" />
+    </definition>
+	
+	<definition name="createOrEditProduct" extends="standardLayout">
+		<put-attribute name="body" value="createOrEditProductTabsTile"/>
+	</definition>
+	
+	<definition name="createOrEditProductTabsTile" template="/WEB-INF/jsp/createOrEditProduct.jsp">
+		<put-attribute name="productDefinitionTile" value="/WEB-INF/jsp/productDefinition.jsp"/>
+		<put-attribute name="productRegistrationTile" value="/WEB-INF/jsp/productRegistration.jsp"/>
+		<put-attribute name="productAssociationsTile" value="/WEB-INF/jsp/productAssociations.jsp"/>
+		<put-attribute name="productExternalIdsTile" value="/WEB-INF/jsp/productExternalIds.jsp"/>
+		<put-attribute name="productUrlsTile" value="/WEB-INF/jsp/productUrls.jsp"/>
+		<put-attribute name="productUsageTile" value="/WEB-INF/jsp/productUsage.jsp"/>
+		<put-attribute name="productUsedByPlatformTile" value="/WEB-INF/jsp/productUsedByPlatform.jsp"/>
+	</definition>
+	
+	<definition name="createOrEditActivationCodeBatch" extends="standardLayout" >		
+		<put-attribute name="body" value="activationCodeTile" />		
+	</definition>
+	
+	<definition name="activationCodeTile" template="/WEB-INF/jsp/batch/createOrEditActivationCodeBatch.jsp">
+		<put-attribute name="activationCodeBatchTile" value="activationCodeBatchTile" />
+		<put-attribute name="licenceTemplateTile" value="licenceTemplateTile"/>			
+		<put-attribute name="productAndLicenceTile" value="productAndLicenceTile" />	
+	</definition>
+	
+	<definition name="activationCodeBatchTile" template="/WEB-INF/jsp/batch/activationCodeBatch.jsp">
+		<put-attribute name="activationCodeBatchFormatTile" value="/WEB-INF/jsp/batch/activationCodeBatchFormat.jsp"/>
+	</definition>
+		
+	<definition name="productAndLicenceTile" template="/WEB-INF/jsp/batch/productAndLicence.jsp">
+		<put-attribute name="activationCodeRegistrationDefinitionTile" value="activationCodeRegistrationDefinitionTile"/>
+		<put-attribute name="licenceTemplateTile" value="licenceTemplateTile"/>
+		<put-attribute name="eacGroupActivationCodeRegistrationDefinitionTile" value="eacGroupActivationCodeRegistrationDefinitionTile"/>
+	</definition>
+	
+	<definition name="licenceTemplateTile" template="/WEB-INF/jsp/batch/licenceTemplate.jsp" />
+
+	<definition name="activationCodeRegistrationDefinitionTile" template="/WEB-INF/jsp/batch/activationCodeRegistrationDefinition.jsp" />
+	
+	<definition name="eacGroupActivationCodeRegistrationDefinitionTile" template="/WEB-INF/jsp/batch/eacGroupActivationCodeRegistrationDefinition.jsp" />
+	
+	
+	<definition name="generatedActivationCodeBatchSummary" extends="standardLayout" >		
+		<put-attribute name="body" value="/WEB-INF/jsp/batch/generatedActivationCodeBatchSummary.jsp" />		
+	</definition>
+	
+	<definition name="manageExternalSystem" extends="standardLayout">
+		<put-attribute name="body" value="manageExternalSystemTile"/>
+	</definition>	
+	
+	<definition name="manageExternalSystemTile" template="/WEB-INF/jsp/manageExternalSystem.jsp"/>
+	
+	<definition name="manageAccount" extends="standardLayout">
+		<put-attribute name="body" value="manageAccountTile"/>
+	</definition>	
+	
+	<definition name="searchResultsAccountTile" template="/WEB-INF/jsp/searchResultsAccountTile.jsp">
+		<put-attribute name="searchNavigationTile" value="searchNavigationTile" />
+	</definition>
+	<definition name="searchAccountTile" template="/WEB-INF/jsp/searchAccountTile.jsp">
+	</definition>
+		<definition name="searchAccountControl" template="/WEB-INF/jsp/searchAccountControl.jsp">
+	</definition>
+	
+	<definition name="manageAccountTile" template="/WEB-INF/jsp/manageAccount.jsp">
+		<put-attribute name="searchResultsAccountTile" value="searchResultsAccountTile"/>
+		<put-attribute name="searchAccountTile" value="searchAccountTile"/>
+		<put-attribute name="searchControlTile" value="searchControlTile" />
+	</definition>
+	
+	
+	<definition name="manageAccountTabs" extends="standardLayout">
+		<put-attribute name="body" value="manageAccountTabsTile"/>
+	</definition>
+		
+	<definition name="manageAccountTabsTile" template="/WEB-INF/jsp/manageAccountTabs.jsp">
+		<put-attribute name="manageAccountUserTile" value="/WEB-INF/jsp/manageAccountUser.jsp"/>
+		<put-attribute name="manageAccountPermissionTile" value="/WEB-INF/jsp/manageAccountPermission.jsp"/>
+	</definition>
+	
+	<definition name="resetPassword" extends="notLoggedInLayout">
+		<put-attribute name="body" value="resetPasswordTile"/>
+	</definition>
+	
+	<definition name="resetPasswordTile" template="/WEB-INF/jsp/resetPassword.jsp"/>
+	
+	<definition name="changePassword" extends="notLoggedInLayout">
+		<put-attribute name="body" value="changePasswordTile"/>
+	</definition>
+	
+	<definition name="changePasswordLoggedIn" extends="standardLayout">
+		<put-attribute name="body" value="changePasswordTile"/>
+	</definition>
+	
+	<definition name="changePasswordTile" template="/WEB-INF/jsp/changePassword.jsp"/>
+	
+	<definition name="manageSkin" extends="standardLayout">
+		<put-attribute name="body" value="manageSkinTile"/>
+	</definition>	
+	
+	<definition name="manageSkinTile" template="/WEB-INF/jsp/manageSkin.jsp"/>
+	
+	<definition name="manageLanguage" extends="standardLayout">
+		<put-attribute name="body" value="manageLanguageTile"/>
+	</definition>	
+	
+	<definition name="manageLanguageTile" template="/WEB-INF/jsp/manageLanguage.jsp">
+		<put-attribute name="manageLanguageFormTile" value="manageLanguageForm"/>
+	</definition>
+	
+	<definition name="manageLanguageForm" template="/WEB-INF/jsp/manageLanguageForm.jsp"/>
+	
+	<definition name="manageQuestion" extends="standardLayout">
+		<put-attribute name="body" value="manageQuestionTile"/>
+	</definition>	
+		
+	<definition name="manageQuestionTile" template="/WEB-INF/jsp/manageQuestion.jsp">
+		<put-attribute name="manageQuestionFormTile" value="manageQuestionForm"/>
+	</definition>
+	
+	<definition name="manageQuestionForm" template="/WEB-INF/jsp/manageQuestionForm.jsp"/>
+
+	<definition name="manageOrgUnits" extends="standardLayout">
+		<put-attribute name="body" value="manageOrgUnitsTile"/>
+	</definition>	
+		
+	<definition name="manageOrgUnitsTile" template="/WEB-INF/jsp/manageOrgUnits.jsp">
+		<put-attribute name="manageOrgUnitsFormTile" value="manageOrgUnitsForm"/>
+	</definition>
+	
+	<definition name="manageOrgUnitsForm" template="/WEB-INF/jsp/manageOrgUnitsForm.jsp"/>
+	
+	<definition name="manageElement" extends="standardLayout">
+		<put-attribute name="body" value="manageElementTile"/>
+	</definition>	
+		
+	<definition name="manageElementTile" template="/WEB-INF/jsp/manageElement.jsp">
+		<put-attribute name="manageElementFormTile" value="manageElementForm"/>
+	</definition>
+	
+	<definition name="manageElementForm" template="/WEB-INF/jsp/manageElementForm.jsp"/>
+	
+	<definition name="manageComponent" extends="standardLayout">
+		<put-attribute name="body" value="manageComponentTile"/>
+	</definition>	
+		
+	<definition name="manageComponentTile" template="/WEB-INF/jsp/manageComponent.jsp">
+		<put-attribute name="manageComponentFormTile" value="manageComponentForm"/>
+	</definition>
+	
+	<definition name="manageComponentForm" template="/WEB-INF/jsp/manageComponentForm.jsp"/>
+	
+	<definition name="managePage" extends="standardLayout">
+		<put-attribute name="body" value="managePageTile"/>
+	</definition>	
+		
+	<definition name="managePageTile" template="/WEB-INF/jsp/managePage.jsp">
+		<put-attribute name="managePageFormTile" value="managePageForm"/>
+	</definition>
+	
+	<definition name="managePageForm" template="/WEB-INF/jsp/managePageForm.jsp"/>
+	
+	<definition name="searchEacGroups" extends="standardLayout">
+		<put-attribute name="body" value="eacGroupSearchTile" />
+	</definition>
+	
+	<definition name="eacGroupSearchTile" template="/WEB-INF/jsp/eacGroupSearch.jsp">
+		<put-attribute name="eacGroupSearchFormTile" value="/WEB-INF/jsp/eacGroupSearchForm.jsp" />
+		<put-attribute name="searchControlTile" value="searchControlTile" />
+		<put-attribute name="eacGroupSearchResultsTile" value="eacGroupSearchResultsTile" />
+	</definition>
+	
+	<definition name="eacGroupSearchResultsTile" template="/WEB-INF/jsp/eacGroupSearchResults.jsp">
+		<put-attribute name="searchNavigationTile" value="searchNavigationTile" />
+	</definition>
+	
+	<definition name="createOrEditEacGroup" extends="standardLayout">
+		<put-attribute name="body" value="createOrEditEacGroupTile"/>
+	</definition>
+	
+	<definition name="createOrEditEacGroupTile" template="/WEB-INF/jsp/createOrEditEacGroup.jsp"/>
+	
+	<definition name="uploadProducts" extends="standardLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/uploadProducts.jsp" />
+    </definition>
+    
+    <definition name="bulkCreateActivationCodes" extends="standardLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/BulkCreateActivationCodes.jsp" />
+    </definition>
+    
+   
+    <definition name="manageUrls" extends="standardLayout">
+		<put-attribute name="body" value="manageUrlTile"/>
+	</definition>	
+		
+	<definition name="manageUrlTile" template="/WEB-INF/jsp/manageUrls.jsp">
+		<put-attribute name="manageUrlFormTile" value="whiteListUrlsForm"/>
+	</definition>
+	
+	<definition name="whiteListUrlsForm" template="/WEB-INF/jsp/whiteListUrlsForm.jsp"/>
+	
+    <!-- Activation Code batch views -->
+    <definition name="searchActivationCodeBatches" extends="standardLayout">
+		<put-attribute name="body" value="activationCodeBatchSearchTile" />
+	</definition>
+
+	<definition name="activationCodeBatchSearchTile" template="/WEB-INF/jsp/activationCodeBatchSearch.jsp">
+		<put-attribute name="activationCodeBatchSearchFormTile" value="/WEB-INF/jsp/activationCodeBatchSearchForm.jsp" />
+		<put-attribute name="searchControlTile" value="/WEB-INF/jsp/activationCodeSearchControl.jsp" />
+		<put-attribute name="searchResultsTile" value="activationCodeBatchSearchResultsTile" />
+	</definition>
+	
+	<definition name="activationCodeBatchSearchResultsTile" template="/WEB-INF/jsp/activationCodeBatchSearchResults.jsp">
+		<put-attribute name="searchNavigationTile" value="/WEB-INF/jsp/searchNavigation.jsp" />
+	</definition>
+	<!-- Activation Code batch views -->
+	
+	
+	<!-- Activation Strategy Views For ACES Email Broker -->
+	<definition name="validatorLicenceAllowed" extends="notLoggedInLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/validatorLicenceAllowed.jsp" />
+    </definition>
+    
+    <definition name="validatorLicenceDenied" extends="notLoggedInLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/validatorLicenceDenied.jsp" />
+    </definition>
+    
+     
+    <definition name="activationError" extends="notLoggedInLayout">
+        <put-attribute name="body" value="/WEB-INF/jsp/activationError.jsp" />
+    </definition>
+    
+     <definition name="mergeCustomers" extends="standardLayout">
+        <put-attribute name="body" value="mergeCustomersTile" />
+    </definition>
+	
+	
+	<definition name="mergeCustomersTile" template="/WEB-INF/jsp/mergeCustomers.jsp">
+        <put-attribute name="searchResultsMergeCustomersTile" value="searchResultsMergeCustomersTile" />
+    </definition>
+    <definition name="searchResultsMergeCustomersTile" template="/WEB-INF/jsp/searchResultsMergeCustomers.jsp"/>
+    
+    <!-- Platform master views -->
+	
+	<definition name="managePlatform" extends="standardLayout">
+		<put-attribute name="body" value="managePlatformTile"/>
+	</definition>	
+	
+	<definition name="managePlatformTile" template="/WEB-INF/jsp/managePlatform.jsp"/>
+	
+	<!-- User Details report views -->
+	<definition name="userDetailsReport" extends="standardLayout">
+		<put-attribute name="body" value="userDetailsReportTile"/>
+	</definition>	
+	
+	<definition name="userDetailsReportTile" template="/WEB-INF/jsp/userDetailsReport.jsp"/>
+	
+	<definition name="cacheEviction" extends="standardLayout">
+		<put-attribute name="body" value="cacheEvictionTile"/>
+	</definition>	
+	<definition name="cacheEvictionTile" template="/WEB-INF/jsp/cacheEviction.jsp"/>
+	
+	<definition name="insertToFailFeeder" extends="standardLayout">
+		<put-attribute name="body" value="insertToFailFeederTile"/>
+	</definition>	
+	<definition name="insertToFailFeederTile" template="/WEB-INF/jsp/insertToFailFeeder.jsp"/>
+	
+	<!-- Trusted System views -->
+	
+	<definition name="manageTrustedSystem" extends="standardLayout">
+		<put-attribute name="body" value="manageTrustedSystemTile"/>
+	</definition>	
+	
+	<definition name="manageTrustedSystemTile" template="/WEB-INF/jsp/manageTrustedSystem.jsp"/>
+	
+</tiles-definitions>

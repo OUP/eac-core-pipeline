@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<CUSTOMER_MIGRATION_DATA
+        ID="[ID]"
+        OBJ_VERSION="0"
+        USERNAME="[USERNAME]"
+        PASSWORD="[PASSWORD]"
+        FIRST_NAME="[FIRST_NAME]"
+        LAST_NAME="[LAST_NAME]"
+        EMAIL_ADDRESS="[EMAIL_ADDRESS]"
+        RESET_PASSWORD="[RESET_PASSWORD]"
+        FAILED_ATTEMPTS="[FAILED_ATTEMPTS]"
+        LOCKED="[LOCKED]"
+        CUSTOMER_TYPE="[CUSTOMER_TYPE]"
+        ENABLED="[ENABLED]"
+        LOCALE="[LOCALE]"
+        TIME_ZONE="[TIME_ZONE]"
+        LAST_LOGIN="[LAST_LOGIN]"
+        EMAIL_VERIFICATION_STATE="[EMAIL_VERIFICATION_STATE]"
+        EXTERNAL_ID="[EXTERNAL_ID]"
+        COLUMN1="[COLUMN1]"
+        COLUMN2="[COLUMN2]"
+        COLUMN3="[COLUMN3]"
+        COLUMN4="[COLUMN4]"
+        COLUMN5="[COLUMN5]"
+        CREATED_DATE="[CREATED_DATE]"
+        UPDATED_DATE="[UPDATED_DATE]"
+    />
+</dataset>
+
+	
+	

@@ -1,0 +1,9 @@
+Dear username,
+
+Thank you for requesting access to productName. We are pleased to inform you that your request has been accepted.
+
+Licence Details : Access from 30-Jan-2013 13:14:15 GMT to 30-Jan-2014 13:14:15 GMT.
+
+Regards
+The OUP Support Team
+(Please do not respond to this automatically generated email)

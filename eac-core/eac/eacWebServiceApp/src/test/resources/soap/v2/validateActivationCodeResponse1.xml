@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" />
+	<SOAP-ENV:Body xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		<ValidateActivationCodeResponse
+			xmlns="http://eac.oup.com/2.0/eac-access-services">
+			<activationCode xmlns="http://eac.oup.com/2.0/eac-access-services">ABCDEF</activationCode>
+			<product xmlns="http://eac.oup.com/2.0/eac-access-services">
+				<ns1:productIds xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">
+					<ns1:id xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">indProdId1</ns1:id>
+					<ns1:external xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">
+						<ns1:id xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">extProdId1</ns1:id>
+						<ns1:systemId xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">system1</ns1:systemId>
+						<ns1:typeId xmlns:ns1="http://eac.oup.com/2.0/eac-common-types">ISBN</ns1:typeId>
+					</ns1:external>
+				</ns1:productIds>
+				<ns2:productName xmlns:ns2="http://eac.oup.com/2.0/eac-common-types">PRODUCT NUMBER ONE</ns2:productName>
+			</product>
+		</ValidateActivationCodeResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

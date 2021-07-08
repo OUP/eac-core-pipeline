@@ -1,0 +1,33 @@
+Dear Admin Name,
+
+jsmith has registered for the following product ProductXYZ.
+
+Account:	
+	First Name:	John
+	Surname:	Smith
+	Username:	jsmith
+	Email Address:	jsmith@mailinator.com
+	Locale:		English (United Kingdom)
+	Time Zone:	Europe/London
+	a/c Question 1:	answer 1
+	a/c Question 2:	answer 2
+	a/c Question 3:	answer 3
+	label for cbox:	Y
+	label 4 radio:	No
+	label 4 select:	DropDownValue
+
+Application:
+	App Question 4:	answer 4
+	App Question 5:	answer 5
+	App Question 6:	answer 6
+	label for cbox:	Y
+	label 4 radio:	No
+	label 4 select:	DropDownValue
+
+To Allow ProductXYZ Click Here: http://allowLink 
+
+To Deny ProductXYZ Click Here: http://denyLink 
+
+Regards
+The EAC Team
+This is the respond line

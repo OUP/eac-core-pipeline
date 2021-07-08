@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/eac-user-data-services">
+   <soapenv:Header>
+       <!--  the security headers are added by the test -->
+   </soapenv:Header>
+   <soapenv:Body>
+      <eac:UserNameRequest>
+         <eac:sessionToken>ABCDEF</eac:sessionToken>
+      </eac:UserNameRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+

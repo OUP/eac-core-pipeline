@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd" abstract="true">
+
+	<end-state id="errorFlow" view="flowRedirect:common/errors?errorCode=500"/>
+	<end-state id="accessDeniedErrorFlow" view="flowRedirect:common/errors?errorCode=403"/>
+	<end-state id="staleObjectState" view="flowRedirect:common/errors?errorCode=staleObjectState"/>
+		      
+	<global-transitions>
+		<transition on-exception="org.springframework.security.access.AccessDeniedException" to="accessDeniedErrorFlow"/>
+		<transition on-exception="org.hibernate.StaleObjectStateException" to="staleObjectState"/>
+    	<transition on-exception="java.lang.Exception" to="errorFlow"/>    	
+	</global-transitions>
+</flow>

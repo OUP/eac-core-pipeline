@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- Enables controllers mapped with @RequestMapping annotations, formatting annotations @NumberFormat @DateTimeFormat, and JSR 303 style validation -->
+	<mvc:annotation-driven conversion-service="applicationConversionService"/>
+	
+	<bean id="applicationConversionService" class="com.oup.eac.admin.binding.ApplicationConversionServiceFactoryBean"/>
+
+	<mvc:resources mapping="/resources/**" location="/, /js/, classpath*:/META-INF/web-resources/" />
+	<mvc:default-servlet-handler />
+    
+	<!-- Maps request paths to flows in the flowRegistry; e.g. a path of /hotels/booking looks for a flow with id "hotels/booking". -->
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+		<property name="order" value="-1"/>
+		<property name="flowRegistry" ref="flowRegistry" />
+	</bean>
+
+	<!-- Map paths directly to view names without controller processing. Use the view-name attribute if necessary: by convention the view name equals the path without the leading slash -->
+	<mvc:view-controller path="/" view-name="intro" />
+	<mvc:view-controller path="/login" />
+	<mvc:view-controller path="/logoutSuccess"/>
+	<mvc:view-controller path="/mvc/accessDenied.htm" view-name="accessDenied"/>
+	<mvc:view-controller path="/testAssetProductFinder"/>
+	
+	<!--  Views For ACES Email Broker -->
+	<mvc:view-controller path="/mvc/validatorLicenceAllowed.htm" view-name="validatorLicenceAllowed"/>
+	<mvc:view-controller path="/mvc/validatorLicenceDenied.htm" view-name="validatorLicenceDenied"/>
+	<mvc:view-controller path="/mvc/activationError.htm" view-name="activationError"/>
+	
+    <mvc:interceptors>
+
+	    <!-- Prevents EAC pages being cached in browsers -->
+	    <!-- see code for special IE only settings -->
+	    <mvc:interceptor>
+	    	<mvc:mapping path="/mvc/**" />
+	    	<mvc:mapping path="/customer/*" />
+	    	<mvc:mapping path="/token/*" />
+	    	<mvc:mapping path="/resources/js/eacAdmin.js" />
+	    	<mvc:mapping path="/resources/styles/eacadmin.css" />
+		    <bean class="com.oup.eac.web.interceptors.EacWebContentInterceptor">
+		        <property name="cacheSeconds" value="0"/>
+		        <property name="useExpiresHeader" value="true"/>
+		        <property name="useCacheControlHeader" value="true"/>
+		        <property name="useCacheControlNoStore" value="true"/>
+		    </bean>
+       </mvc:interceptor>
+       
+       <mvc:interceptor>
+       		<mvc:mapping path="/mvc/page/manage.htm" />
+       		<mvc:mapping path="/mvc/component/manage.htm" />
+       		<mvc:mapping path="/mvc/element/manage.htm" />
+       		<mvc:mapping path="/mvc/question/manage.htm" />
+       		<bean class="com.oup.eac.admin.components.BreadCrumbHistoryInterceptor">
+       			<property name="ignoreParams">
+					<list>
+						<value>statusMessageKey</value>
+					</list>
+				</property>
+       		</bean>
+       </mvc:interceptor>       
+       
+    </mvc:interceptors>
+
+	<!-- Resolves logical view names returned by Controllers to Tiles; a view name to resolve is treated as the name of a tiles definition -->
+	<bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>
+		<property name="order" value="1"/>
+	</bean>
+
+	<!-- Configures the Tiles layout system -->
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/**/views.xml</value>
+			</list>
+		</property>
+		<!-- TODO: Remove after development-->
+		<property name="checkRefresh" value="true"/>
+	</bean>
+	
+	<!-- Dispatches requests mapped to flows to FlowHandler implementations -->
+	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor"/>
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>        
+        <property name="order" value="99"/>
+    </bean>
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean>	 
+</beans>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title>Oxford University Press</title>
+<link rel="stylesheet" href="/styles.css" type="text/css" />
+	<!--[if !IE 7]>
+        <style type="text/css">
+            #wrap {display:table;height:100%}
+        </style>
+	<![endif]-->
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<div id="header-top"></div>
+			<div id="header-middle">
+				<div id="header-middle-left">
+					<a href="http://www.oup.com">Home</a>
+				</div>
+			</div>
+		</div>
+		<div id="main">
+			<div id="content">
+				<div style="line-height: 1.5em; text-align: center; margin-top: 200px; font-size: 1.5em; font-weight: bold">
+					We are sorry but the page that you requested is currently unavailable due to temporary site maintenance.<br />Please try again after a short while.
+				</div>
+			</div>
+		</div>
+		<div id="push">&nbsp;</div>
+	</div>
+	<div id="footer">
+		<div id="footer-top"></div>
+		<div id="footer-middle">
+			Copyright &copy; Oxford University Press <span id="yearPlaceholder">2013</span>. All Rights Reserved.
+		</div>
+		<div id="footer-bottom"></div>
+	</div>
+</body>
+<script type="text/javascript">
+     var yearPlaceholder = document.getElementById('yearPlaceholder');
+     var currentYear = new Date().getFullYear();
+     if (yearPlaceholder.textContent) {
+             yearPlaceholder.textContent = currentYear;
+     } else {
+             yearPlaceholder.innerText = currentYear;
+     }
+</script>
+</html>

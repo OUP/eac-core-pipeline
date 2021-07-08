@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>  
+  <deployment>  
+    <dependencies>
+      <module name="org.jboss.as.sar" />
+      <module name="org.apache.xerces" />
+      <module name="com.sun.xml.messaging.saaj" />
+      <module name="org.jboss.as.web" />
+      <!-- <module name="org.jboss.as.jmx" />
+      <module name="org.jboss.remoting3.remoting-jmx" /> -->
+    </dependencies>  
+  </deployment>  
+</jboss-deployment-structure>

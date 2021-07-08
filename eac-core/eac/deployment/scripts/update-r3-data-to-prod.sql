@@ -1,0 +1,1 @@
+update customer set email_address = 'cw.info@oxfordfajar.com.my' where id = '4259c882-aa57-45a7-9bee-0de4d85d8d9d';

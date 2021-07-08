@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+    <display-name>Eac Web Services Application</display-name>
+	
+    <servlet>
+        <servlet-name>eac-web-services</servlet-name>
+        <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:/eac-web-services-servlet.xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>transformWsdlLocations</param-name>
+            <param-value>true</param-value>
+        </init-param>      
+        <load-on-startup>1</load-on-startup>                
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>eac-web-services</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+       <filter-name>stopWatchFilter</filter-name>
+       <filter-class>com.oup.eac.ws.filter.StopWatchFilter</filter-class>
+    </filter>
+
+    <filter>
+       <filter-name>exceptionFaultFilter</filter-name>
+       <filter-class>com.oup.eac.ws.filter.ExceptionFaultFilter</filter-class>
+    </filter> 
+
+     <filter-mapping>
+       <filter-name>exceptionFaultFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+       <filter-name>stopWatchFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>

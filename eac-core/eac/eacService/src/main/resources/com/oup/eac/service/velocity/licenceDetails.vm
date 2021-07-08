@@ -1,0 +1,9 @@
+#if($licenceDescription and $licenceDescription.length() > 0 )##
+$resource.getString("licence.description.email.prefix") ${licenceDescription}.
+
+#end##
+#set($divisionType = "EMAIL-EXCLUSION")
+#if($email and $productdivision  != $divisionType)##
+   $resource.getString("label.comments") ${email}.
+   
+#end##

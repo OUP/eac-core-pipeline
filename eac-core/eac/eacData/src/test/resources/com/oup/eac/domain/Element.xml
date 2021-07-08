@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<ELEMENT ID="[ID]" REGULAR_EXPRESSION="[REGULAR_EXPRESSION]" 
+			 TITLE_TEXT="[TITLE_TEXT]" HELP_TEXT="[HELP_TEXT]" QUESTION_ID="[QUESTION_ID]"  OBJ_VERSION="0" />
+</dataset>
+	

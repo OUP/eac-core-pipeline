@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eac:RegistrationInformationResponse
+	xmlns:eac="http://eac.oup.com/2.0/eac-user-data-services"
+	xmlns:cmn="http://eac.oup.com/2.0/eac-common-types">
+	<cmn:errorStatus>
+		<cmn:statusCode>SERVER_ERROR</cmn:statusCode>
+		<cmn:statusReason>The error reason</cmn:statusReason>
+	</cmn:errorStatus>
+</eac:RegistrationInformationResponse>

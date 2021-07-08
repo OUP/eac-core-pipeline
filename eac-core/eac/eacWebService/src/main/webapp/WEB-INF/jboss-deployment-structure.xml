@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.1">
+  <deployment>  
+    <dependencies>
+    	<system>
+            <paths>
+                <path name="com/sun/org/apache/xerces/internal/jaxp"/>
+            </paths>
+        </system>
+      <module name="org.jboss.as.webservices" />
+      <module name="org.apache.xerces" />
+      <module name="com.sun.xml.messaging.saaj" />
+    </dependencies>  
+  </deployment>  
+</jboss-deployment-structure>

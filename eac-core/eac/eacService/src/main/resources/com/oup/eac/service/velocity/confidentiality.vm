@@ -1,0 +1,5 @@
+$resource.getString("label.confidentiality1")
+$resource.getString("label.confidentiality2")
+$resource.getString("label.confidentiality3")
+$resource.getString("label.confidentiality4")
+$resource.getString("label.confidentiality5")

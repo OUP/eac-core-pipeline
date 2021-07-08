@@ -1,0 +1,7 @@
+Dear ${username}
+
+You have registered for ${productname} . To complete your registration please click on the following link ${registrationlink} and then login to access ${productname} .
+
+Regards
+The OUP Support Team
+(Please do not respond to this automatically generated email)

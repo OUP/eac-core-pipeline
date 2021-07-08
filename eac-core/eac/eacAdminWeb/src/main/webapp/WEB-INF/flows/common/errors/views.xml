@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	
+	<definition name="403" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/flows/common/errors/403.jsp"/>
+	</definition>
+	
+	<definition name="404" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/flows/common/errors/404.jsp"/>
+	</definition>
+	
+	<definition name="500" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/flows/common/errors/500.jsp"/>
+	</definition>
+	
+	<definition name="staleObjectState" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/flows/common/errors/staleObjectState.jsp"/>
+	</definition>
+	
+</tiles-definitions>

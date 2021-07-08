@@ -1,0 +1,23 @@
+#eacLoginFooter ul {
+	list-style-type: none;
+	padding-bottom: 5px;
+	padding-top: 5px;	
+	border-top: thin solid black; 
+}
+
+#eacLoginFooter ul li {	
+	width:auto;
+    margin:0 auto;
+    display:inline;
+    padding:5px 1.5em;
+    background: url("/eacSampleSite/images/pipe.gif") no-repeat 0 0.5em;
+}
+
+#eacLoginFooter ul li:first-child {	
+	padding-left:0;
+    background:none;
+}
+
+#eacLoginFooter ul li:last-child { 
+    padding-right:0;
+}

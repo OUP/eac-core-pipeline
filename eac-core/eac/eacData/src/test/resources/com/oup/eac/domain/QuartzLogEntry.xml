@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <QUARTZ_LOG_ENTRY   ID="[ID]" OBJ_VERSION="[OBJ_VERSION]"
+                        TRG_NAME="[TRG_NAME]"
+                        TRG_GROUP="[TRG_GROUP]"
+                        JOB_NAME="[JOB_NAME]"
+                        JOB_GROUP="[JOB_GROUP]"
+                        REFIRE_COUNT="[REFIRE_COUNT]"
+                        TRG_INSTR_CODE="[TRG_INSTR_CODE]"                        
+                        ACT_FIRE_TIME="[ACT_FIRE_TIME]"
+                        SCH_FIRE_TIME="[SCH_FIRE_TIME]"
+                        NXT_FIRE_TIME="[NXT_FIRE_TIME]"
+                        JOB_RUN_TIME="[JOB_RUN_TIME]"
+                        HOST_NAME="[HOST_NAME]"
+                        HOST_ADDRESS="[HOST_ADDRESS]"
+                        JOB_CLASS_NAME="[JOB_CLASS_NAME]"
+    />
+</dataset>

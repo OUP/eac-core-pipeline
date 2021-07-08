@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/util
+      		http://www.springframework.org/schema/util/spring-util-3.1.xsd
+      		http://www.springframework.org/schema/security 
+      		http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<util:list id="test.registrationNotAllowedValues">		
+		
+		<ref bean="regNotAllowed.customerSelfRegSelfServiceActive"   />		
+		<ref bean="regNotAllowed.customerSelfRegSelfServiceSuspended" />
+		<ref bean="regNotAllowed.customerSelfRegSelfServiceRemoved"   />
+		<ref bean="regNotAllowed.customerSelfRegSelfServiceRetired"   />
+		
+		<ref bean="regNotAllowed.customerSelfRegSpecificConcurrencyActive"   />       
+        <ref bean="regNotAllowed.customerSelfRegSpecificConcurrencySuspended" />
+        <ref bean="regNotAllowed.customerSelfRegSpecificConcurrencyRemoved"   />
+        <ref bean="regNotAllowed.customerSelfRegSpecificConcurrencyRetired"   />
+
+		<ref bean="regNotAllowed.customerSelfRegSharedActive"        />		
+		<ref bean="regNotAllowed.customerSelfRegSharedSuspended"      />
+		<ref bean="regNotAllowed.customerSelfRegSharedRemoved"        />
+		<ref bean="regNotAllowed.customerSelfRegSharedRetired"        />
+
+		<ref bean="regNotAllowed.customerAdminRegSelfServiceActive"   />		
+		<ref bean="regNotAllowed.customerAdminRegSelfServiceSuspended" />
+		<ref bean="regNotAllowed.customerAdminRegSelfServiceRemoved"   />
+		<ref bean="regNotAllowed.customerAdminRegSelfServiceRetired"   />
+		
+		<ref bean="regNotAllowed.customerAdminRegSpecificConcurrencyActive"   />        
+        <ref bean="regNotAllowed.customerAdminRegSpecificConcurrencySuspended" />
+        <ref bean="regNotAllowed.customerAdminRegSpecificConcurrencyRemoved"   />
+        <ref bean="regNotAllowed.customerAdminRegSpecificConcurrencyRetired"   />
+
+		<ref bean="regNotAllowed.customerAdminRegSharedActive"   />		
+		<ref bean="regNotAllowed.customerAdminRegSharedSuspended" />
+		<ref bean="regNotAllowed.customerAdminRegSharedRemoved"   />
+		<ref bean="regNotAllowed.customerAdminRegSharedRetired"   />
+	</util:list>
+	
+	<util:map  id="test.registrationNotAllowedMessageConfig"
+		key-type="com.oup.eac.web.controllers.helpers.impl.RegistrationNotAllowedMessageCodeConfig"
+		value-type="java.lang.String" map-class="java.util.LinkedHashMap">		
+		
+		<entry key-ref="regNotAllowed.customerSelfRegSelfServiceActive"    value="${test.registration.not.alllowed.message.1}"  />	
+		<entry key-ref="regNotAllowed.customerSelfRegSelfServiceSuspended"  value="${test.registration.not.alllowed.message.2}"  />
+		<entry key-ref="regNotAllowed.customerSelfRegSelfServiceRemoved"    value="${test.registration.not.alllowed.message.3}"  />
+		<entry key-ref="regNotAllowed.customerSelfRegSelfServiceRetired"    value="${test.registration.not.alllowed.message.4}"  />
+		
+		<entry key-ref="regNotAllowed.customerSelfRegSpecificConcurrencyActive"    value="${test.registration.not.alllowed.message.5}"  />    
+        <entry key-ref="regNotAllowed.customerSelfRegSpecificConcurrencySuspended"  value="${test.registration.not.alllowed.message.6}"  />
+        <entry key-ref="regNotAllowed.customerSelfRegSpecificConcurrencyRemoved"    value="${test.registration.not.alllowed.message.7}"  />
+        <entry key-ref="regNotAllowed.customerSelfRegSpecificConcurrencyRetired"    value="${test.registration.not.alllowed.message.8}"  />
+
+		<entry key-ref="regNotAllowed.customerSelfRegSharedActive"         value="${test.registration.not.alllowed.message.9}"  />
+		<entry key-ref="regNotAllowed.customerSelfRegSharedSuspended"       value="${test.registration.not.alllowed.message.10}"  />
+		<entry key-ref="regNotAllowed.customerSelfRegSharedRemoved"         value="${test.registration.not.alllowed.message.11}"  />
+		<entry key-ref="regNotAllowed.customerSelfRegSharedRetired"         value="${test.registration.not.alllowed.message.12}"  />
+
+		<entry key-ref="regNotAllowed.customerAdminRegSelfServiceActive"   value="${test.registration.not.alllowed.message.13}"  />
+		<entry key-ref="regNotAllowed.customerAdminRegSelfServiceSuspended" value="${test.registration.not.alllowed.message.14}" />
+		<entry key-ref="regNotAllowed.customerAdminRegSelfServiceRemoved"   value="${test.registration.not.alllowed.message.15}" />
+		<entry key-ref="regNotAllowed.customerAdminRegSelfServiceRetired"   value="${test.registration.not.alllowed.message.16}" />
+		
+		<entry key-ref="regNotAllowed.customerAdminRegSpecificConcurrencyActive"   value="${test.registration.not.alllowed.message.17}"  />
+        <entry key-ref="regNotAllowed.customerAdminRegSpecificConcurrencySuspended" value="${test.registration.not.alllowed.message.18}" />
+        <entry key-ref="regNotAllowed.customerAdminRegSpecificConcurrencyRemoved"   value="${test.registration.not.alllowed.message.19}" />
+        <entry key-ref="regNotAllowed.customerAdminRegSpecificConcurrencyRetired"   value="${test.registration.not.alllowed.message.20}" />
+
+		<entry key-ref="regNotAllowed.customerAdminRegSharedActive"        value="${test.registration.not.alllowed.message.21}" />		
+		<entry key-ref="regNotAllowed.customerAdminRegSharedSuspended"      value="${test.registration.not.alllowed.message.22}" />
+		<entry key-ref="regNotAllowed.customerAdminRegSharedRemoved"        value="${test.registration.not.alllowed.message.23}" />
+		<entry key-ref="regNotAllowed.customerAdminRegSharedRetired"        value="${test.registration.not.alllowed.message.24}" />
+	</util:map>
+
+</beans>

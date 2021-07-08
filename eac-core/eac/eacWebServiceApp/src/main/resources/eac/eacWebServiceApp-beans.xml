@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:load-time-weaver/>
+	<context:spring-configured />
+
+    <bean id="userServiceAdapterV1" class="com.oup.eac.ws.v1.service.impl.CachingUserServiceAdapter" primary="true">
+		<constructor-arg index="0" ref="wsCustomerLookup" />
+    </bean>
+    
+	<bean id="wsCustomerLookup" class="com.oup.eac.ws.v2.service.impl.WsCustomerLookupImpl" >
+		<constructor-arg ref="customerService" />
+	</bean>
+	
+	<bean id="wsProductLookup" class="com.oup.eac.ws.v2.service.impl.WsProductLookupImpl" >
+		<constructor-arg ref="productService" />
+		<constructor-arg ref="divisionService" />
+	</bean>
+
+	<bean id="wsExternalSystemLookup" class="com.oup.eac.ws.v2.service.impl.WsExternalSystemLookupImpl" >
+		<constructor-arg ref="externalIdService" />
+	</bean>
+
+	<bean id="customerConverter" class="com.oup.eac.ws.v2.service.impl.entitlements.CustomerConverterImpl" />
+	<bean id="licenceDtoConverter" class="com.oup.eac.ws.v2.service.impl.entitlements.LicenceDtoConverterImpl"/>
+    
+    <bean id="externalCustomerIdDtoSource" class="com.oup.eac.ws.v2.service.impl.entitlements.ExternalCustomerDtoSourceImpl">
+	    <constructor-arg index="0" ref="externalIdService" />
+    </bean>
+
+	<bean id="entitlementsAdapterHelper" class="com.oup.eac.ws.v2.service.impl.entitlements.EntitlementsAdapterHelperImpl" >
+		<constructor-arg index="0" ref="licenceDtoConverter" />
+	</bean>
+	
+	<bean id="userEntitlementsAdapter" class="com.oup.eac.ws.v2.service.impl.UserEntitlementsAdapterImpl">
+		<constructor-arg index="0" ref="wsCustomerLookup" />
+		<constructor-arg index="1" ref="registrationService" />
+        <constructor-arg index="2" ref="customerConverter" />
+        <constructor-arg index="3" ref="externalIdService" />
+   		<constructor-arg index="4" ref="wsExternalSystemLookup" />
+   		<constructor-arg index="5" ref="userEntitlementsService" />
+   		<constructor-arg index="6" ref="entitlementsAdapterHelper" />
+	</bean>
+    
+	<bean id="activationCodeAdapter" class="com.oup.eac.ws.v2.service.impl.ActivationCodeAdapterImpl" >   		
+		<constructor-arg index="0" ref="wsCustomerLookup" />
+   		<constructor-arg index="1" ref="registrationService" />
+   		<constructor-arg index="2" ref="wsExternalSystemLookup" />
+   		<constructor-arg index="3" ref="externalCustomerIdDtoSource" />
+   		<constructor-arg index="4" ref="activationCodeService" />
+   		<constructor-arg index="5" ref="userEntitlementsService" />
+   		<constructor-arg index="6" ref="entitlementsAdapterHelper" />
+   		<constructor-arg index="7" ref="externalIdService" />
+   		<constructor-arg index="8" ref="productService" />
+   		<constructor-arg index="9" ref="licenceService" />
+   		<constructor-arg index="10" ref="erightsFacade" />
+   	</bean>
+	
+	<bean id="createUserAccountAdapter" class="com.oup.eac.ws.v2.service.impl.CreateUserAccountAdapterImpl" >
+		<constructor-arg index="0" ref="messageSource" />   		
+		<constructor-arg index="1" ref="customerService" />
+   		<constructor-arg index="2" ref="customerConverter" />
+   		<constructor-arg index="3" ref="externalIdService" />
+   		<constructor-arg index="4" ref="usernameValidator" />
+   	</bean>
+   	
+   	
+	<bean id="updateUserAccountAdapter" class="com.oup.eac.ws.v2.service.impl.UpdateUserAccountAdapterImpl" >
+		<constructor-arg index="0" ref="messageSource" />
+		<constructor-arg index="1" ref="customerService" />
+		<constructor-arg index="2" ref="wsCustomerLookup" />
+   		<constructor-arg index="3" ref="usernameValidator" />
+	</bean>
+	
+	<bean id="externalUserIdsAdapter" class="com.oup.eac.ws.v2.service.impl.ExternalUserIdsAdapterImpl" >
+		<constructor-arg ref="wsCustomerLookup" />
+		<constructor-arg ref="externalIdService" />
+	</bean>
+	
+	<bean id="externalProductIdsAdapter" class="com.oup.eac.ws.v2.service.impl.ExternalProductIdsAdapterImpl" >
+		<constructor-arg ref="registrationDefinitionService" />
+		<constructor-arg ref="externalIdService" />
+		<constructor-arg ref="wsProductLookup"/>
+	</bean>
+	
+	<bean id="validatePasswordCredentialsAdapter" class="com.oup.eac.ws.v2.service.impl.ValidatePasswordCredentialsAdapterImpl" >
+		<constructor-arg index="0" ref="messageSource" />
+		<constructor-arg index="1" ref="customerService" />
+		<constructor-arg index="2" ref="usernameValidator" />
+	</bean>
+
+	<bean id="productRegistrationAdapter" class="com.oup.eac.ws.v2.service.impl.ProductRegistrationAdapterImpl" >
+		<constructor-arg index="0" ref="wsCustomerLookup" />
+		<constructor-arg index="1" ref="wsProductLookup"  />
+		<constructor-arg index="2" ref="productRegistrationService" />
+		<constructor-arg index="3" ref="productService" />
+	</bean>
+	
+	
+    <bean id="killUserSessionAdapter" class="com.oup.eac.ws.v2.service.impl.KillUserSessionAdapterImpl" >
+        <constructor-arg index="0" ref="messageSource" />
+        <constructor-arg index="1" ref="customerService" />
+        <constructor-arg index="2" ref="wsCustomerLookup" />
+        <constructor-arg index="3" ref="usernameValidator" />
+    </bean>
+    
+    <bean id="createUserAccountWithConcurrencyAdapter" class="com.oup.eac.ws.v2.service.impl.CreateUserAccountWithConcurrencyAdapterImpl" >
+        <constructor-arg index="0" ref="messageSource" />           
+        <constructor-arg index="1" ref="customerService" />
+        <constructor-arg index="2" ref="customerConverter" />
+        <constructor-arg index="3" ref="externalIdService" />
+        <constructor-arg index="4" ref="usernameValidator" />
+    </bean>
+    
+	
+    <bean id="updateUserAccountWithConcurrencyAdapter" class="com.oup.eac.ws.v2.service.impl.UpdateUserAccountWithConcurrencyAdapterImpl" >
+        <constructor-arg index="0" ref="messageSource" />
+        <constructor-arg index="1" ref="customerService" />
+        <constructor-arg index="2" ref="wsCustomerLookup" />
+        <constructor-arg index="3" ref="usernameValidator" />
+    </bean>
+	
+	<bean id="fullUserEntitlementsAdapter" class="com.oup.eac.ws.v2.service.impl.FullUserEntitlementsAdapterImpl">
+        <constructor-arg index="0" ref="wsCustomerLookup" />
+        <constructor-arg index="1" ref="registrationService" />
+        <constructor-arg index="2" ref="customerConverter" />
+        <constructor-arg index="3" ref="externalIdService" />
+        <constructor-arg index="4" ref="wsExternalSystemLookup" />
+        <constructor-arg index="5" ref="userEntitlementsService" />
+        <constructor-arg index="6" ref="entitlementsAdapterHelper" />
+        <constructor-arg index="7" ref="wsProductLookup" />
+    </bean>
+    
+	<!-- 
+	<bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+        <property name="beans">
+            <map>
+                <entry key="eac:webServices=messageReloader" value-ref="dbMessageSourceReloader"/>
+            </map>
+        </property>
+    </bean>
+	 -->
+	 
+	<bean id="credentialPolicyAdapter" class="com.oup.eac.ws.v2.service.impl.CredentialPolicyAdapterImpl"/>
+	
+	<bean id="resetPasswordWithUrlAdapter"
+		class="com.oup.eac.ws.v2.service.impl.ResetPasswordWithUrlAdapterImpl">
+		<constructor-arg index="0" ref="wsCustomerLookup" />
+		<constructor-arg index="1" ref="customerService" />
+	</bean>
+	
+</beans>

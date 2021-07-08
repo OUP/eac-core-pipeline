@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<bean id="appConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	    <property name="locations">
+	         <list>
+	             <value>classpath*:/eac/eac*.properties</value>
+	             <value>classpath*:/eac/test.eac*.properties</value>
+	         </list>
+	    </property>
+	</bean>
+	
+	<!-- We override the cache manager here so that we can use a different 
+			cache configuration for unit tests - specifically without cache
+			replication turned on. Turning on replication when running unit
+			tests can cause bind issues with 'address already in use' as the 
+			replication system is repeatedly brought up/down with each unit
+			test execution. -->
+    <!-- <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    	<property name="configLocation"  value="classpath:/test-ehcache.xml"/>
+    </bean>  -->
+    
+</beans>

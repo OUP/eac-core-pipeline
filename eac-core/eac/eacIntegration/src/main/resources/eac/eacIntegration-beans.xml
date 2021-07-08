@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd			
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/util
+      		http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	
+    <bean id="acesErightsPort" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.oup.eac.integration.erights.AccessServiceV10" />
+        <property name="wsdlDocumentUrl" value="classpath:eac/access-service-v1.0.wsdl" />
+        <property name="endpointAddress" value="${erights.webservice.url}"/>
+        <property name="namespaceUri" value="http://aces.oup.com/1.0/aces-access-services" />
+        <property name="serviceName" value="access-service-v1.0Service" />
+        <property name="portName" value="access-service-v1.0Soap11" />
+        <property name="handlerResolver" ref="erightsHandlerResolver"/>
+        <property name="lookupServiceOnStartup" value="false"/>
+        <property name="customProperties">
+	        <util:map id="jaxwsCustomProperties">    
+			    <entry key="com.sun.xml.ws.request.timeout">
+			        <value type="java.lang.Integer">${ws.request.timeout}</value>
+			    </entry>
+			    <entry key="com.sun.xml.ws.connect.timeout">
+			        <value type="java.lang.Integer">${ws.connect.timeout}</value>
+			    </entry>
+			</util:map>
+        </property>
+    </bean>
+    
+    <bean id="erightsRestFacade" class="com.oup.eac.integration.facade.impl.ErightsRestFacadeImpl">
+        <property name="URI" value="${erights.rest.webservice.url}"/>
+    </bean>
+    <bean id="authenticateUser" class="com.oup.eac.integration.utils.authenticatication.AuthenticateUser">        
+    </bean>
+    <bean id="userDataSyncService" class="com.oup.eac.integration.utils.datasync.UserDataSyncService">        
+    </bean>
+    <bean id="sqsUtility" class="com.oup.eac.integration.utils.sqs.SqsUtility">            
+    </bean>
+    <bean id="ssmParameterUtility" class="com.oup.eac.integration.utils.ssm.SSMParameterUtility">
+    <property name="AWS_SSM_URL" value="${aws.ssm.endPoint}"/>
+    <property name="AWS_SSM_PARAMS" value="${aws.ssm.params}"/>
+    <property name="AWS_SSM_REGION" value="${aws.ssm.region}"/>
+    <property name="AWS_SSM_PARAMS_PREFIX" value="${aws.eac.envName}"/>
+    <property name="AWS_SSM_SERVICE" value="${aws.ssm.service}"/>  
+    <property name="AWS_SSM_ACCESS_KEY_ID" value="${aws.kms.password.accesskey}"/>    
+    <property name="AWS_SSM_SECRET_KEY" value="${aws.kms.password.secretkey}"/>    
+    </bean>
+    <bean id="acesRestTemplate" class="com.oup.eac.integration.rest.template.AcesRestTemplate">        
+    </bean>
+        
+</beans>

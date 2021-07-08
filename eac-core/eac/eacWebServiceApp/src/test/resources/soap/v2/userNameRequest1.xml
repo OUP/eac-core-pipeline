@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:eac="http://eac.oup.com/2.0/eac-user-data-services" xmlns:cmn="http://eac.oup.com/2.0/eac-common-types">
+   <soapenv:Header>
+       <!--  the security headers are added by the test -->
+   </soapenv:Header>
+   <soapenv:Body>
+      <eac:UserNameRequest>
+			<cmn:wsUserId>
+				<cmn:sessionToken>ABCDEF</cmn:sessionToken>
+			</cmn:wsUserId>
+      </eac:UserNameRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+

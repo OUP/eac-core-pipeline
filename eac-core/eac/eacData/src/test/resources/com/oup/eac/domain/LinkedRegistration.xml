@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<LINKED_REGISTRATION ID="[ID]" 
+		OBJ_VERSION="0"
+		REGISTRATION_ID="[REGISTRATION_ID]"
+		LINKED_PRODUCT_ID="[LINKED_PRODUCT_ID]"
+		ERIGHTS_LICENCE_ID="[ERIGHTS_LICENCE_ID]"
+		/>
+</dataset>	

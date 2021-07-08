@@ -1,0 +1,9 @@
+$resource.getString("label.dear") ${username},
+
+$resource.getString("label.you") ${productname}. $resource.getString("label.complete") 
+
+${registrationlink} 
+
+$resource.getString("label.after.registration") ${productname}
+
+#parse( "com/oup/eac/service/velocity/regards.vm" )

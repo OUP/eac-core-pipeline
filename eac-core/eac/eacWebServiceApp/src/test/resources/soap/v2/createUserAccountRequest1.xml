@@ -1,0 +1,44 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:cmn="http://eac.oup.com/2.0/eac-common-types" xmlns:eac="http://eac.oup.com/2.0/eac-access-services">
+	<soapenv:Header />
+	<soapenv:Body>
+		<eac:CreateUserAccountRequest>
+			<eac:user>
+				<cmn:emailAddress>david.hay@test.com</cmn:emailAddress>
+				<cmn:firstName>david</cmn:firstName>
+				<cmn:lastName>hay</cmn:lastName>
+				<cmn:locale language="en" country="GB" />
+				<cmn:credentials>
+					<cmn:passwordCredential>
+						<cmn:userName>davidhay</cmn:userName>
+						<cmn:Password>password1</cmn:Password>
+					</cmn:passwordCredential>
+				</cmn:credentials>
+			</eac:user>
+			<eac:user>
+				<cmn:emailAddress>bart.simpson@test.com</cmn:emailAddress>
+				<cmn:firstName>bart</cmn:firstName>
+				<cmn:lastName>simpson</cmn:lastName>
+				<cmn:locale language="en" country="GB" />
+				<cmn:credentials>
+					<cmn:passwordCredential>
+						<cmn:userName>bart1</cmn:userName>
+						<cmn:Password>password1</cmn:Password>
+					</cmn:passwordCredential>
+				</cmn:credentials>
+			</eac:user>
+			<eac:user>
+				<cmn:emailAddress>lisa.simpson@test.com</cmn:emailAddress>
+				<cmn:firstName>lisa</cmn:firstName>
+				<cmn:lastName>simpson</cmn:lastName>
+				<cmn:locale language="en" country="GB" />
+				<cmn:credentials>
+					<cmn:passwordCredential>
+						<cmn:userName>lisa1</cmn:userName>
+						<cmn:Password>password1</cmn:Password>
+					</cmn:passwordCredential>
+				</cmn:credentials>
+			</eac:user>
+		</eac:CreateUserAccountRequest>
+	</soapenv:Body>
+</soapenv:Envelope>

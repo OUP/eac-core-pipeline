@@ -1,0 +1,74 @@
+{
+  "builders": [
+    {
+      "ami_description": "Shibboleth AMI",
+      "ami_name": "{{user `ami_name` | clean_resource_name}}",
+      "associate_public_ip_address": "false",
+      "instance_type": "t3.micro",
+      "name": "CodePipeline AMI Builder",
+      "region": "{{user `aws_region`}}",
+      "run_tags": {
+        "Name": "{{user `ami_name`}}"
+      },
+      "run_volume_tags": {
+        "Name": "{{user `ami_name`}}"
+      },
+      "snapshot_tags": {
+        "Name": "{{user `ami_name`}}"
+      },
+      "source_ami": "{{user `upstream_ami`}}",
+      "ssh_username": "ec2-user",
+      "subnet_id": "{{user `subnet`}}",
+      "tags": {
+        "Component": "{{user `component_name`}}",
+        "Name": "{{user `ami_name`}}"
+      },
+      "type": "amazon-ebs",
+      "vpc_id": "{{user `vpc`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "../chef/data_bag_key",
+      "destination": "/tmp/secret"
+    },
+    {
+      "inline": [
+        "sudo mkdir -p /etc/chef",
+        "sudo mv /tmp/secret /etc/chef/encrypted_data_bag_secret"
+      ],
+      "type": "shell"
+    },
+    {
+      "cookbook_paths": [
+        "../chef/cookbooks"
+      ],
+      "environments_path": "../chef/environments",
+      "data_bags_path": "../chef/databags",
+      "run_list": [
+        "{{user `app_roles`}}"
+      ],
+      "type": "chef-solo",
+      "install_command":"curl -L https://www.opscode.com/chef/install.sh | {{if .Sudo}}sudo{{end}} bash -s -- -v 14.12.9",
+      "json": {
+      }
+    },
+    {
+      "inline": [
+        "rm .ssh/authorized_keys ; sudo rm /root/.ssh/authorized_keys"
+      ],
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "ami_name": "{{env `PROJECT`}}-{{env `BUILD_COMPONENT_NAME`}}-env-{{env `ENVIRONMENT`}}-branch-{{env `BUILD_GIT_BRANCH`}}-{{isotime \"02-Jan-06 03_04_05\"}}",
+    "component_name": "{{env `BUILD_COMPONENT_NAME`}}",
+    "app_roles": "{{env `BUILD_APP_ROLES`}}",
+    "aws_region": "{{env `AWS_REGION`}}",
+    "subnet": "{{env `BUILD_SUBNET_ID`}}",
+    "upstream_ami": "{{env `BUILD_UPSTREAM_AMI`}}",
+    "environment": "{{env `ENVIRONMENT`}}",
+    "branch": "{{env `BUILD_GIT_BRANCH`}}"
+  }
+}
