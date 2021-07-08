@@ -16,6 +16,7 @@ phases:
       - echo "setting java home to ${JAVA_HOME}"
       - mkdir $BUILDDIR
       - mkdir $BUILDDIR/target
+      - ls -lh
       - cp -Rp $BUILDDIR/eacBuild $BUILDDIR/target/eacBuild
       - rsync -avz "${APPDIR}/eacBuild/" $BUILDDIR/target/eacBuild
       - cd $BUILDDIR/target/eacBuild
