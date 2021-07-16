@@ -3,6 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
+       - java -version
        - echo "setting up global environment variables"
        - export BUILDDIR="./build"
        - export APPDIR="./eac-core/eac"
