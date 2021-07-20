@@ -2,10 +2,9 @@ version: 0.2
 
 phases:
   pre_build:
+    runtime-versions:
+      java: corretto8
     commands:
-      - apt-get install openjdk-8-jre -y
-      - update-alternatives --config java
-      - 2
       - java -version
       - echo "setting up global environment variables"
       - export BUILDDIR="./build"
