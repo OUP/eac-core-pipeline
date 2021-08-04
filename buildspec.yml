@@ -22,7 +22,7 @@ phases:
       - mkdir $BUILDDIR/target
       - rsync -avz "${APPDIR}/" $BUILDDIR/target/
       - cd $BUILDDIR/target/eacBuild
-      - mvn --batch-mode clean install -U
+      - mvn --batch-mode clean install -U -e -X
       - ls -lh
       #- mvn clean -X release:prepare release:perform
 
