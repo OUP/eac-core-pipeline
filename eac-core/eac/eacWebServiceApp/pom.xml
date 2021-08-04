@@ -40,6 +40,10 @@
 					<artifactId>org.springframework.jms</artifactId>
 					<groupId>org.springframework</groupId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.igniterealtime</groupId>
+  					<artifactId>com.springsource.org.jivesoftware.smackx</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>		
 		<dependency>
@@ -87,7 +91,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eacDomain</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eacDomain</artifactId>
 			<type>test-jar</type>
@@ -98,7 +102,7 @@
 			<artifactId>eacData</artifactId>
 			<type>test-jar</type>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 		    <groupId>org.dbunit</groupId>
 		    <artifactId>dbunit</artifactId>
@@ -127,7 +131,7 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eacService</artifactId>
 			<type>test-jar</type>
@@ -138,13 +142,13 @@
 			<artifactId>eacIntegration</artifactId>
 			<type>test-jar</type>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eacCommon</artifactId>
 			<type>test-jar</type>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 		    <groupId>wsdl4j</groupId>
 		    <artifactId>wsdl4j</artifactId>
@@ -296,6 +300,11 @@
             <artifactId>powermock-module-junit4</artifactId>
             <scope>test</scope>
        	</dependency>
+       	<dependency>
+  			<groupId>org.igniterealtime.legacy</groupId>
+  			<artifactId>com.springsource.org.jivesoftware.smackx</artifactId>
+  			<version>3.1.0</version>
+		</dependency>
 	</dependencies>
 
 

@@ -46,12 +46,12 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eacDomain</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eacDomain</artifactId>
 			<type>test-jar</type>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>eacData</artifactId>
@@ -85,11 +85,11 @@
 			<artifactId>org.springframework.webflow</artifactId>		
 		</dependency>
 		<dependency> 
-			<groupId>javax.validation</groupId> 
+			<groupId>javax.validation.legacy</groupId> 
 			<artifactId>com.springsource.javax.validation</artifactId>
 		</dependency>
 		<dependency> 
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.legacy</groupId>
 			<artifactId>com.springsource.org.hibernate.validator</artifactId>
 		</dependency>
 		<dependency>
@@ -114,13 +114,13 @@
 		    <groupId>org.dbunit</groupId>
 		    <artifactId>dbunit</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.oup.eac</groupId>
 			<artifactId>eacCommon</artifactId>
 			<type>test-jar</type>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- <dependency>
 			<groupId>com.oup.eac</groupId>
 			<artifactId>eacService</artifactId>
 			<type>test-jar</type>
@@ -137,7 +137,7 @@
 			<artifactId>eacIntegration</artifactId>
 			<type>test-jar</type>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>

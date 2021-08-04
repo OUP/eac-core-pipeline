@@ -134,30 +134,33 @@
         </plugin>
 <!-- JSP PreCompilation -->
 		   <plugin>  
-              <groupId>org.codehaus.mojo.jspc</groupId>  
-              <artifactId>jspc-maven-plugin</artifactId>  
-              <version>2.0-alpha-3</version>  
+              <groupId>io.leonard.maven.plugins</groupId>
+ 				<artifactId>jspc-maven-plugin</artifactId>
+             <version>2.3.0</version>  
               <configuration>
 			      <workingDirectory>${project.build.directory}\jsp_src</workingDirectory>
 			      <webFragmentFile>${project.build.directory}\generated_web.xml</webFragmentFile>
 			      <validateXml>false</validateXml>
 			      <trimSpaces>true</trimSpaces>
 			    </configuration>
-              <executions>  
-                <execution>  
-                  <goals>  
-                    <goal>compile</goal>  
-                  </goals>  
-                </execution>  
-              </executions>  
+              <executions>
+    <execution>
+     <id>jspc</id>
+     <goals>
+     <goal>compile</goal>
+    </goals>
+    <configuration>
+    </configuration>
+  </execution>
+ </executions>
               <!-- Use the Tomcat 6 JSP compiler plugin   
                 (no Tomcat 7 or JBoss 6 compiler plugin yet) -->  
-              <dependencies>  
+              <!-- <dependencies>  
                 <dependency>  
                   <groupId>org.codehaus.mojo.jspc</groupId>  
                   <artifactId>jspc-compiler-tomcat6</artifactId>  
-                  <version>2.0-alpha-3</version>
-                  <!-- Exclude Tomcat 6 JSP compiler and JEE5 API -->  
+                  <version>2.0.2</version>
+                  Exclude Tomcat 6 JSP compiler and JEE5 API  
                   <exclusions>  
                     <exclusion>  
                       <groupId>org.apache.tomcat</groupId>  
@@ -189,19 +192,19 @@
                     </exclusion>  
                   </exclusions>  
                 </dependency>  
-                <!-- Add Tomcat 7 JSP compiler -->  
+                Add Tomcat 7 JSP compiler  
                 <dependency>  
                   <groupId>org.apache.tomcat</groupId>  
                   <artifactId>tomcat-jasper</artifactId>  
                   <version>7.0.12</version>  
                 </dependency>  
-                <!-- Override ecj version, since newer not yet on maven central -->  
-                <!-- <dependency>  
+                Override ecj version, since newer not yet on maven central  
+                <dependency>  
                   <groupId>org.eclipse.jdt.core.compiler</groupId>  
                   <artifactId>ecj</artifactId>  
                   <version>3.5.1</version>  
-                </dependency>  --> 
-              </dependencies>  
+                </dependency>  
+              </dependencies> -->  
             </plugin>
 <!-- JSP PreCompilation -->   
 	  </plugins>
