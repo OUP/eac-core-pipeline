@@ -114,7 +114,8 @@
 		</dependency>		
 		<dependency>
 			<groupId>org.springframework.ws</groupId>
-			<artifactId>org.springframework.ws.soap.security</artifactId>
+    		<artifactId>spring-ws-security</artifactId>
+    		<version>2.0.0.RELEASE</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>stax-api</artifactId>
