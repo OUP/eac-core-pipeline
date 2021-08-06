@@ -21,7 +21,7 @@ phases:
       - test -d /root/.m2 && echo "/root/.m2 exist" || mkdir /root/.m2
       - cp -Rp ./configs/settings.xml /root/.m2/settings.xml
       - sed -i "s/|NEXUS_USERNAME|/admin/g" /root/.m2/settings.xml
-      - sed -i "s/|NEXUS_PASSWORD|/CHQ-Pipeline-Nexus/g" /root/.m2/settings.xml
+      - sed -i "s/|NEXUS_PASSWORD|/admin123/g" /root/.m2/settings.xml
       - sed -i "s/|NEXUS_URL|/http:\/\/nexus.eps-management.the-infra.com:8081\/nexus\/content\/groups\/public\//g" /root/.m2/settings.xml
       - echo "setting nexus username to admin on repository nexus.eps-management.the-infra.com:8081"
       - mkdir $BUILDDIR
