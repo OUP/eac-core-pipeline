@@ -22,7 +22,18 @@ Parameters:
   PipelineName:
     Type: String
     Default: CoreBuilder
+  CodeBuildVPC: 
+    Type: AWS::EC2::VPC::Id
+    Default: vpc-0059fd92000eaae5d
+  CodeBuildSubnet:
+    Type: AWS::EC2::Subnet::Id
+    Default: subnet-03452a3f41c4f34fc
+  CodeBuildSecurityGroup:
+    Type: AWS::EC2::SecurityGroup::Id
+    Default: sg-0346bf91a376ef7bb
+
 Resources:
+
   Artifacts:
     Type: AWS::S3::Bucket
     Properties:
@@ -33,6 +44,7 @@ Resources:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: AES256
     DeletionPolicy: Delete
+
   Build:
     Type: AWS::CodeBuild::Project
     Properties:
@@ -51,6 +63,12 @@ Resources:
         Type: CODEPIPELINE
       TimeoutInMinutes: 15
       Name: !Sub ${PipelineName}_build
+      VpcConfig:
+        SecurityGroupIds: 
+          - !Ref CodeBuildSecurityGroup
+        Subnets: 
+          - !Ref CodeBuildSubnet
+        VpcId: !Ref CodeBuildVPC
 
   MainCodePipeline:
       Type: AWS::CodePipeline::Pipeline
@@ -94,6 +112,7 @@ Resources:
                 Configuration:
                   ProjectName: !Ref Build
                 RunOrder: 2
+
   CodePipelineServiceRole:
     Type: AWS::IAM::Role
     Properties:
@@ -121,6 +140,7 @@ Resources:
                   - codebuild:*
                 Effect: Allow
                 Resource: '*'
+
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
     Properties:
@@ -144,6 +164,8 @@ Resources:
                   - logs:CreateLogGroup
                   - logs:CreateLogStream
                   - logs:PutLogEvents
+                  - ec2:DescribeSecurityGroups
+                  - ec2:DescribeSubnets
               - Resource: "*"
                 Effect: Allow
                 Action:
@@ -166,6 +188,7 @@ Resources:
                 Effect: Allow
                 Action:
                   - s3:List*
+
   CFNRole:
     Type: AWS::IAM::Role
     Properties:
