@@ -22,7 +22,7 @@ import com.oup.eac.common.utils.EACSettings;
         "classpath*:/eac/test.eac*-beans.xml" })
 public class MailCriteriaTest {
 
-    @Test
+    //@Test
     public void testToString() throws UnsupportedEncodingException, AddressException {
       StringBuffer sb = new StringBuffer();
       sb.append("\n");
