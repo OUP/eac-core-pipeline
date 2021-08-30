@@ -14,7 +14,7 @@ Parameters:
   GitHubToken:
     Type: 'String'
     Description: GitHub token
-    Default: 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
+    Default: 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
     NoEcho: True
   SourceBucket:
     Type: String
@@ -84,7 +84,7 @@ Resources:
           - Name: SourceBucket
             Value: !Ref SourceBucket
       Source:
-        BuildSpec: amibuild.yml
+        BuildSpec: /eac-core/amibuild.yml
         Type: CODEPIPELINE
       TimeoutInMinutes: 15
       Name: !Sub ${PipelineName}_amibuild
@@ -146,7 +146,9 @@ Resources:
                   Version: '1'
                   Provider: CodeBuild
                 InputArtifacts:
-                  - Name: SourceArtifact
+                  - Name: BuildArtifact
+#                InputArtifacts:
+#                  - Name: SourceArtifact
 #                OutputArtifacts:
 #                  - Name: BuildArtifact
                 Configuration:
