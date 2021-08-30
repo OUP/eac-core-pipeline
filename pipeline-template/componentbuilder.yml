@@ -70,6 +70,31 @@ Resources:
           - !Ref CodeBuildSubnet
         VpcId: !Ref CodeBuildVPC
 
+  AmiBuild:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      ServiceRole: !Ref CodeBuildServiceRole
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:4.0
+        EnvironmentVariables:
+          - Name: SourceBucket
+            Value: !Ref SourceBucket
+      Source:
+        BuildSpec: amibuild.yml
+        Type: CODEPIPELINE
+      TimeoutInMinutes: 15
+      Name: !Sub ${PipelineName}_build
+      VpcConfig:
+        SecurityGroupIds:
+          - !Ref CodeBuildSecurityGroup
+        Subnets:
+          - !Ref CodeBuildSubnet
+        VpcId: !Ref CodeBuildVPC
+
   MainCodePipeline:
       Type: AWS::CodePipeline::Pipeline
       Properties:
@@ -112,6 +137,21 @@ Resources:
                 Configuration:
                   ProjectName: !Ref Build
                 RunOrder: 2
+          - Name: AmiBuild
+            Actions:
+              - Name: BuildAction
+                ActionTypeId:
+                  Category: Build
+                  Owner: AWS
+                  Version: '1'
+                  Provider: CodeBuild
+                InputArtifacts:
+                  - Name: SourceArtifact
+                OutputArtifacts:
+                  - Name: BuildArtifact
+                Configuration:
+                  ProjectName: !Ref AmiBuild
+                RunOrder: 3
 
   CodePipelineServiceRole:
     Type: AWS::IAM::Role
