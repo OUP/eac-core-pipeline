@@ -83,7 +83,7 @@ Resources:
           - Name: SourceBucket
             Value: !Ref SourceBucket
       Source:
-        BuildSpec: /eac-core/amibuild.yml
+        BuildSpec: amibuild.yml
         Type: CODEPIPELINE
       TimeoutInMinutes: 15
       Name: !Sub ${PipelineName}_amibuild

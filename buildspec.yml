@@ -34,7 +34,8 @@ phases:
 
 artifacts:
   files:
-    - './configs/**/*'
-    - './eac-core/**/*'
-    - './pipeline-template/**/*'
-    - './build/target/**/*'
+    - '**/*'
+#    - './configs/**/*'
+#    - './eac-core/**/*'
+#    - './pipeline-template/**/*'
+#    - './build/target/**/*'
