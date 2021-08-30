@@ -14,7 +14,6 @@ Parameters:
   GitHubToken:
     Type: 'String'
     Description: GitHub token
-    Default: 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
     NoEcho: True
   SourceBucket:
     Type: String
