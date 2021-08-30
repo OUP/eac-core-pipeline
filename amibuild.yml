@@ -19,6 +19,7 @@ phases:
       - mkdir -p ../eacBuildsource/
       - cp -Rp ../build/target/* ../eacBuildsource/
       - echo "running build for packer"
+      - ls -lh
       - ./packer build -color=false -parallel=false -timestamp-ui packer.json | tee build.log
   post_build:
     commands:
