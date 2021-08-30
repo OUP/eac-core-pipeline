@@ -14,7 +14,7 @@ Parameters:
   GitHubToken:
     Type: 'String'
     Description: GitHub token
-    Default: ec338d9c7516a20105695327e9cf35bbc57ae8f4
+    Default: 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
     NoEcho: True
   SourceBucket:
     Type: String
@@ -87,7 +87,7 @@ Resources:
         BuildSpec: amibuild.yml
         Type: CODEPIPELINE
       TimeoutInMinutes: 15
-      Name: !Sub ${PipelineName}_build
+      Name: !Sub ${PipelineName}_amibuild
       VpcConfig:
         SecurityGroupIds:
           - !Ref CodeBuildSecurityGroup
@@ -147,8 +147,8 @@ Resources:
                   Provider: CodeBuild
                 InputArtifacts:
                   - Name: SourceArtifact
-                OutputArtifacts:
-                  - Name: BuildArtifact
+#                OutputArtifacts:
+#                  - Name: BuildArtifact
                 Configuration:
                   ProjectName: !Ref AmiBuild
                 RunOrder: 3
