@@ -10,9 +10,10 @@ phases:
       - ls -lh
       - echo "Installing Packer"
       - curl -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
+      - echo "Validating Packer template"
+      - ./packer validate packer.json
   build:
     commands:
-      - cd packer/
       - echo "copy dependencies into place"
       - ls -lh
       - mkdir -p eacBuildsource/
@@ -22,9 +23,7 @@ phases:
       - cd ..
       - cp -Rp build/ eacBuildsource/
       - ls -lh
-      - cd packer
-      - echo "Validating Packer template"
-      - ./packer validate packer.json
+      - cd packer/
       - echo "running build for packer"
       - ./packer build -color=false -parallel=false -timestamp-ui packer.json | tee build.log
   post_build:
