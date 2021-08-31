@@ -15,7 +15,7 @@ phases:
       - echo "copy dependencies into place"
       - ls -lh
       - mkdir -p ../eacBuildsource/
-      - cp -Rp ../build/target/* ../eacBuildsource/
+      - cp -Rp ../build/* ../eacBuildsource/
       - echo "Validating Packer template"
       - ./packer validate packer.json
       - echo "running build for packer"
