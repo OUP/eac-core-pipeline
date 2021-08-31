@@ -26,7 +26,7 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "../eacBuildsource/",
+      "source": "../build/",
       "destination": "/tmp/target"
     }
   ]
