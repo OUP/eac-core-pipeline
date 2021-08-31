@@ -21,7 +21,7 @@ phases:
       - cd ..
       - cp -Rp build/ eacBuildsource/
       - ls -lh
-      - cd ../packer/
+      - cd packer
       - echo "Validating Packer template"
       - ./packer validate packer.json
       - echo "running build for packer"
