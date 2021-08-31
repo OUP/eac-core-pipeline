@@ -7,14 +7,10 @@ phases:
       #- echo $(aws ssm get-parameters --name "/${UPSTREAMPROJECT}-common/${UPSTREAMPIPELINE}" --query "Parameters[0].Value" --output text)
       #- export DATE=$(date '+%s')
       #- export PACKER_LOG=1
-      - ls -lh
+      - cd /eac-core/packer/
       - echo "Installing Packer"
       - curl -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
       - echo "Validating Packer template"
-      - cd eac-core/
-      - ls -lh
-      - cd packer/
-      - ls -lh
       - ./packer validate packer.json
   build:
     commands:
