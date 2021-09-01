@@ -7,6 +7,7 @@ phases:
       #- echo $(aws ssm get-parameters --name "/${UPSTREAMPROJECT}-common/${UPSTREAMPIPELINE}" --query "Parameters[0].Value" --output text)
       #- export DATE=$(date '+%s')
       #- export PACKER_LOG=1
+      - pwd
       - cd eac-core/
       - cd packer/
       - echo "Installing Packer"
