@@ -213,6 +213,17 @@ Resources:
                   - ec2:DescribeSubnets
                   - ec2:DescribeSecurityGroups
                   - ec2:DescribeVpcs
+                  - cloudformation:*
+                  - s3:*
+                  - ec2:*
+                  - lambda:*
+                  - ssm:*
+                  - iam:*
+                  - inspector:*
+                  - sns:*
+                  - codebuild:*
+                  - codepipeline:*
+                  - events:*
               - Resource: "*"
                 Effect: Allow
                 Action:
