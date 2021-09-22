@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.oup.eac.data.util.SampleDataFactory;
 import com.oup.eac.domain.Answer;
 import com.oup.eac.domain.Component;
 import com.oup.eac.domain.Customer;
@@ -21,7 +22,6 @@ import com.oup.eac.domain.Question;
 import com.oup.eac.domain.RegisterableProduct;
 import com.oup.eac.domain.RegisterableProduct.RegisterableType;
 import com.oup.eac.domain.StandardLicenceTemplate;
-import com.oup.eac.domain.util.SampleDataFactory;
 
 /**
  * @author harlandd User dao hibernate test

@@ -26,7 +26,7 @@ import com.oup.eac.domain.Registration;
 import com.oup.eac.domain.StandardLicenceTemplate;
 import com.oup.eac.domain.paging.PagingCriteria;
 import com.oup.eac.domain.paging.PagingCriteria.SortDirection;
-import com.oup.eac.domain.util.SampleDataFactory;
+import com.oup.eac.data.util.SampleDataFactory;
 import com.oup.eac.dto.RegistrationDefinitionSearchCriteria;
 
 /**

@@ -34,7 +34,7 @@ import com.oup.eac.domain.Registration;
 import com.oup.eac.domain.SelfRegistrationActivation;
 import com.oup.eac.domain.StandardLicenceTemplate;
 import com.oup.eac.domain.User.EmailVerificationState;
-import com.oup.eac.domain.util.SampleDataFactory;
+import com.oup.eac.data.util.SampleDataFactory;
 
 public class ProductHibernateDaoIntegrationTest extends AbstractDBTest {
 

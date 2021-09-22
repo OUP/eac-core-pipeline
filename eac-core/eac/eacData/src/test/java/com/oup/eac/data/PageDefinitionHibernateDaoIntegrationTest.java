@@ -40,7 +40,7 @@ import com.oup.eac.domain.RegisterableProduct.RegisterableType;
 import com.oup.eac.domain.Select;
 import com.oup.eac.domain.StandardLicenceTemplate;
 import com.oup.eac.domain.TagOption;
-import com.oup.eac.domain.util.SampleDataFactory;
+import com.oup.eac.data.util.SampleDataFactory;
 
 /**
  * @author harlandd PageDefinition hibernate test

@@ -88,7 +88,6 @@ import com.oup.eac.domain.ValidatedRegistrationActivation;
 import com.oup.eac.domain.WhiteListUrl;
 import com.oup.eac.domain.migrationtool.CustomerMigration;
 import com.oup.eac.domain.migrationtool.CustomerMigrationData;
-import com.oup.eac.domain.util.SampleDataFactory;
 
 /**
  * @author harlandd Creates sample data for tests.
