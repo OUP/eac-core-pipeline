@@ -25,7 +25,7 @@
 				<value>classpath*:/eac/eac*.properties</value>
 				<!-- <value>file:/usr/share/tomcat7/resources/eacSettings.properties</value> --> 
 				<!-- <value>file:/D:/eac/eacSettings.properties</value> -->
-				<value>file:${config.file.location}/eacSettings.properties</value>
+				<!-- <value>file:${config.file.location}/eacSettings.properties</value> -->
 				
 			</list>
 	    </property>

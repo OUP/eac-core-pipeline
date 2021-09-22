@@ -5,9 +5,8 @@ import javax.naming.NamingException;
 import org.junit.Test;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
-import com.oup.eac.common.mock.AbstractMockTest;
 
-public class PasswordEncoderTest extends AbstractMockTest {
+public class PasswordEncoderTest /* extends AbstractMockTest */{
 
     private StandardPasswordEncoder passwordEncoder = new StandardPasswordEncoder();
     
