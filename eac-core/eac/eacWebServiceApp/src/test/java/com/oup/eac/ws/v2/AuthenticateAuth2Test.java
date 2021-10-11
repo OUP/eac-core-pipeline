@@ -14,22 +14,19 @@ import com.oup.eac.ws.AbstractWebServiceAuthenticationTest;
  * @author David Hay
  *
  */
-@Component
-public class AuthenticateAuth2Test extends AbstractWebServiceAuthenticationTest {
-
-    private Resource request = new ClassPathResource("/soap/v2/authenticateRequest2.xml");
-
-    private Resource response = new ClassPathResource("/soap/v2/authenticateResponse2.xml");
-
-    @Override
-    protected Resource getExpectedResponse() {
-        return response;
-    }
-
-    @Override
-    protected Resource getRequest() {
-        return request;
-    }
-
-
-}
+//@Component
+public class AuthenticateAuth2Test /* extends AbstractWebServiceAuthenticationTest */ {
+	/*
+	 * 
+	 * private Resource request = new
+	 * ClassPathResource("/soap/v2/authenticateRequest2.xml");
+	 * 
+	 * private Resource response = new
+	 * ClassPathResource("/soap/v2/authenticateResponse2.xml");
+	 * 
+	 * @Override protected Resource getExpectedResponse() { return response; }
+	 * 
+	 * @Override protected Resource getRequest() { return request; }
+	 * 
+	 * 
+	 */}

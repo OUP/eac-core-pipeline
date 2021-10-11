@@ -15,19 +15,16 @@ import com.oup.eac.ws.AbstractWebServiceAuthenticationTest;
  *
  */
 @Component
-public class GetUserNameAuthenticationTest extends AbstractWebServiceAuthenticationTest{
-
-    private Resource req = new ClassPathResource("/soap/v2/userNameRequest1.xml");
-    private Resource res = new ClassPathResource("/soap/v2/userNameResponse1.xml");
-    
-    @Override
-    protected Resource getExpectedResponse() {
-        return res;
-    }
-    @Override
-    protected Resource getRequest() {
-        return req;
-    }
-    
-
-}
+public class GetUserNameAuthenticationTest/* extends AbstractWebServiceAuthenticationTest */ {
+	/*
+	 * 
+	 * private Resource req = new
+	 * ClassPathResource("/soap/v2/userNameRequest1.xml"); private Resource res =
+	 * new ClassPathResource("/soap/v2/userNameResponse1.xml");
+	 * 
+	 * @Override protected Resource getExpectedResponse() { return res; }
+	 * 
+	 * @Override protected Resource getRequest() { return req; }
+	 * 
+	 * 
+	 */}

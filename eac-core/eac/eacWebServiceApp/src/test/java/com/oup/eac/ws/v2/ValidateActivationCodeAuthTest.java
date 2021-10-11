@@ -15,21 +15,18 @@ import com.oup.eac.ws.AbstractWebServiceAuthenticationTest;
  *
  */
 @Component
-public class ValidateActivationCodeAuthTest extends AbstractWebServiceAuthenticationTest {
-
-    private Resource request = new ClassPathResource("/soap/v2/validateActivationCodeRequest1.xml");
-
-    private Resource response = new ClassPathResource("/soap/v2/validateActivationCodeResponse1.xml");
-
-    @Override
-    protected Resource getExpectedResponse() {
-        return response;
-    }
-
-    @Override
-    protected Resource getRequest() {
-        return request;
-    }
-
-
-}
+public class ValidateActivationCodeAuthTest /* extends AbstractWebServiceAuthenticationTest */ {
+	/*
+	 * 
+	 * private Resource request = new
+	 * ClassPathResource("/soap/v2/validateActivationCodeRequest1.xml");
+	 * 
+	 * private Resource response = new
+	 * ClassPathResource("/soap/v2/validateActivationCodeResponse1.xml");
+	 * 
+	 * @Override protected Resource getExpectedResponse() { return response; }
+	 * 
+	 * @Override protected Resource getRequest() { return request; }
+	 * 
+	 * 
+	 */}

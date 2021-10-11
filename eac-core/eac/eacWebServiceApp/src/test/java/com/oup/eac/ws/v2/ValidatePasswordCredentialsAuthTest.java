@@ -14,20 +14,17 @@ import com.oup.eac.ws.AbstractWebServiceAuthenticationTest;
  *
  */
 @Component
-public class ValidatePasswordCredentialsAuthTest extends AbstractWebServiceAuthenticationTest {
-
-    private Resource request = new ClassPathResource("/soap/v2/validatePasswordCredentialsRequest1.xml");
-
-    private Resource response = new ClassPathResource("/soap/v2/validatePasswordCredentialsResponse1.xml");
-
-    @Override
-    protected Resource getExpectedResponse() {
-        return response;
-    }
-
-    @Override
-    protected Resource getRequest() {
-        return request;
-    }
-
-}
+public class ValidatePasswordCredentialsAuthTest /* extends AbstractWebServiceAuthenticationTest */ {
+	/*
+	 * 
+	 * private Resource request = new
+	 * ClassPathResource("/soap/v2/validatePasswordCredentialsRequest1.xml");
+	 * 
+	 * private Resource response = new
+	 * ClassPathResource("/soap/v2/validatePasswordCredentialsResponse1.xml");
+	 * 
+	 * @Override protected Resource getExpectedResponse() { return response; }
+	 * 
+	 * @Override protected Resource getRequest() { return request; }
+	 * 
+	 */}

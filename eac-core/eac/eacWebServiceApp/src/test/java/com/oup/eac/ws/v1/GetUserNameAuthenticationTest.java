@@ -14,22 +14,19 @@ import com.oup.eac.ws.AbstractWebServiceAuthenticationTest;
  * @author David Hay
  *
  */
-@Component("GetUserNameAuthentationTestV1")
-public class GetUserNameAuthenticationTest extends AbstractWebServiceAuthenticationTest{
-
-    private Resource req = new ClassPathResource("/soap/v1/userNameRequest1.xml");
-    private Resource res = new ClassPathResource("/soap/v1/userNameResponse1.xml");
-    
-    @Override
-    protected Resource getExpectedResponse() {
-        return res;
-    }
-    @Override
-    protected Resource getRequest() {
-        return req;
-    }
-    
-    
-    
-
-}
+//@Component("GetUserNameAuthentationTestV1")
+public class GetUserNameAuthenticationTest /* extends AbstractWebServiceAuthenticationTest */ {
+	/*
+	 * 
+	 * private Resource req = new
+	 * ClassPathResource("/soap/v1/userNameRequest1.xml"); private Resource res =
+	 * new ClassPathResource("/soap/v1/userNameResponse1.xml");
+	 * 
+	 * @Override protected Resource getExpectedResponse() { return res; }
+	 * 
+	 * @Override protected Resource getRequest() { return req; }
+	 * 
+	 * 
+	 * 
+	 * 
+	 */}

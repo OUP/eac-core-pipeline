@@ -15,21 +15,18 @@ import com.oup.eac.ws.AbstractWebServiceAuthenticationTest;
  *
  */
 @Component
-public class ResetPasswordAuth2Test extends AbstractWebServiceAuthenticationTest {
-
-    private Resource request = new ClassPathResource("/soap/v2/resetPasswordRequest2.xml");
-
-    private Resource response = new ClassPathResource("/soap/v2/resetPasswordResponse2.xml");
-
-    @Override
-    protected Resource getExpectedResponse() {
-        return response;
-    }
-
-    @Override
-    protected Resource getRequest() {
-        return request;
-    }
-
-
-}
+public class ResetPasswordAuth2Test /* extends AbstractWebServiceAuthenticationTest */ {
+	/*
+	 * 
+	 * private Resource request = new
+	 * ClassPathResource("/soap/v2/resetPasswordRequest2.xml");
+	 * 
+	 * private Resource response = new
+	 * ClassPathResource("/soap/v2/resetPasswordResponse2.xml");
+	 * 
+	 * @Override protected Resource getExpectedResponse() { return response; }
+	 * 
+	 * @Override protected Resource getRequest() { return request; }
+	 * 
+	 * 
+	 */}
