@@ -30,11 +30,14 @@ phases:
       - test -s ami_id.txt || exit 1
       - export AMI_ID=$(head -n 1 ami_id.txt)
       - echo "${AMI_ID}"
+      - echo "${ENVIRONMENT}"
+      - echo "${PROJECT}"
       #- sed -ie "s@<<AMI-ID>>@${AMI_ID}@g" ${ENVIRONMENT}.json
       #- sed -ie "s@<<VPC-ID>>@${BUILD_VPC_ID}@g" ${ENVIRONMENT}.json
       #- sed -ie "s@<<SUBNET-ID>>@${TEST_SUBNET_ID}@g" ${ENVIRONMENT}.json
       #- sed -ie "s@<<KEYNAME>>@${PROJECT}-${ENVIRONMENT}-${PIPELINENAME}-${DATE}-key@g" ${ENVIRONMENT}.json
       #- cat ${ENVIRONMENT}.json
+      #- aws ssm put-parameter --type 'String' --name "/${PROJECT}-${BUILD_COMPONENT_NAME}/${ENVIRONMENT}/AMI-${ENVIRONMENT}" --value $AMI_ID --overwrite
 artifacts:
   files:
      - './packer/**/*'
