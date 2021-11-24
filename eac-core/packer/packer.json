@@ -31,7 +31,7 @@
     }
   ],
   "variables": {
-    "ami_name": "EAC-CorePipeline-AMI-{{environment}}-{{isotime \"02-Jan-06 03_04_05\"}}",
+    "ami_name": "EAC-CorePipeline-AMI-{{env `ENVIRONMENT`}}-{{isotime \"02-Jan-06 03_04_05\"}}",
     "environment": "{{env `ENVIRONMENT`}}",
     "subnet": "{{env `BUILD_SUBNET_ID`}}",
     "vpc": "{{env `BUILD_VPC_ID`}}"
