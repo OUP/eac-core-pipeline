@@ -6,6 +6,7 @@
     "GitHubToken": "",
     "SourceBucket": "eac-core-cloudformation",
     "UpstreamStack": "EAC-CommonComponents",
+    "Environment": "infra",
     "PipelineName": "CoreBuilder",
     "CodeBuildVPC": "vpc-0059fd92000eaae5d",
     "CodeBuildSubnet": "subnet-03452a3f41c4f34fc",

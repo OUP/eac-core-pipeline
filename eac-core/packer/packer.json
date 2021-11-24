@@ -18,9 +18,9 @@
       },
       "source_ami": "ami-0ba539fe92fb117fe",
       "ssh_username": "ec2-user",
-      "subnet_id": "{{user `BUILD_SUBNET_ID`}}",
+      "subnet_id": "{{user `subnet`}}",
       "type": "amazon-ebs",
-      "vpc_id": "{{user `BUILD_VPC_ID`}}"
+      "vpc_id": "{{user `vpc`}}"
     }
   ],
   "provisioners": [
@@ -31,6 +31,8 @@
     }
   ],
   "variables": {
-    "ami_name": "EAC-CorePipeline-AMI-{{isotime \"02-Jan-06 03_04_05\"}}"
+    "ami_name": "EAC-CorePipeline-AMI-{{isotime \"02-Jan-06 03_04_05\"}}",
+    "subnet": "{{env `BUILD_SUBNET_ID`}}",
+    "vpc": "{{env `BUILD_VPC_ID`}}"
   }
 }

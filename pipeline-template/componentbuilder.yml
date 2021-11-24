@@ -20,6 +20,16 @@ Parameters:
     Default: eac-core-cloudformation
   UpstreamStack:
     Type: String
+  Environment:
+      Type: String
+      AllowedValues:
+        - infra
+        - dev
+        - test
+        - uat
+        - perf
+        - preprod
+        - prod
   PipelineName:
     Type: String
     Default: CoreBuilder
@@ -84,6 +94,8 @@ Resources:
         EnvironmentVariables:
           - Name: SourceBucket
             Value: !Ref SourceBucket
+          - Name: ENVIRONMENT
+            Value: !Ref Environment
           - Name: BUILD_VPC_ID
             Value: !Sub '{{resolve:ssm:/${UpstreamStack}-common/VPC:1}}'
           - Name: BUILD_SUBNET_ID
