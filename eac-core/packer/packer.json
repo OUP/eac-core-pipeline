@@ -20,7 +20,7 @@
       "ssh_username": "ec2-user",
       "subnet_id": "subnet-03452a3f41c4f34fc",
       "type": "amazon-ebs",
-      "vpc_id": "vpc-0059fd92000eaae5d"
+      "vpc_id": "{{user `vpc`}}"
     }
   ],
   "provisioners": [

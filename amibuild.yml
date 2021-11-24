@@ -18,6 +18,8 @@ phases:
       - cd packer/
       - echo "Validating Packer template"
       - ./packer validate packer.json
+      - echo "${BUILD_VPC_ID}"
+      - echo "${BUILD_SUBNET_ID}"
   build:
     commands:
       - echo "copy dependencies into place"
@@ -30,8 +32,6 @@ phases:
       - test -s ami_id.txt || exit 1
       - export AMI_ID=$(head -n 1 ami_id.txt)
       - echo "${AMI_ID}"
-      - echo "${ENVIRONMENT}"
-      - echo "${PROJECT}"
       #- sed -ie "s@<<AMI-ID>>@${AMI_ID}@g" ${ENVIRONMENT}.json
       #- sed -ie "s@<<VPC-ID>>@${BUILD_VPC_ID}@g" ${ENVIRONMENT}.json
       #- sed -ie "s@<<SUBNET-ID>>@${TEST_SUBNET_ID}@g" ${ENVIRONMENT}.json
@@ -40,6 +40,6 @@ phases:
       #- aws ssm put-parameter --type 'String' --name "/${PROJECT}-${BUILD_COMPONENT_NAME}/${ENVIRONMENT}/AMI-${ENVIRONMENT}" --value $AMI_ID --overwrite
 artifacts:
   files:
-     - './packer/**/*'
-     - './test/**/*'
-     - './cf-templates/**/*'
+    - './packer/**/*'
+    - './test/**/*'
+    - './cf-templates/**/*'

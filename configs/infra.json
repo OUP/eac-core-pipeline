@@ -1,0 +1,14 @@
+{
+    "Parameters" : {
+    "RepositoryName": "eac-core-pipeline",
+    "BranchName": "infra",
+    "GitHubOwner": "OUP",
+    "GitHubToken": "",
+    "SourceBucket": "eac-core-cloudformation",
+    "UpstreamStack": "EAC-CommonComponents",
+    "PipelineName": "CoreBuilder",
+    "CodeBuildVPC": "vpc-0059fd92000eaae5d",
+    "CodeBuildSubnet": "subnet-03452a3f41c4f34fc",
+    "CodeBuildSecurityGroup": "sg-0346bf91a376ef7bb"
+    }
+}
