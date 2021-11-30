@@ -35,6 +35,6 @@
     "environment": "{{env `ENVIRONMENT`}}",
     "subnet": "{{env `BUILD_SUBNET_ID`}}",
     "vpc": "{{env `BUILD_VPC_ID`}}",
-    "golden_ami": "{{env `GOLDEN_AMI_ID}}"
+    "golden_ami": "{{env `GOLDEN_AMI_ID`}}"
   }
 }
