@@ -3,10 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      #- export BUILD_UPSTREAM_AMI=$(aws ssm get-parameters --name "/${UPSTREAMPROJECT}-common/${UPSTREAMPIPELINE}" --query "Parameters[0].Value" --output text)
-      #- echo $(aws ssm get-parameters --name "/${UPSTREAMPROJECT}-common/${UPSTREAMPIPELINE}" --query "Parameters[0].Value" --output text)
-      #- export DATE=$(date '+%s')
-      #- export PACKER_LOG=1
       - echo "/${UPSTREAMSTACK}/${ENVIRONMENT}/${GOLDENAMIPIPELINE}"
       - export GOLDEN_AMI_ID=$(aws ssm get-parameters --name "/${UPSTREAMSTACK}/${ENVIRONMENT}/${GOLDENAMIPIPELINE}" --query "Parameters[0].Value" --output text)
       - echo "${GOLDEN_AMI_ID}"
@@ -27,17 +23,16 @@ phases:
       - ./packer build -color=false -parallel=false -timestamp-ui packer.json | tee build.log
   post_build:
     commands:
-      #- aws ec2 create-key-pair --key-name ${PROJECT}-${ENVIRONMENT}-${PIPELINENAME}-${DATE}-key --query "KeyMaterial" --output text > ${PROJECT}-${ENVIRONMENT}-${PIPELINENAME}-${DATE}-key.pem
       - egrep "${AWS_REGION}\:\sami\-" build.log | cut -d' ' -f2 > ami_id.txt
       - test -s ami_id.txt || exit 1
       - export AMI_ID=$(head -n 1 ami_id.txt)
       - echo "${AMI_ID}"
-      #- sed -ie "s@<<AMI-ID>>@${AMI_ID}@g" ${ENVIRONMENT}.json
-      #- sed -ie "s@<<VPC-ID>>@${BUILD_VPC_ID}@g" ${ENVIRONMENT}.json
-      #- sed -ie "s@<<SUBNET-ID>>@${TEST_SUBNET_ID}@g" ${ENVIRONMENT}.json
-      #- sed -ie "s@<<KEYNAME>>@${PROJECT}-${ENVIRONMENT}-${PIPELINENAME}-${DATE}-key@g" ${ENVIRONMENT}.json
-      #- cat ${ENVIRONMENT}.json
-      #- aws ssm put-parameter --type 'String' --name "/${PROJECT}-${BUILD_COMPONENT_NAME}/${ENVIRONMENT}/AMI-${ENVIRONMENT}" --value $AMI_ID --overwrite
+      - sed -ie "s@<<AMI-ID>>@${AMI_ID}@g" ${ENVIRONMENT}.json
+      - sed -ie "s@<<VPC-ID>>@${BUILD_VPC_ID}@g" ${ENVIRONMENT}.json
+      - sed -ie "s@<<SUBNET-ID>>@${BUILD_SUBNET_ID}@g" ${ENVIRONMENT}.json
+      - sed -ie "s@<<AMI-PARAMETER>>@/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI@g" ${ENVIRONMENT}.json
+      - cat ${ENVIRONMENT}.json
+      - aws ssm put-parameter --type 'String' --name "/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI" --value $AMI_ID --overwrite
 artifacts:
   files:
     - './packer/**/*'
