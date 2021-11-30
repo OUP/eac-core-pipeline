@@ -5,11 +5,13 @@
     "GitHubOwner": "OUP",
     "GitHubToken": "",
     "SourceBucket": "eac-core-cloudformation",
-    "UpstreamStack": "EAC-CommonComponents",
+    "UpstreamStack": "EAC-CommonComponents-common",
     "Environment": "infra",
     "PipelineName": "CoreBuilder",
     "CodeBuildVPC": "vpc-0059fd92000eaae5d",
     "CodeBuildSubnet": "subnet-03452a3f41c4f34fc",
-    "CodeBuildSecurityGroup": "sg-0346bf91a376ef7bb"
+    "CodeBuildSecurityGroup": "sg-0346bf91a376ef7bb",
+    "GoldenAMIProject": "EAC-CommonComponents-common",
+    "GoldenAMIPipeline": "eac-core-golden-ami"
     }
 }

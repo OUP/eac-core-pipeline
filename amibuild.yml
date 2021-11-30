@@ -7,19 +7,17 @@ phases:
       #- echo $(aws ssm get-parameters --name "/${UPSTREAMPROJECT}-common/${UPSTREAMPIPELINE}" --query "Parameters[0].Value" --output text)
       #- export DATE=$(date '+%s')
       #- export PACKER_LOG=1
+      - export GOLDEN_AMI_ID=$(aws ssm get-parameters --name "/${UPSTREAMSTACK}/${ENVIRONMENT}/${GOLDENAMIPIPELINE}" --query "Parameters[0].Value" --output text)
       - cd eac-core/
       - cd packer/
       - echo "Installing Packer"
       - curl -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
       - cd ../../
-      - ls -lh
       - cp -r build/ eac-core/packer/
       - cd eac-core/
       - cd packer/
       - echo "Validating Packer template"
       - ./packer validate packer.json
-      - echo "${BUILD_VPC_ID}"
-      - echo "${BUILD_SUBNET_ID}"
   build:
     commands:
       - echo "copy dependencies into place"

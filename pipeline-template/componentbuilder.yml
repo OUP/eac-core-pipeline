@@ -42,6 +42,9 @@ Parameters:
   CodeBuildSecurityGroup:
     Type: AWS::EC2::SecurityGroup::Id
     Default: sg-0346bf91a376ef7bb
+  GoldenAMIPipeline:
+      Type: String
+      Description: Golden AMI Pipeline Name
 
 Resources:
 
@@ -73,7 +76,7 @@ Resources:
         BuildSpec: buildspec.yml
         Type: CODEPIPELINE
       TimeoutInMinutes: 15
-      Name: !Sub ${PipelineName}_build
+      Name: !Sub ${PipelineName}_${Environment}_build
       VpcConfig:
         SecurityGroupIds: 
           - !Ref CodeBuildSecurityGroup
@@ -97,14 +100,18 @@ Resources:
           - Name: ENVIRONMENT
             Value: !Ref Environment
           - Name: BUILD_VPC_ID
-            Value: !Sub '{{resolve:ssm:/${UpstreamStack}-common/VPC:1}}'
+            Value: !Sub '{{resolve:ssm:/${UpstreamStack}/VPC:1}}'
           - Name: BUILD_SUBNET_ID
-            Value: !Sub '{{resolve:ssm:/${UpstreamStack}-common/SubnetPrivA:1}}'
+            Value: !Sub '{{resolve:ssm:/${UpstreamStack}/SubnetPrivA:1}}'
+          - Name: UPSTREAMSTACK
+            Value: !Ref UpstreamStack
+          - Name: GOLDENAMIPIPELINE
+            Value: !Ref GoldenAMIPipeline
       Source:
         BuildSpec: amibuild.yml
         Type: CODEPIPELINE
       TimeoutInMinutes: 15
-      Name: !Sub ${PipelineName}_amibuild
+      Name: !Sub ${PipelineName}_${Environment}_amibuild
       VpcConfig:
         SecurityGroupIds:
           - !Ref CodeBuildSecurityGroup
@@ -115,7 +122,7 @@ Resources:
   MainCodePipeline:
       Type: AWS::CodePipeline::Pipeline
       Properties:
-        Name: !Sub ${PipelineName}
+        Name: !Sub ${PipelineName}_${Environment}
         RoleArn: !GetAtt
           - CodePipelineServiceRole
           - Arn

@@ -16,7 +16,7 @@
       "snapshot_tags": {
         "Name": "ami_name"
       },
-      "source_ami": "ami-0ba539fe92fb117fe",
+      "source_ami": "{{user `golden_ami`}}",
       "ssh_username": "ec2-user",
       "subnet_id": "{{user `subnet`}}",
       "type": "amazon-ebs",
@@ -34,6 +34,7 @@
     "ami_name": "EAC-CorePipeline-AMI-{{env `ENVIRONMENT`}}-{{isotime \"02-Jan-06 03_04_05\"}}",
     "environment": "{{env `ENVIRONMENT`}}",
     "subnet": "{{env `BUILD_SUBNET_ID`}}",
-    "vpc": "{{env `BUILD_VPC_ID`}}"
+    "vpc": "{{env `BUILD_VPC_ID`}}",
+    "golden_ami": "{{env `GOLDEN_AMI_ID}}"
   }
 }
