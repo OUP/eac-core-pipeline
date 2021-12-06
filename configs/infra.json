@@ -1,9 +1,9 @@
 {
     "Parameters" : {
-    "RepositoryName": "eac-core-pipeline",
-    "BranchName": "infra",
-    "GitHubOwner": "OUP",
-    "GitHubToken": "",
+    "GitHubRepositoryName": "eac-core-pipeline",
+    "GitHubBranchName": "infra",
+    "GitHubRepositoryOwner": "OUP",
+    "CodeStarConnectionARN": "arn:aws:codestar-connections:eu-west-1:637927391752:connection/613f3f2e-9218-4d9c-a03f-49748e88700b",
     "SourceBucket": "eac-core-cloudformation",
     "UpstreamStack": "EAC-CommonComponents-common",
     "Environment": "infra",
@@ -11,7 +11,6 @@
     "CodeBuildVPC": "vpc-0059fd92000eaae5d",
     "CodeBuildSubnet": "subnet-03452a3f41c4f34fc",
     "CodeBuildSecurityGroup": "sg-0346bf91a376ef7bb",
-    "GoldenAMIProject": "EAC-CommonComponents-common",
     "GoldenAMIPipeline": "eac-core-golden-ami"
     }
 }

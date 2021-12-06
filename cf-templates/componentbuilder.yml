@@ -1,20 +1,20 @@
 AWSTemplateFormatVersion: 2010-09-09
+
 Parameters:
-  RepositoryName:
+  GitHubRepositoryName:
     Description: GitHub repository name
     Type: String
     Default: eac-core-pipeline
-  BranchName:
+  GitHubBranchName:
     Description: Github Branch name
     Type: String
     Default: infra
-  GitHubOwner:
+  GitHubRepositoryOwner:
     Type: String
     Default: OUP
-  GitHubToken:
-    Type: 'String'
-    Description: GitHub token
-    NoEcho: True
+  CodeStarConnectionARN:
+    Type: String
+    Description: ARN of the CodeStar connection used to connect to GitHub
   SourceBucket:
     Type: String
     Default: eac-core-cloudformation
@@ -59,7 +59,7 @@ Resources:
               SSEAlgorithm: AES256
     DeletionPolicy: Delete
 
-  Build:
+  AppBuild:
     Type: AWS::CodeBuild::Project
     Properties:
       ServiceRole: !Ref CodeBuildServiceRole
@@ -76,7 +76,7 @@ Resources:
         BuildSpec: buildspec.yml
         Type: CODEPIPELINE
       TimeoutInMinutes: 15
-      Name: !Sub ${PipelineName}_${Environment}_build
+      Name: !Sub ${PipelineName}_${Environment}_appbuild
       VpcConfig:
         SecurityGroupIds: 
           - !Ref CodeBuildSecurityGroup
@@ -84,7 +84,7 @@ Resources:
           - !Ref CodeBuildSubnet
         VpcId: !Ref CodeBuildVPC
 
-  AmiBuild:
+  AMIBuild:
     Type: AWS::CodeBuild::Project
     Properties:
       ServiceRole: !Ref CodeBuildServiceRole
@@ -132,21 +132,22 @@ Resources:
         Stages:
           - Name: Source
             Actions:
-              - Name: SourceAction
+              - Name: GitHubRepo
                 ActionTypeId:
                   Category: Source
-                  Owner: ThirdParty
+                  Owner: AWS
+                  Provider: CodeStarSourceConnection
                   Version: '1'
-                  Provider: GitHub
+                Configuration:
+                  ConnectionArn: !Ref CodeStarConnectionARN
+                  FullRepositoryId: !Sub '${GitHubRepositoryOwner}/${GitHubRepositoryName}'
+                  BranchName: !Ref GitHubBranchName
+                  OutputArtifactFormat: "CODE_ZIP"
+                  DetectChanges: True
                 OutputArtifacts:
                   - Name: SourceArtifact
-                Configuration:
-                  Owner: !Ref 'GitHubOwner'
-                  Repo: !Ref 'RepositoryName'
-                  Branch: !Ref 'BranchName'
-                  OAuthToken: !Ref GitHubToken
                 RunOrder: 1
-          - Name: Build
+          - Name: AppBuild
             Actions:
               - Name: BuildAction
                 ActionTypeId:
@@ -159,9 +160,9 @@ Resources:
                 OutputArtifacts:
                   - Name: BuildArtifact
                 Configuration:
-                  ProjectName: !Ref Build
+                  ProjectName: !Ref AppBuild
                 RunOrder: 2
-          - Name: AmiBuild
+          - Name: AMIBuild
             Actions:
               - Name: BuildAction
                 ActionTypeId:
@@ -171,12 +172,8 @@ Resources:
                   Provider: CodeBuild
                 InputArtifacts:
                   - Name: BuildArtifact
-#                InputArtifacts:
-#                  - Name: SourceArtifact
-#                OutputArtifacts:
-#                  - Name: BuildArtifact
                 Configuration:
-                  ProjectName: !Ref AmiBuild
+                  ProjectName: !Ref AMIBuild
                 RunOrder: 3
 
   CodePipelineServiceRole:
@@ -198,19 +195,52 @@ Resources:
             Version: '2012-10-17'
             Statement:
               - Action:
-                  - s3:*
-                  - cloudformation:*
-                  - iam:PassRole
                   - sns:Publish
-                  - lambda:*
                   - codebuild:*
                 Effect: Allow
                 Resource: '*'
+        - PolicyName: !Sub '${PipelineName}-${Environment}-S3Policy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+                - 
+                  Action:
+                    - 's3:GetBucketVersioning'
+                    - 's3:DeleteBucketPolicy'
+                    - 's3:GetObjectVersion'
+                    - "s3:PutObjectAcl"
+                    - 's3:PutObject'
+                    - 's3:GetObject'
+                  Effect: Allow
+                  Resource: 
+                    - !Sub 'arn:aws:s3:::${Artifacts}'
+                    - !Sub 'arn:aws:s3:::${Artifacts}/*'
+        - PolicyName: !Sub '${PipelineName}-${Environment}-PassCodebuild'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+                - 
+                  Action: 'iam:PassRole'
+                  Effect: Allow
+                  Resource: !GetAtt CodeBuildServiceRole.Arn
+        - PolicyName: !Sub '${PipelineName}-${Environment}-CodeStarPolicy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+                - 
+                  Action:
+                    - 'codestar-connections:UseConnection'
+                  Effect: Allow
+                  Resource: 
+                    - !Ref CodeStarConnectionARN
+                  Condition: {"ForAllValues:StringEquals": {"codestar-connections:PassedToService": "codepipeline.amazonaws.com"}}
 
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
     Properties:
       Path: /
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/PowerUserAccess'
       AssumeRolePolicyDocument:
         {
             "Statement": [{
@@ -238,14 +268,7 @@ Resources:
                   - ec2:DescribeSubnets
                   - ec2:DescribeSecurityGroups
                   - ec2:DescribeVpcs
-                  - cloudformation:*
-                  - s3:*
-                  - ec2:*
-                  - lambda:*
-                  - ssm:*
-                  - iam:*
-                  - inspector:*
-                  - sns:*
+                  # - iam:*
                   - codebuild:*
                   - codepipeline:*
                   - events:*
@@ -271,36 +294,3 @@ Resources:
                 Effect: Allow
                 Action:
                   - s3:List*
-
-  CFNRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-          - Action:
-              - sts:AssumeRole
-            Effect: Allow
-            Principal:
-              Service:
-                - cloudformation.amazonaws.com
-        Version: '2012-10-17'
-      Path: /
-      Policies:
-        - PolicyName: CloudFormationRole
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Action:
-                  - cloudformation:*
-                  - s3:*
-                  - ec2:*
-                  - lambda:*
-                  - ssm:*
-                  - iam:*
-                  - inspector:*
-                  - sns:*
-                  - codebuild:*
-                  - codepipeline:*
-                  - events:*
-                Effect: Allow
-                Resource: '*'
