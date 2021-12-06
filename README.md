@@ -27,8 +27,9 @@ Please follow the below instructions prior to a brand-new deployment of this pip
 - Create a new branch in this repository with the branch name being the environment you are deploying to (i.e dev, stage, prod)
 - Copy the files from one of the current environment branches and update as necessary
 - Two files of note which will need updated:
-    - readme.md file
-    - /configs/environment-name.json (environment-name being replaced with your new environment name)
+    - `readme.md` file
+    - `/configs/environment-name.json` (environment-name being replaced with your new environment name)
+        - Add all of the parameters you will use in this file
 
 ### SSM Parameters 
 - Check the SSM Parameter store and make sure it already has the parameters created that the stack will use
@@ -43,7 +44,7 @@ Please follow the below instructions prior to a brand-new deployment of this pip
 ### Deployment
 - Navigate to CloudFormation and select Create Stack > With new resources (standard)
 - In the specify a template section upload the `pipeline-template/componentbuilder.yml` file > Next
-- Enter all of the parameters with the data gathered in the previous sections > Next > Next
+- Enter all of the parameters with the data you gathered & put in the `/configs/environment-name.json` file > Next > Next
 - Accept the IAM Capability warnings and click 'Create Stack'
 
 # Useful Links
