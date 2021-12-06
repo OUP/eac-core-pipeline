@@ -26,7 +26,7 @@ If any of the pipeline configuration files have been updated, including the buil
 Please follow the below instructions prior to a CloudFormation Stack update of an already deployed version of this pipeline.
 
 - Update the parameter list in the `configs/infra.json` folder with any new or updated parameters
-- Commit any CloudFormation template changes to the `pipeline-template/` folder of this repository
+- Commit any CloudFormation template changes to the `cf-templates/` folder of this repository
 - Deploy changes manually through CLI or Console (as there is no pipeline builder pipeline for this project)
 
 # Fresh Deployment Procedure/Requirements
