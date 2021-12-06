@@ -33,6 +33,11 @@ phases:
       - sed -ie "s@<<AMI-PARAMETER>>@/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI@g" ${ENVIRONMENT}.json
       - cat ${ENVIRONMENT}.json
       - aws ssm put-parameter --type 'String' --name "/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI" --value $AMI_ID --overwrite
+      - sed -i.bak "s/<<AMI-NAME>>/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI" ami_builder_event.json
+      - sed -i.bak "s/<<AMI-ID>>/$(cat ami_id.txt)/g" ami_builder_event.json
+      - aws events put-events --entries file://ami_builder_event.json
+      - cat ami_builder_event.json
+      - echo "build completed on `date`"
 artifacts:
   files:
     - './packer/**/*'
