@@ -1,4 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
+Description: EAC AMI CoreBuilder Pipeline
 
 Parameters:
   GitHubRepositoryName:
@@ -254,7 +255,7 @@ Resources:
           PolicyDocument:
             Version: 2012-10-17
             Statement:
-              - Resource: "*"
+              - Sid: BuildPermissions
                 Effect: Allow
                 Action:
                   - logs:CreateLogGroup
@@ -268,29 +269,26 @@ Resources:
                   - ec2:DescribeSubnets
                   - ec2:DescribeSecurityGroups
                   - ec2:DescribeVpcs
-                  # - iam:*
-                  - codebuild:*
                   - codepipeline:*
-                  - events:*
-              - Resource: "*"
+                  - codebuild:*
+                  # - events:*
+                  - events:PutEvents
+                Resource: "*"
+              - Sid: CodeBuildToSSM
+                Resource: "*"
                 Effect: Allow
                 Action:
                   - ssm:GetParameters
                   - ssm:GetParameter
                   - ssm:GetParametersByPath
-              - Resource: !Sub arn:aws:s3:::${Artifacts}/*
+              - Sid: CodeBuildToS3
                 Effect: Allow
                 Action:
+                  - s3:GetObjectVersion
                   - s3:GetObject
                   - s3:PutObject
-                  - s3:GetObjectVersion
-              - Resource: !Sub arn:aws:s3:::${SourceBucket}/*
-                Effect: Allow
-                Action:
-                  - s3:GetObject
-                  - s3:PutObject
-                  - s3:GetObjectVersion
-              - Resource: !Sub arn:aws:s3:::${SourceBucket}
-                Effect: Allow
-                Action:
                   - s3:List*
+                Resource: 
+                  - !Sub arn:aws:s3:::${SourceBucket}/*
+                  - !Sub arn:aws:s3:::${SourceBucket}
+                  - !Sub arn:aws:s3:::${Artifacts}/*
