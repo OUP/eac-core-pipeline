@@ -45,6 +45,7 @@ phases:
       - ls -la
       - pwd
 artifacts:
+  base-directory: src
   files:
     - '/eac-core/test/**/*'
     - '/eac-core/packer/*'
