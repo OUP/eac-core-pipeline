@@ -40,6 +40,7 @@ phases:
       - echo "build completed on `date`"
 artifacts:
   files:
-    - './packer/**/*'
-    - './test/**/*'
-    - './cf-templates/**/*'
+    - 'testbuild.yml'
+    - '/eac-core/packer/**/*'
+    - '/eac-core/test/**/*'
+    - '/cf-templates/**/*'
