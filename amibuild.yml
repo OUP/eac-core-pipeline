@@ -3,10 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - pwd
-      - cd ~
-      - pwd
-      - exit
       - echo "/${UPSTREAMSTACK}/${ENVIRONMENT}/${GOLDENAMIPIPELINE}"
       - export GOLDEN_AMI_ID=$(aws ssm get-parameters --name "/${UPSTREAMSTACK}/${ENVIRONMENT}/${GOLDENAMIPIPELINE}" --query "Parameters[0].Value" --output text)
       - echo "${GOLDEN_AMI_ID}"
@@ -48,9 +44,8 @@ phases:
       - cd ..
       - ls -la
       - pwd
-      - cd ~
-      - pwd
 artifacts:
+  base-directory: ${CODEBUILD_SRC_DIR}
   files:
     - '/eac-core/test/**/*'
     - '/eac-core/packer/*'
