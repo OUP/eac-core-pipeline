@@ -16,7 +16,7 @@
       "snapshot_tags": {
         "Name": "ami_name"
       },
-      "source_ami": "{{user `golden_ami`}}",
+      "source_ami": "{{user `ami_id`}}",
       "ssh_username": "ec2-user",
       "subnet_id": "{{user `subnet`}}",
       "type": "amazon-ebs",
@@ -25,9 +25,8 @@
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "build/",
-      "destination": "/tmp/target"
+      "type": "ansible",
+      "playbook_file": "{{playbook_path}}/playbook-ami-test.yml"
     }
   ],
   "variables": {
@@ -35,6 +34,7 @@
     "environment": "{{env `ENVIRONMENT`}}",
     "subnet": "{{env `BUILD_SUBNET_ID`}}",
     "vpc": "{{env `BUILD_VPC_ID`}}",
-    "golden_ami": "{{env `GOLDEN_AMI_ID`}}"
+    "ami_id": "{{env `AMI_ID`}}",
+    "playbook_path": "{{env `CODEBUILD_SRC_DIR`}}/eac-core/ansible"
   }
 }
