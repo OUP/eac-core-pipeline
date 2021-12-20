@@ -38,12 +38,6 @@ phases:
       - aws events put-events --entries file://ami_builder_event.json
       - cat ami_builder_event.json
       - echo "build completed on `date`"
-      - ls -la
-      - cd ..
-      - ls -la
-      - cd ..
-      - ls -la
-      - pwd
 artifacts:
   base-directory: ${CODEBUILD_SRC_DIR}
   files:

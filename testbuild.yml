@@ -8,20 +8,15 @@ phases:
       # - echo "${GOLDEN_AMI_ID}"
       - ls -la
       - cd eac-core/
+      - ls -la
       - cd packer/
-      - echo "Installing Packer"
-      - curl -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
-      - cd ../../
-      # - cp -r build/ eac-core/packer/
-      # - cd eac-core/
-      # - cd packer/
+      - ls -la
       - echo "Validating Packer template"
-      - ./packer validate packer.json # Change packer.json name
+      - ./packer validate packer_test.json
   build:
     commands:
-      # - echo "copy dependencies into place"
-      - echo "running build for packer"
-      # - ./packer build -color=false -parallel=false -timestamp-ui packer.json | tee build.log # Change packer.json name
+      # - echo "running build for packer"
+      # - ./packer build -color=false -parallel=false -timestamp-ui packer_test.json | tee build.log
   post_build:
     commands:
       # - cat ami_builder_event.json
