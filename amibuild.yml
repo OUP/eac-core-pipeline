@@ -43,6 +43,7 @@ phases:
       - ls -la
       - cd ..
       - ls -la
+      - pwd
 artifacts:
   files:
     - '/eac-core/test/**/*'
