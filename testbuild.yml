@@ -6,7 +6,7 @@ phases:
       # - echo "/${UPSTREAMSTACK}/${ENVIRONMENT}/${GOLDENAMIPIPELINE}"
       # - export GOLDEN_AMI_ID=$(aws ssm get-parameters --name "/${UPSTREAMSTACK}/${ENVIRONMENT}/${GOLDENAMIPIPELINE}" --query "Parameters[0].Value" --output text)
       # - echo "${GOLDEN_AMI_ID}"
-      - ll
+      - ls -la
       - cd eac-core/
       - cd packer/
       - echo "Installing Packer"
