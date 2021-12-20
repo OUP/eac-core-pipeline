@@ -27,14 +27,14 @@ phases:
       - test -s ami_id.txt || exit 1
       - export AMI_ID=$(head -n 1 ami_id.txt)
       - echo "${AMI_ID}"
-      - sed -ie "s@<<AMI-ID>>@${AMI_ID}@g" ${ENVIRONMENT}.json
-      - sed -ie "s@<<VPC-ID>>@${BUILD_VPC_ID}@g" ${ENVIRONMENT}.json
-      - sed -ie "s@<<SUBNET-ID>>@${BUILD_SUBNET_ID}@g" ${ENVIRONMENT}.json
-      - sed -ie "s@<<AMI-PARAMETER>>@/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI@g" ${ENVIRONMENT}.json
+      - sed -i "s@<<AMI-ID>>@${AMI_ID}@g" ${ENVIRONMENT}.json
+      - sed -i "s@<<VPC-ID>>@${BUILD_VPC_ID}@g" ${ENVIRONMENT}.json
+      - sed -i "s@<<SUBNET-ID>>@${BUILD_SUBNET_ID}@g" ${ENVIRONMENT}.json
+      - sed -i "s@<<AMI-PARAMETER>>@/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI@g" ${ENVIRONMENT}.json
       - cat ${ENVIRONMENT}.json
       - aws ssm put-parameter --type 'String' --name "/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI" --value $AMI_ID --overwrite
-      - sed -ie "s@<<AMI-NAME>>@/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI@g" ami_builder_event.json
-      - sed -i.bak "s/<<AMI-ID>>/$(cat ami_id.txt)/g" ami_builder_event.json
+      - sed -i "s@<<AMI-NAME>>@/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI@g" ami_builder_event.json
+      - sed -i "s/<<AMI-ID>>/$(cat ami_id.txt)/g" ami_builder_event.json
       - aws events put-events --entries file://ami_builder_event.json
       - cat ami_builder_event.json
       - echo "build completed on `date`"
