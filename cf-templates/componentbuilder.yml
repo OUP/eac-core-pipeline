@@ -120,6 +120,41 @@ Resources:
           - !Ref CodeBuildSubnet
         VpcId: !Ref CodeBuildVPC
 
+  TestBuild:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      ServiceRole: !Ref CodeBuildServiceRole
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:4.0
+        EnvironmentVariables:
+          - Name: SourceBucket
+            Value: !Ref SourceBucket
+          - Name: ENVIRONMENT
+            Value: !Ref Environment
+          - Name: BUILD_VPC_ID
+            Value: !Sub '{{resolve:ssm:/${UpstreamStack}/VPC:1}}'
+          - Name: BUILD_SUBNET_ID
+            Value: !Sub '{{resolve:ssm:/${UpstreamStack}/SubnetPrivA:1}}'
+          - Name: UPSTREAMSTACK
+            Value: !Ref UpstreamStack
+          - Name: GOLDENAMIPIPELINE
+            Value: !Ref GoldenAMIPipeline
+      Source:
+        BuildSpec: testbuild.yml
+        Type: CODEPIPELINE
+      TimeoutInMinutes: 15
+      Name: !Sub ${PipelineName}_${Environment}_testbuild
+      VpcConfig:
+        SecurityGroupIds:
+          - !Ref CodeBuildSecurityGroup
+        Subnets:
+          - !Ref CodeBuildSubnet
+        VpcId: !Ref CodeBuildVPC
+
   MainCodePipeline:
       Type: AWS::CodePipeline::Pipeline
       Properties:
@@ -173,9 +208,24 @@ Resources:
                   Provider: CodeBuild
                 InputArtifacts:
                   - Name: BuildArtifact
+                OutputArtifacts:
+                  - Name: TestArtifact
                 Configuration:
                   ProjectName: !Ref AMIBuild
                 RunOrder: 3
+          - Name: TestBuild
+            Actions:
+              - Name: BuildAction
+                ActionTypeId:
+                  Category: Build
+                  Owner: AWS
+                  Version: '1'
+                  Provider: CodeBuild
+                InputArtifacts:
+                  - Name: TestArtifact
+                Configuration:
+                  ProjectName: !Ref TestBuild
+                RunOrder: 4
 
   CodePipelineServiceRole:
     Type: AWS::IAM::Role
