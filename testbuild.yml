@@ -15,7 +15,7 @@ phases:
   build:
     commands:
       # - echo "running build for packer"
-      # - ./packer build -color=false -parallel=false -timestamp-ui packer_test.json | tee build.log
+      # - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee build.log
   post_build:
     commands:
       # - cat ami_builder_event.json
