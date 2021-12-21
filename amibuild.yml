@@ -41,6 +41,6 @@ phases:
 artifacts:
   base-directory: ${CODEBUILD_SRC_DIR}
   files:
-    - 'eac-core/packer/*.json'
     - 'eac-core/ansible/*.yml'
+    - 'eac-core/packer/*'
     - 'testbuild.yml'

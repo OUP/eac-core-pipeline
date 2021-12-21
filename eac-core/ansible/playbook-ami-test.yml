@@ -1,0 +1,22 @@
+# playbook-ami-test.yml
+---
+
+  - hosts: all
+    become: true
+
+    tasks:
+      - name: Verify Tomcat Config Exists
+        stat: 
+          path: /etc/systemd/system/tomcat.service
+      
+      - name: Start Apache Tomcat
+        service:
+          name: tomcat
+          state: started
+      
+      - name: Check Java Version
+        command: java --version
+      
+      - name: Check EAC App URL
+        uri:
+          url: http://localhost:8080/eacAdmin/login
