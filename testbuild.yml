@@ -9,7 +9,7 @@ phases:
       - export AMI_ID=$(cat eac-core/packer/ami_id.txt)
       - echo "${AMI_ID}"
       - echo "Installing Ansible & adding to PATH ..."
-      python -m pip install --user ansible
+      - python -m pip install --user ansible
       - echo "$PATH"
       - export PATH=$PATH:/usr/local/bin/ansible
       - echo "$PATH"
