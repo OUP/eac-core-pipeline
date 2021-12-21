@@ -9,7 +9,7 @@ phases:
       - cd eac-core/
       - cd packer/
       - echo "Installing Packer"
-      - curl -o packer.zip https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip && unzip packer.zip
+      - curl -o packer.zip https://releases.hashicorp.com/packer/1.7.8/packer_1.7.8_linux_amd64.zip && unzip packer.zip
       - cd ../../
       - cp -r build/ eac-core/packer/
       - cd eac-core/
