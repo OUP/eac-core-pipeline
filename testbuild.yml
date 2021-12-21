@@ -1,15 +1,16 @@
 ---
 version: 0.2
 phases:
+  install:
+    runtime-versions:
+      python: latest
   pre_build:
     commands:
       - export AMI_ID=$(cat eac-core/packer/ami_id.txt)
       - echo "${AMI_ID}"
-      - ls -la
+      - python -m pip install --user ansible
       - cd eac-core/
-      - ls -la
       - cd packer/
-      - ls -la
       - echo "Validating Packer template"
       - ./packer validate packer_test.json
   build:
