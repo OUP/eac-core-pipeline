@@ -8,14 +8,18 @@ phases:
     commands:
       - export AMI_ID=$(cat eac-core/packer/ami_id.txt)
       - echo "${AMI_ID}"
-      - python -m pip install --user ansible
+      - echo "Installing Ansible & adding to PATH ..."
+      python -m pip install --user ansible
+      - echo "$PATH"
+      - export PATH=$PATH:/usr/local/bin/ansible
+      - echo "$PATH"
       - cd eac-core/
       - cd packer/
-      - echo "Validating Packer template"
+      - echo "Validating Packer template ..."
       - ./packer validate packer_test.json
   build:
     commands:
-      # - echo "running build for packer"
+      # - echo "Running build for packer ..."
       # - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee build.log
   post_build:
     commands:
