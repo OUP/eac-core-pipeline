@@ -10,7 +10,7 @@
       "subnet_id": "{{user `subnet`}}",
       "type": "amazon-ebs",
       "vpc_id": "{{user `vpc`}}",
-      "skip_create_ami": "true"
+      "skip_create_ami": true
     }
   ],
   "provisioners": [
