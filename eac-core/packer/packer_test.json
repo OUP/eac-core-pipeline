@@ -17,7 +17,7 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "{{playbook_path}}/playbook-ami-test.yml"
+      "playbook_file": "{{user `playbook_path`}}/playbook-ami-test.yml"
     }
   ],
   "variables": {
