@@ -9,7 +9,7 @@ phases:
     commands:
       - python -m pip install --user ansible
       - echo "$PATH"
-      - "export PATH=$PATH: /usr/local/bin/ansible"
+      - export PATH=$PATH:/usr/local/bin/ansible
       - echo "$PATH"
       # - java -version
       # - echo "setting up global environment variables"
