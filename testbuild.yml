@@ -13,8 +13,10 @@ phases:
       - echo "Installing Ansible & adding to PATH ..."
       - python -m pip install --user ansible
       - echo "$PATH"
-      - export PATH=$PATH:/usr/bin/ansible-playbook
+      # - export PATH=$PATH:/usr/bin/ansible-playbook
       - echo "$PATH"
+      - ls -l /usr/bin/ansible*
+      - find / -name ansible
       - cd eac-core/
       - cd packer/
       - echo "Validating Packer template ..."
