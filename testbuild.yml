@@ -18,7 +18,7 @@ phases:
       - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee amitest.log
   post_build:
     commands:
-      - echo "test completed on `date`"
+      - echo "Test completed on `date`"
 
 artifacts:
   files:

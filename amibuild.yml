@@ -37,7 +37,7 @@ phases:
       - sed -i "s/<<AMI-ID>>/$(cat ami_id.txt)/g" ami_builder_event.json
       - aws events put-events --entries file://ami_builder_event.json
       - cat ami_builder_event.json
-      - echo "build completed on `date`"
+      - echo "Build completed on `date`"
 
 artifacts:
   base-directory: ${CODEBUILD_SRC_DIR}

@@ -5,7 +5,7 @@
 
     tasks:
       - name: Verify Tomcat Config Exists
-      become: true
+        become: true
         stat: 
           path: /etc/systemd/system/tomcat.service
       
