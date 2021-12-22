@@ -2,10 +2,10 @@
 ---
 
   - hosts: all
-    become: true
 
     tasks:
       - name: Verify Tomcat Config Exists
+      become: true
         stat: 
           path: /etc/systemd/system/tomcat.service
       
