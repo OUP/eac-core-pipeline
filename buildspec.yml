@@ -1,74 +1,36 @@
----
 version: 0.2
-env:
-  shell: bash
+
 phases:
   install:
     runtime-versions:
-      python: latest
+      java: corretto8
   pre_build:
     commands:
-      # - export AMI_ID=$(cat eac-core/packer/ami_id.txt)
-      # - echo "${AMI_ID}"
-      - echo "Installing Ansible & adding to PATH ..."
-      # - python -m pip install --user ansible
-      - apt install software-properties-common -y
-      - add-apt-repository --yes --update ppa:ansible/ansible -y
-      - apt install ansible -y
-      - echo "$PATH"
-      # - export PATH=$PATH:/usr/bin/ansible-playbook
-      - echo "$PATH"
-      - find / -name ansible -exec ls -l {} \;
-      - ls -l /usr/bin/ansible*
-      - ansible-playbook --version
-      - cd eac-core/
-      - cd packer/
-      - echo "Validating Packer template ..."
-      - ./packer validate packer_test.json
+      - java -version
+      - echo "setting up global environment variables"
+      - export BUILDDIR="./build"
+      - export APPDIR="./eac-core/eac"
+      - echo "updating container packages"
+      - apt-get update -y
+      - echo "installing container dependencies"
+      - apt-get install maven ant rsync unzip foodcritic -y
   build:
     commands:
-      # - echo "Running build for packer ..."
-      # - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee build.log
-  post_build:
-    commands:
-      # - cat ami_builder_event.json
-      - echo "test completed on `date`"
+      - export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:bin/javac::")
+      - echo "setting java home to ${JAVA_HOME}"
+      - test -d /root/.m2 && echo "/root/.m2 exist" || mkdir /root/.m2
+      - cp -Rp ./configs/settings.xml /root/.m2/settings.xml
+      - sed -i "s/|NEXUS_USERNAME|/admin/g" /root/.m2/settings.xml
+      - sed -i "s/|NEXUS_PASSWORD|/admin123/g" /root/.m2/settings.xml
+      - sed -i "s/|NEXUS_URL|/http:\/\/nexus.eps-management.the-infra.com:8081\/nexus\/content\/groups\/public\//g" /root/.m2/settings.xml
+      - echo "setting nexus username to admin on repository nexus.eps-management.the-infra.com:8081"
+      - mkdir $BUILDDIR
+      - mkdir $BUILDDIR/target
+      - rsync -avz "${APPDIR}/" $BUILDDIR/target/
+      - cd $BUILDDIR/target/eacBuild
+      - mvn --batch-mode clean install -U
+      # - mvn clean -X release:prepare release:perform
 
-
-
-# version: 0.2
-
-# phases:
-#   install:
-#     runtime-versions:
-#       java: corretto8
-#   pre_build:
-#     commands:
-#       - java -version
-#       - echo "setting up global environment variables"
-#       - export BUILDDIR="./build"
-#       - export APPDIR="./eac-core/eac"
-#       - echo "updating container packages"
-#       - apt-get update -y
-#       - echo "installing container dependencies"
-#       - apt-get install maven ant rsync unzip foodcritic -y
-#   build:
-#     commands:
-#       - export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:bin/javac::")
-#       - echo "setting java home to ${JAVA_HOME}"
-#       - test -d /root/.m2 && echo "/root/.m2 exist" || mkdir /root/.m2
-#       - cp -Rp ./configs/settings.xml /root/.m2/settings.xml
-#       - sed -i "s/|NEXUS_USERNAME|/admin/g" /root/.m2/settings.xml
-#       - sed -i "s/|NEXUS_PASSWORD|/admin123/g" /root/.m2/settings.xml
-#       - sed -i "s/|NEXUS_URL|/http:\/\/nexus.eps-management.the-infra.com:8081\/nexus\/content\/groups\/public\//g" /root/.m2/settings.xml
-#       - echo "setting nexus username to admin on repository nexus.eps-management.the-infra.com:8081"
-#       - mkdir $BUILDDIR
-#       - mkdir $BUILDDIR/target
-#       - rsync -avz "${APPDIR}/" $BUILDDIR/target/
-#       - cd $BUILDDIR/target/eacBuild
-#       - mvn --batch-mode clean install -U
-#       # - mvn clean -X release:prepare release:perform
-
-# artifacts:
-#   files:
-#     - '**/*'
+artifacts:
+  files:
+    - '**/*'

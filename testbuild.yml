@@ -1,22 +1,15 @@
----
 version: 0.2
 env:
   shell: bash
 phases:
-  install:
-    runtime-versions:
-      python: latest
   pre_build:
     commands:
       - export AMI_ID=$(cat eac-core/packer/ami_id.txt)
       - echo "${AMI_ID}"
-      - echo "Installing Ansible & adding to PATH ..."
-      - python -m pip install --user ansible
-      - echo "$PATH"
-      # - export PATH=$PATH:/usr/bin/ansible-playbook
-      - echo "$PATH"
-      - ls -l /usr/bin/ansible*
-      - find / -name ansible
+      - echo "Installing Ansible ..."
+      - apt install software-properties-common -y
+      - add-apt-repository --yes --update ppa:ansible/ansible -y
+      - apt install ansible -y
       - cd eac-core/
       - cd packer/
       - echo "Validating Packer template ..."
