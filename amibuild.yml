@@ -1,5 +1,5 @@
----
 version: 0.2
+
 phases:
   pre_build:
     commands:
@@ -38,6 +38,7 @@ phases:
       - aws events put-events --entries file://ami_builder_event.json
       - cat ami_builder_event.json
       - echo "build completed on `date`"
+
 artifacts:
   base-directory: ${CODEBUILD_SRC_DIR}
   files:

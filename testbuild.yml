@@ -1,14 +1,12 @@
 version: 0.2
-env:
-  shell: bash
+
 phases:
   pre_build:
     commands:
       - export AMI_ID=$(cat eac-core/packer/ami_id.txt)
       - echo "${AMI_ID}"
       - echo "Installing Ansible ..."
-      - apt install software-properties-common -y
-      - add-apt-repository --yes --update ppa:ansible/ansible -y
+      - apt install software-properties-common -y && add-apt-repository --yes --update ppa:ansible/ansible -y
       - apt install ansible -y
       - cd eac-core/
       - cd packer/
@@ -16,9 +14,12 @@ phases:
       - ./packer validate packer_test.json
   build:
     commands:
-      # - echo "Running build for packer ..."
-      # - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee build.log
+      - echo "Running build for packer ..."
+      - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee amitest.log
   post_build:
     commands:
-      # - cat ami_builder_event.json
       - echo "test completed on `date`"
+
+artifacts:
+  files:
+    - './amitest.log'
