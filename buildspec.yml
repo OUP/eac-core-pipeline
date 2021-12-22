@@ -15,7 +15,7 @@ phases:
       - echo "$PATH"
       # - export PATH=$PATH:/usr/bin/ansible-playbook
       - echo "$PATH"
-      - find / -name ansible
+      - find / -name ansible -exec ls -l {} \;
       - ls -l /usr/bin/ansible*
       - cd eac-core/
       - cd packer/
