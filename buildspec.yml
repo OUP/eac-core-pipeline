@@ -12,9 +12,9 @@ phases:
       # - echo "${AMI_ID}"
       - echo "Installing Ansible & adding to PATH ..."
       # - python -m pip install --user ansible
-      - apt install software-properties-common
-      - add-apt-repository --yes --update ppa:ansible/ansible
-      - apt install ansible
+      - apt install software-properties-common -y
+      - add-apt-repository --yes --update ppa:ansible/ansible -y
+      - apt install ansible -y
       - echo "$PATH"
       # - export PATH=$PATH:/usr/bin/ansible-playbook
       - echo "$PATH"
