@@ -11,12 +11,16 @@ phases:
       # - export AMI_ID=$(cat eac-core/packer/ami_id.txt)
       # - echo "${AMI_ID}"
       - echo "Installing Ansible & adding to PATH ..."
-      - python -m pip install --user ansible
+      # - python -m pip install --user ansible
+      - sudo apt install software-properties-common
+      - sudo add-apt-repository --yes --update ppa:ansible/ansible
+      - sudo apt install ansible
       - echo "$PATH"
       # - export PATH=$PATH:/usr/bin/ansible-playbook
       - echo "$PATH"
       - find / -name ansible -exec ls -l {} \;
       - ls -l /usr/bin/ansible*
+      - ansible-playbook --version
       - cd eac-core/
       - cd packer/
       - echo "Validating Packer template ..."
