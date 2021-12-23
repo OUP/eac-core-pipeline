@@ -16,7 +16,7 @@
           state: started
       
       - name: Check Java Version
-        command: java --version
+        command: java -version
       
       - name: Check EAC App URL
         uri:
