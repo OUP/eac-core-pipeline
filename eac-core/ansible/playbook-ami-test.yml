@@ -10,6 +10,7 @@
           path: /etc/systemd/system/tomcat.service
       
       - name: Start Apache Tomcat
+        become: true
         service:
           name: tomcat
           state: started
