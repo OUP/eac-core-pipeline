@@ -23,10 +23,10 @@
       "vpc_id": "{{user `vpc`}}"
     }
   ],
+  "_comment": "The shell command removes the defualt webapps installed with Tomcat9",
   "provisioners": [
     {
       "type": "shell",
-      "_comment": "This removes the defualt webapps installed with Tomcat9",
       "inline": [
         "sudo rm -rf /opt/tomcat9/webapps/*"
       ]
