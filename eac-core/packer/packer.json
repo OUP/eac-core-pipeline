@@ -25,9 +25,16 @@
   ],
   "provisioners": [
     {
+      "type": "shell",
+      "_comment": "This removes the defualt webapps installed with Tomcat9",
+      "inline": [
+        "sudo rm -rf /opt/tomcat9/webapps/*"
+      ]
+    },
+    {
       "type": "file",
       "source": "build/",
-      "destination": "/tmp/target"
+      "destination": "/opt/tomcat9/webapps/"
     }
   ],
   "variables": {
