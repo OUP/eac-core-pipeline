@@ -34,7 +34,7 @@
     {
       "type": "file",
       "source": "build/",
-      "destination": "/opt/tomcat9/webapps/"
+      "destination": "/opt/tomcat9/webapps/target"
     }
   ],
   "variables": {
