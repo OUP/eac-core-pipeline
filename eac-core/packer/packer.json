@@ -34,7 +34,19 @@
     {
       "type": "file",
       "source": "build/",
-      "destination": "/opt/tomcat9/webapps/target"
+      "destination": "/tmp/target"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "ls /tmp/"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "ls /tmp/target"
+      ]
     }
   ],
   "variables": {
