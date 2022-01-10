@@ -39,13 +39,7 @@
     {
       "type": "shell",
       "inline": [
-        "ls /tmp/"
-      ]
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "ls /tmp/target"
+        "sudo mv /tmp/target/* /opt/tomcat9/webapps/"
       ]
     }
   ],
