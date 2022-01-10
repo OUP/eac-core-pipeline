@@ -41,6 +41,12 @@
       "inline": [
         "sudo mv /tmp/target/* /opt/tomcat9/webapps/"
       ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo ls /opt/tomcat9/webapps/"
+      ]
     }
   ],
   "variables": {
