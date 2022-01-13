@@ -18,7 +18,6 @@
     {
       "type": "ansible",
       "use_proxy": false,
-      "valid_exit_codes": [0, 1, 2],
       "playbook_file": "{{user `playbook_path`}}/playbook-ami-test.yml"
     }
   ],
