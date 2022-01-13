@@ -20,6 +20,7 @@ phases:
     commands:
       - echo "Running build for packer ..."
       - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee amitest.log
+      - ls
       - if cat amitest.log | grep -q exit status 2; then exit; fi
   post_build:
     commands:
