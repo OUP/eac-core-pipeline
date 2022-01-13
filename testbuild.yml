@@ -20,6 +20,7 @@ phases:
     commands:
       - echo "Running build for packer ..."
       - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee amitest.log
+      - cat amitest.log 2>/dev/null 
   post_build:
     commands:
       - echo "Test completed on `date`"
