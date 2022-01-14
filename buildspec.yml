@@ -6,6 +6,7 @@ phases:
       java: corretto8
   pre_build:
     commands:
+      - whereis grep
       - java -version
       - echo "setting up global environment variables"
       - export BUILDDIR="./build"
