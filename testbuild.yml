@@ -20,8 +20,8 @@ phases:
     commands:
       - echo "Running build for packer ..."
       - ./packer build -color=false -parallel-builds=1 -timestamp-ui packer_test.json | tee amitest.log
-      - ls
-      - if cat amitest.log | grep -q exit status 2; then exit; fi
+      # The below if statement is needed to make CodeBuiuld fail if the Ansible tests do, as the Packer exit code is not enough to make CodeBuild unsuccessful.
+      - if grep -q 'exit status 2' amitest.log; then exit 1; else echo "no exit status found, test successful!"; fi
   post_build:
     commands:
       - echo "Test completed on `date`"
