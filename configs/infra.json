@@ -3,7 +3,7 @@
     "GitHubRepositoryName": "eac-core-pipeline",
     "GitHubBranchName": "infra",
     "GitHubRepositoryOwner": "OUP",
-    "CodeStarConnectionARN": "arn:aws:codestar-connections:eu-west-1:637927391752:connection/613f3f2e-9218-4d9c-a03f-49748e88700b",
+    "CodeStarConnectionARN": "arn:aws:codestar-connections:eu-west-1:637927391752:connection/2a9a160b-2822-4177-bf57-5f473ff3788a",
     "SourceBucket": "eac-core-cloudformation",
     "UpstreamStack": "EAC-CommonComponents-common",
     "Environment": "infra",
