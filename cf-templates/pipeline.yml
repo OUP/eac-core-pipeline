@@ -179,7 +179,7 @@ Resources:
                   FullRepositoryId: !Sub '${GitHubRepositoryOwner}/${GitHubRepositoryName}'
                   BranchName: !Ref GitHubBranchName
                   OutputArtifactFormat: "CODE_ZIP"
-                  DetectChanges: True
+                  DetectChanges: False
                 OutputArtifacts:
                   - Name: SourceArtifact
                 RunOrder: 1
