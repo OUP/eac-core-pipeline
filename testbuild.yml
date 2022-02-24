@@ -21,6 +21,12 @@ phases:
       - if grep -q 'exit status 2' amitest.log; then exit 1; else echo "no exit status found, test successful!"; fi
   post_build:
     commands:
+      - echo "Preparing EventBridge Config & Deploying AMI ID ..."
+      - aws ssm put-parameter --type 'String' --name "/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI" --value $AMI_ID --overwrite
+      - sed -i "s@<<AMI-NAME>>@/${UPSTREAMSTACK}/${ENVIRONMENT}/Final-AMI@g" ami_builder_event.json
+      - sed -i "s/<<AMI-ID>>/$(cat ami_id.txt)/g" ami_builder_event.json
+      - aws events put-events --entries file://ami_builder_event.json
+      - cat ami_builder_event.json
       - echo "Test completed on `date`"
 
 artifacts:

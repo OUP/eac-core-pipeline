@@ -16,6 +16,15 @@
           name: tomcat
           state: started
       
+      - name: Start Flexera
+        become: true
+        service:
+          name: mgsusageag
+          state: started
+      
+      - name: Check Flexera Install
+        command: ps aux | grep mgsusageag | grep -v grep
+      
       - name: Check Java Version
         command: java -version
       
